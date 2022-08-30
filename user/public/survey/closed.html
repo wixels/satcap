@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" media="screen" href="../_style/app.screen.css">
+    <title>Survey Closed</title>
+  </head>
+  <body>
+  <header>
+    <h1>Sorry, we're closed</h1>
+  </header>
+  <main>
+    <p>You have already completed the <em class="title"></em> survey or it is not accepting any more responses.</p>
+    <strong>Thank you!</strong>
+  </main>
+  <footer>
+  </footer>
+  <script>
+    const params = new URLSearchParams(window.location.search)
+    if (params.has('title')) {
+      const el = document.querySelector('.title')
+      el.textContent = params.get('title')
+    }
+  </script>
+  <script type="module">
+    import { getLink, initMenu } from '../_scripts/init.js'
+    const link = await getLink()
+    if (link.package.scopes?.length) {
+      initMenu(link.linkId, link.package.scopes)
+    }
+  </script>
+  </body>
+</html>

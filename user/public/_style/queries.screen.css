@@ -1,0 +1,45 @@
+form {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: var(--spacer);
+  width: 90vw;
+  max-height: 80vh;
+  box-shadow: var(--box-shadow);
+}
+
+form h2 {
+  text-align: center;
+  margin-top: var(--spacer);
+  margin-bottom: var(--spacer);
+}
+
+form label,
+form input:not([type="checkbox"]),
+form textarea {
+  display: block;
+}
+
+form input:not([type="checkbox"]),
+form textarea {
+  width: 100%;
+  padding: var(--spacer);
+  font-size: 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid;
+}
+
+form input:not([type="checkbox"]):focus,
+form textarea:focus {
+  outline: 0;
+  border-color: hsl(var(--color-primary));
+}
+
+form textarea {
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 5.5rem;
+}
+
+form label {
+  margin-bottom: var(--spacer);
+}

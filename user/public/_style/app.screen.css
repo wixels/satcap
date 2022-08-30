@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;900&display=swap');
+:root {
+  --color-primary: 232, 35%, 43%;
+  --color-secondary: 231, 27%, 90%;
+  --color-tertiary: 0, 0%, 77%;
+  --color-success: 120, 46%, 40%;
+  --color-error: 0, 48%, 43%;
+  --font-default: "Poppins","Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  --font-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  --box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.2);
+  --border-radius: 0.75rem;
+  --max-width: 540px;
+  --spacer: 1rem;
+  --feature-image: linear-gradient(
+    45deg,
+    hsl(var( --color-primary)),
+    60%,
+    hsl(var(--color-secondary))
+  );
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+img,
+fieldset,
+button {
+  border: none;
+}
+.sr-only {
+  position: absolute;
+  left: -100000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+html {
+  height: 100%;
+}
+body {
+  font-family: var(--font-default);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+main {
+  padding-bottom: 4rem;
+  margin: auto;
+}
+h1 {
+  color: hsl(var( --color-primary));
+  font-size: 1.6rem;
+  transition: all 0.1s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+h2 { 
+  font-size: 1.4rem;
+}
+a {
+  color: hsl(var(--color-primary));
+}
+button {
+  display: block;
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius);
+  font-size: 1.1rem;
+  line-height: 1.1rem;
+  border: none;
+  margin: 0.5rem auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+button[type="button"] {
+  background-color: white;
+  color: hsl(var(--color-primary));
+}
+button[type="submit"], button.primary {
+  background-color: hsl(var(--color-primary));
+  color: white;
+  margin-top: 1rem;
+}
+.link {
+  display: block;
+  border: 1px solid hsl(var( --color-primary));
+  text-decoration: none;
+  border-radius: 1rem;
+  padding: 0.25rem 1rem;
+  margin: 0.5rem auto;
+  width: max-content;
+}
+.hidden {
+  display: none !important;
+}
+.init {
+  text-align: center;
+  padding: 2rem;
+}
+header {
+  transition: all 0.1s ease;
+  box-shadow: var(--box-shadow);
+  padding: var(--spacer);
+  display: grid;
+  margin-bottom: 1rem;
+}
+header:not(.withLink) {
+  place-content: center;
+}
+header.withLink {
+  gap: 0.25rem;
+  grid-template-columns: auto 2rem;
+}
+header a {
+  font-size: 1.6rem;
+  text-decoration: none;
+  text-align: center;
+}
+
+.empty {
+  padding: var(--spacer);
+  text-align: center;
+}
+
+section {
+  margin-bottom: var(--spacer);
+  padding-left: var(--spacer);
+  padding-right: var(--spacer);
+}
+section.survey {
+  background-color: hsla(var(--color-tertiary), 50%);
+  padding: var(--spacer);
+}
+section.survey a {
+  margin: 0.5rem 0;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 9;
+  display: grid;
+  place-content: center;
+  backdrop-filter: blur(4px);
+}
+.modal embed {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: var(--border-radius);
+}
+
+footer {
+  position: fixed;
+  bottom: var(--spacer);
+  left: var(--spacer);
+  right: var(--spacer);
+  width: calc(100vw - (var(--spacer) * 2));
+  display: grid;
+  place-content: center;
+  z-index: 2;
+  border-radius: 1rem;
+}
+footer ul {
+  background-color: white;
+  max-width: var(--max-width);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  width: calc(100vw - (var(--spacer) * 2));
+  border-radius: 1rem;
+  box-shadow: var(--box-shadow);
+}
+footer ul li {
+  display: grid;
+  place-content: center;
+  width: 100%;
+}
+footer ul li:first-of-type {
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+footer ul li:last-of-type {
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+footer ul li.current {
+  background-color: hsl(var( --color-primary));
+}
+footer ul li.current img {
+  fill: white;
+}
+footer ul li a {
+  display: grid;
+  place-content: center;
+  padding: 0.5rem 1rem;
+}
+
+footer ul li:first-of-type a {
+  padding-left: 2rem;
+}
+footer ul li:last-of-type a {
+  padding-right: 2rem;
+}
+
+footer ul li img {
+  vertical-align: middle;
+}
+
+.list {
+  display: grid;
+  gap: var(--spacer);
+  width: 100%;
+}
+
+.list.inline {
+  grid-auto-flow: column;
+  grid-template-columns: repeat(5, 80vw);
+  overflow-y: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.list.inline > .card {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+/* .list.inline > div:first-of-type {
+  margin-left: var(--spacer);
+}
+.list.inline > div:last-of-type {
+  margin-right: var(--spacer);
+} */
+
+.card {
+  display: grid;
+  border-radius: 1rem;
+  width: 100%;
+  background-image: var(--feature-image);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  aspect-ratio: 16/9;
+}
+.card:not(.hasRibbon) {
+  align-content: flex-end;
+}
+.card.hasRibbon {
+  align-content: space-between;
+}
+.card .ribbon { 
+  color: white;
+  margin-top: 1rem;
+  justify-self: right;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  background-color: hsl(var(--color-primary));
+  border-top-left-radius: 1.5rem;
+  border-bottom-left-radius: 1.5rem;
+}
+.card h3 {
+  padding-bottom: var(--spacer);
+}
+.card .info {
+  color: white;
+  background-color: hsla(var(--color-tertiary), 70%);
+  border-radius: 1rem;
+  padding: var(--spacer);
+  aspect-ratio: 3/1;
+  width: 100%;
+  display: grid;
+  height: 100%;
+}
+.card a {
+  justify-self: flex-end;
+  align-self: center;
+  margin-right: 0.5rem;
+  text-decoration: none;
+  border-radius: 1rem;
+  background-color: hsl(var( --color-primary));
+  color: white;
+  padding: 0.25rem 2rem;
+}
+
+@media screen and (max-width: 400px) {
+  h1, header a {
+    font-size: 1.3rem;
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  :root {
+    --spacer: 0.5rem;
+  }
+  h1, header a {
+    font-size: 1.25rem;
+  }
+}

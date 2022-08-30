@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" media="screen" href="./_style/app.screen.css">
+    <title>Error</title>
+    <style>
+      main {
+        padding: var(--spacer);
+      }
+    </style>
+  </head>
+  <body>
+  <header>
+    <h1>🫢 That shouldn't happen</h1>
+  </header>
+  <main>
+    <h2>An error occured processing your link. This either means your link is invalid or the config is not set up properly. Error code below:</h2>
+    <p class="code">Unknown</p>
+  </main>
+  <script>
+    const params = new URLSearchParams(window.location.search)
+    if (params.has('code')) {
+      const el = document.querySelector('.code')
+      el.textContent = params.get('code')
+    }
+    const link = JSON.parse(window.localStorage.getItem('link'))
+    if (link) {
+      const el = document.createElement('a')
+      el.setAttribute('href', `/?linkId=${link.linkId}`)
+      el.textContent = 'Try again'
+      document.querySelector('main').appendChild(el)
+    }
+  </script>
+  </body>
+</html>

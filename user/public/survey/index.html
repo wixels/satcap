@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" media="screen" href="./_style/app.screen.css">
+    <title>Survey</title>
+  </head>
+  <body>
+    <main>
+      <p class="init">Loading...</p>
+    </main>
+    <footer></footer>
+    <script defer type="module">
+      import { link } from './_scripts/init.js'
+
+      if (link.package.scopes.includes('survey') && link.package.survey?.key) {
+        location.href = `survey/${link.package.survey?.key}?linkId=${link.linkId}`
+      } else {
+        alert('Missing survey config, alert support')
+      }
+    </script>
+  </body>
+</html>

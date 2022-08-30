@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "satcap-research"
+  },
+  "targets": {
+    "satcap": {
+      "hosting": {
+        "admin": [
+          "admin"
+        ],
+        "user": [
+          "user"
+        ]
+      }
+    }
+  }
+}

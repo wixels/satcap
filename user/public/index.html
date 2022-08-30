@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" media="screen" href="./_style/app.screen.css">
+    <title>Home</title>
+  </head>
+  <body>
+    <header>
+      <h1>Dashboard</h1>
+    </header>
+    <main>
+      <p class="init">Loading...</p>
+      <section class="survey hidden">
+        <h3></h3>
+        <a class="link" href="/survey">Start survey</a>
+      </section>
+      <section class="resources hidden">
+        <h2>Resources</h2>
+        <div class="list inline"></div>
+      </section>
+      <section class="notice-board hidden">
+        <h2>Notice Board</h2>
+        <div class="list inline"></div>
+      </section>
+    </main>
+    <footer></footer>
+    <template id="templateContent">
+      <div class="card">
+        <div class="info">
+          <h3></h3>
+          <a href="">View</a>
+        </div>
+      </div>   
+    </template>
+    <script defer src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"></script>
+    <script defer type="module">
+      import { app, db, getLink, initMenu } from './_scripts/init.js'
+      import { insertSurvey, insertListContent, getRecentContent } from './_scripts/content.js'
+
+      const link = await getLink()
+      if (!link) {
+        location.href = '/error?code=link'
+      }
+
+      if (!link.package.scopes?.length) location.href = '/error?code=link.scopes'
+
+      if (link.package.scopes.length === 1 && link.package.scopes[0] === 'survey') {
+        if (!link.package.survey?.key) location.href = '/error?code=link.survey.key'
+        location.href = `survey/${link.package.survey.key}?linkId=${link.linkId}`
+      }
+
+      initMenu(link.linkId, link.package.scopes)
+
+      if (link.package.scopes.includes('survey')) {
+        insertSurvey(link.linkId, link.package.survey)
+        const loader = document.querySelector('.init')
+        if (loader) {
+          loader.remove()
+        } 
+      }
+      
+      if (link.package.scopes.includes('information')) {
+        const resources = await getRecentContent('resources', link.mineDocId, link.locationDocId, link.package.docId)
+        const loader = document.querySelector('.init')
+        if (loader) {
+          loader.remove()
+        } 
+        insertListContent('resources', resources)
+        const notices = await getRecentContent('notices', link.mineDocId, link.locationDocId, link.package.docId)
+        insertListContent('notice-board', notices)
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" media="screen" href="./_style/app.screen.css">
+    <link rel="stylesheet" media="screen" href="./_style/tabs.screen.css">
+    <title>Information</title>
+  </head>
+  <body>
+    <header>
+      <h1>Information</h1>
+    </header>
+    <main>
+      <div class="tabset">
+        <input
+          type="radio"
+          name="tabsetInformation"
+          id="tabset-notices"
+          hidden
+          aria-hidden="true"
+        >
+        <input
+          type="radio"
+          name="tabsetInformation"
+          id="tabset-resources"
+          hidden
+          aria-hidden="true"
+        >
+        <ul hidden aria-hidden="true">
+          <li><label class="tabsetClicker" for="tabset-notices">Notice Board</label></li>
+          <li><label class="tabsetClicker" for="tabset-resources">Resources</label></li>
+        </ul>
+        <div>
+          <section class="notice-board hidden">
+            <h2 class="sr-only">Notice Board</h2>
+            <div class="list"></div>
+          </section>
+          <section class="resources hidden">
+            <h2 class="sr-only">Resources</h2>
+            <div class="list"></div>
+          </section>
+        </div>
+      </div>
+      <p class="init">Loading...</p>
+    </main>
+    <footer></footer>
+    <template id="templateContent">
+      <div class="card">
+        <div class="info">
+          <h3></h3>
+          <a href="">View</a>
+        </div>
+      </div>   
+    </template>
+    <template id="templateResource">
+      <div class="feature">
+        <a href="/information">&#8592;</a>
+      </div>
+      <div class="header">
+        <p class="date">
+          <span class="month"></span>
+          <span class="day"></span>
+        </p>
+        <h3></h3>
+      </div>
+      <p class="description"></p>
+      <a class="hidden link" href="">More details</a>
+    </template>
+    <template id="templateNotice">
+      <div class="feature">
+        <a href="/information">&#8592;</a>
+      </div>
+      <div class="header">
+        <p class="date">
+          <span class="month"></span>
+          <span class="day"></span>
+        </p>
+        <h3></h3>
+      </div>
+      <p class="description"></p>
+      <a class="hidden link" href="">More details</a>
+    </template>
+    <template id="sheet">
+      <div class="overlay close"></div>
+      <div class="sheet"></div>
+    </template>
+    <script>
+      const params = new URLSearchParams(location.search)
+      if (params.has('type')) {
+        const selectables = document.getElementsByName('tabsetInformation')
+        for (const input of selectables) {
+          input.removeAttribute('checked')
+        }
+        const el = document.querySelector(`#tabset-${params.get('type')}`)
+        if (el) { el.setAttribute('checked', true) }
+      } else {
+        params.set('type', 'notices')
+        window.history.replaceState({}, null, location.pathname+'?'+params.toString())
+        document.querySelector('#tabset-notices').setAttribute('checked', true)
+      }
+
+      const clickables = document.querySelectorAll('.tabsetClicker')
+
+      for (const clicker of clickables) {
+        clicker.addEventListener('click', (e) => {
+          params.set('type', e.currentTarget.getAttribute('for').split('-')[1])
+          window.history.replaceState({}, null, location.pathname+'?'+params.toString())
+        })
+      }
+    </script>
+    <script defer src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"></script>
+    <script defer type="module">
+      import { app, db, link, initMenu } from './_scripts/init.js'
+      import { getAllContent, insertListContent } from './_scripts/content.js'
+
+      if (!link) {
+        location.href = '/error?code=link'
+      }
+
+      if (!link.package.scopes?.length) location.href = '/error?code=link.scopes'
+
+      if (!link.package.scopes.includes('information')) location.href = '/?linkId='+link.linkId
+
+      if (link.package.scopes.length === 1 && link.package.scopes[0] === 'survey') {
+        if (!link.package.survey?.key) location.href = '/error?code=link.survey.key'
+        location.href = `survey/${link.package.survey.key}?linkId=${link.linkId}`
+      }
+
+      initMenu(link.linkId, link.package.scopes)
+      
+      if (params.has('docId')) {
+        console.log('IM here')
+      } else {
+        const resources = await getAllContent('resources', link.mineDocId, link.locationDocId, link.package.docId)
+        const loader = document.querySelector('.init')
+        if (loader) {
+          loader.remove()
+        }
+        insertListContent('resources', resources)
+        const notices = await getAllContent('notices', link.mineDocId, link.locationDocId, link.package.docId)
+        insertListContent('notice-board', notices)
+      }
+
+      
+      
+    </script>
+  </body>
+</html>

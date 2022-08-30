@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" media="screen" href="../_style/app.screen.css">
+    <title>Survey Submitted</title>
+    <style>
+      body {
+        display: grid;
+        place-content: center;
+        min-height: 100vh;
+        background-image: url('../_style/images/submitted.jpeg');
+        background-size: cover;
+        height: 100vh;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      main {
+        padding: calc(var(--spacer) * 2);
+        text-align: center;
+        background-color: rgba(255,255,255,.3);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border-radius: 1rem;
+        width: 98vw;
+        max-width: var(--max-width);
+        margin: auto;
+      }
+      h2 {
+        margin-bottom: 2rem;
+        font-size: 1.6rem;
+      }
+      em {
+        font-size: 5rem;
+      }
+    </style>
+  </head>
+  <body>
+  <main>
+    <h2><em>🎉</em><br>Thank you for completing the survey</h2>
+    <a class="link hidden" href="/survey">Click here to start the survey again</a>
+  </main>
+  <footer></footer>
+  <script type="module">
+    import { getLink, initMenu } from '../_scripts/init.js'
+    
+    const link = await getLink()
+    if (link.package.survey?.allowMultipleResponses) {
+      const el = document.querySelector('a[href="/survey"].hidden')
+      el.setAttribute('href', `${el.getAttribute('href')}?linkId=${link.linkId}`)
+      el.classList.remove('hidden')
+    }
+
+    if (link.package.scopes?.length) {
+      initMenu(link.linkId, link.package.scopes)
+    }
+  </script>
+  </body>
+</html>
