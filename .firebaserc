@@ -3,13 +3,13 @@
     "default": "satcap-research"
   },
   "targets": {
-    "satcap": {
+    "satcap-research": {
       "hosting": {
         "admin": [
-          "admin"
+          "admin-satcap-research"
         ],
         "user": [
-          "user"
+          "satcap-research"
         ]
       }
     }
