@@ -48,6 +48,7 @@ body {
 main {
   padding-bottom: 4rem;
   margin: auto;
+  max-width: var(--max-width);
 }
 h1 {
   color: hsl(var( --color-primary));
@@ -223,7 +224,7 @@ footer ul li img {
 
 .list.inline {
   grid-auto-flow: column;
-  grid-template-columns: repeat(5, 80vw);
+  grid-template-columns: repeat(5, 80%);
   overflow-y: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
@@ -277,7 +278,6 @@ footer ul li img {
   aspect-ratio: 3/1;
   width: 100%;
   display: grid;
-  height: 100%;
 }
 .card a {
   justify-self: flex-end;
