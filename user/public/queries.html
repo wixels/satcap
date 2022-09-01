@@ -33,18 +33,18 @@
     </template>
     <template id="modal">
       <div class="modal close">
-        <form enctype="multipart/form-data" method="POST" action="https://satcap-research.web.app/api/query">
+        <form name="query" enctype="multipart/form-data" method="POST" action="https://satcap-research.web.app/api/query">
           <input type="hidden" name="userRef" value="" />
           <input type="hidden" name="mineDocId" value="" />
           <input type="hidden" name="locationDocId" value="" />
           <input type="hidden" name="linkDocId" value="" />
           <h2>Create a new query</h2>
           <label>
-            Title
+            Subject / Title
             <input type="text" name="title" />
           </label>
           <label>
-            Description
+            Describe your query
             <textarea name="description"></textarea>
           </label>
           <label>
@@ -52,15 +52,54 @@
             <input type="file" name="image" accept="image/*"/>
           </label>
           <label>
-            <input type="checkbox" />
+            <input type="checkbox" name="isAnonymous" checked />
             Remain anonymous
           </label>
+          <div id="notAnon"></div>
           <button type="submit">Submit query</button>
           <button type="button" class="close secondary">Cancel</button>
         </form>
       </div>
     </template>
-    <script>
+    <template id="notAnonymous">
+      <label class="notAnonymous">
+        Name
+        <input type="text" name="name" />
+      </label>
+      <label class="notAnonymous">
+        Contact information (Email or mobile)
+        <input type="text" name="contact" />
+      </label>
+    </template>
+    <script defer src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"></script>
+    <script type="module">
+      import { submit } from './_scripts/queries.js'
+
+      const enableAnonCheckbox = function () {
+        const anonymousCheckbox = document.querySelector('input[type="checkbox"][name="isAnonymous"]')
+        if (anonymousCheckbox) {
+          anonymousCheckbox.addEventListener('input', (e) => {
+            if (!e.currentTarget.checked) {
+              const template = document.getElementById('notAnonymous')
+              const content = template.content.cloneNode(true)
+              document.getElementById('notAnon').appendChild(content)
+            } else {
+              const existingEls = document.querySelectorAll('.notAnonymous')
+              if (existingEls.length) {
+                for (const el of existingEls) {
+                  el.remove()
+                }
+              }
+            }
+          })
+        }
+      }
+      const enableSubmitBtn = function () {
+        const form = document.forms.query
+        if (form) {
+          form.addEventListener('submit', submit)
+        }
+      }
       const setHiddenValues = function () {
         const localLink = JSON.parse(window.localStorage.getItem('link'))
         if (!localLink) {
@@ -72,27 +111,31 @@
         document.querySelector('[name="locationDocId"]').value = localLink.locationDocId
         document.querySelector('[name="linkDocId"]').value = localLink.docId
       }
-      const btn = document.querySelector('#newQuery')
-      btn.addEventListener('click', (e) => {
-        const template = document.getElementById('modal')
-        const content = template.content.cloneNode(true)
-        const form = content.querySelector('form')
-        const closers = content.querySelectorAll('.close')
 
-        form.addEventListener('click', (e) => {
-          e.stopPropagation()
-        })
-        closers.forEach((close) => {
-          close.addEventListener('click', (e) => {
+      const btn = document.querySelector('#newQuery')
+      if (btn) {
+        btn.addEventListener('click', (e) => {
+          const template = document.getElementById('modal')
+          const content = template.content.cloneNode(true)
+          const form = content.querySelector('form')
+          const closers = content.querySelectorAll('.close')
+
+          form.addEventListener('click', (e) => {
             e.stopPropagation()
-            document.querySelector('.modal').remove()
           })
+          closers.forEach((close) => {
+            close.addEventListener('click', (e) => {
+              e.stopPropagation()
+              document.querySelector('.modal').remove()
+            })
+          })
+          document.body.appendChild(content)
+          setHiddenValues()
+          enableAnonCheckbox()
+          enableSubmitBtn()
         })
-        document.body.appendChild(content)
-        setHiddenValues()
-      })
+      }
     </script>
-    <script defer src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"></script>
     <script defer type="module">
       import { app, db, link, initMenu } from './_scripts/init.js'
       import { getAllQueries, insertQueryContent } from './_scripts/content.js'
