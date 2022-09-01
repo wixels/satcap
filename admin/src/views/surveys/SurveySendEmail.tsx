@@ -16,6 +16,7 @@ export const SurveySendEmail = () => {
       <TextInput
         placeholder="John Doe"
         withAsterisk
+        type="email"
         sx={{ flex: 1 }}
         {...form.getInputProps(`employees.${index}.name`)}
       />
