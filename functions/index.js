@@ -14,13 +14,16 @@ exports.submitQuery = functions.https.onRequest(async (req, res) => {
     res.end()
   } else {
     if (req.body.mineDocId) {
-      const db = getFirestore()
-      const query = await db.collection(`mines/${req.body.mineDocId}/queries`).add({
+      const query = await admin.firestore().collection(`mines/${req.body.mineDocId}/queries`).add({
         name: (req.body.isAnonymous === 'on') ? 'Private' : req.body.name,
         contact: (req.body.isAnonymous === 'on') ? 'Private' : req.body.contact,
         title: req.body.title,
         description: req.body.description,
         image: req.body.imageUrl,
+        userRef: req.body.userRef,
+        mineDocId: req.body.mineDocId,
+        linkDocId: req.body.linkDocId,
+        locationDocId: req.body.locationDocId,
         isAnonymous: (req.body.isAnonymous === 'on'),
         createdAt: dayjs().format('YYYY-MM-DD HH:mm:ss'),
         status: 'open'
