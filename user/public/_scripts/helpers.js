@@ -1,4 +1,5 @@
-/* eslint-disable no-undef, no-var, no-unused-vars */
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-storage.js'
+import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js'
 
 function setQueryParams (params) {
   return Object.keys(params).map(key => key + '=' + params[key]).join('&')
@@ -40,7 +41,15 @@ async function requestHandler (url, method, data, requiresAuth) {
   return await window.fetch(url, opts)
 }
 
+const uploadFile = async function (file, directory = 'uploads/') {
+  const storage = getStorage()
+  const storageRef = ref(storage, `${directory+nanoid(4)}_${file.name}`)
+  await uploadBytes(storageRef, file)
+  return await getDownloadURL(storageRef)
+}
+
 export {
   setQueryParams,
-  requestHandler
+  requestHandler,
+  uploadFile
 }

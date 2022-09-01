@@ -275,7 +275,6 @@ footer ul li img {
   background-color: hsla(var(--color-tertiary), 70%);
   border-radius: 1rem;
   padding: var(--spacer);
-  aspect-ratio: 3/1;
   width: 100%;
   display: grid;
 }
