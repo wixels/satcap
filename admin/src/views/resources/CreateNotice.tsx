@@ -30,12 +30,12 @@ export const CreateNotice = () => {
       <Grid gutter={"xl"}>
         <Grid.Col span={12}>
           <FileInput
-            placeholder="Image"
+            placeholder="Title"
             radius={"md"}
             size="md"
             label={
               <Text size="sm" color="dimmed">
-                Image
+                Title
               </Text>
             }
             {...form.getInputProps("file")}
