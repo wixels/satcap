@@ -24,6 +24,10 @@
           "function": "submitQuery"
         },
         {
+          "source": "/api/query/delete",
+          "function": "deleteQuery"
+        },
+        {
           "source": "/api/survey",
           "function": "submitSurvey"
         }

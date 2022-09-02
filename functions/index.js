@@ -37,3 +37,23 @@ exports.submitQuery = functions.https.onRequest(async (req, res) => {
     }
   }
 })
+
+exports.deleteQuery = functions.https.onRequest(async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*')
+  if (req.method === 'OPTIONS') {
+    res.set('Access-Control-Allow-Methods', 'DELETE')
+    res.set('Access-Control-Allow-Headers', 'Content-Type')
+    res.set('Access-Control-Max-Age', '3600')
+    res.status(204).send('')
+    res.end()
+  } else {
+    if (req.body.mineDocId && req.body.queryDocId) {
+      await admin.firestore().collection(`mines/${req.body.mineDocId}/queries`).doc(req.body.queryDocId).delete();
+      res.send({ sucesss: true, message: 'Successfully deleted query' })
+      res.end()
+    } else {
+      res.status(412).send({ sucesss: false, message: 'Unable to delete query: We need a valid mine ID and query doc ID to continue' })
+      res.end()
+    }
+  }
+})
