@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" media="screen" href="./_style/app.screen.css">
     <link rel="stylesheet" media="screen" href="./_style/tabs.screen.css">
+    <link rel="stylesheet" media="screen" href="./_style/info.screen.css">
     <title>Information</title>
   </head>
   <body>
@@ -53,10 +54,15 @@
         </div>
       </div>   
     </template>
-    <template id="templateResource">
-      <div class="feature">
-        <a href="/information">&#8592;</a>
+    <template id="template-resources">
+      <div class="header">
+        <h3></h3>
+        <p class="date"></p>
       </div>
+      <p class="description"></p>
+      <a class="link" href="">View / Download</a>
+    </template>
+    <template id="template-notices">
       <div class="header">
         <p class="date">
           <span class="month"></span>
@@ -67,23 +73,13 @@
       <p class="description"></p>
       <a class="hidden link" href="">More details</a>
     </template>
-    <template id="templateNotice">
-      <div class="feature">
-        <a href="/information">&#8592;</a>
+    <template id="templateItem">
+      <div id="view-information">
+        <div class="feature">
+          <button type="button">&#10229;</button>
+        </div>
+        <div class="item"></div>
       </div>
-      <div class="header">
-        <p class="date">
-          <span class="month"></span>
-          <span class="day"></span>
-        </p>
-        <h3></h3>
-      </div>
-      <p class="description"></p>
-      <a class="hidden link" href="">More details</a>
-    </template>
-    <template id="sheet">
-      <div class="overlay close"></div>
-      <div class="sheet"></div>
     </template>
     <script>
       const params = new URLSearchParams(location.search)
@@ -112,7 +108,7 @@
     <script defer src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"></script>
     <script defer type="module">
       import { app, db, link, initMenu } from './_scripts/init.js'
-      import { getAllContent, insertListContent } from './_scripts/content.js'
+      import { getAllContent, getSingleContent, insertListContent, viewItem } from './_scripts/content.js'
 
       if (!link) {
         location.href = '/error?code=link'
@@ -129,8 +125,13 @@
 
       initMenu(link.linkId, link.package.scopes)
       
-      if (params.has('docId')) {
-        console.log('IM here')
+      if (params.has('docId') && params.has('type')) {
+        const item = await getSingleContent(`mines/${link.mineDocId}/${params.get('type')}`, params.get('docId'), params.get('type'))
+        if (item) {
+          viewItem(item)
+        } else {
+          window.history.back()
+        }
       } else {
         const resources = await getAllContent('resources', link.mineDocId, link.locationDocId, link.package.docId)
         const loader = document.querySelector('.init')

@@ -49,3 +49,23 @@ form textarea {
 form label {
   margin-bottom: var(--spacer);
 }
+
+.query {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: var(--spacer);
+}
+
+.query h3 {
+  font-weight: 300;
+}
+
+.query img {
+  margin-top: calc(var(--spacer) / 2);
+  border-radius: var(--border-radius);
+}
+
+.query details {
+  margin-top: calc(var(--spacer) / 2);
+}

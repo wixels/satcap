@@ -14,7 +14,33 @@
   </header>
   <main>
     <p class="init">Loading...</p>
+    <div class="consent hidden">
+      <div class="content">
+        <p id="surveyDescription"></p>
+        <h2>Consent to take part in research pilot</h2>
+        <details>
+          <summary>Click here to see what you're consenting to</summary>
+          <ul>
+            <li>I voluntarily agree to participate in this pilot study for a digital leadership competency assessment.</li>
+            <li>I understand that I am participating in an assessment of this digital application in this pilot test of my own free will.</li>
+            <li>I understand that I should not expect any financial gain, remuneration or benefit directly for participation in this pilot test.</li>
+            <li>I understand that all information I provide in this study will be treated confidentially and no personal information will be shared.</li>
+            <li>I understand that in the findings and results of this study my identity will remain anonymous.</li>
+            <li>I understand that my participation in this pilot will in no way advantage or disadvantage me in future engagements with the host organisation.</li>
+            <li>I understand that as the information will be stored anonymously, I may not be able to access my specific responses.</li>
+            <li>I understand that participating in this pilot does not mean that I will expect any action to be taken from the host organisation based on my responses and feedback.</li>
+            <li>I understand that my current performance review will not be impacted by the results of this assessment.</li>
+            <li>I understand that my current job function or role will not be impacted by the responses I provide on this assessment.</li>
+          </ul>
+        </details>
+        <form>
+          <label><input type="checkbox" name="giveConsent" required/>I understand and consent to the above</label>
+          <button type="submit" id="giveConsent">Start survey</button>
+        </form>
+      </div>
+    </div>
     <form class="survey hidden" name="survey" action="https://satcap-research.web.app/api/survey" method="POST">
+      <input type="hidden" name="consent" value="true" />
       <input type="hidden" name="survey" value="wp-two-two" />
       <input type="hidden" name="mineDocId" />
       <input type="hidden" name="linkDocId" />
@@ -1110,7 +1136,7 @@
       </label>
     </template>
   </main>
-  <footer>
+  <footer class="hidden">
     <div class="progress">
       <label for="progress"></label>
       <progress id="progress" max="100" value=""></progress>

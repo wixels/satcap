@@ -19,6 +19,47 @@ main {
   margin-top: 1.5rem;
 }
 
+.consent {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  background-image: url('./images/submitted.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: calc(2rem + (var(--spacer) * 3));
+}
+
+#surveyDescription {
+  white-space: pre-line;
+}
+.consent .content {
+  padding: var(--spacer);
+  width: calc(100vw - (var(--spacer) * 2));
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(255,255,255,.7);
+  border-radius: var(--border-radius);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  margin-bottom: var(--spacer);
+}
+.consent .content h2 {
+  text-align: center;
+  font-size: 1.1rem;
+  margin: var(--spacer) auto;
+}
+.consent .content summary {
+  font-weight: 700;
+}
+.consent .content ul {
+  padding-left: 2rem;
+}
+
 .question {
   margin-bottom: 1.5rem;
 }

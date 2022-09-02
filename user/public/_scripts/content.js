@@ -1,5 +1,6 @@
-import { collection, query, where, limit, orderBy, getDocs } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js'
+import { collection, query, where, limit, orderBy, getDocs, getDoc, doc } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js'
 import { db } from './init.js'
+import { requestHandler } from './helpers.js'
 
 const setCard = function (item) {
   const template = document.getElementById('templateContent')
@@ -31,7 +32,38 @@ const setCard = function (item) {
 }
 
 const setQuery = function (item) {
-  return
+  const template = document.getElementById('templateContent')
+  const content = template.content.cloneNode(true)
+  const title = content.querySelector('h3')
+  const description = content.querySelector('p')
+  const img = content.querySelector('img')
+  const btn = content.querySelector('button')
+
+  const query = content.querySelector('.query')
+  query.classList.add(item.status)
+  query.id = item.docId
+  title.textContent = item.title
+  description.textContent = item.description
+
+  if (item.image) {
+    img.setAttribute('src', item.image)
+    img.setAttribute('alt', item.title)
+  } else {
+    img.remove()
+  }
+  btn.dataset.queryDocId = item.docId
+  btn.addEventListener('click', async (e) => {
+    const id = e.currentTarget.dataset.queryDocId
+    const link = JSON.parse(window.localStorage.getItem('link'))
+    e.currentTarget.textContent = 'Deleting...'
+    const res = await requestHandler('https://satcap-research.web.app/api/query/delete', 'DELETE', { mineDocId: link.mineDocId , queryDocId: id })
+    if (res.ok) {
+      document.getElementById(id).remove()
+    }
+    e.currentTarget.textContent = 'Delete'
+  })
+
+  return content
 }
 
 const insertListContent = function (parent, data) {
@@ -96,6 +128,42 @@ const getRecentContent = async function (type, mineId, locationId, packageId) {
   return data
 }
 
+const getSingleContent = async function (collection, docId, type) {
+  console.log(collection)
+  const docRef = doc(db, collection, docId)
+  const docSnap = await getDoc(docRef)
+  
+  if (!docSnap.exists()) {
+    return
+  } return {
+    type,
+    ...docSnap.data()
+  }
+}
+
+const viewItem = function (item) {
+  const template = document.getElementById('templateItem')
+  const content = template.content.cloneNode(true)
+  const subTemplate = document.getElementById(`template-${item.type}`)
+  const subContent = subTemplate.content.cloneNode(true)
+
+  const feature = content.querySelector('.feature')
+  feature.style.backgroundImage = `url('${item.featureImageUrl}')`
+  const btn = content.querySelector('button')
+  btn.addEventListener('click', (e) => {
+    window.history.back()
+  })
+  const title = subContent.querySelector('h3')
+  title.textContent = item.title
+  const date = subContent.querySelector('.date')
+  date.textContent = dayjs(item.createdAt).format('DD MMMM YYYY')
+
+  content.querySelector('.item').appendChild(subContent)
+  const existing = document.getElementById('view-information')
+  if (existing) existing.remove()
+  document.body.appendChild(content)
+}
+
 const getAllContent = async function (type, mineId, locationId, packageId) {
   if (!type || !mineId) return []
 
@@ -113,10 +181,21 @@ const getAllContent = async function (type, mineId, locationId, packageId) {
   return data
 }
 
-const getAllQueries = function (mineId) {
+const getAllQueries = async function (mineId) {
   const userRef = window.localStorage.getItem('userRef')
-  if (!userRef) return
-  return []
+  if (!userRef) return []
+  const snapshot = await getDocs(query(collection(db, `mines/${mineId}/queries`), orderBy('createdAt', 'desc'), where('userRef', '==', userRef)))
+  console.log(snapshot)
+  if (!snapshot.size) return []
+
+  const data = []
+  snapshot.forEach((doc) => {
+    data.push({
+      docId: doc.id,
+      ...doc.data()
+    })
+  })
+  return data
 }
 
 const setContentModal = function () {
@@ -150,5 +229,7 @@ export {
   getRecentContent,
   getAllContent,
   getAllQueries,
-  setContentModal
+  setContentModal,
+  getSingleContent,
+  viewItem
 }

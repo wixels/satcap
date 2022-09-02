@@ -11,21 +11,35 @@ const initialise = async function (suveryKey, localSubmissions) {
       if (exitLink) {
         exitLink.setAttribute('href', `./exit?linkId=${link.linkId}`)
       }
-      const form = document.querySelector('.survey')
-      if (form) {
-        form.addEventListener('submit', submitSurvey)
-        form.classList.remove('hidden')
-        form.querySelector('input[name="mineDocId"]').setAttribute('value', link.mineDocId)
-        form.querySelector('input[name="linkDocId"]').setAttribute('value', link.docId)
-        form.querySelector('input[name="linkId"]').setAttribute('value', link.linkId)
-        setOnChange(form)
-        setProgressTracker()
-        setEmbeddables()
-      }
+      const consent = document.querySelector('.consent')
+      consent.querySelector('form').addEventListener('submit', giveConsent)
+      document.getElementById('surveyDescription').innerHTML = link.package.survey.description
+      consent.classList.remove('hidden')
+      
       const loader = document.querySelector('.init')
       if (loader) loader.remove()
     } else {
       window.location.href = `./closed?title=${link.package.survey.title}&linkId=${link.linkId}`
+    }
+  }
+}
+
+const giveConsent = function (e) {
+  e.preventDefault()
+  const checked = document.querySelector('[name="giveConsent"]:checked')
+  if (checked) {
+    const consent = document.querySelector('.consent')
+    const form = document.querySelector('.survey')
+    if (form) {
+      form.addEventListener('submit', submitSurvey)
+      consent.classList.add('hidden')
+      form.classList.remove('hidden')
+      form.querySelector('input[name="mineDocId"]').setAttribute('value', link.mineDocId)
+      form.querySelector('input[name="linkDocId"]').setAttribute('value', link.docId)
+      form.querySelector('input[name="linkId"]').setAttribute('value', link.linkId)
+      setOnChange(form)
+      setProgressTracker()
+      setEmbeddables()
     }
   }
 }
@@ -102,11 +116,37 @@ const setOnChange = function (containerElement) {
           e.currentTarget.checked = false
         }
       } else {
-        if (el.value.toLowerCase() === item.split('-')[1].toLowerCase()) {
-          const template = document.querySelector(`[data-choice="${item}"]`)
+        const itemAsArray = item.split('-')
+        console.log(itemAsArray)
+        if (el.value.toLowerCase() === itemAsArray[1].toLowerCase()) {
+          const template = document.querySelector(`[data-choice="${itemAsArray[0]}-${el.value.toLowerCase()}"]`)
           const content = template.content.cloneNode(true)
           for (let i = 0; i < content.children.length; i++) {
-            content.children[i].classList.add(item)
+            content.children[i].classList.add(itemAsArray[0]+'-'+itemAsArray[1].toLowerCase())
+          }
+          if (itemAsArray.length > 2) {
+            const existing = container.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[3]?.toLowerCase()}`)
+            if (existing.length) {
+              existing.forEach((node) => {
+                node.remove()
+              })
+            }
+          }
+          
+          container.appendChild(content)
+          setOnChange(container.lastElementChild)
+        } else if (itemAsArray.length > 2 && el.value.toLowerCase() === itemAsArray[3]?.toLowerCase()) {
+          const template = document.querySelector(`[data-choice="${itemAsArray[0]}-${el.value.toLowerCase()}"]`)
+          const content = template.content.cloneNode(true)
+          for (let i = 0; i < content.children.length; i++) {
+            content.children[i].classList.add(itemAsArray[0]+'-'+itemAsArray[3].toLowerCase())
+          }
+
+          const existing = container.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[1]?.toLowerCase()}`)
+          if (existing.length) {
+            existing.forEach((node) => {
+              node.remove()
+            })
           }
           container.appendChild(content)
           setOnChange(container.lastElementChild)
@@ -191,6 +231,7 @@ const setProgressTracker = function () {
   }
   document.querySelector('label[for="progress"]').textContent = `${completed} of ${total} answered`
   document.getElementById('progress').setAttribute('value', (completed / total) * 100)
+  document.querySelector('footer').classList.remove('hidden')
 }
 
 export {

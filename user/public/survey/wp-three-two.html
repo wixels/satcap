@@ -5,22 +5,816 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" media="screen" href="../_style/app.screen.css">
     <link rel="stylesheet" media="screen" href="../_style/survey.screen.css">
-    <title>Community Needs Survey</title>
+    <title>Community Needs Assessment Tool</title>
   </head>
   <body>
   <header class="withLink">
-    <h1>Community Needs Survey</h1>
+    <h1>Community Needs Assessment Tool</h1>
     <a href="./exit">&times;</a>
   </header>
   <main>
     <p class="init">Loading...</p>
+    <div class="consent hidden">
+      <div class="content">
+        <p id="surveyDescription"></p>
+        <h2>Consent to take part in research pilot</h2>
+        <details>
+          <summary>Click here to see what you're consenting to</summary>
+          <ul>
+            <li>I voluntarily agree to participate in this pilot study for a community needs assessment digital application.</li>
+            <li>I understand that I am participating in an assessment of this digital application in this pilot test of my own free will.</li>
+            <li>I understand that I should not expect any financial gain, remuneration or benefit directly for participation in this pilot test.</li>
+            <li>I understand that all information I provide in this study will be treated confidentially and no personal information will be shared.</li>
+            <li>I understand that in the findings and results of this study my identity will remain anonymous.</li>
+            <li>I understand that my participation in this pilot will in no way advantage or disadvantage me in future engagements with the host organisation.</li>
+            <li>I understand that as the information will be stored anonymously, I may not be able to access my specific responses.</li>
+            <li>I understand that participating in this pilot does not mean that I will expect any action to be taken from the host organisation based on my responses and feedback.</li>
+          </ul>
+        </details>
+        <form>
+          <label><input type="checkbox" name="giveConsent" required/>I understand and consent to the above</label>
+          <button type="submit" id="giveConsent">Start survey</button>
+        </form>
+      </div>
+    </div>
     <form class="survey hidden" name="survey" action="https://satcap-research.web.app/api/survey" method="POST">
+      <input type="hidden" name="consent" value="true" />
       <input type="hidden" name="survey" value="wp-three-two" />
       <input type="hidden" name="mineDocId" />
       <input type="hidden" name="linkDocId" />
       <input type="hidden" name="linkId" />
       <div class="question">
-        
+        <p>Question One</p>
+        <label>
+          <span>Which town/community do you currently live in?</span> 
+          <span class="sub">Please provide the place name and/or location</span>
+          <input type="text" name="questionOne" />
+        </label>
+      </div>
+      <div class="question">
+        <p>Question Two</p>
+        <label>
+          <span>Where do you work currently?</span>
+          <input type="text" name="questionTwo" />
+        </label>
+      </div>
+      <div class="question">
+        <p>Question Three</p>
+        <span class="label">What type of mine is in your community?</span>
+        <div class="multiple">
+          <label class="selector">
+            <input type="radio" value="Gold" name="questionThree" data-on-change="free-text"/>
+            <span>Gold</span>
+          </label>
+          <label class="selector">
+            <input type="radio" value="Platinum Group Metals (PGM)" name="questionThree" data-on-change="free-text"/>
+            <span>Platinum Group Metals (PGM)</span>
+          </label>
+          <label class="selector">
+            <input type="radio" value="Coal" name="questionThree" data-on-change="free-text"/>
+            <span>Coal</span>
+          </label>
+          <label class="selector">
+            <input type="radio" value="Iron" name="questionThree" data-on-change="free-text"/>
+            <span>Iron</span>
+          </label>
+          <label class="selector">
+            <input type="radio" value="Other" name="questionThree" data-on-change="free-text" data-free-text="true" />
+            <span>Other</span>
+          </label>
+        </div>
+      </div>
+      <div class="question">
+        <p>Question Four</p>
+        <label>
+          <span>Which age bracket do you fall into?</span>
+          <select name="questionFour">
+            <option value="">Select an option</option>
+            <option value="1-15">1 - 15</option>
+            <option value="15-25">15 - 25</option>
+            <option value="25-35">25 - 35</option>
+            <option value="35-45">35 - 45</option>
+            <option value="45-55">45 - 55</option>
+            <option value="55-65">55 - 65</option>
+            <option value="65 or older">65 or older</option>
+          </select>
+        </label>
+      </div>
+      <div class="question">
+        <p>Question Five</p>
+        <fieldset class="radioGroup">
+          <legend>What is your gender?</legend>
+          <label>
+            <input type="radio" value="Female" name="questionFive"/>
+            <span>Female</span>
+          </label>
+          <label>
+            <input type="radio" value="Male" name="questionFive"/>
+            <span>Male</span>
+          </label>
+          <label>
+            <input type="radio" value="Prefer not to say" name="questionFive"/>
+            <span>Prefer not to say</span>
+          </label>
+        </fieldset>
+      </div>
+      <div class="question">
+        <p>Question Six</p>
+        <label>
+          <span>What is your highest level of education?</span>
+          <select name="questionSix">
+            <option value="">Select an option</option>
+            <option value="No formal schooling">No formal schooling</option>
+            <option value="Primary School">Primary School</option>
+            <option value="High School">High School (Gr.8 – Gr. 11)</option>
+            <option value="Matric">Matric</option>
+            <option value="TVET diploma">TVET diploma</option>
+            <option value="College diploma">College diploma</option>
+            <option value="University degree/Post graduate studies">University degree/Post graduate studies</option>
+          </select>
+        </label>
+      </div>
+      <div class="question">
+        <p>Question Seven</p>
+        <fieldset class="radioGroup">
+          <legend>Are you a SMME/business owner?</legend>
+          <label>
+            <input type="radio" value="Yes" name="questionSeven" data-on-change="conditionalPath" data-conditional-path="seven-yes-seven-no"/>
+            <span>Yes</span>
+          </label>
+          <label>
+            <input type="radio" value="No" name="questionSeven" data-on-change="conditionalPath" data-conditional-path="seven-yes-seven-no"/>
+            <span>No</span>
+          </label>
+        </fieldset>
+        <template data-choice="seven-yes">
+          <div class="question">
+            <span>How many employees do you currently have?</span>
+            <div class="multiple">
+              <label class="selector">
+                <input type="radio" value="No employees" name="questionSeventeenOne"/>
+                <span>No employees</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="Less than 10" name="questionSeventeenOne"/>
+                <span>Less than 10</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="Between 10-20" name="questionSeventeenOne"/>
+                <span>Between 10-20</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="Between 20-30" name="questionSeventeenOne"/>
+                <span>Between 20-30</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="Greater than 30" name="questionSeventeenOne"/>
+                <span>Greater than 30</span>
+              </label>
+            </div>
+          </div>
+          <div class="question">
+            <span>What type of services does your business offer?</span>
+            <span class="sub">Choose as many as applicable</span>
+            <div class="multiple">
+              <label class="selector">
+                <input type="checkbox" value="Automotive" name="questionSeventeenTwo" />
+                <span>Automotive</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Agriculture, Regenerative agriculture, agro-processing and re-forestry" name="questionSeventeenTwo" />
+                <span>Agriculture, Regenerative agriculture, agro-processing and re-forestry</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Construction and building" name="questionSeventeenTwo" />
+                <span>Construction and building</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Creative and Design Industry" name="questionSeventeenTwo" />
+                <span>Creative and Design Industry</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Engineering" name="questionSeventeenTwo" />
+                <span>Engineering</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Healthcare" name="questionSeventeenTwo" />
+                <span>Healthcare</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Mining and minerals" name="questionSeventeenTwo" />
+                <span>Mining and minerals</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Mine rehabilitation" name="questionSeventeenTwo" />
+                <span>Mine rehabilitation</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Mine waste beneficiation" name="questionSeventeenTwo" />
+                <span>Mine waste beneficiation</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="e-Waste" name="questionSeventeenTwo" />
+                <span>e-Waste</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Renewable energy" name="questionSeventeenTwo" />
+                <span>Renewable energy</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Small/light manufacturing" name="questionSeventeenTwo" />
+                <span>Small/light manufacturing</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Services and retail trade" name="questionSeventeenTwo" />
+                <span>Services and retail trade</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Textiles" name="questionSeventeenTwo" />
+                <span>Textiles</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Tourism and hospitality" name="questionSeventeenTwo" />
+                <span>Tourism and hospitality</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Oil and gas" name="questionSeventeenTwo" />
+                <span>Oil and gas</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Recycling or Upcycling" name="questionSeventeenTwo" />
+                <span>Recycling or Upcycling</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Waste management" name="questionSeventeenTwo" />
+                <span>Waste management</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Catering" name="questionSeventeenTwo" />
+                <span>Catering</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Retail" name="questionSeventeenTwo" />
+                <span>Retail</span>
+              </label>
+            </div>
+            <label>
+              <span>Other</span>
+              <input type="text" placeholder="Please specify" name="questionSeventeenTwo" />
+            </label>
+          </div>
+          <div class="question">
+            <fieldset class="radioGroup">
+              <legend>Are you a contractor of the mine?</legend>
+              <label>
+                <input type="radio" value="Yes" name="questionSeventeenThree"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="questionSeventeenThree"/>
+                <span>No</span>
+              </label>
+            </fieldset>
+          </div>
+          <div class="question">
+            <span class="label">Choose the top three (3) skills according to how important they are for SMMEs</span>
+            <div class="multiple" >
+              <label class="selector">
+                <input type="checkbox" value="Finance" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3" />
+                <span>Finance</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Business planning" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3" />
+                <span>Business planning</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Marketing" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3" />
+                <span>Marketing</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Registration of business" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3" />
+                <span>Registration of business</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Tenders" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3" />
+                <span>Tenders</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Vendor registration" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3" />
+                <span>Vendor registration</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Health and safety" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3" />
+                <span>Health and safety</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Language proficiency" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3" />
+                <span>Language proficiency</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Numeracy and literacy" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Numeracy and literacy</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Job readiness skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3" />
+                <span>Job readiness skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Technological/Technical skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Technological/Technical skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Digital literacy" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Digital literacy</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Digital strategy skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Digital strategy skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Decision-making" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Decision-making</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Communication skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Communication skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Leadership skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Leadership skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Project management skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Project management skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Interpersonal skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Interpersonal skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Problem-solving skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Problem-solving skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Writing skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Writing skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Analytical skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Analytical skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Administrative skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Administrative skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Financial skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Financial skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Management skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Management skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Business management skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Business management skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Entrepreneurial skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Entrepreneurial skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Coaching and mentorship" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Coaching and mentorship</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Networking skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Networking skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Organisational skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Organisational skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Cultural awareness skills" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Cultural awareness skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Computer literacy" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Computer literacy</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Computer software skills " name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Computer software skills </span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Electronic/computer (IT)" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Electronic/computer (IT)</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Administrative/Clerical" name="questionSeventeenFour" data-on-change="maxCount" data-max-count="3"/>
+                <span>Administrative/Clerical</span>
+              </label>
+            </div>
+          </div>
+          <div class="question">
+            <fieldset class="radioGroup">
+              <legend>
+                Have you received training<sup>*</sup> that is related to your business? 
+                <span class="sub"><sup>*</sup>That assist/improve how you provide your services</span>
+              </legend>
+              <label>
+                <input type="radio" value="Yes" name="questionSeventeenFive" data-on-change="conditionalPath" data-conditional-path="seventeenFive-yes"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="questionSeventeenFive" data-on-change="conditionalPath" data-conditional-path="seventeenFive-yes"/>
+                <span>No</span>
+              </label>
+              <label>
+                <input type="radio" value="Not sure" name="questionSeventeenFive" data-on-change="conditionalPath" data-conditional-path="seventeenFive-yes"/>
+                <span>Not sure</span>
+              </label>
+            </fieldset>
+            <template data-choice="seventeenFive-yes">
+              <div class="question">
+                <span>Who provided the training?</span>
+                <div class="multiple">
+                  <label class="selector">
+                    <input type="radio" value="Business chamber" name="questionSeventeenFiveOne" data-on-change="free-text" />
+                    <span>Business chamber</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="Capacity building institution" name="questionSeventeenFiveOne" data-on-change="free-text" />
+                    <span>Capacity building institution</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="NGO/NPO" name="questionSeventeenFiveOne" data-on-change="free-text" />
+                    <span>NGO/NPO</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="Mining company programme" name="questionSeventeenFiveOne" data-on-change="free-text" />
+                    <span>Mining company programme</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="Other" name="questionSeventeenFiveOne" data-on-change="free-text" data-free-text="true" />
+                    <span>Other</span>
+                  </label>
+                </div>
+              </div>
+              <div class="question">
+                <span>What type of training did you receive?</span>
+                <span class="sub">Choose as many as applicable</span>
+                <div class="multiple" >
+                  <label class="selector">
+                    <input type="checkbox" value="Finance" name="questionSeventeenFiveTwo" />
+                    <span>Finance</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Business planning" name="questionSeventeenFiveTwo" />
+                    <span>Business planning</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Marketing" name="questionSeventeenFiveTwo" />
+                    <span>Marketing</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Registration of business" name="questionSeventeenFiveTwo" />
+                    <span>Registration of business</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Tenders" name="questionSeventeenFiveTwo" />
+                    <span>Tenders</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Vendor registration" name="questionSeventeenFiveTwo" />
+                    <span>Vendor registration</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Health and safety" name="questionSeventeenFiveTwo" />
+                    <span>Health and safety</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Language proficiency" name="questionSeventeenFiveTwo" />
+                    <span>Language proficiency</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Numeracy and literacy" name="questionSeventeenFiveTwo"/>
+                    <span>Numeracy and literacy</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Job readiness skills" name="questionSeventeenFiveTwo" />
+                    <span>Job readiness skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Technological/Technical skills" name="questionSeventeenFiveTwo"/>
+                    <span>Technological/Technical skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Digital literacy" name="questionSeventeenFiveTwo"/>
+                    <span>Digital literacy</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Digital strategy skills" name="questionSeventeenFiveTwo"/>
+                    <span>Digital strategy skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Decision-making" name="questionSeventeenFiveTwo"/>
+                    <span>Decision-making</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Communication skills" name="questionSeventeenFiveTwo"/>
+                    <span>Communication skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Leadership skills" name="questionSeventeenFiveTwo"/>
+                    <span>Leadership skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Project management skills" name="questionSeventeenFiveTwo"/>
+                    <span>Project management skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Interpersonal skills" name="questionSeventeenFiveTwo"/>
+                    <span>Interpersonal skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Problem-solving skills" name="questionSeventeenFiveTwo"/>
+                    <span>Problem-solving skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Writing skills" name="questionSeventeenFiveTwo"/>
+                    <span>Writing skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Analytical skills" name="questionSeventeenFiveTwo"/>
+                    <span>Analytical skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Administrative skills" name="questionSeventeenFiveTwo"/>
+                    <span>Administrative skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Financial skills" name="questionSeventeenFiveTwo"/>
+                    <span>Financial skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Management skills" name="questionSeventeenFiveTwo"/>
+                    <span>Management skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Business management skills" name="questionSeventeenFiveTwo"/>
+                    <span>Business management skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Entrepreneurial skills" name="questionSeventeenFiveTwo"/>
+                    <span>Entrepreneurial skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Coaching and mentorship" name="questionSeventeenFiveTwo"/>
+                    <span>Coaching and mentorship</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Networking skills" name="questionSeventeenFiveTwo"/>
+                    <span>Networking skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Organisational skills" name="questionSeventeenFiveTwo"/>
+                    <span>Organisational skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Cultural awareness skills" name="questionSeventeenFiveTwo"/>
+                    <span>Cultural awareness skills</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Computer literacy" name="questionSeventeenFiveTwo"/>
+                    <span>Computer literacy</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Computer software skills " name="questionSeventeenFiveTwo"/>
+                    <span>Computer software skills </span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Electronic/computer (IT)" name="questionSeventeenFiveTwo"/>
+                    <span>Electronic/computer (IT)</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Administrative/Clerical" name="questionSeventeenFiveTwo"/>
+                    <span>Administrative/Clerical</span>
+                  </label>
+                </div>
+                <label>
+                  <span>Other</span>
+                  <input type="text" placeholder="Please specify" name="questionSeventeenFiveTwo" />
+                </label>
+              </div>
+              <div class="question">
+                <span>After receiving training, which bracket does your business fall in?</span>
+                <div class="multiple">
+                  <label class="selector">
+                    <input type="radio" value="Turnover between R0 - R500K" name="questionSeventeenFiveThree" />
+                    <span>Turnover between R0 - R500K</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="Turnover between R500K - R1M" name="questionSeventeenFiveThree" />
+                    <span>Turnover between R500K - R1M</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="Turnover between R1M - R10M" name="questionSeventeenFiveThree" />
+                    <span>Turnover between R1M - R10M</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="Turnover between R10M - R50M" name="questionSeventeenFiveThree" />
+                    <span>Turnover between R10M - R50M</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="Turnover greater than R50M" name="questionSeventeenFiveThree" />
+                    <span>Turnover greater than R50M</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="Not Sure" name="questionSeventeenFiveThree" />
+                    <span>Not Sure</span>
+                  </label>
+                </div>
+              </div>
+              <div class="question">
+                <span>Have you been able to access the following opportunities post training?</span>
+                <span class="sub">Choose as many as applicable</span>
+                <div class="multiple">
+                  <label class="selector">
+                    <input type="checkbox" value="I was able to submit a vendor application successfully" name="questionSeventeenFiveFour" />
+                    <span>I was able to submit a vendor application successfully</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="I was able to better comply with health and safety requirements" name="questionSeventeenFiveFour" />
+                    <span>I was able to better comply with health and safety requirements</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="I was able to secure funding" name="questionSeventeenFiveFour" />
+                    <span>I was able to secure funding</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="I was able to provide goods/services in a new industry" name="questionSeventeenFiveFour" />
+                    <span>I was able to provide goods/services in a new industry</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="I was able to expand my business" name="questionSeventeenFiveFour" />
+                    <span>I was able to expand my business</span>
+                  </label>
+                </div>
+                <label>
+                  <span>Other</span>
+                  <input type="text" placeholder="Please specify" name="questionSeventeenFiveFour" />
+                </label>
+              </div>
+            </template>
+          </div>
+          <div class="question">
+            <fieldset class="radioGroup">
+              <legend>As an SMME, are you currently receiving support from a mining company?</legend>
+              <label>
+                <input type="radio" value="Yes" name="questionSeventeenSix" data-on-change="conditionalPath" data-conditional-path="seventeenSix-yes" />
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="questionSeventeenSix" data-on-change="conditionalPath" data-conditional-path="seventeenSix-yes" />
+                <span>No</span>
+              </label>
+              <label>
+                <input type="radio" value="Not sure" name="questionSeventeenSix" data-on-change="conditionalPath" data-conditional-path="seventeenSix-yes" />
+                <span>Not sure</span>
+              </label>
+            </fieldset>
+            <template data-choice="seventeenSix-yes">
+              <div class="question">
+                <span>What type of support are you receiving?</span>
+                <span class="sub">Choose as many as applicable</span>
+                <div class="multiple">
+                  <label class="selector">
+                    <input type="checkbox" value="Finance" name="questionSeventeenSixOne" />
+                    <span>Finance</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Business planning" name="questionSeventeenSixOne" />
+                    <span>Business planning</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Marketing" name="questionSeventeenSixOne" />
+                    <span>Marketing</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Registration of business" name="questionSeventeenSixOne" />
+                    <span>Registration of business</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Tenders" name="questionSeventeenSixOne" />
+                    <span>Tenders</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Vendor registration" name="questionSeventeenSixOne" />
+                    <span>Vendor registration</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Skills in latest technology" name="questionSeventeenSixOne" />
+                    <span>Skills in latest technology</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Business Management" name="questionSeventeenSixOne" />
+                    <span>Business Management</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Ethical business practice" name="questionSeventeenSixOne" />
+                    <span>Ethical business practice</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Digital literacy" name="questionSeventeenSixOne" />
+                    <span>Digital literacy</span>
+                  </label>
+                  <label class="selector">
+                    <input type="checkbox" value="Health and safety" name="questionSeventeenSixOne" />
+                    <span>Health and safety</span>
+                  </label>
+                </div>
+                <label>
+                  <span>Other</span>
+                  <input type="text" placeholder="Please specify" name="questionSeventeenSixOne" />
+                </label>
+              </div>
+            </template>
+            <fieldset class="radioGroup">
+              <legend>Have you received training that has assisted you in accessing tender opportunities?</legend>
+              <label>
+                <input type="radio" value="Yes" name="questionSeventeenSeven"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="questionSeventeenSeven"/>
+                <span>No</span>
+              </label>
+              <label>
+                <input type="radio" value="Not sure" name="questionSeventeenSeven"/>
+                <span>Not sure</span>
+              </label>
+            </fieldset>
+            <fieldset class="radioGroup">
+              <legend>Have you received vendor related training?</legend>
+              <label>
+                <input type="radio" value="Yes" name="questionSeventeenEight"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="questionSeventeenEight"/>
+                <span>No</span>
+              </label>
+              <label>
+                <input type="radio" value="Not sure" name="questionSeventeenEight"/>
+                <span>Not sure</span>
+              </label>
+            </fieldset>
+            <fieldset class="radioGroup">
+              <legend>Have you received training related to health and safety requirements of mining companies?</legend>
+              <label>
+                <input type="radio" value="Yes" name="questionSeventeenNine"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="questionSeventeenNine"/>
+                <span>No</span>
+              </label>
+              <label>
+                <input type="radio" value="Not sure" name="questionSeventeenNine"/>
+                <span>Not sure</span>
+              </label>
+            </fieldset>
+          </div>
+        </template>
+        <template data-choice="seven-no">
+          <div class="question">
+            <span>Community based question?</span>
+            <div class="multiple">
+              <label class="selector">
+                <input type="radio" value="No employees" name="questionSeventeenOne"/>
+                <span>No employees</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="Less than 10" name="questionSeventeenOne"/>
+                <span>Less than 10</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="Between 10-20" name="questionSeventeenOne"/>
+                <span>Between 10-20</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="Between 20-30" name="questionSeventeenOne"/>
+                <span>Between 20-30</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="Greater than 30" name="questionSeventeenOne"/>
+                <span>Greater than 30</span>
+              </label>
+            </div>
+          </div>
+        </template>
       </div>
       <button type="submit">Submit</button>
     </form>
@@ -36,7 +830,7 @@
       </label>
     </template>
   </main>
-  <footer>
+  <footer class="hidden">
     <div class="progress">
       <label for="progress"></label>
       <progress id="progress" max="100" value=""></progress>
@@ -49,7 +843,7 @@
     import { initialise } from '../_scripts/survey.js'
 
     const link = await getLink()
-    const suveryKey = 'wp-two-two'
+    const suveryKey = 'wp-three-two'
     const localSubmissions= JSON.parse(window.localStorage.getItem('submissions')) || []
     
     initialise(suveryKey, localSubmissions)
