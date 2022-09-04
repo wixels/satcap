@@ -149,93 +149,161 @@
         </fieldset>
         <template data-choice="seven-yes">
           <div class="question">
+            <p>SMME: Question One</p>
             <span>What services do you provide?</span>
             <span class="sub">Choose as many as applicable</span>
             <div class="multiple">
               <label class="selector">
-                <input type="checkbox" value="Automotive" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Automotive" name="SMMEQuestionOne" />
                 <span>Automotive</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Agriculture, Regenerative agriculture, agro-processing and re-forestry" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Agriculture, Regenerative agriculture, agro-processing and re-forestry" name="SMMEQuestionOne" />
                 <span>Agriculture, Regenerative agriculture, agro-processing and re-forestry</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Construction and building" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Construction and building" name="SMMEQuestionOne" />
                 <span>Construction and building</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Creative and Design Industry" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Creative and Design Industry" name="SMMEQuestionOne" />
                 <span>Creative and Design Industry</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Engineering" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Engineering" name="SMMEQuestionOne" />
                 <span>Engineering</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Healthcare" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Healthcare" name="SMMEQuestionOne" />
                 <span>Healthcare</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Mining and minerals" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Mining and minerals" name="SMMEQuestionOne" />
                 <span>Mining and minerals</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Mine rehabilitation" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Mine rehabilitation" name="SMMEQuestionOne" />
                 <span>Mine rehabilitation</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Mine waste beneficiation" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Mine waste beneficiation" name="SMMEQuestionOne" />
                 <span>Mine waste beneficiation</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="e-Waste" name="questionSeventeenTwo" />
+                <input type="checkbox" value="e-Waste" name="SMMEQuestionOne" />
                 <span>e-Waste</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Renewable energy" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Renewable energy" name="SMMEQuestionOne" />
                 <span>Renewable energy</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Small/light manufacturing" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Small/light manufacturing" name="SMMEQuestionOne" />
                 <span>Small/light manufacturing</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Services and retail trade" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Services and retail trade" name="SMMEQuestionOne" />
                 <span>Services and retail trade</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Textiles" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Textiles" name="SMMEQuestionOne" />
                 <span>Textiles</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Tourism and hospitality" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Tourism and hospitality" name="SMMEQuestionOne" />
                 <span>Tourism and hospitality</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Oil and gas" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Oil and gas" name="SMMEQuestionOne" />
                 <span>Oil and gas</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Recycling or Upcycling" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Recycling or Upcycling" name="SMMEQuestionOne" />
                 <span>Recycling or Upcycling</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Waste management" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Waste management" name="SMMEQuestionOne" />
                 <span>Waste management</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Catering" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Catering" name="SMMEQuestionOne" />
                 <span>Catering</span>
               </label>
               <label class="selector">
-                <input type="checkbox" value="Retail" name="questionSeventeenTwo" />
+                <input type="checkbox" value="Retail" name="SMMEQuestionOne" />
                 <span>Retail</span>
               </label>
             </div>
             <label>
               <span>Other</span>
-              <input type="text" placeholder="Please specify" name="questionSeventeenTwo" />
+              <input type="text" placeholder="Please specify" name="SMMEQuestionOne" />
+            </label>
+          </div>
+          <div class="question">
+            <p>SMME: Question Two</p>
+            <fieldset class="radioGroup">
+              <legend>Are you a service provider to the mine?</legend>
+              <label>
+                <input type="radio" value="Yes" name="SMMEQuestionTwo" data-on-change="conditionalPath" data-conditional-path="SMMEOne-yes-SMMEOne-no"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="SMMEQuestionTwo" data-on-change="conditionalPath" data-conditional-path="SMMEOne-yes-SMMEOne-no"/>
+                <span>No</span>
+              </label>
+            </fieldset>
+            <template data-choice="smmeOne-yes">
+              <div class="question">
+                <span>How long have you been supplying the mine?</span>
+                <div class="multiple">
+                  <label class="selector">
+                    <input type="radio" value="A few months" name="SMMEQuestionTwo" />
+                    <span>A few months</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="6 months - 1 year" name="SMMEQuestionTwo" />
+                    <span>6 months - 1 year</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="More than 1 year" name="SMMEQuestionTwo" />
+                    <span>More than 1 year</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="Over 5 years" name="SMMEQuestionTwo" />
+                    <span>Over 5 years</span>
+                  </label>
+                </div>
+              </div>
+            </template>
+            <template data-choice="smmeOne-no">
+              <div class="question">
+                <fieldset class="radioGroup">
+                  <legend>Would you like to supply the mine?</legend>
+                  <label>
+                    <input type="radio" value="Yes" name="SMMEQuestionTwo"/>
+                    <span>Yes</span>
+                  </label>
+                  <label>
+                    <input type="radio" value="No" name="SMMEQuestionTwo"/>
+                    <span>No</span>
+                  </label>
+                </fieldset>
+              </div>
+            </template>
+          </div>
+          <div class="question">
+            <p>SMME: Question Three</p>
+            <label>
+              <span>What stage would you describe your business at present?</span>
+              <select name="questionThree">
+                <option value="">Select an option</option>
+                <option value="Ideating (A form of idea or concept you are having)">Ideating (A form of idea or concept you are having)</option>
+                <option value="Concepting (Mapping out the idea on paper)">Concepting (Mapping out the idea on paper)</option>
+                <option value="Committing (Carrying out the idea)">Committing (Carrying out the idea)</option>
+                <option value="Validating (Providing the accuracy of the idea)">Validating (Providing the accuracy of the idea)</option>
+                <option value="Scaling (Initiating growth in a company)">Scaling (Initiating growth in a company)</option>
+                <option value="Establishing/Maturity (Level off from rapid growth period)">Establishing/Maturity (Level off from rapid growth period)</option>
+              </select>
             </label>
           </div>
         </template>
@@ -244,11 +312,11 @@
             <fieldset class="radioGroup">
               <legend>Are you employed?</legend>
               <label>
-                <input type="radio" value="Yes" name="questionSevenCommunityOne" data-on-change="conditionalPath" data-conditional-path="sevenCommunityOne-yes"/>
+                <input type="radio" value="Yes" name="communityQuestionOne" data-on-change="conditionalPath" data-conditional-path="communityOne-yes"/>
                 <span>Yes</span>
               </label>
               <label>
-                <input type="radio" value="No" name="questionSevenCommunityOne" data-on-change="conditionalPath" data-conditional-path="sevenCommunityOne-yes"/>
+                <input type="radio" value="No" name="communityQuestionOne" data-on-change="conditionalPath" data-conditional-path="communityOne-yes"/>
                 <span>No</span>
               </label>
             </fieldset>
