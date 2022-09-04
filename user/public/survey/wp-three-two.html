@@ -295,7 +295,7 @@
             <p>SMME: Question Three</p>
             <label>
               <span>What stage would you describe your business at present?</span>
-              <select name="questionThree">
+              <select name="SMMEQuestionThree">
                 <option value="">Select an option</option>
                 <option value="Ideating (A form of idea or concept you are having)">Ideating (A form of idea or concept you are having)</option>
                 <option value="Concepting (Mapping out the idea on paper)">Concepting (Mapping out the idea on paper)</option>
@@ -304,6 +304,696 @@
                 <option value="Scaling (Initiating growth in a company)">Scaling (Initiating growth in a company)</option>
                 <option value="Establishing/Maturity (Level off from rapid growth period)">Establishing/Maturity (Level off from rapid growth period)</option>
               </select>
+            </label>
+          </div>
+          <div class="question">
+            <p>SMME: Question Four</p>
+            <label>
+              <span>How much revenue would do you earn annually?</span>
+              <span class="sub">Provide estimates</span>
+              <select name="SMMEQuestionFour">
+                <option value="">Select an option</option>
+                <option value="Less than R100,000">Less than R100,000</option>
+                <option value="R100,000-R1M">R100,000 - R1M</option>
+                <option value="R1M-R10M">R1M - R10M</option>
+                <option value="R10M-R50M">R10M - R50M</option>
+                <option value="Over R50M">Over R50M</option>
+              </select>
+            </label>
+          </div>
+          <div class="question">
+            <p>SMME: Question Five</p>
+            <fieldset class="radioGroup">
+              <legend>Can you easily access loan and finances to operate your business?</legend>
+              <label>
+                <input type="radio" value="Yes" name="SMMEQuestionFive"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="SMMEQuestionFive"/>
+                <span>No</span>
+              </label>
+            </fieldset>
+          </div>
+          <div class="question">
+            <p>SMME: Question Six</p>
+            <fieldset class="radioGroup">
+              <legend>Have you applied for any funding/loans?</legend>
+              <label>
+                <input type="radio" value="Yes" name="SMMEQuestionSix" data-on-change="conditionalPath" data-conditional-path="SMMESix-yes" />
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="SMMEQuestionSix" data-on-change="conditionalPath" data-conditional-path="SMMESix-yes"/>
+                <span>No</span>
+              </label>
+            </fieldset>
+            <template data-choice="SMMESix-yes">
+              <div class="question">
+                <fieldset class="radioGroup">
+                  <legend>Were you successful in obtaining the loan or grant?</legend>
+                  <label>
+                    <input type="radio" value="Yes" name="SMMEQuestionSixOne" data-on-change="conditionalPath" data-conditional-path="SMMESixOne-yes"/>
+                    <span>Yes</span>
+                  </label>
+                  <label>
+                    <input type="radio" value="No" name="SMMEQuestionSixOne" data-on-change="conditionalPath" data-conditional-path="SMMESixOne-yes"/>
+                    <span>No</span>
+                  </label>
+                </fieldset>
+                <template data-choice="SMMESixOne-yes">
+                  <div class="question">
+                    <label>
+                      <span>What were you able to do with the funding support?</span>
+                      <select name="SMMEQuestionSixTwo" data-on-change="free-text">
+                        <option value="">Select an option</option>
+                        <option value="Hire more people">Hire more people</option>
+                        <option value="Expand the business">Expand the business</option>
+                        <option value="Grow a new service offering or product line">Grow a new service offering or product line</option>
+                        <option value="Purchase new equipment or hire additional equipment">Purchase new equipment or hire additional equipment</option>
+                        <option value="Hire new business premises">Hire new business premises</option>
+                        <option value="Purchase new business premises">Purchase new business premises</option>
+                        <option value="Other" data-free-text="true">Other</option>
+                      </select>
+                    </label>
+                  </div>
+                </template>
+              </div>
+            </template>
+          </div>
+          <div class="question">
+            <p>Question Seven</p>
+            <label>
+              <span>Have you received any assistance from the following organisations to grow your business?</span>
+              <select name="SMMEQuestionSeven" data-on-change="free-text">
+                <option value="">Select an option</option>
+                <option value="National Government">National Government</option>
+                <option value="Local Government">Local Government</option>
+                <option value="Municipality">Municipality</option>
+                <option value="Mine">Mine</option>
+                <option value="NGOs">NGOs</option>
+                <option value="CBOs">CBOs</option>
+                <option value="Forums">Forums</option>
+                <option value="Unions">Unions</option>
+                <option value="Local Businesses/SMMEs/Industrialists">Local Businesses/SMMEs/Industrialists</option>
+                <option value="Other" data-free-text="true">Other</option>
+              </select>
+            </label>
+          </div>
+          <div class="question">
+            <p>Question Eight</p>
+            <span class="label">Which of the following skills is most needed for future economies of local communities?</span>
+            <span class="sub">Choose as many as applicable</span>
+            <div class="multiple" >
+              <label class="selector">
+                <input type="checkbox" value="Language proficiency" name="SMMEQuestionEight" />
+                <span>Language proficiency</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Numeracy and literacy" name="SMMEQuestionEight"/>
+                <span>Numeracy and literacy</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Job readiness skills" name="SMMEQuestionEight" />
+                <span>Job readiness skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Digital literacy skills" name="SMMEQuestionEight"/>
+                <span>Digital literacy skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Technical training" name="SMMEQuestionEight"/>
+                <span>Technical training</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Business skills" name="SMMEQuestionEight"/>
+                <span>Business skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Coaching and mentorship" name="SMMEQuestionEight"/>
+                <span>Coaching and mentorship</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Ethical Business Practice" name="SMMEQuestionEight"/>
+                <span>Ethical Business Practice</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Entrepreneurship and Innovation" name="SMMEQuestionEight"/>
+                <span>Entrepreneurship and Innovation</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Business management" name="SMMEQuestionEight"/>
+                <span>Business management</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Leadership skills" name="SMMEQuestionEight"/>
+                <span>Leadership skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Black Industrialists Scheme : Grants, Benefits and Incentives" name="SMMEQuestionEight"/>
+                <span>Black Industrialists Scheme : Grants, Benefits and Incentives</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Adult Based Education & Training" name="SMMEQuestionEight"/>
+                <span>Adult Based Education & Training</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Communication Skills" name="SMMEQuestionEight"/>
+                <span>Communication Skills</span>
+              </label>
+            </div>
+            <label>
+              <span>Other</span>
+              <input type="text" placeholder="Please specify" name="SMMEQuestionEight" />
+            </label>
+          </div>
+          <div class="question">
+            <p>Question Nine</p>
+            <span class="label">What type of mine operates within or close to your community?</span>
+            <div class="multiple">
+              <label class="selector">
+                <input type="radio" value="Learnerships" name="SMMEQuestionNine" data-on-change="free-text"/>
+                <span>Learnerships</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="Internships" name="SMMEQuestionNine" data-on-change="free-text"/>
+                <span>Internships</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="Bursaries" name="SMMEQuestionNine" data-on-change="free-text"/>
+                <span>Bursaries</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="Other" name="SMMEQuestionNine" data-on-change="free-text" data-free-text="true" />
+                <span>Other</span>
+              </label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question Ten</p>
+            <span class="label">Have you received any training in any of the following industries?</span>
+            <span class="sub">Choose as many as applicable</span>
+            <div class="multiple" >
+              <label class="selector">
+                <input type="checkbox" value="Mine waste beneficiation" name="SMMEQuestionTen" />
+                <span>Mine waste beneficiation</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="e-Waste" name="SMMEQuestionTen"/>
+                <span>e-Waste</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Recycling or Upcycling" name="SMMEQuestionTen" />
+                <span>Recycling or Upcycling</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Regenerative agriculture, agro-processing and re-forestry" name="SMMEQuestionTen"/>
+                <span>Regenerative agriculture, agro-processing and re-forestry</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Renewable energy" name="SMMEQuestionTen"/>
+                <span>Renewable energy</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Small/light manufacturing" name="SMMEQuestionTen"/>
+                <span>Small/light manufacturing</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Tourism" name="SMMEQuestionTen"/>
+                <span>Tourism</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Mine rehabilitation" name="SMMEQuestionTen"/>
+                <span>Mine rehabilitation</span>
+              </label>
+            </div>
+            <label>
+              <span>Other</span>
+              <input type="text" placeholder="Please specify" name="SMMEQuestionTen" />
+            </label>
+          </div>
+          <div class="question">
+            <p>Question Eleven</p>
+            <span class="label">Choose the top three (3) skills according to how important they are for SMMEs</span>
+            <div class="multiple" >
+              <label class="selector">
+                <input type="checkbox" value="Finance" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3" />
+                <span>Finance</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Business planning" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3" />
+                <span>Business planning</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Marketing" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3" />
+                <span>Marketing</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Registration of business" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3" />
+                <span>Registration of business</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Tenders" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3" />
+                <span>Tenders</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Vendor registration" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3" />
+                <span>Vendor registration</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Health and safety" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3" />
+                <span>Health and safety</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Digital literacy" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3"/>
+                <span>Digital literacy</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Ethical business practice" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3"/>
+                <span>Ethical business practice</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Business management" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3"/>
+                <span>Business management</span>
+              </label>
+            </div>
+          </div>
+          <div class="question">
+            <p>SMME: Question Twelve</p>
+            <fieldset class="radioGroup">
+              <legend>Do you use any natural assets to provide your services?</legend>
+              <label>
+                <input type="radio" value="Yes" name="SMMEQuestionTwelve" data-on-change="conditionalPath" data-conditional-path="SMMETwelve-yes"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="SMMEQuestionTwelve" data-on-change="conditionalPath" data-conditional-path="SMMETwelve-yes"/>
+                <span>No</span>
+              </label>
+            </fieldset>
+            <template data-choice="SMMETwelve-yes">
+              <div class="question">
+                <span>Which of the following natural assets assist you in operating your business?</span>
+                <div class="multiple">
+                  <label class="selector">
+                    <input type="radio" value="Rivers/Streams/Ground water" name="SMMEQuestionTwelveOne" data-on-change="free-text"/>
+                    <span>Rivers/Streams/Ground water</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="Land" name="SMMEQuestionTwelveOne" data-on-change="free-text"/>
+                    <span>Land</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="Mine Waste Dump" name="SMMEQuestionTwelveOne" data-on-change="free-text"/>
+                    <span>Mine Waste Dump</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="Other" name="SMMEQuestionTwelveOne" data-on-change="free-text" data-free-text="true" />
+                    <span>Other</span>
+                  </label>
+                </div>
+              </div>
+            </template>
+          </div>
+          <div class="question">
+            <p>Question Thirteen</p>
+            <fieldset class="radioGroup">
+              <legend>Are you aware of any of such business networks, cooperatives and forums etc.?</legend>
+              <label>
+                <input type="radio" value="Yes" name="SMMEQuestionThirteen"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="SMMEQuestionThirteen"/>
+                <span>No</span>
+              </label>
+            </fieldset>
+          </div>
+          <div class="question">
+            <p>Question Fourteen</p>
+            <fieldset class="radioGroup">
+              <legend>Do you have other businesses that you partner/work with?</legend>
+              <label>
+                <input type="radio" value="Yes" name="SMMEQuestionFourteen"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="SMMEQuestionFourteen"/>
+                <span>No</span>
+              </label>
+            </fieldset>
+          </div>
+          <div class="question">
+            <p>SMME: Question Fifteen</p>
+            <fieldset class="radioGroup">
+              <legend>Are you part of any business networks, cooperatives and/or forums?</legend>
+              <label>
+                <input type="radio" value="Yes" name="SMMEQuestionFifteen" data-on-change="conditionalPath" data-conditional-path="SMMEFifteen-yes"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="SMMEQuestionFifteen" data-on-change="conditionalPath" data-conditional-path="SMMEFifteen-yes"/>
+                <span>No</span>
+              </label>
+            </fieldset>
+            <template data-choice="SMMEFifteen-yes">
+              <div class="question">
+                <span>Which of the following natural assets assist you in operating your business?</span>
+                <div class="multiple">
+                  <label class="selector">
+                    <input type="radio" value="Business Network" name="SMMEQuestionFifteenOne" data-on-change="free-text"/>
+                    <span>Business Network</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="Local Business Forum" name="SMMEQuestionFifteenOne" data-on-change="free-text"/>
+                    <span>Local Business Forum</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="Local Business Cooperatives" name="SMMEQuestionFifteenOne" data-on-change="free-text"/>
+                    <span>Local Business Cooperatives</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="Not sure" name="SMMEQuestionFifteenOne" data-on-change="free-text"/>
+                    <span>Not sure</span>
+                  </label>
+                  <label class="selector">
+                    <input type="radio" value="Other" name="SMMEQuestionFifteenOne" data-on-change="free-text" data-free-text="true" />
+                    <span>Other</span>
+                  </label>
+                </div>
+              </div>
+            </template>
+          </div>
+          <div class="question">
+            <p>SMME: Question Sixteen</p>
+            <span>Is your business equipped to <strong>offer on the job training for skills</strong> in the any of the following?</span>
+            <span class="sub">Choose as many as applicable</span>
+            <div class="multiple">
+              <label class="selector">
+                <input type="checkbox" value="Gardening" name="SMMEQuestionSixteen" />
+                <span>Gardening</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Carpentry" name="SMMEQuestionSixteen" />
+                <span>Carpentry</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Construction" name="SMMEQuestionSixteen" />
+                <span>Construction</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Ceiling and Lighting" name="SMMEQuestionSixteen" />
+                <span>Ceiling and Lighting</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Recycling" name="SMMEQuestionSixteen" />
+                <span>Recycling</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Mine Tailings Management" name="SMMEQuestionSixteen" />
+                <span>Mine Tailings Management</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Catering" name="SMMEQuestionSixteen" />
+                <span>Catering</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Retail Trade" name="SMMEQuestionSixteen" />
+                <span>Retail Trade</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Accommodation" name="SMMEQuestionSixteen" />
+                <span>Accommodation</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Industrial Engineering" name="SMMEQuestionSixteen" />
+                <span>Industrial Engineering</span>
+              </label>
+            </div>
+            <label>
+              <span>Other</span>
+              <input type="text" placeholder="Please specify" name="SMMEQuestionSixteen" />
+            </label>
+          </div>
+          <div class="question">
+            <p>Question Seventeen</p>
+            <fieldset class="radioGroup">
+              <legend>Do you operate out of your own premises?</legend>
+              <label>
+                <input type="radio" value="Yes" name="SMMEQuestionSeventeen"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="SMMEQuestionSeventeen"/>
+                <span>No</span>
+              </label>
+            </fieldset>
+          </div>
+          <div class="question">
+            <p>Question Eighteen</p>
+            <fieldset class="radioGroup">
+              <legend>Do you have connectivity<sup>*</sup> on your premises?</legend>
+              <span class="sub"><sup>*</sup>Wi-Fi, mobile/telephone network</span>
+              <label>
+                <input type="radio" value="Yes" name="SMMEQuestionEighteen"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="SMMEQuestionEighteen"/>
+                <span>No</span>
+              </label>
+            </fieldset>
+          </div>
+          <div class="question">
+            <p>Question Nineteen</p>
+            <fieldset class="radioGroup">
+              <legend>Do you have running water and electricity on your operation premises?</legend>
+              <label>
+                <input type="radio" value="Yes" name="SMMEQuestionNineteen"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="SMMEQuestionNineteen"/>
+                <span>No</span>
+              </label>
+            </fieldset>
+          </div>
+          <div class="question">
+            <p>Question Twenty</p>
+            <fieldset class="radioGroup">
+              <legend>Is security an issue for your premises and the operation of your business?</legend>
+              <label>
+                <input type="radio" value="Yes" name="SMMEQuestionTwenty"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="SMMEQuestionTwenty"/>
+                <span>No</span>
+              </label>
+            </fieldset>
+          </div>
+          <div class="question">
+            <p>SMME: Question Twenty-one</p>
+            <fieldset class="radioGroup">
+              <legend>Does your business have any initiatives in place to empower marginalised groups in the community? </legend>
+              <label>
+                <input type="radio" value="Yes" name="SMMEQuestionTwentyOne" data-on-change="conditionalPath" data-conditional-path="SMMETwentyOne-yes"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="SMMEQuestionTwentyOne" data-on-change="conditionalPath" data-conditional-path="SMMETwentyOne-yes"/>
+                <span>No</span>
+              </label>
+            </fieldset>
+            <template data-choice="SMMETwentyOne-yes">
+              <div class="question">
+                <label>
+                  <span>What are these initiatives?</span> 
+                  <input type="text" name="SMMEQuestionTwentyOneOne" />
+                </label>
+              </div>
+            </template>
+          </div>
+          <div class="question">
+            <p>Question Twenty-two</p>
+            <fieldset class="radioGroup">
+              <legend>Do you have information on the other needs in the community that you operate in?</legend>
+              <label>
+                <input type="radio" value="Yes" name="SMMEQuestionTwentyTwo"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="SMMEQuestionTwentyTwo"/>
+                <span>No</span>
+              </label>
+              <label>
+                <input type="radio" value="Don't know" name="SMMEQuestionTwentyTwo"/>
+                <span>Don't know</span>
+              </label>
+            </fieldset>
+          </div>
+          <div class="question">
+            <p>Question Twenty-three</p>
+            <fieldset class="radioGroup">
+              <legend>Are you aware of any local initiatives, businesses, or groups that are meeting needs in the community?</legend>
+              <label>
+                <input type="radio" value="Yes" name="SMMEQuestionTwentyThree" data-on-change="conditionalPath" data-conditional-path="SMMETwentyThree-yes"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="SMMEQuestionTwentyThree" data-on-change="conditionalPath" data-conditional-path="SMMETwentyThree-yes"/>
+                <span>No</span>
+              </label>
+              <label>
+                <input type="radio" value="Don't know" name="SMMEQuestionTwentyThree" data-on-change="conditionalPath" data-conditional-path="SMMETwentyThree-yes"/>
+                <span>Don't know</span>
+              </label>
+            </fieldset>
+            <template data-choice="SMMETwentyThree-yes">
+              <div class="question">
+                <label>
+                  <span>What are these initiatives, businesses or groups?</span> 
+                  <input type="text" name="SMMEQuestionTwentyThreeOne" />
+                </label>
+              </div>
+              <div class="question">
+                <label>
+                  <span>What needs are they meeting and how?</span> 
+                  <input type="text" name="SMMEQuestionTwentyThreeTwo" />
+                </label>
+              </div>
+            </template>
+          </div>
+          <div class="question">
+            <p>Question Twenty-four</p>
+            <fieldset class="radioGroup">
+              <legend>Are you aware of the Black Industrialists Scheme (BIS) by the Department of Trade and Industry (DTI)?</legend>
+              <label>
+                <input type="radio" value="Yes" name="SMMEQuestionTwentyFour" data-on-change="conditionalPath" data-conditional-path="SMMETwentyFour-yes"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="SMMEQuestionTwentyFour" data-on-change="conditionalPath" data-conditional-path="SMMETwentyFour-yes"/>
+                <span>No</span>
+              </label>
+            </fieldset>
+            <template data-choice="SMMETwentyFour-yes">
+              <div class="question">
+                <fieldset class="radioGroup">
+                  <legend>Did you apply for the scheme?</legend>
+                  <label>
+                    <input type="radio" value="Yes" name="SMMEQuestionTwentyFourOne" data-on-change="conditionalPath" data-conditional-path="SMMETwentyFourOne-yes"/>
+                    <span>Yes</span>
+                  </label>
+                  <label>
+                    <input type="radio" value="No" name="SMMEQuestionTwentyFourOne" data-on-change="conditionalPath" data-conditional-path="SMMETwentyFourOne-yes"/>
+                    <span>No</span>
+                  </label>
+                </fieldset>
+                <template data-choice="SMMETwentyFourOne-yes">
+                  <div class="question">
+                    <fieldset class="radioGroup">
+                      <legend>Were you successful?</legend>
+                      <label>
+                        <input type="radio" value="Yes" name="SMMEQuestionTwentyFourTwo"/>
+                        <span>Yes</span>
+                      </label>
+                      <label>
+                        <input type="radio" value="No" name="SMMEQuestionTwentyFourTwo"/>
+                        <span>No</span>
+                      </label>
+                    </fieldset>
+                  </div>
+                </template>
+              </div>
+            </template>
+          </div>
+          <div class="question">
+            <p>Question Twenty-five</p>
+            <label>
+              <span>Would assistance or partnerships with any of the following organisations assist your business to grow to support the local economy post mining?</span>
+              <select name="SMMEQuestionTwentyFive" data-on-change="free-text">
+                <option value="">Select an option</option>
+                <option value="National Government">National Government</option>
+                <option value="Local Government">Local Government</option>
+                <option value="Municipality">Municipality</option>
+                <option value="Mine">Mine</option>
+                <option value="NGOs">NGOs</option>
+                <option value="CBOs">CBOs</option>
+                <option value="Forums">Forums</option>
+                <option value="Unions">Unions</option>
+                <option value="Local Businesses/SMMEs/Industrialists">Local Businesses/SMMEs/Industrialists</option>
+                <option value="Other" data-free-text="true">Other</option>
+              </select>
+            </label>
+          </div>
+          <div class="question">
+            <p>Question Twenty-six</p>
+            <fieldset class="radioGroup">
+              <legend>Are there initiatives, programs or business that assist with meeting community needs?</legend>
+              <label>
+                <input type="radio" value="Yes" name="SMMEQuestionTwentySix"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="SMMEQuestionTwentySix"/>
+                <span>No</span>
+              </label>
+              <label>
+                <input type="radio" value="Unsure/Don't know" name="SMMEQuestionTwentySix"/>
+                <span>Unsure/Don't know</span>
+              </label>
+            </fieldset>
+          </div>
+          <div class="question">
+            <p>SMME: Question Twenty-seven</p>
+            <span>Do any of these assets exist within your community?</span>
+            <span class="sub">Choose as many as applicable</span>
+            <div class="multiple">
+              <label class="selector">
+                <input type="checkbox" value="Health facilities" name="SMMEQuestionTwentySeven" />
+                <span>Health facilities</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Community Hall" name="SMMEQuestionTwentySeven" />
+                <span>Community Hall</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Primary and Secondary Schools" name="SMMEQuestionTwentySeven" />
+                <span>Primary and Secondary Schools</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Police Station" name="SMMEQuestionTwentySeven" />
+                <span>Police Station</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Tuckshops/Spaza Shops" name="SMMEQuestionTwentySeven" />
+                <span>Tuckshops/Spaza Shops</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Transport stations" name="SMMEQuestionTwentySeven" />
+                <span>Transport stations</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Sports and recreational facilities" name="SMMEQuestionTwentySeven" />
+                <span>Sports and recreational facilities</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Solid waste disposal and recycling depot" name="SMMEQuestionTwentySeven" />
+                <span>Solid waste disposal and recycling depot</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Post office" name="SMMEQuestionTwentySeven" />
+                <span>Post office</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Agriculture/farming/gardening" name="SMMEQuestionTwentySeven" />
+                <span>Agriculture/farming/gardening</span>
+              </label>
+            </div>
+            <label>
+              <span>Other</span>
+              <input type="text" placeholder="Please specify" name="SMMEQuestionTwentySeven" />
             </label>
           </div>
         </template>
