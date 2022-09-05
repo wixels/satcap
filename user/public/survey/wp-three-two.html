@@ -469,7 +469,7 @@
           </div>
           <div class="question">
             <p>Question Sixteen</p>
-            <span class="label">What type of mine operates within or close to your community?</span>
+            <span class="label">Does your business offer the following opportunities to the community?</span>
             <div class="multiple">
               <label class="selector">
                 <input type="radio" value="Learnerships" name="SMMEQuestionNine" data-on-change="free-text"/>
@@ -1512,6 +1512,267 @@
                 <span>Unsure/Don't know</span>
               </label>
             </fieldset>
+          </div>
+          <div class="question">
+            <p>Question Twenty-two</p>
+            <fieldset class="radioGroup">
+              <legend>Are there any recreational activities/sites/initiatives that are in your community?</legend>
+              <label>
+                <input type="radio" value="Yes" name="communityQuestionTwentyTwo" data-on-change="conditionalPath" data-conditional-path="communityTwentyTwo-yes"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="communityQuestionTwentyTwo" data-on-change="conditionalPath" data-conditional-path="communityTwentyTwo-yes"/>
+                <span>No</span>
+              </label>
+              <label>
+                <input type="radio" value="Unsure/Don't know" name="communityQuestionTwentyTwo" data-on-change="conditionalPath" data-conditional-path="communityTwentyTwo-yes"/>
+                <span>Unsure/Don't know</span>
+              </label>
+            </fieldset>
+            <template data-choice="communityTwentyTwo-yes">
+              <div class="question">
+                <label>
+                  <span>What are these activities/initiatives?</span> 
+                  <input type="text" name="communityQuestionTwentyTwo" />
+                </label>
+              </div>
+            </template>
+          </div>
+          <div class="question">
+            <p>Question Twenty-three</p>
+            <span>What skills do you have that could be included in the local community economy?</span>
+            <span class="sub">Choose as many as applicable</span>
+            <div class="multiple">
+              <label class="selector">
+                <input type="checkbox" value="Agricultural" name="communityQuestionTwentyThree" />
+                <span>Agricultural</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Cleaning and Maintenance" name="communityQuestionTwentyThree" />
+                <span>Cleaning and Maintenance</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Security" name="communityQuestionTwentyThree" />
+                <span>Security</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Trade and service" name="communityQuestionTwentyThree" />
+                <span>Trade and service</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Artisanal" name="communityQuestionTwentyThree" />
+                <span>Artisanal</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Engineering" name="communityQuestionTwentyThree" />
+                <span>Engineering</span>
+              </label>
+            </div>
+            <label>
+              <span>Other</span>
+              <input type="text" placeholder="Please specify" name="communityQuestionTwentyThree" />
+            </label>
+          </div>
+          <div class="question">
+            <p>Question Twenty-four</p>
+            <fieldset class="radioGroup">
+              <legend>Would you start a business to sustain the economy post-mining if you were aware of any community needs?</legend>
+              <label>
+                <input type="radio" value="Yes" name="communityQuestionTwentyFour" data-on-change="conditionalPath" data-conditional-path="communityTwentyFour-yes"/>
+                <span>Yes</span>
+              </label>
+              <label>
+                <input type="radio" value="No" name="communityQuestionTwentyFour" data-on-change="conditionalPath" data-conditional-path="communityTwentyFour-yes"/>
+                <span>No</span>
+              </label>
+              <label>
+                <input type="radio" value="Unsure/Don't know" name="communityQuestionTwentyFour" data-on-change="conditionalPath" data-conditional-path="communityTwentyFour-yes"/>
+                <span>Unsure/Don't know</span>
+              </label>
+            </fieldset>
+            <template data-choice="communityTwentyFour-yes">
+              <div class="question">
+                <label>
+                  <span>What would it be?</span> 
+                  <input type="text" name="communityQuestionTwentyFourOne" />
+                </label>
+              </div>
+            </template>
+          </div>
+          <div class="question">
+            <p>Question Twenty-five</p>
+            <span class="label">Which of the following skills is most needed for future economies of local communities?</span>
+            <span class="sub">Choose as many as applicable</span>
+            <div class="multiple" >
+              <label class="selector">
+                <input type="checkbox" value="Language proficiency" name="communityQuestionTwentyFive" />
+                <span>Language proficiency</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Numeracy and literacy" name="communityQuestionTwentyFive"/>
+                <span>Numeracy and literacy</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Job readiness skills" name="communityQuestionTwentyFive" />
+                <span>Job readiness skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Digital literacy skills" name="communityQuestionTwentyFive"/>
+                <span>Digital literacy skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Technical training" name="communityQuestionTwentyFive"/>
+                <span>Technical training</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Business skills" name="communityQuestionTwentyFive"/>
+                <span>Business skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Coaching and mentorship" name="communityQuestionTwentyFive"/>
+                <span>Coaching and mentorship</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Ethical Business Practice" name="communityQuestionTwentyFive"/>
+                <span>Ethical Business Practice</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Entrepreneurship and Innovation" name="communityQuestionTwentyFive"/>
+                <span>Entrepreneurship and Innovation</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Business management" name="communityQuestionTwentyFive"/>
+                <span>Business management</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Leadership skills" name="communityQuestionTwentyFive"/>
+                <span>Leadership skills</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Black Industrialists Scheme : Grants, Benefits and Incentives" name="communityQuestionTwentyFive"/>
+                <span>Black Industrialists Scheme : Grants, Benefits and Incentives</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Adult Based Education & Training" name="communityQuestionTwentyFive"/>
+                <span>Adult Based Education & Training</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Communication Skills" name="communityQuestionTwentyFive"/>
+                <span>Communication Skills</span>
+              </label>
+            </div>
+            <label>
+              <span>Other</span>
+              <input type="text" placeholder="Please specify" name="communityQuestionTwentyFive" />
+            </label>
+          </div>
+          <div class="question">
+            <p>Question Twenty-six</p>
+            <span class="label">Which of following opportunities would benefit the community?</span>
+            <div class="multiple">
+              <label class="selector">
+                <input type="radio" value="Learnerships" name="communityQuestionTwentySix" data-on-change="free-text"/>
+                <span>Learnerships</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="Internships" name="communityQuestionTwentySix" data-on-change="free-text"/>
+                <span>Internships</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="Bursaries" name="communityQuestionTwentySix" data-on-change="free-text"/>
+                <span>Bursaries</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="Other" name="communityQuestionTwentySix" data-on-change="free-text" data-free-text="true" />
+                <span>Other</span>
+              </label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question Twenty-seven</p>
+            <span class="label">What do you think is required to make the community a better place for future generations?</span>
+            <span class="sub">Choose as many as applicable</span>
+            <div class="multiple" >
+              <label class="selector">
+                <input type="checkbox" value="Clean air" name="communityQuestionTwentySeven" />
+                <span>Clean air</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Healthy fertile soil" name="communityQuestionTwentySeven"/>
+                <span>Healthy fertile soil</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Access to land" name="communityQuestionTwentySeven" />
+                <span>Access to land</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Pollution free environment" name="communityQuestionTwentySeven"/>
+                <span>Pollution free environment</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Functioning waste management system" name="communityQuestionTwentySeven"/>
+                <span>Functioning waste management system</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Water and sanitation" name="communityQuestionTwentySeven"/>
+                <span>Water and sanitation</span>
+              </label>
+            </div>
+            <label>
+              <span>Other</span>
+              <input type="text" placeholder="Please specify" name="communityQuestionTwentySeven" />
+            </label>
+          </div>
+          <div class="question">
+            <p>Question Twenty-eight</p>
+            <label>
+              <span>What standout initiatives, businesses and SMMEs do you think can be building blocks for the post mine future?</span>
+              <input type="text" name="communityQuestionTwentyEight" />
+            </label>
+          </div>
+          <div class="question">
+            <p>Question Twenty-nine</p>
+            <span class="label">What sort of businesses do you want to see in the community after the closure of the mine?</span>
+            <span class="sub">Choose as many as applicable</span>
+            <div class="multiple" >
+              <label class="selector">
+                <input type="checkbox" value="Mine waste beneficiation" name="communityQuestionTwentyNine" />
+                <span>Mine waste beneficiation</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="e-Waste" name="communityQuestionTwentyNine"/>
+                <span>e-Waste</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Recycling or Upcycling" name="communityQuestionTwentyNine" />
+                <span>Recycling or Upcycling</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Regenerative agriculture, agro-processing and re-forestry" name="communityQuestionTwentyNine"/>
+                <span>Regenerative agriculture, agro-processing and re-forestry</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Renewable energy" name="communityQuestionTwentyNine"/>
+                <span>Renewable energy</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Small/light manufacturing" name="communityQuestionTwentyNine"/>
+                <span>Small/light manufacturing</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Tourism" name="communityQuestionTwentyNine"/>
+                <span>Tourism</span>
+              </label>
+              <label class="selector">
+                <input type="checkbox" value="Mine rehabilitation" name="communityQuestionTwentyNine"/>
+                <span>Mine rehabilitation</span>
+              </label>
+            </div>
+            <label>
+              <span>Other</span>
+              <input type="text" placeholder="Please specify" name="communityQuestionTwentyNine" />
+            </label>
           </div>
         </template>
       </div>
