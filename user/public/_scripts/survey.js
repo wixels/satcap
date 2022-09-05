@@ -50,9 +50,6 @@ const submitSurvey = async function (e) {
   try {
     form.querySelector('button[type="submit"]').textContent = 'Submitting your responses...'
     let body = new window.FormData(form)
-    for (const pair of body.entries()) {
-      console.log(`${pair[0]}, ${pair[1]}`);
-    }
               
     const res = await requestHandler(form.action, form.method, body)
     form.querySelector('button[type="submit"]').textContent = 'Submit'
@@ -117,7 +114,6 @@ const setOnChange = function (containerElement) {
         }
       } else {
         const itemAsArray = item.split('-')
-        console.log(itemAsArray)
         if (el.value.toLowerCase() === itemAsArray[1].toLowerCase()) {
           const template = document.querySelector(`[data-choice="${itemAsArray[0]}-${el.value.toLowerCase()}"]`)
           const content = template.content.cloneNode(true)
@@ -203,9 +199,8 @@ const setProgressTracker = function () {
 
   for (const key of answers.keys()) {
     if (!keysChecked.includes(key)) {
-      console.log(`${key}, ${answers.getAll(key)}`);
       let isComplete = false
-      if (key.includes('question')) {
+      if (key.toLowerCase().includes('question')) {
         const els = document.getElementsByName(key)
         for (const el of els) {
           if (!isComplete) {
