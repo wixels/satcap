@@ -1064,32 +1064,42 @@
                 <fieldset class="radioGroup">
                   <legend>Are you looking for a job?</legend>
                   <label>
-                    <input type="radio" value="Yes" name="communityQuestionOneTwo"/>
+                    <input type="radio" value="Yes" name="communityQuestionOneTwo" data-on-change="conditionalPath" data-conditional-path="communityOneTwo-yes-communityOneTwo-no"/>
                     <span>Yes</span>
                   </label>
                   <label>
-                    <input type="radio" value="No" name="communityQuestionOneTwo"/>
+                    <input type="radio" value="No" name="communityQuestionOneTwo" data-on-change="conditionalPath" data-conditional-path="communityOneTwo-yes-communityOneTwo-no"/>
                     <span>No</span>
                   </label>
                 </fieldset>
-              </div>
-              <div class="question">
-                <label>
-                  <span>Have you received any assistance from the following organisations to gain access to a job?</span>
-                  <select name="communityQuestionOneThree">
-                    <option value="">Select an option</option>
-                    <option value="National Government">National Government</option>
-                    <option value="Local Government">Local Government</option>
-                    <option value="Municipality">Municipality</option>
-                    <option value="Mine">Mine</option>
-                    <option value="NGOs">Non-governmental organisation (NGOs)</option>
-                    <option value="CBOs">Community-based organisation (CBOs)</option>
-                    <option value="Forums">Forums</option>
-                    <option value="Unions">Unions</option>
-                    <option value="Local Businesses/SMMEs/Industrialists">Local Businesses/SMMEs/Industrialists</option>
-                    <option value="None">None</option>
-                  </select>
-                </label>
+                <template data-choice="communityOneTwo-yes">
+                  <div class="question">
+                    <label>
+                      <span>Select which organisations have assisted you in gaining access to a job</span>
+                      <select name="communityQuestionOneTwoOne">
+                        <option value="">Select an option</option>
+                        <option value="National Government">National Government</option>
+                        <option value="Local Government">Local Government</option>
+                        <option value="Municipality">Municipality</option>
+                        <option value="Mine">Mine</option>
+                        <option value="NGOs">Non-governmental organisation (NGOs)</option>
+                        <option value="CBOs">Community-based organisation (CBOs)</option>
+                        <option value="Forums">Forums</option>
+                        <option value="Unions">Unions</option>
+                        <option value="Local Businesses/SMMEs/Industrialists">Local Businesses/SMMEs/Industrialists</option>
+                        <option value="None">None</option>
+                      </select>
+                    </label>
+                  </div>
+                </template>
+                <template data-choice="communityOneTwo-no">
+                  <div class="question">
+                    <label>
+                      <span>Please provide a reason</span>
+                      <input type="text" name="communityQuestionOneTwoOne" />
+                    </label>
+                  </div>
+                </template>
               </div>
             </template>
           </div>
