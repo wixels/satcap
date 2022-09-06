@@ -157,6 +157,10 @@ const viewItem = function (item) {
   title.textContent = item.title
   const date = subContent.querySelector('.date')
   date.textContent = dayjs(item.createdAt).format('DD MMMM YYYY')
+  const link = subContent.querySelector('a')
+  if (link && item.url) {
+    link.setAttribute('href', item.url)
+  }
 
   content.querySelector('.item').appendChild(subContent)
   const existing = document.getElementById('view-information')
