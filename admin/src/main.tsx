@@ -1,101 +1,193 @@
-import { MantineProvider } from "@mantine/core";
-import { ModalsProvider } from "@mantine/modals";
-import { NotificationsProvider } from "@mantine/notifications";
-import { ReactLocation, Router } from "@tanstack/react-location";
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import "./index.css";
-import { Login } from "./views/auth/Login";
-import { Home } from "./views/home/Home";
-import { CreatePerson } from "./views/people/CreatePerson";
-import { People } from "./views/people/People";
-import { SurveyReports } from "./views/reports/SurveyReports";
-import { CreateWrapper } from "./views/resources/CreateWrapper";
-import { Information } from "./views/resources/Information";
-import { SurveyLink } from "./views/surveys/SurveyLink";
-import { Surveys } from "./views/surveys/Surveys";
-import { SurveySend } from "./views/surveys/SurveySend";
+import { MantineProvider } from '@mantine/core';
+import { ModalsProvider } from '@mantine/modals';
+import { NotificationsProvider } from '@mantine/notifications';
+import { ReactLocation, Router } from '@tanstack/react-location';
+import { collection, getDocs } from 'firebase/firestore';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import { AuthenticationProvider } from './context/AuthenticationContext';
+import db from './firebase';
+import './index.css';
+import { Login } from './views/auth/Login';
+import { Home } from './views/home/Home';
+import { CreatePerson } from './views/people/CreatePerson';
+import { People } from './views/people/People';
+import { SurveyReports } from './views/reports/SurveyReports';
+import { CreateWrapper } from './views/resources/CreateWrapper';
+import { Information } from './views/resources/Information';
+import { SurveyLink } from './views/surveys/SurveyLink';
+import { Surveys } from './views/surveys/Surveys';
+import { SurveySend } from './views/surveys/SurveySend';
 const location = new ReactLocation();
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <MantineProvider withNormalizeCSS withGlobalStyles>
-      <NotificationsProvider>
-        <ModalsProvider>
-          <Router
-            location={location}
-            routes={[
-              {
-                path: "/auth",
-                children: [
-                  {
-                    path: "/login",
-                    element: <Login />,
-                  },
-                ],
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <MantineProvider withNormalizeCSS withGlobalStyles>
+    <NotificationsProvider>
+      <ModalsProvider>
+        <Router
+          location={location}
+          routes={[
+            {
+              path: '/auth',
+
+              children: [
+                {
+                  path: '/login',
+                  element: <Login />,
+                },
+              ],
+            },
+            {
+              path: '/dashboard',
+              element: <Home />,
+            },
+            {
+              path: '/information',
+              loader: async () => {
+                const information = [];
+                const noticeSnap = await getDocs(
+                  collection(
+                    db,
+                    `mines/${window.localStorage.getItem('mineId')}/notices`
+                  )
+                );
+                const resourceSnap = await getDocs(
+                  collection(
+                    db,
+                    `mines/${window.localStorage.getItem('mineId')}/resources`
+                  )
+                );
+                noticeSnap.forEach((doc) => {
+                  information.push({
+                    ...doc.data(),
+                    type: 'notice',
+                  });
+                });
+                resourceSnap.forEach((doc) => {
+                  information.push({
+                    ...doc.data(),
+                    type: 'resource',
+                  });
+                });
+                return {
+                  information,
+                };
               },
-              {
-                path: "/dashboard",
-                element: <Home />,
+              children: [
+                {
+                  path: '/',
+                  element: <Information />,
+                },
+                {
+                  path: '/create',
+                  loader: async () => {
+                    const locations = [];
+                    const locationsSnap = await getDocs(
+                      collection(
+                        db,
+                        `mines/${window.localStorage.getItem(
+                          'mineId'
+                        )}/locations`
+                      )
+                    );
+                    locationsSnap.forEach((doc) => {
+                      locations.push({
+                        ...doc.data(),
+                        id: doc.id,
+                      });
+                    });
+                    return {
+                      locations,
+                    };
+                  },
+                  element: <CreateWrapper />,
+                },
+              ],
+            },
+            {
+              path: '/surveys',
+              loader: async () => {
+                const links = [];
+                const linksSnap = await getDocs(
+                  collection(
+                    db,
+                    `mines/${window.localStorage.getItem('mineId')}/links`
+                  )
+                );
+                linksSnap.forEach((doc) => {
+                  links.push({
+                    docId: doc.id,
+                    ...doc.data(),
+                  });
+                });
+                return {
+                  links,
+                };
               },
-              {
-                path: "/information",
-                children: [
-                  {
-                    path: "/",
-                    element: <Information />,
+              children: [
+                {
+                  path: '/',
+                  element: <Surveys />,
+                },
+                {
+                  path: '/:link',
+                  loader: async () => {
+                    const locations = [];
+                    const locationsSnap = await getDocs(
+                      collection(
+                        db,
+                        `mines/${window.localStorage.getItem(
+                          'mineId'
+                        )}/locations`
+                      )
+                    );
+                    locationsSnap.forEach((doc) => {
+                      locations.push({
+                        ...doc.data(),
+                        id: doc.id,
+                      });
+                    });
+                    return {
+                      locations,
+                    };
                   },
-                  {
-                    path: "/create",
-                    element: <CreateWrapper />,
-                  },
-                ],
-              },
-              {
-                path: "/surveys",
-                children: [
-                  {
-                    path: "/",
-                    element: <Surveys />,
-                  },
-                  {
-                    path: "/:link",
-                    children: [
-                      {
-                        path: "/",
-                        element: <SurveyLink />,
-                      },
-                      {
-                        path: "/send",
-                        element: <SurveySend />,
-                      },
-                    ],
-                  },
-                ],
-              },
-              {
-                path: "/reports",
-                element: <SurveyReports />,
-              },
-              {
-                path: "/people",
-                children: [
-                  {
-                    path: "/",
-                    element: <People />,
-                  },
-                  {
-                    path: "/create",
-                    element: <CreatePerson />,
-                  },
-                ],
-              },
-            ]}
-          >
+                  children: [
+                    {
+                      path: '/',
+                      element: <SurveyLink />,
+                    },
+                    {
+                      path: '/send',
+                      element: <SurveySend />,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              path: '/reports',
+              element: <SurveyReports />,
+            },
+            {
+              path: '/people',
+              children: [
+                {
+                  path: '/',
+                  element: <People />,
+                },
+                {
+                  path: '/create',
+                  element: <CreatePerson />,
+                },
+              ],
+            },
+          ]}
+        >
+          <AuthenticationProvider>
             <App />
-          </Router>
-        </ModalsProvider>
-      </NotificationsProvider>
-    </MantineProvider>
-  </React.StrictMode>
+          </AuthenticationProvider>
+        </Router>
+      </ModalsProvider>
+    </NotificationsProvider>
+  </MantineProvider>
 );

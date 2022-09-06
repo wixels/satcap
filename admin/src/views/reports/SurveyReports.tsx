@@ -1,29 +1,19 @@
 import {
   ActionIcon,
   Avatar,
-  Badge,
-  Button,
   Card,
   Group,
-  Image,
   Menu,
   SimpleGrid,
   Stack,
   Text,
-} from "@mantine/core";
-import {
-  IconCirclePlus,
-  IconDots,
-  IconFileZip,
-  IconTable,
-  IconTrash,
-} from "@tabler/icons";
-import { Link } from "@tanstack/react-location";
+} from '@mantine/core';
+import { IconDots, IconFileZip, IconTable, IconTrash } from '@tabler/icons';
 
-export const SurveyReports = () => {
+export const SurveyReports = (): JSX.Element => {
   return (
     <Stack>
-      <Text weight={700} size={"lg"}>
+      <Text weight={700} size={'lg'}>
         Survey Reports
       </Text>
 
@@ -31,15 +21,15 @@ export const SurveyReports = () => {
         cols={3}
         spacing="lg"
         breakpoints={[
-          { maxWidth: "md", cols: 1, spacing: "sm" },
-          { maxWidth: "lg", cols: 2, spacing: "lg" },
+          { maxWidth: 'md', cols: 1, spacing: 'sm' },
+          { maxWidth: 'lg', cols: 2, spacing: 'lg' },
         ]}
       >
         <Card shadow="sm" p="lg" radius="lg" withBorder>
           <Card.Section withBorder inheritPadding py="xs">
             <Group position="apart">
               <Group>
-                <Avatar color={"green"} radius={"xl"}>
+                <Avatar color={'green'} radius={'xl'}>
                   DS
                 </Avatar>
                 <div style={{ flex: 1 }}>
@@ -74,11 +64,11 @@ export const SurveyReports = () => {
           <Card.Section
             color="green"
             sx={(theme) => ({
-              height: "25vh",
+              height: '25vh',
               background: theme.colors.green[0],
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             })}
           >
             <IconTable color="green" size={52} />

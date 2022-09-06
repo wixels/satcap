@@ -9,55 +9,56 @@ import {
   PasswordInput,
   Text,
   TextInput,
-} from "@mantine/core";
-import { useForm } from "@mantine/form";
-import { showNotification } from "@mantine/notifications";
-import { IconX } from "@tabler/icons";
-import { useNavigate } from "@tanstack/react-location";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
-import { auth } from "../../firebase";
+} from '@mantine/core';
+import { useForm } from '@mantine/form';
+import { showNotification } from '@mantine/notifications';
+import { IconX } from '@tabler/icons';
+import { useNavigate } from '@tanstack/react-location';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useState } from 'react';
+import { auth } from '../../firebase';
 
 interface FormValues {
   email: string;
   password: string;
 }
 
-export const Login = () => {
+export const Login = (): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(false);
   const form = useForm<FormValues>({
     initialValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
     },
   });
 
   const naviagte = useNavigate();
 
-  const handleSubmit = async (values: FormValues) => {
+  const handleSubmit = async (values: FormValues): Promise<void> => {
+    setLoading(true);
     await signInWithEmailAndPassword(auth, values.email, values.password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        naviagte({ to: "/people", replace: true });
+      .then(() => {
+        naviagte({ to: '/people', replace: true });
+        setLoading(false);
       })
       .catch((error) => {
         showNotification({
           icon: <IconX size={18} />,
-          color: "red",
+          color: 'red',
           message: error.message,
         });
+        setLoading(false);
       });
   };
 
   return (
     <Grid
       sx={(theme) => ({
-        width: "100vw",
-        height: "100vh",
+        width: '100vw',
+        height: '100vh',
         backgroundColor: theme.colors.gray[1],
       })}
     >
@@ -66,15 +67,15 @@ export const Login = () => {
         span={6}
         p="xl"
         style={{
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
         }}
       >
-        <Center my={"xl"}>
-          <div style={{ width: 120, marginLeft: "auto", marginRight: "auto" }}>
+        <Center my={'xl'}>
+          <div style={{ width: 120, marginLeft: 'auto', marginRight: 'auto' }}>
             <Image
               radius="xl"
               src="https://images.unsplash.com/photo-1618556450991-2f1af64e8191?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80"
@@ -82,34 +83,34 @@ export const Login = () => {
             />
           </div>
         </Center>
-        <Card p={"xl"} radius={"md"} style={{ width: "100%" }}>
+        <Card p={'xl'} radius={'md'} style={{ width: '100%' }}>
           <form onSubmit={form.onSubmit(handleSubmit)}>
-            <Text size={"xl"} weight={700}>
+            <Text size={'xl'} weight={700}>
               Sign in to your account
             </Text>
             <TextInput
-              pt={"lg"}
-              radius={"md"}
+              pt={'lg'}
+              radius={'md'}
               size="md"
               label={
                 <Text size="sm" color="dimmed">
                   Email
                 </Text>
               }
-              {...form.getInputProps("email")}
+              {...form.getInputProps('email')}
             />
             <PasswordInput
-              pt={"lg"}
-              radius={"md"}
+              pt={'lg'}
+              radius={'md'}
               size="md"
               label={
                 <Text size="sm" color="dimmed">
                   Password
                 </Text>
               }
-              {...form.getInputProps("password")}
+              {...form.getInputProps('password')}
             />
-            <Group pt={"xl"} position="apart">
+            <Group pt={'xl'} position="apart">
               <Checkbox label="Remember me" />
               <Button variant="white">Forgot Password?</Button>
             </Group>
@@ -117,7 +118,7 @@ export const Login = () => {
               loading={loading}
               type="submit"
               mt="xl"
-              radius={"md"}
+              radius={'md'}
               fullWidth
             >
               Sign In

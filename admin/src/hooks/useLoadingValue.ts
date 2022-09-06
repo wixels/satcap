@@ -1,23 +1,33 @@
-import { useMemo, useReducer } from "react";
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { useMemo, useReducer } from 'react';
 
-export type LoadingValue<T, E> = {
+export interface LoadingValue<T, E> {
   error?: E;
   loading: boolean;
   reset: () => void;
   setError: (error: E) => void;
   setValue: (value?: T) => void;
   value?: T;
-};
+}
 
-type ReducerState<E> = {
+interface ReducerState<E> {
   error?: E;
   loading: boolean;
   value?: any;
-};
+}
 
-type ErrorAction<E> = { type: "error"; error: E };
-type ResetAction = { type: "reset"; defaultValue?: any };
-type ValueAction = { type: "value"; value: any };
+interface ErrorAction<E> {
+  type: 'error';
+  error: E;
+}
+interface ResetAction {
+  type: 'reset';
+  defaultValue?: any;
+}
+interface ValueAction {
+  type: 'value';
+  value: any;
+}
 type ReducerAction<E> = ErrorAction<E> | ResetAction | ValueAction;
 
 const defaultState = (defaultValue?: any) => {
@@ -31,16 +41,16 @@ const reducer =
   <E>() =>
   (state: ReducerState<E>, action: ReducerAction<E>): ReducerState<E> => {
     switch (action.type) {
-      case "error":
+      case 'error':
         return {
           ...state,
           error: action.error,
           loading: false,
           value: undefined,
         };
-      case "reset":
+      case 'reset':
         return defaultState(action.defaultValue);
-      case "value":
+      case 'value':
         return {
           ...state,
           error: undefined,
@@ -53,23 +63,24 @@ const reducer =
   };
 
 export default <T, E>(getDefaultValue?: () => T): LoadingValue<T, E> => {
-  const defaultValue = getDefaultValue ? getDefaultValue() : undefined;
+  const defaultValue = getDefaultValue != null ? getDefaultValue() : undefined;
   const [state, dispatch] = useReducer(
     reducer<E>(),
     defaultState(defaultValue)
   );
 
   const reset = () => {
-    const defaultValue = getDefaultValue ? getDefaultValue() : undefined;
-    dispatch({ type: "reset", defaultValue });
+    const defaultValue =
+      getDefaultValue != null ? getDefaultValue() : undefined;
+    dispatch({ type: 'reset', defaultValue });
   };
 
   const setError = (error: E) => {
-    dispatch({ type: "error", error });
+    dispatch({ type: 'error', error });
   };
 
   const setValue = (value?: T) => {
-    dispatch({ type: "value", value });
+    dispatch({ type: 'value', value });
   };
 
   return useMemo(

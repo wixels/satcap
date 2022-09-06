@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   UnstyledButton,
   UnstyledButtonProps,
@@ -6,20 +6,18 @@ import {
   Avatar,
   Text,
   createStyles,
-} from "@mantine/core";
-import { IconChevronRight } from "@tabler/icons";
-
+} from '@mantine/core';
 const useStyles = createStyles((theme) => ({
   user: {
-    display: "block",
-    width: "100%",
+    display: 'block',
+    width: '100%',
     padding: theme.spacing.md,
-    color: theme.colorScheme === "dark" ? theme.colors.dark[0] : theme.black,
-    borderRadius: "0.625rem",
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
+    borderRadius: '0.625rem',
 
-    "&:hover": {
+    '&:hover': {
       backgroundColor:
-        theme.colorScheme === "dark"
+        theme.colorScheme === 'dark'
           ? theme.colors.dark[8]
           : theme.colors.gray[0],
     },
@@ -39,7 +37,7 @@ export const UserButton = ({
   email,
   icon,
   ...others
-}: UserButtonProps) => {
+}: UserButtonProps): JSX.Element => {
   const { classes } = useStyles();
   return (
     <UnstyledButton className={classes.user} {...others}>

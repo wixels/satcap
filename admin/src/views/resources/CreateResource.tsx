@@ -4,104 +4,192 @@ import {
   FileInput,
   Grid,
   MultiSelect,
+  Select,
   Text,
   Textarea,
   TextInput,
-} from "@mantine/core";
-import { DatePicker, DateRangePicker } from "@mantine/dates";
-import { useForm } from "@mantine/form";
+} from '@mantine/core';
+import { DatePicker } from '@mantine/dates';
+import { useForm } from '@mantine/form';
+import { useMatch, useNavigate } from '@tanstack/react-location';
+import dayjs from 'dayjs';
+import { useGetUser, userGetMine } from '../../context/AuthenticationContext';
+import useUploadFile from '../../hooks/useUploadFile';
+import { getDownloadURL, ref } from 'firebase/storage';
+import db, { storage } from '../../firebase';
+import { useNanoId } from '../../hooks/useNanoId';
+import { showNotification } from '@mantine/notifications';
+import { IconCheck, IconX } from '@tabler/icons';
+import { useState } from 'react';
+import { addDoc, collection } from 'firebase/firestore';
 
-export const CreateResource = () => {
+export const CreateResource = (): JSX.Element => {
+  const {
+    data: { locations },
+  } = useMatch();
+  const { mine, fetching } = userGetMine();
+  const { user } = useGetUser();
+  const fileId = useNanoId();
+  const [loading, setLoading] = useState(false);
+  const naviagte = useNavigate();
+  const [uploadFile] = useUploadFile();
+
   const form = useForm({
     initialValues: {
-      createdAt: "",
-      description: "",
-      packageDocId: "",
-      title: "",
-      visibility: [],
-      timeframe: "",
-      file: "",
+      createdAt: dayjs().format('YYYY-MM-DD HH:mm:ssZ'),
+      date: '',
+      description: '',
+      packageDocId: '',
+      title: '',
+      visibility: null,
+      url: null,
+      featureImageUrl: null,
     },
   });
+
+  const createResource = async (values: any) => {
+    console.log(values);
+    setLoading(true);
+    try {
+      const featureRef = ref(
+        storage,
+        `mines/${mine?.mineId}/resources/${fileId}-${values.featureImageUrl.name}`
+      );
+      const urlRef = ref(
+        storage,
+        `mines/${mine?.mineId}/resources/${fileId}-${values.url.name}`
+      );
+      await uploadFile(featureRef, values.url, {
+        contentType: values.url?.type,
+      });
+      await uploadFile(urlRef, values.featureImageUrl, {
+        contentType: values.featureImageUrl?.type,
+      });
+      const url = await getDownloadURL(urlRef);
+      const featureImageUrl = await getDownloadURL(featureRef);
+
+      await addDoc(collection(db, `mines/${mine?.mineId}/resources`), {
+        ...values,
+        url,
+        featureImageUrl,
+        publishedBy: {
+          name: user.name,
+          authUid: user?.authUid,
+          email: user?.email,
+        },
+      });
+      setLoading(false);
+      showNotification({
+        message: 'Successfully created resource',
+        icon: <IconCheck size={18} />,
+      });
+      naviagte({ to: `/information` });
+    } catch (error) {
+      showNotification({
+        icon: <IconX size={18} />,
+        color: 'red',
+        message: error?.message || 'Unable to create resource',
+      });
+      setLoading(false);
+    }
+  };
+
   return (
-    <form>
-      <Grid gutter={"xl"}>
+    <form onSubmit={form.onSubmit(createResource)}>
+      <Grid gutter={'xl'}>
         <Grid.Col span={12}>
           <FileInput
             placeholder="Image"
-            radius={"md"}
+            radius={'md'}
             size="md"
             label={
               <Text size="sm" color="dimmed">
-                Image
+                Resource
               </Text>
             }
-            {...form.getInputProps("file")}
+            {...form.getInputProps('url')}
+          />
+          <FileInput
+            mt={'lg'}
+            placeholder="Image"
+            radius={'md'}
+            size="md"
+            label={
+              <Text size="sm" color="dimmed">
+                Feature Image
+              </Text>
+            }
+            {...form.getInputProps('featureImageUrl')}
           />
         </Grid.Col>
         <Grid.Col span={6}>
           <TextInput
             placeholder="Title"
-            radius={"md"}
+            radius={'md'}
             size="md"
             label={
               <Text size="sm" color="dimmed">
                 Title
               </Text>
             }
-            {...form.getInputProps("title")}
+            {...form.getInputProps('title')}
           />
         </Grid.Col>
         <Grid.Col span={6}>
           <DatePicker
             placeholder="Pick Date"
-            radius={"md"}
+            radius={'md'}
             size="md"
             label={
               <Text size="sm" color="dimmed">
                 Date
               </Text>
             }
-            {...form.getInputProps("createdAt")}
+            {...form.getInputProps('date')}
           />
         </Grid.Col>
         <Grid.Col span={6}>
           <MultiSelect
-            data={[
-              { value: "react", label: "React" },
-              { value: "ng", label: "Angular" },
-              { value: "svelte", label: "Svelte" },
-              { value: "vue", label: "Vue" },
-              { value: "riot", label: "Riot" },
-              { value: "next", label: "Next.js" },
-              { value: "blitz", label: "Blitz.js" },
-            ]}
+            data={locations.map((location) => ({
+              value: location.id,
+              label: location.name,
+            }))}
             placeholder="Select Locations"
-            radius={"md"}
+            radius={'md'}
             size="md"
             label={
               <Text size="sm" color="dimmed">
                 Location
               </Text>
             }
-            {...form.getInputProps("visibility")}
+            {...form.getInputProps('visibility')}
           />
-          <DateRangePicker
+          <Select
+            mt={'xl'}
+            disabled={fetching}
+            data={
+              fetching
+                ? []
+                : mine?.packages?.map((pack) => ({
+                    value: pack.packageDocId,
+                    label: pack?.name,
+                  }))
+            }
+            placeholder="Select Package"
+            radius={'md'}
             size="md"
-            mt={"xl"}
             label={
               <Text size="sm" color="dimmed">
-                Timeframe
+                Package
               </Text>
             }
-            {...form.getInputProps("timeframe")}
-            placeholder="Timeframe"
+            {...form.getInputProps('packageDocId')}
           />
         </Grid.Col>
         <Grid.Col span={6}>
           <Textarea
             placeholder="Description"
-            radius={"md"}
+            radius={'md'}
             autosize
             minRows={5}
             label={
@@ -109,12 +197,19 @@ export const CreateResource = () => {
                 Description
               </Text>
             }
-            {...form.getInputProps("description")}
+            {...form.getInputProps('description')}
           />
         </Grid.Col>
       </Grid>
-      <Center mt={"xl"}>
-        <Button style={{ maxWidth: "576px" }} fullWidth radius={"md"}>
+      <Center mt={'xl'}>
+        <Button
+          type="submit"
+          style={{ maxWidth: '576px' }}
+          fullWidth
+          radius={'md'}
+          loading={loading}
+          disabled={loading}
+        >
           Create Resource
         </Button>
       </Center>
