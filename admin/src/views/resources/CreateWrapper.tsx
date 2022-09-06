@@ -1,27 +1,22 @@
-import { Avatar, Group, Tabs, Text, UnstyledButton } from "@mantine/core";
-import { IconChevronLeft } from "@tabler/icons";
-import {
-  Link,
-  Outlet,
-  useMatches,
-  useNavigate,
-} from "@tanstack/react-location";
-import React from "react";
-import { CreateNotice } from "./CreateNotice";
-import { CreateResource } from "./CreateResource";
+import { Avatar, Group, Tabs, Text, UnstyledButton } from '@mantine/core';
+import { IconChevronLeft } from '@tabler/icons';
+import { Link } from '@tanstack/react-location';
+import React from 'react';
+import { CreateNotice } from './CreateNotice';
+import { CreateResource } from './CreateResource';
 
-export const CreateWrapper = () => {
+export const CreateWrapper = (): JSX.Element => {
   return (
     <>
       <Link to="/information">
         <UnstyledButton
-          mb={"xl"}
+          mb={'xl'}
           p="lg"
           sx={(theme) => ({
             borderRadius: theme.radius.md,
-            "&:hover": {
+            '&:hover': {
               backgroundColor:
-                theme.colorScheme === "dark"
+                theme.colorScheme === 'dark'
                   ? theme.colors.dark[8]
                   : theme.colors.gray[1],
             },
@@ -40,7 +35,7 @@ export const CreateWrapper = () => {
           </Group>
         </UnstyledButton>
       </Link>
-      <Tabs defaultValue="resource" mb={"xl"}>
+      <Tabs defaultValue="resource" mb={'xl'}>
         <Tabs.List>
           <Tabs.Tab value="resource">Resource</Tabs.Tab>
           <Tabs.Tab value="notice">Notice</Tabs.Tab>

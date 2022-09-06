@@ -1,13 +1,13 @@
-import { Auth, onAuthStateChanged, User } from "firebase/auth";
-import { useEffect, useMemo } from "react";
-import useLoadingValue from "./useLoadingValue";
+import { Auth, onAuthStateChanged, User } from 'firebase/auth';
+import { useEffect, useMemo } from 'react';
+import useLoadingValue from './useLoadingValue';
 
-type LoadingHook<T, E> = [T | undefined, boolean, E | undefined];
+export type LoadingHook<T, E> = [T | undefined, boolean, E | undefined];
 export type AuthStateHook = LoadingHook<User | null, Error>;
 
-type AuthStateOptions = {
+interface AuthStateOptions {
   onUserChanged?: (user: User | null) => Promise<void>;
-};
+}
 
 export default (auth: Auth, options?: AuthStateOptions): AuthStateHook => {
   const { error, loading, setError, setValue, value } = useLoadingValue<
@@ -19,7 +19,7 @@ export default (auth: Auth, options?: AuthStateOptions): AuthStateHook => {
     const listener = onAuthStateChanged(
       auth,
       async (user) => {
-        if (options?.onUserChanged) {
+        if (options?.onUserChanged != null) {
           // onUserChanged function to process custom claims on any other trigger function
           try {
             await options.onUserChanged(user);

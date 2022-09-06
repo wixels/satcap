@@ -1,31 +1,32 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   ActionIcon,
-  Box,
   Button,
   Card,
   createStyles,
   Group,
   Select,
   Table,
-} from "@mantine/core";
+} from '@mantine/core';
 import {
   IconChevronLeft,
   IconChevronRight,
   IconChevronsLeft,
   IconChevronsRight,
   IconTrash,
-} from "@tabler/icons";
-import React, { useMemo } from "react";
-import { useTable, usePagination, useRowSelect } from "react-table";
+} from '@tabler/icons';
+import React, { useMemo } from 'react';
+import { useTable, usePagination, useRowSelect } from 'react-table';
 
 const useStyles = createStyles((theme) => ({
   td: {
     marginBottom: theme.spacing.lg,
-    "&:first-of-type": {
+    '&:first-of-type': {
       borderTopLeftRadius: theme.radius.lg,
       borderBottomLeftRadius: theme.radius.lg,
     },
-    "&:last-of-type": {
+    '&:last-of-type': {
       borderTopRightRadius: theme.radius.lg,
       borderBottomRightRadius: theme.radius.lg,
     },
@@ -36,28 +37,28 @@ export const PeopleTable = ({ data }) => {
   const columns = useMemo(
     () => [
       {
-        Header: "First Name",
-        accessor: "firstName",
+        Header: 'First Name',
+        accessor: 'firstName',
       },
       {
-        Header: "Last Name",
-        accessor: "lastName",
+        Header: 'Last Name',
+        accessor: 'lastName',
       },
       {
-        Header: "Mobile",
-        accessor: "mobile",
+        Header: 'Mobile',
+        accessor: 'mobile',
       },
       {
-        Header: "Job Title",
-        accessor: "jobTitle",
+        Header: 'Job Title',
+        accessor: 'jobTitle',
       },
       {
-        Header: "Name of Mine",
-        accessor: "mine",
+        Header: 'Name of Mine',
+        accessor: 'mine',
       },
       {
-        Header: "Operation",
-        accessor: "operation",
+        Header: 'Operation',
+        accessor: 'operation',
       },
     ],
     []
@@ -66,7 +67,7 @@ export const PeopleTable = ({ data }) => {
   const IndeterminateCheckbox = React.forwardRef(
     ({ indeterminate, ...rest }, ref) => {
       const defaultRef = React.useRef();
-      const resolvedRef = ref || defaultRef;
+      const resolvedRef = ref != null || defaultRef;
 
       React.useEffect(() => {
         resolvedRef.current.indeterminate = indeterminate;
@@ -79,13 +80,13 @@ export const PeopleTable = ({ data }) => {
       );
     }
   );
+  IndeterminateCheckbox.displayName = 'IndeterminateCheckbox';
 
   const { classes } = useStyles();
 
   const {
     getTableProps,
     getTableBodyProps,
-    headerGroups,
     prepareRow,
     page,
     canPreviousPage,
@@ -96,7 +97,7 @@ export const PeopleTable = ({ data }) => {
     nextPage,
     previousPage,
     setPageSize,
-    selectedFlatRows,
+    // eslint-disable-next-line no-unused-vars
     state: { pageIndex, pageSize, selectedRowIds },
   } = useTable(
     {
@@ -105,10 +106,10 @@ export const PeopleTable = ({ data }) => {
     },
     usePagination,
     useRowSelect,
-    (hooks: any) => {
-      hooks.visibleColumns.push((columns: any) => [
+    (hooks) => {
+      hooks.visibleColumns.push((columns) => [
         {
-          id: "selection",
+          id: 'selection',
           Header: ({ getToggleAllPageRowsSelectedProps }) => (
             <div>
               <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
@@ -122,7 +123,7 @@ export const PeopleTable = ({ data }) => {
         },
         ...columns,
         {
-          id: "delete",
+          id: 'delete',
           Cell: () => (
             <ActionIcon color="red" variant="light">
               <IconTrash size={16} />
@@ -135,9 +136,9 @@ export const PeopleTable = ({ data }) => {
   return (
     <>
       <Table
-        style={{ marginBottom: "60px" }}
+        style={{ marginBottom: '60px' }}
         {...getTableProps()}
-        verticalSpacing={"md"}
+        verticalSpacing={'md'}
         highlightOnHover
       >
         {/* <thead>
@@ -153,11 +154,15 @@ export const PeopleTable = ({ data }) => {
           {page.map((row, i) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
+              <tr key={row.id} {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   return (
-                    <td className={classes.td} {...cell.getCellProps()}>
-                      {cell.render("Cell")}
+                    <td
+                      key={cell.id}
+                      className={classes.td}
+                      {...cell.getCellProps()}
+                    >
+                      {cell.render('Cell')}
                     </td>
                   );
                 })}
@@ -168,15 +173,15 @@ export const PeopleTable = ({ data }) => {
       </Table>
       <Card
         sx={(theme) => ({
-          position: "absolute",
+          position: 'absolute',
           zIndex: 100,
           bottom: 0,
           left: 0,
           right: 0,
           boxShadow: theme.shadows.xl,
-          display: "flex",
-          justifyContent: "space-between",
-          overflow: "initial",
+          display: 'flex',
+          justifyContent: 'space-between',
+          overflow: 'initial',
         })}
       >
         <Group>
@@ -225,11 +230,11 @@ export const PeopleTable = ({ data }) => {
           }}
           dropdownPosition="top"
           data={[
-            { value: "10", label: "10" },
-            { value: "20", label: "20" },
-            { value: "30", label: "30" },
-            { value: "40", label: "40" },
-            { value: "50", label: "50" },
+            { value: '10', label: '10' },
+            { value: '20', label: '20' },
+            { value: '30', label: '30' },
+            { value: '40', label: '40' },
+            { value: '50', label: '50' },
           ]}
         />
       </Card>

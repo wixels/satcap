@@ -10,56 +10,42 @@ import {
   NavLink,
   Anchor,
   Box,
-  MantineProvider,
-} from "@mantine/core";
-import { ModalsProvider } from "@mantine/modals";
+  LoadingOverlay,
+} from '@mantine/core';
 import {
   IconChartPie,
+  IconHome2,
   IconLayoutGrid,
+  IconMessages,
   IconSpeakerphone,
   IconUsers,
-} from "@tabler/icons";
-import {
-  Link,
-  Outlet,
-  ReactLocation,
-  Router,
-  useMatches,
-  useNavigate,
-} from "@tanstack/react-location";
-import { useEffect, useState } from "react";
-import { UserButton } from "./components/UserButton";
-import { Login } from "./views/auth/Login";
-import { Home } from "./views/home/Home";
-import { CreatePerson } from "./views/people/CreatePerson";
-import { People } from "./views/people/People";
-import { CreateWrapper } from "./views/resources/CreateWrapper";
-import { Information } from "./views/resources/Information";
-import { Surveys } from "./views/surveys/Surveys";
-import { SurveyLink } from "./views/surveys/SurveyLink";
-import { SurveySend } from "./views/surveys/SurveySend";
-import { SurveyReports } from "./views/reports/SurveyReports";
-import useAuthState from "./hooks/useAuthState";
-import { getAuth } from "firebase/auth";
+} from '@tabler/icons';
+import { Link, Outlet, useNavigate } from '@tanstack/react-location';
+import { useEffect, useState } from 'react';
+import { UserButton } from './components/UserButton';
+import useAuthState from './hooks/useAuthState';
+import { getAuth } from 'firebase/auth';
+import { useGetUser, userGetMine } from './context/AuthenticationContext';
 
-function App() {
+function App(): JSX.Element {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+  const { user: currentAccount, fetching } = useGetUser();
   const [user, loading, error] = useAuthState(getAuth());
-  const naviagte = useNavigate();
-  useEffect(() => {
-    if (error || (!user && !loading)) {
-      naviagte({ to: "/auth/login" });
-    }
-  }, [user, loading, error]);
   return (
     <>
-      {user && !loading && !error ? (
+      <LoadingOverlay
+        visible={(!currentAccount && !error && loading) || fetching}
+        about="This is a test"
+      >
+        x
+      </LoadingOverlay>
+      {user != null && !loading && !fetching && error === undefined ? (
         <AppShell
           styles={(theme) => ({
             main: {
               backgroundColor:
-                theme.colorScheme === "dark"
+                theme.colorScheme === 'dark'
                   ? theme.colors.dark[8]
                   : theme.colors.gray[0],
             },
@@ -75,22 +61,22 @@ function App() {
             >
               <Navbar.Section grow mt="md">
                 <UserButton
-                  email="dan@wixels.com"
-                  image="https://avatars.dicebear.com/api/initials/ds.svg"
-                  name="Dan Sivewright"
+                  email={currentAccount?.email}
+                  image={`https://avatars.dicebear.com/api/initials/${currentAccount?.name?.[0]}.svg`}
+                  name={currentAccount?.name}
                 />
-                <Box mt={"1rem"}>
-                  {/* <Link to="/dashboard">
-           {({ isActive }) => {
-             return (
-               <NavLink
-                 active={isActive}
-                 label="Home"
-                 icon={<IconHome2 size={16} stroke={1.5} />}
-               />
-             );
-           }}
-         </Link> */}
+                <Box mt={'1rem'}>
+                  <Link to="/dashboard">
+                    {({ isActive }) => {
+                      return (
+                        <NavLink
+                          active={isActive}
+                          label="Home"
+                          icon={<IconHome2 size={16} stroke={1.5} />}
+                        />
+                      );
+                    }}
+                  </Link>
                   <Link to="./people">
                     {({ isActive }) => {
                       return (
@@ -135,10 +121,10 @@ function App() {
                       );
                     }}
                   </Link>
-                  {/* <NavLink
-           label="Discussion Board"
-           icon={<IconMessages size={16} stroke={1.5} />}
-         /> */}
+                  <NavLink
+                    label="Discussion Board"
+                    icon={<IconMessages size={16} stroke={1.5} />}
+                  />
                 </Box>
               </Navbar.Section>
               <Navbar.Section>x</Navbar.Section>
@@ -146,9 +132,9 @@ function App() {
           }
           header={
             <Header height={70} p="md">
-              <Group sx={{ height: "100%" }} px={20} position="apart">
+              <Group sx={{ height: '100%' }} px={20} position="apart">
                 <Group>
-                  <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+                  <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
                     <Burger
                       opened={opened}
                       onClick={() => setOpened((o) => !o)}

@@ -5,35 +5,79 @@ import {
   Grid,
   Group,
   MultiSelect,
+  Select,
   Text,
   Textarea,
-  TextInput,
   UnstyledButton,
-} from "@mantine/core";
-import { useForm } from "@mantine/form";
-import { IconChevronsLeft } from "@tabler/icons";
-import { Link } from "@tanstack/react-location";
-import React from "react";
+} from '@mantine/core';
+import { useForm } from '@mantine/form';
+import { showNotification } from '@mantine/notifications';
+import { IconCheck, IconChevronsLeft, IconX } from '@tabler/icons';
+import { Link, useMatch, useNavigate } from '@tanstack/react-location';
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import React, { useState } from 'react';
+import { userGetMine } from '../../context/AuthenticationContext';
+import db from '../../firebase';
 
-export const SurveyLink = () => {
+export const SurveyLink = (): JSX.Element => {
+  const [loading, setLoading] = useState(false);
+  const {
+    data: { locations },
+    params: { link },
+  } = useMatch();
+
   const form = useForm({
     initialValues: {
-      operation: "",
-      location: "",
-      description: "",
+      package: null,
+      locationDocId: null,
+      description: '',
+      acceptResponses: true,
+      linkId: link,
+    },
+    validate: {
+      package: (value) => (!value?.length ? 'Package is required' : null),
+      locationDocId: (value) => (!value ? 'Location is required' : null),
+      description: (value) =>
+        value === '' || !value ? 'Description is required' : null,
     },
   });
+
+  const naviagte = useNavigate();
+  const { mine, fetching } = userGetMine();
+
+  const createLink = async (values: any) => {
+    setLoading(true);
+    try {
+      await addDoc(collection(db, `mines/${mine?.mineId}/links`), {
+        ...values,
+        package: values.package?.map((pack: any) => JSON.parse(pack)),
+      });
+      setLoading(false);
+      showNotification({
+        message: 'Successfully created link',
+        icon: <IconCheck size={18} />,
+      });
+      naviagte({ to: `./send` });
+    } catch (error) {
+      showNotification({
+        icon: <IconX size={18} />,
+        color: 'red',
+        message: error?.message || 'Unable to create link',
+      });
+      setLoading(false);
+    }
+  };
   return (
     <>
       <Link to="/surveys">
         <UnstyledButton
-          mb={"xl"}
+          mb={'xl'}
           p="lg"
           sx={(theme) => ({
             borderRadius: theme.radius.md,
-            "&:hover": {
+            '&:hover': {
               backgroundColor:
-                theme.colorScheme === "dark"
+                theme.colorScheme === 'dark'
                   ? theme.colors.dark[8]
                   : theme.colors.gray[1],
             },
@@ -52,55 +96,50 @@ export const SurveyLink = () => {
           </Group>
         </UnstyledButton>
       </Link>
-      <form>
-        <Grid gutter={"xl"}>
+      <form onSubmit={form.onSubmit(createLink)}>
+        <Grid gutter={'xl'}>
           <Grid.Col span={6}>
-            <MultiSelect
-              data={[
-                { value: "react", label: "React" },
-                { value: "ng", label: "Angular" },
-                { value: "svelte", label: "Svelte" },
-                { value: "vue", label: "Vue" },
-                { value: "riot", label: "Riot" },
-                { value: "next", label: "Next.js" },
-                { value: "blitz", label: "Blitz.js" },
-              ]}
+            <Select
+              data={locations.map((location) => ({
+                value: location.id,
+                label: location.name,
+              }))}
               placeholder="Select Locations"
-              radius={"md"}
-              size="md"
-              label={
-                <Text size="sm" color="dimmed">
-                  Operation
-                </Text>
-              }
-              {...form.getInputProps("operation")}
-            />
-            <MultiSelect
-              mt={"xl"}
-              data={[
-                { value: "react", label: "React" },
-                { value: "ng", label: "Angular" },
-                { value: "svelte", label: "Svelte" },
-                { value: "vue", label: "Vue" },
-                { value: "riot", label: "Riot" },
-                { value: "next", label: "Next.js" },
-                { value: "blitz", label: "Blitz.js" },
-              ]}
-              placeholder="Select Locations"
-              radius={"md"}
+              radius={'md'}
               size="md"
               label={
                 <Text size="sm" color="dimmed">
                   Location
                 </Text>
               }
-              {...form.getInputProps("location")}
+              {...form.getInputProps('locationDocId')}
+            />
+            <MultiSelect
+              mt={'xl'}
+              disabled={fetching}
+              data={
+                fetching
+                  ? []
+                  : mine?.packages?.map((pack) => ({
+                      value: JSON.stringify(pack),
+                      label: pack?.name,
+                    }))
+              }
+              placeholder="Select Package"
+              radius={'md'}
+              size="md"
+              label={
+                <Text size="sm" color="dimmed">
+                  Package(s)
+                </Text>
+              }
+              {...form.getInputProps('package')}
             />
           </Grid.Col>
           <Grid.Col span={6}>
             <Textarea
               placeholder="Description"
-              radius={"md"}
+              radius={'md'}
               autosize
               minRows={5}
               label={
@@ -108,18 +147,23 @@ export const SurveyLink = () => {
                   Description
                 </Text>
               }
-              {...form.getInputProps("description")}
+              {...form.getInputProps('description')}
             />
           </Grid.Col>
         </Grid>
-      </form>
-      <Center mt={"xl"}>
-        <Link to="./send">
-          <Button style={{ maxWidth: "576px" }} fullWidth radius={"md"}>
+        <Center mt={'xl'}>
+          <Button
+            disabled={loading || fetching}
+            loading={loading || fetching}
+            type="submit"
+            style={{ maxWidth: '576px' }}
+            fullWidth
+            radius={'md'}
+          >
             Create Link
           </Button>
-        </Link>
-      </Center>
+        </Center>
+      </form>
     </>
   );
 };

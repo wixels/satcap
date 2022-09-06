@@ -1,11 +1,11 @@
-import { Avatar, Group, Tabs, Text, UnstyledButton } from "@mantine/core";
-import { IconChevronLeft } from "@tabler/icons";
-import { Link, useMatch } from "@tanstack/react-location";
-import React from "react";
-import { SurveySendEmail } from "./SurveySendEmail";
-import { SurveySendSms } from "./SurveySendSms";
+import { Avatar, Group, Tabs, Text, UnstyledButton } from '@mantine/core';
+import { IconChevronLeft } from '@tabler/icons';
+import { Link, useMatch } from '@tanstack/react-location';
+import React from 'react';
+import { SurveySendEmail } from './SurveySendEmail';
+import { SurveySendSms } from './SurveySendSms';
 
-export const SurveySend = () => {
+export const SurveySend = (): JSX.Element => {
   const {
     params: { link },
   } = useMatch();
@@ -13,13 +13,13 @@ export const SurveySend = () => {
     <>
       <Link to={`/surveys/${link}`}>
         <UnstyledButton
-          mb={"xl"}
+          mb={'xl'}
           p="lg"
           sx={(theme) => ({
             borderRadius: theme.radius.md,
-            "&:hover": {
+            '&:hover': {
               backgroundColor:
-                theme.colorScheme === "dark"
+                theme.colorScheme === 'dark'
                   ? theme.colors.dark[8]
                   : theme.colors.gray[1],
             },
@@ -38,7 +38,7 @@ export const SurveySend = () => {
           </Group>
         </UnstyledButton>
       </Link>
-      <Tabs defaultValue="email" mb={"xl"}>
+      <Tabs defaultValue="email" mb={'xl'}>
         <Tabs.List>
           <Tabs.Tab value="email">Email Link</Tabs.Tab>
           <Tabs.Tab value="sms">SMS Link</Tabs.Tab>
