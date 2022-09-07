@@ -20,6 +20,7 @@ const initialise = async function (suveryKey, localSubmissions) {
           const description = content.querySelector('p')
           const btn = content.querySelector('button')
 
+          content.querySelector('.listItem').style.borderColor = survey.color
           title.textContent = survey.title
           description.textContent = survey.description
           btn.dataset.key = survey.key

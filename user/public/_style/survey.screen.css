@@ -274,6 +274,30 @@ progress {
   width: 100%;
 }
 
+#surveyList {
+  display: grid;
+  gap: calc(var(--spacer) * 2);
+}
+
+.listItem {
+  background-color: white;
+  padding: var(--spacer) var(--spacer) var(--spacer) calc(var(--spacer) * 2);
+  width: calc(100vw - (var(--spacer) * 2));
+  margin: auto;
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+  border-left: var(--spacer) solid;
+  box-shadow: var(--box-shadow);
+}
+.listItem p {
+  font-size: .9rem;
+}
+.listItem button {
+  border: 1px solid;
+  padding: 0.25rem 0.5rem;
+  margin: var(--spacer) 0;
+}
+
 @media screen and (max-width: 400px) {
   .numberRating.lrg {
     flex-wrap: wrap;
