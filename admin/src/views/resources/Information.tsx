@@ -3,12 +3,12 @@ import { IconCirclePlus, IconDots, IconTrash } from '@tabler/icons';
 import { Link, useMatch } from '@tanstack/react-location';
 import { NoticeCard } from '../../components/NoticeCard';
 import { ResourceCard } from '../../components/ResourceCard';
+import { INotice, IResource } from '../../types';
 
 export const Information = (): JSX.Element => {
-  const {
-    data: { information },
-  } = useMatch();
+  const { data } = useMatch();
 
+  const information: Array<INotice | IResource> | any = data.information;
   console.log(information);
   return (
     <Stack>
@@ -31,7 +31,7 @@ export const Information = (): JSX.Element => {
           { maxWidth: 'lg', cols: 2, spacing: 'lg' },
         ]}
       >
-        {information.map((item) => {
+        {information.map((item: INotice | IResource) => {
           if (item.type === 'resource') {
             return (
               <ResourceCard

@@ -17,6 +17,7 @@ import { Link, useNavigate } from '@tanstack/react-location';
 import { deleteDoc, doc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import db from '../firebase';
+import { IError } from '../types';
 
 interface Props {
   name: string;
@@ -44,7 +45,7 @@ export const SurveyCard = ({
         doc(db, `mines/${window.localStorage.getItem('mineId')}/links`, docId)
       );
       window.location.pathname = '/surveys';
-    } catch (error) {
+    } catch (error: any) {
       showNotification({
         icon: <IconX size={18} />,
         color: 'red',

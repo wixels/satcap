@@ -2,6 +2,7 @@ import { Button, Group, ScrollArea, Stack, Text } from '@mantine/core';
 import { IconCirclePlus } from '@tabler/icons';
 import { Link } from '@tanstack/react-location';
 import { useMemo } from 'react';
+// @ts-ignore
 import { PeopleTable } from '../../components/PeopleTable';
 
 export const People = (): JSX.Element => {

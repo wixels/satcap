@@ -9,6 +9,7 @@ import App from './App';
 import { AuthenticationProvider } from './context/AuthenticationContext';
 import db from './firebase';
 import './index.css';
+import { ILink, ILocation, INotice, IResource } from './types';
 import { Login } from './views/auth/Login';
 import { Home } from './views/home/Home';
 import { CreatePerson } from './views/people/CreatePerson';
@@ -44,7 +45,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             {
               path: '/information',
               loader: async () => {
-                const information = [];
+                const information: Array<IResource | INotice> = [];
                 const noticeSnap = await getDocs(
                   collection(
                     db,
@@ -59,13 +60,13 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 );
                 noticeSnap.forEach((doc) => {
                   information.push({
-                    ...doc.data(),
+                    ...(doc.data() as INotice),
                     type: 'notice',
                   });
                 });
                 resourceSnap.forEach((doc) => {
                   information.push({
-                    ...doc.data(),
+                    ...(doc.data() as IResource),
                     type: 'resource',
                   });
                 });
@@ -81,7 +82,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 {
                   path: '/create',
                   loader: async () => {
-                    const locations = [];
+                    const locations: ILocation[] = [];
                     const locationsSnap = await getDocs(
                       collection(
                         db,
@@ -92,7 +93,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                     );
                     locationsSnap.forEach((doc) => {
                       locations.push({
-                        ...doc.data(),
+                        ...(doc.data() as ILocation),
                         id: doc.id,
                       });
                     });
@@ -107,7 +108,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             {
               path: '/surveys',
               loader: async () => {
-                const links = [];
+                const links: ILink[] = [];
                 const linksSnap = await getDocs(
                   collection(
                     db,
@@ -116,8 +117,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 );
                 linksSnap.forEach((doc) => {
                   links.push({
+                    ...(doc.data() as ILink),
                     docId: doc.id,
-                    ...doc.data(),
                   });
                 });
                 return {
@@ -132,7 +133,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 {
                   path: '/:link',
                   loader: async () => {
-                    const locations = [];
+                    const locations: ILocation[] = [];
                     const locationsSnap = await getDocs(
                       collection(
                         db,
@@ -143,7 +144,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                     );
                     locationsSnap.forEach((doc) => {
                       locations.push({
-                        ...doc.data(),
+                        ...(doc.data() as ILocation),
                         id: doc.id,
                       });
                     });

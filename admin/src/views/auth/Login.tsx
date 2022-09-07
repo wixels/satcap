@@ -44,7 +44,7 @@ export const Login = (): JSX.Element => {
         naviagte({ to: '/people', replace: true });
         setLoading(false);
       })
-      .catch((error) => {
+      .catch((error: any) => {
         showNotification({
           icon: <IconX size={18} />,
           color: 'red',

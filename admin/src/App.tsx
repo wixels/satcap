@@ -32,6 +32,9 @@ function App(): JSX.Element {
   const [opened, setOpened] = useState(false);
   const { user: currentAccount, fetching } = useGetUser();
   const [user, loading, error] = useAuthState(getAuth());
+
+  console.log(currentAccount);
+
   return (
     <>
       <LoadingOverlay
@@ -60,11 +63,13 @@ function App(): JSX.Element {
               width={{ sm: 200, lg: 300 }}
             >
               <Navbar.Section grow mt="md">
-                <UserButton
-                  email={currentAccount?.email}
-                  image={`https://avatars.dicebear.com/api/initials/${currentAccount?.name?.[0]}.svg`}
-                  name={currentAccount?.name}
-                />
+                {currentAccount && (
+                  <UserButton
+                    email={currentAccount?.email}
+                    image={`https://avatars.dicebear.com/api/initials/${currentAccount?.name?.[0]}.svg`}
+                    name={currentAccount?.name}
+                  />
+                )}
                 <Box mt={'1rem'}>
                   <Link to="/dashboard">
                     {({ isActive }) => {

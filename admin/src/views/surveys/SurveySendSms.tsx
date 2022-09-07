@@ -44,7 +44,7 @@ export const SurveySendSms = (): JSX.Element => {
     setLoading(true);
     try {
       await addDoc(collection(db, 'messages'), {
-        to: values.mobiles?.map((cell) =>
+        to: values.mobiles?.map((cell: { mobile: string }) =>
           cell.mobile
             .replaceAll(' ', '')
             .replaceAll('(', '')
@@ -59,7 +59,7 @@ export const SurveySendSms = (): JSX.Element => {
         icon: <IconCheck size={18} />,
       });
       naviagte({ to: '/surveys', replace: true });
-    } catch (error) {
+    } catch (error: any) {
       showNotification({
         icon: <IconX size={18} />,
         color: 'red',

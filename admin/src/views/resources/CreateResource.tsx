@@ -22,11 +22,11 @@ import { showNotification } from '@mantine/notifications';
 import { IconCheck, IconX } from '@tabler/icons';
 import { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
+import { ILocation } from '../../types';
 
 export const CreateResource = (): JSX.Element => {
-  const {
-    data: { locations },
-  } = useMatch();
+  const { data } = useMatch();
+  const locations: ILocation[] | any = data.locations;
   const { mine, fetching } = userGetMine();
   const { user } = useGetUser();
   const fileId = useNanoId();
@@ -73,7 +73,7 @@ export const CreateResource = (): JSX.Element => {
         url,
         featureImageUrl,
         publishedBy: {
-          name: user.name,
+          name: user?.name,
           authUid: user?.authUid,
           email: user?.email,
         },
@@ -84,7 +84,7 @@ export const CreateResource = (): JSX.Element => {
         icon: <IconCheck size={18} />,
       });
       naviagte({ to: `/information` });
-    } catch (error) {
+    } catch (error: any) {
       showNotification({
         icon: <IconX size={18} />,
         color: 'red',
@@ -150,7 +150,7 @@ export const CreateResource = (): JSX.Element => {
         </Grid.Col>
         <Grid.Col span={6}>
           <MultiSelect
-            data={locations.map((location) => ({
+            data={locations.map((location: { id: any; name: any }) => ({
               value: location.id,
               label: location.name,
             }))}

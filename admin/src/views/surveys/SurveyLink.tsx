@@ -18,17 +18,19 @@ import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { userGetMine } from '../../context/AuthenticationContext';
 import db from '../../firebase';
+import { ILocation } from '../../types';
 
 export const SurveyLink = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const {
-    data: { locations },
+    data,
     params: { link },
   } = useMatch();
+  const locations: ILocation[] | any = data.locations;
 
   const form = useForm({
     initialValues: {
-      package: null,
+      package: [],
       locationDocId: null,
       description: '',
       acceptResponses: true,
@@ -58,7 +60,7 @@ export const SurveyLink = (): JSX.Element => {
         icon: <IconCheck size={18} />,
       });
       naviagte({ to: `./send` });
-    } catch (error) {
+    } catch (error: any) {
       showNotification({
         icon: <IconX size={18} />,
         color: 'red',
@@ -100,7 +102,7 @@ export const SurveyLink = (): JSX.Element => {
         <Grid gutter={'xl'}>
           <Grid.Col span={6}>
             <Select
-              data={locations.map((location) => ({
+              data={locations.map((location: ILocation) => ({
                 value: location.id,
                 label: location.name,
               }))}

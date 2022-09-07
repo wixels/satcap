@@ -45,7 +45,9 @@ export const SurveySendEmail = (): JSX.Element => {
     setLoading(true);
     try {
       await addDoc(collection(db, 'mail'), {
-        to: values.emails?.map((email) => email.email),
+        to: values.emails?.map(
+          (email: { email: string; key: string }) => email.email
+        ),
         message: {
           subject: 'SATCAP | Complete our survey',
           text: `Hi there! Please complete our survey at https://satcap-research.web.app/?linkId=${link}`,
@@ -58,7 +60,7 @@ export const SurveySendEmail = (): JSX.Element => {
         icon: <IconCheck size={18} />,
       });
       naviagte({ to: '/surveys', replace: true });
-    } catch (error) {
+    } catch (error: any) {
       showNotification({
         icon: <IconX size={18} />,
         color: 'red',
