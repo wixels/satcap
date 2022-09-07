@@ -1,26 +1,76 @@
 import { collection, query, where, getDocs } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js'
 import { logEvent } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js'
 import { requestHandler } from './helpers.js'
-import { analytics, db, link } from './init.js'
+import { analytics, db, initMenu, link } from './init.js'
 
 const initialise = async function (suveryKey, localSubmissions) {
   if (link && link.package.survey.key === suveryKey) {
     const linkOpenSnapShot = await getDocs(query(collection(db, `mines/${link.mineDocId}/links/`), where('acceptResponses', '==', true), where('linkId', '==', link.linkId)))
     if (linkOpenSnapShot.size && (!localSubmissions.includes(link.linkId) || link.package.survey.allowMultipleResponses)) {
       const exitLink = document.querySelector('[href="./exit"]')
-      if (exitLink) {
-        exitLink.setAttribute('href', `./exit?linkId=${link.linkId}`)
+      if (link.package.survey.subSurveys || link.package.survey.surveys) {
+        if (exitLink) {
+          exitLink.classList.add('hidden')
+        }
+        const surveys = link.package.survey.subSurveys || link.package.survey.surveys
+        for (const survey of surveys) {
+          const template = document.getElementById('surveyItem')
+          const content = template.content.cloneNode(true)
+          const title = content.querySelector('h3')
+          const description = content.querySelector('p')
+          const btn = content.querySelector('button')
+
+          title.textContent = survey.title
+          description.textContent = survey.description
+          btn.dataset.key = survey.key
+          btn.dataset.surveyKey = link.package.survey.key
+          btn.dataset.title = survey.title
+          btn.addEventListener('click', (e) => {
+            e.preventDefault()
+            startSurvey(e.currentTarget.dataset.surveyKey, e.currentTarget.dataset.key, e.currentTarget.dataset.title)
+          })
+          document.querySelector('#surveyList').appendChild(content)
+        }
+        if (link.package.scopes?.length) {
+          initMenu(link.linkId, link.package.scopes)
+        }
+      } else {
+        if (exitLink) {
+          exitLink.setAttribute('href', `./exit?linkId=${link.linkId}`)
+        }
+        const consent = document.querySelector('.consent')
+        consent.querySelector('form').addEventListener('submit', giveConsent)
+        document.getElementById('surveyDescription').innerHTML = link.package.survey.description
+        consent.classList.remove('hidden')
       }
-      const consent = document.querySelector('.consent')
-      consent.querySelector('form').addEventListener('submit', giveConsent)
-      document.getElementById('surveyDescription').innerHTML = link.package.survey.description
-      consent.classList.remove('hidden')
-      
       const loader = document.querySelector('.init')
       if (loader) loader.remove()
     } else {
       window.location.href = `./closed?title=${link.package.survey.title}&linkId=${link.linkId}`
     }
+  }
+}
+
+const startSurvey = function (surveyKey, subKey, title) {
+  const template = document.getElementById(subKey)
+  const content = template.content.cloneNode(true)
+
+  const consent = content.querySelector('.consent')
+  consent.querySelector('form').addEventListener('submit', giveConsent)
+  content.querySelector('#surveyDescription').innerHTML = link.package.survey.description
+  consent.classList.remove('hidden')
+  document.querySelector('#surveyList').classList.add('hidden')
+  document.querySelector('main').appendChild(content)
+  const exitLink = document.querySelector('[href="./exit"]')
+  if (exitLink) {
+    exitLink.classList.remove('hidden')
+    exitLink.setAttribute('href', `/survey/${surveyKey}?linkId=${link.linkId}`)
+  }
+  const header = document.querySelector('header h1')
+  header.textContent = title
+  const menu = document.querySelector('footer ul')
+  if (menu) {
+    menu.classList.add('hidden')
   }
 }
 
@@ -40,6 +90,13 @@ const giveConsent = function (e) {
       setOnChange(form)
       setProgressTracker()
       setEmbeddables()
+      logEvent(analytics, 'survey_start', {
+        name: `${link.package.name} - ${link.package.survey.title}`,
+        user_ref: window.localStorage.getItem('userRef'),
+        link_id: link.linkId,
+        package_id: link.package.docId,
+        time_stamp: dayjs().format('YYYY-MM-DD HH:mm:ssZ')
+      });
     }
   }
 }
@@ -226,7 +283,7 @@ const setProgressTracker = function () {
   }
   document.querySelector('label[for="progress"]').textContent = `${completed} of ${total} answered`
   document.getElementById('progress').setAttribute('value', (completed / total) * 100)
-  document.querySelector('footer').classList.remove('hidden')
+  document.querySelector('.progress').classList.remove('hidden')
 }
 
 export {

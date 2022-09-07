@@ -14,6 +14,14 @@
   </header>
   <main>
     <p class="init">Loading...</p>
+    <div id="surveyList"></div>
+    <template id="surveyItem">
+      <div class="listItem">
+        <h3></h3>
+        <p></p>
+        <button type="button">Start Survey</button>
+      </div>
+    </template>
     <template id="wp-three-one-pre">
       <div class="consent hidden">
         <div class="content">
@@ -40,1756 +48,659 @@
       </div>
       <form class="survey hidden" name="survey" action="https://satcap-research.web.app/api/survey" method="POST">
         <input type="hidden" name="consent" value="true" />
-        <input type="hidden" name="survey" value="wp-three-two" />
+        <input type="hidden" name="survey" value="wp-three-two-pre" />
         <input type="hidden" name="mineDocId" />
         <input type="hidden" name="linkDocId" />
         <input type="hidden" name="linkId" />
         <div class="question">
           <p>Question 1</p>
-          <label>
-            <span>Which town/community do you currently live in?</span> 
-            <span class="sub">Please provide the place name and/or location</span>
-            <input type="text" name="questionOne" />
-          </label>
+          <fieldset class="radioGroup">
+            <legend>Does your company have a registered name?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionOne" data-on-change="conditionalPath" data-conditional-path="one-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionOne" data-on-change="conditionalPath" data-conditional-path="one-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="one-no">
+            <a href="" target="_blank">Pre-application cheat sheet</a>
+          </template>
         </div>
         <div class="question">
           <p>Question 2</p>
-          <label>
-            <span>Where do you work currently?</span>
-            <input type="text" name="questionTwo" />
-          </label>
+          <fieldset class="radioGroup">
+            <legend>Do you have a company trading name?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionTwo" data-on-change="conditionalPath" data-conditional-path="two-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionTwo" data-on-change="conditionalPath" data-conditional-path="two-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="two-no">
+            <a href="" target="_blank">Pre-application cheat sheet</a>
+          </template>
         </div>
         <div class="question">
           <p>Question 3</p>
-          <span class="label">What type of mine is in your community?</span>
+          <fieldset class="radioGroup">
+            <legend>Do you have a primary contact person for the company?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionThree" data-on-change="conditionalPath" data-conditional-path="three-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionThree" data-on-change="conditionalPath" data-conditional-path="two-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="three-no">
+            <a href="" target="_blank">Pre-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 4</p>
+          <fieldset class="radioGroup">
+            <legend>Do you have a primary contact email address for the company?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionFour" data-on-change="conditionalPath" data-conditional-path="four-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionFour" data-on-change="conditionalPath" data-conditional-path="four-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="four-no">
+            <a href="" target="_blank">Pre-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 5</p>
+          <label>
+            <span>Can you explain what your product or service offering is?</span>
+            <select name="questionFive" data-on-change="free-text">
+              <option value="">Select an option</option>
+              <option value="Automotive">Automotive</option>
+              <option value="Agriculture, regenerative agriculture, agro-processing and re-forestry">Agriculture, regenerative agriculture, agro-processing and re-forestry</option>
+              <option value="Construction and building">Construction and building</option>
+              <option value="Creative and Design Industry">Creative and Design Industry</option>
+              <option value="Engineering">Engineering</option>
+              <option value="Healthcare">Healthcare</option>
+              <option value="Mining and minerals">Mining and minerals</option>
+              <option value="Mine rehabilitation">Mine rehabilitation</option>
+              <option value="Mine waste beneficiation">Mine waste beneficiation</option>
+              <option value="e-Waste">e-Waste</option>
+              <option value="Renewable energy">Renewable energy</option>
+              <option value="Small/light manufacturing">Small/light manufacturing</option>
+              <option value="Services and retail trade">Services and retail trade</option>
+              <option value="Textiles">Textiles</option>
+              <option value="Tourism and hospitality (accomodation and catering)">Tourism and hospitality (accomodation and catering)</option>
+              <option value="Oil and gas">Oil and gas</option>
+              <option value="Recycling or Upcycling">Recycling or Upcycling</option>
+              <option value="Waste management">Waste management</option>
+              <option value="Catering">Catering</option>
+              <option value="Retail">Retail</option>
+              <option value="Other" data-free-text="true">Other</option>
+            </select>
+          </label>
+        </div>
+        <div class="question">
+          <p>Question 6</p>
+          <fieldset class="radioGroup">
+            <legend>Is your company registered with the Companies and Intellectual Properties Commission (CIPC)?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionSix" data-on-change="conditionalPath" data-conditional-path="six-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionSix" data-on-change="conditionalPath" data-conditional-path="six-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="six-no">
+            <a href="" target="_blank">Pre-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 7</p>
+          <fieldset class="radioGroup">
+            <legend>Do you have a company registration number?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionSeven" data-on-change="conditionalPath" data-conditional-path="seven-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionSeven" data-on-change="conditionalPath" data-conditional-path="seven-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="seven-no">
+            <a href="" target="_blank">Pre-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 8</p>
+          <fieldset class="radioGroup">
+            <legend>Is your company registered on the Central Supplier Database (CSD)?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionEight" data-on-change="conditionalPath" data-conditional-path="eight-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionEight" data-on-change="conditionalPath" data-conditional-path="eight-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="eight-no">
+            <a href="" target="_blank">Pre-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 9</p>
+          <fieldset class="radioGroup">
+            <legend>Is your company registered with the Workmans Compensation Fund?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionNine" data-on-change="conditionalPath" data-conditional-path="nine-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionNine" data-on-change="conditionalPath" data-conditional-path="nine-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="nine-no">
+            <a href="" target="_blank">Pre-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 10</p>
+          <label>
+            <span>What type of company do you operate?</span>
+            <select name="questionTen">
+              <option value="">Select an option</option>
+              <option value="Sole Proprietor">Sole Proprietor</option>
+              <option value="Partnership">Partnership</option>
+              <option value="Public Company">Public Company</option>
+              <option value="Private Company (Pty) Ltd">Private Company (Pty) Ltd</option>
+              <option value="Other (Not-for-Profit, Franchise, etc.)">Other (Not-for-Profit, Franchise, etc.)</option>
+              <option value="Unsure">Unsure</option>
+            </select>
+          </label>
+        </div>
+        <div class="question">
+          <p>Question 11</p>
+          <label>
+            <span>Are you an exempt micro enterprise (turnover less than R10M) or qualifying small enterprise (turnover between R10M-50M) or generic enterprise (turnover above R50M)?</span>
+            <select name="questionEleven">
+              <option value="">Select an option</option>
+              <option value="Micro">Annual turnover &lt; R10 million</option>
+              <option value="Small">Annual turnover &gt; or equal to R10 million but &lt; R50 million</option>
+              <option value="Generic">Annual turnover &gt; R50 million</option>
+            </select>
+          </label>
+        </div>
+        <div class="question">
+          <p>Question 12</p>
+          <label>
+            <span>What is your BBBEE level?</span>
+            <select name="questionTwelve">
+              <option value="">Select an option</option>
+              <option value="One">Level One > 100 points</option>
+              <option value="Three">Level Three > 90 but < 95 points</option>
+              <option value="Four">Level Four > 80 but < 90 points</option>
+            </select>
+          </label>
+        </div>
+        <div class="question">
+          <p>Question 13</p>
+          <fieldset class="radioGroup">
+            <legend>Do you have a company tax number?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionThirteen" data-on-change="conditionalPath" data-conditional-path="thirteen-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionThirteen" data-on-change="conditionalPath" data-conditional-path="thirteen-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="thirteen-no">
+            <a href="" target="_blank">Pre-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 14</p>
+          <fieldset class="radioGroup">
+            <legend>Do you have a VAT registration number?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionFourteen" data-on-change="conditionalPath" data-conditional-path="fourteen-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionFourteen" data-on-change="conditionalPath" data-conditional-path="fourteen-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="fourteen-no">
+            <a href="" target="_blank">Pre-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 15</p>
+          <fieldset class="radioGroup">
+            <legend>Do you have a bank account for your business?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionFifteen" data-on-change="conditionalPath" data-conditional-path="fifteen-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionFifteen" data-on-change="conditionalPath" data-conditional-path="fifteen-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="fifteen-no">
+            <a href="" target="_blank">Pre-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 16</p>
+          <label>
+            <span>Do you prepare internal management accounts or financial statements?</span>
+            <select name="questionSixteen">
+              <option value="">Select an option</option>
+              <option value="Yes, we prepare financial statements and management accounts">Yes, we prepare financial statements and management accounts</option>
+              <option value="No, we do not prepare financial statements or management accounts">No, we do not prepare financial statements or management accounts</option>
+              <option value="No we do not prepare financial statements">No we do not prepare financial statements</option>
+              <option value="No do we not prepare management accounts">No do we not prepare management accounts</option>
+            </select>
+          </label>
+        </div>
+        <div class="question">
+          <p>Question 17</p>
+          <label>
+            <span>When is your financial year end? The term "financial year-end" refers to the completion of any one-year or 12-month accounting period</span>
+            <input type="date" name="questionSeventeen"/>
+          </label>
+        </div>
+        <div class="question">
+          <p>Question 18</p>
+          <fieldset class="radioGroup">
+            <legend>Do you know how long a vendor application typically takes to complete?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionEighteen" data-on-change="conditionalPath" data-conditional-path="eighteen-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionEighteen" data-on-change="conditionalPath" data-conditional-path="eighteen-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="eighteen-no">
+            <a href="" target="_blank">Pre-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 19</p>
+          <fieldset class="radioGroup">
+            <legend>Are you aware of the closing date for the procurement opportunity that you are applying for?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionNineteen" data-on-change="conditionalPath" data-conditional-path="nineteen-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionNineteen" data-on-change="conditionalPath" data-conditional-path="nineteen-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="nineteen-no">
+            <a href="" target="_blank">Pre-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 20</p>
+          <fieldset class="radioGroup">
+            <legend>Do you understand the tender requirements?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionTwenty" data-on-change="conditionalPath" data-conditional-path="twenty-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionTwenty" data-on-change="conditionalPath" data-conditional-path="twenty-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="twenty-no">
+            <a href="" target="_blank">Pre-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 21</p>
+          <fieldset class="radioGroup">
+            <legend>Do you know how to interpret an RFP?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionTwentyOne" data-on-change="conditionalPath" data-conditional-path="twentyone-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionTwentyOne" data-on-change="conditionalPath" data-conditional-path="twentyone-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="twentyone-no">
+            <a href="" target="_blank">Pre-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 22</p>
+          <fieldset class="radioGroup">
+            <legend>Are you aware of health and safety requirements you need to comply with as an employer?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionTwentyTwo" data-on-change="conditionalPath" data-conditional-path="twentytwo-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionTwentyTwo" data-on-change="conditionalPath" data-conditional-path="twentytwo-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="twentytwo-no">
+            <a href="" target="_blank">Pre-application cheat sheet</a>
+          </template>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </template>
+    <template id="wp-three-one-post">
+      <div class="consent hidden">
+        <div class="content">
+          <p id="surveyDescription"></p>
+          <h2>Consent to take part in research pilot</h2>
+          <details>
+            <summary>Click here to see what you're consenting to</summary>
+            <ul>
+              <li>I voluntarily agree to participate in this pilot study for a community needs assessment digital application.</li>
+              <li>I understand that I am participating in an assessment of this digital application in this pilot test of my own free will.</li>
+              <li>I understand that I should not expect any financial gain, remuneration or benefit directly for participation in this pilot test.</li>
+              <li>I understand that all information I provide in this study will be treated confidentially and no personal information will be shared.</li>
+              <li>I understand that in the findings and results of this study my identity will remain anonymous.</li>
+              <li>I understand that my participation in this pilot will in no way advantage or disadvantage me in future engagements with the host organisation.</li>
+              <li>I understand that as the information will be stored anonymously, I may not be able to access my specific responses.</li>
+              <li>I understand that participating in this pilot does not mean that I will expect any action to be taken from the host organisation based on my responses and feedback.</li>
+            </ul>
+          </details>
+          <form>
+            <label><input type="checkbox" name="giveConsent" required/>I understand and consent to the above</label>
+            <button type="submit" id="giveConsent">Start survey</button>
+          </form>
+        </div>
+      </div>
+      <form class="survey hidden" name="survey" action="https://satcap-research.web.app/api/survey" method="POST">
+        <input type="hidden" name="consent" value="true" />
+        <input type="hidden" name="survey" value="wp-three-two-post" />
+        <input type="hidden" name="mineDocId" />
+        <input type="hidden" name="linkDocId" />
+        <input type="hidden" name="linkId" />
+        <div class="question">
+          <p>Question 1</p>
+          <fieldset class="radioGroup">
+            <legend>Have you submitted the required supporting documentation for your tender submission?</legend>
+            <a href="" target="_blank">Post-application cheat sheet</a>
+            <label>
+              <input type="radio" value="Yes" name="questionOne" data-on-change="conditionalPath" data-conditional-path="one-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionOne" data-on-change="conditionalPath" data-conditional-path="one-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="one-no">
+            <a href="" target="_blank">Post-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 2</p>
+          <fieldset class="radioGroup">
+            <legend>Are you aware of the pre-application readiness survey that assists by guiding you through the application process?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionTwo"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionTwo"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+        </div>
+        <div class="question">
+          <p>Question 3</p>
+          <fieldset class="radioGroup">
+            <legend>Have you taken our pre-application readiness survey?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionThree"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionThree"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+        </div>
+        <div class="question">
+          <p>Question 4</p>
+          <fieldset class="radioGroup">
+            <legend>Have you provided the mining company with the correct contact information?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionFour" data-on-change="conditionalPath" data-conditional-path="four-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionFour" data-on-change="conditionalPath" data-conditional-path="four-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="four-no">
+            <a href="" target="_blank">Post-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 5</p>
+          <fieldset class="radioGroup">
+            <legend>Did you verify that your application was successfully submitted?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionFive" data-on-change="conditionalPath" data-conditional-path="five-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionFive" data-on-change="conditionalPath" data-conditional-path="five-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="five-no">
+            <a href="" target="_blank">Post-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 6</p>
+          <fieldset class="radioGroup">
+            <legend>Do you know where to check the status of your application?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionSix" data-on-change="conditionalPath" data-conditional-path="six-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionSix" data-on-change="conditionalPath" data-conditional-path="six-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="six-no">
+            <a href="" target="_blank">Post-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 7</p>
+          <fieldset class="radioGroup">
+            <legend>Are you actively monitoring the status of your application?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionSeven" data-on-change="conditionalPath" data-conditional-path="seven-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionSeven" data-on-change="conditionalPath" data-conditional-path="seven-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="seven-no">
+            <a href="" target="_blank">Post-application cheat sheet</a>
+          </template>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </template>
+    <template id="wp-three-one-post-response">
+      <div class="consent hidden">
+        <div class="content">
+          <p id="surveyDescription"></p>
+          <h2>Consent to take part in research pilot</h2>
+          <details>
+            <summary>Click here to see what you're consenting to</summary>
+            <ul>
+              <li>I voluntarily agree to participate in this pilot study for a community needs assessment digital application.</li>
+              <li>I understand that I am participating in an assessment of this digital application in this pilot test of my own free will.</li>
+              <li>I understand that I should not expect any financial gain, remuneration or benefit directly for participation in this pilot test.</li>
+              <li>I understand that all information I provide in this study will be treated confidentially and no personal information will be shared.</li>
+              <li>I understand that in the findings and results of this study my identity will remain anonymous.</li>
+              <li>I understand that my participation in this pilot will in no way advantage or disadvantage me in future engagements with the host organisation.</li>
+              <li>I understand that as the information will be stored anonymously, I may not be able to access my specific responses.</li>
+              <li>I understand that participating in this pilot does not mean that I will expect any action to be taken from the host organisation based on my responses and feedback.</li>
+            </ul>
+          </details>
+          <form>
+            <label><input type="checkbox" name="giveConsent" required/>I understand and consent to the above</label>
+            <button type="submit" id="giveConsent">Start survey</button>
+          </form>
+        </div>
+      </div>
+      <form class="survey hidden" name="survey" action="https://satcap-research.web.app/api/survey" method="POST">
+        <input type="hidden" name="consent" value="true" />
+        <input type="hidden" name="survey" value="wp-three-two-post-response" />
+        <input type="hidden" name="mineDocId" />
+        <input type="hidden" name="linkDocId" />
+        <input type="hidden" name="linkId" />
+        <div class="question">
+          <p>Question 1</p>
+          <fieldset class="radioGroup">
+            <legend>Did you know how to navigate the vendor portal in order to submit your application?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionOne"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionOne"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+        </div>
+        <div class="question">
+          <p>Question 2</p>
+          <fieldset class="radioGroup">
+            <legend>Were the instructions on the vendor/procurement portal easy to follow?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionTwo"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionTwo"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+        </div>
+        <div class="question">
+          <p>Question 3</p>
+          <fieldset class="radioGroup">
+            <legend>Was it easy to upload your documents on the vendor/procurement portal?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionThree"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionThree"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+        </div>
+        <div class="question">
+          <p>Question 4</p>
+          <fieldset class="radioGroup">
+            <legend>Was the application process easy to follow?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionFour"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionFour"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+        </div>
+        <div class="question">
+          <p>Question 5</p>
+          <span>What is your preferred method to receive the outcome of your application?</span>
           <div class="multiple">
             <label class="selector">
-              <input type="radio" value="Gold" name="questionThree" data-on-change="free-text"/>
-              <span>Gold</span>
+              <input type="radio" value="Cellphone" name="questionFive" data-on-change="free-text" />
+              <span>Cellphone</span>
             </label>
             <label class="selector">
-              <input type="radio" value="Platinum Group Metals (PGM)" name="questionThree" data-on-change="free-text"/>
-              <span>Platinum Group Metals (PGM)</span>
+              <input type="radio" value="Email" name="questionFive" data-on-change="free-text" />
+              <span>Email</span>
             </label>
             <label class="selector">
-              <input type="radio" value="Coal" name="questionThree" data-on-change="free-text"/>
-              <span>Coal</span>
-            </label>
-            <label class="selector">
-              <input type="radio" value="Iron" name="questionThree" data-on-change="free-text"/>
-              <span>Iron</span>
-            </label>
-            <label class="selector">
-              <input type="radio" value="Other" name="questionThree" data-on-change="free-text" data-free-text="true" />
+              <input type="radio" value="Other" name="questionFive" data-on-change="free-text" data-free-text="true" />
               <span>Other</span>
             </label>
           </div>
         </div>
         <div class="question">
-          <p>Question 4</p>
-          <label>
-            <span>Which age bracket do you fall into?</span>
-            <select name="questionFour">
-              <option value="">Select an option</option>
-              <option value="1-15">1 - 15</option>
-              <option value="15-25">15 - 25</option>
-              <option value="25-35">25 - 35</option>
-              <option value="35-45">35 - 45</option>
-              <option value="45-55">45 - 55</option>
-              <option value="55-65">55 - 65</option>
-              <option value="65 or older">65 or older</option>
-            </select>
-          </label>
-        </div>
-        <div class="question">
-          <p>Question 5</p>
+          <p>Question 6</p>
           <fieldset class="radioGroup">
-            <legend>What is your gender?</legend>
+            <legend>If your application was not successful, do you know the reason why?</legend>
             <label>
-              <input type="radio" value="Female" name="questionFive"/>
-              <span>Female</span>
+              <input type="radio" value="Yes" name="questionSix"/>
+              <span>Yes</span>
             </label>
             <label>
-              <input type="radio" value="Male" name="questionFive"/>
-              <span>Male</span>
-            </label>
-            <label>
-              <input type="radio" value="Prefer not to say" name="questionFive"/>
-              <span>Prefer not to say</span>
+              <input type="radio" value="No" name="questionSix"/>
+              <span>No</span>
             </label>
           </fieldset>
-        </div>
-        <div class="question">
-          <p>Question 6</p>
-          <label>
-            <span>What is your highest level of education?</span>
-            <select name="questionSix">
-              <option value="">Select an option</option>
-              <option value="No formal schooling">No formal schooling</option>
-              <option value="Primary School">Primary School</option>
-              <option value="High School">High School (Gr.8 – Gr. 11)</option>
-              <option value="Matric">Matric</option>
-              <option value="TVET diploma">TVET diploma</option>
-              <option value="College diploma">College diploma</option>
-              <option value="University degree/Post graduate studies">University degree/Post graduate studies</option>
-            </select>
-          </label>
         </div>
         <div class="question">
           <p>Question 7</p>
           <fieldset class="radioGroup">
-            <legend>Are you a SMME/business owner?</legend>
+            <legend>Were you able to amend your application during the application process?</legend>
             <label>
-              <input type="radio" value="Yes" name="questionSeven" data-on-change="conditionalPath" data-conditional-path="seven-yes-seven-no"/>
+              <input type="radio" value="Yes" name="questionSeven"/>
               <span>Yes</span>
             </label>
             <label>
-              <input type="radio" value="No" name="questionSeven" data-on-change="conditionalPath" data-conditional-path="seven-yes-seven-no"/>
+              <input type="radio" value="No" name="questionSeven"/>
               <span>No</span>
             </label>
           </fieldset>
-          <template data-choice="seven-yes">
-            <div class="subQuestion">
-              <div class="question">
-                <p>Question 8</p>
-                <span>What services do you provide?</span>
-                <span class="sub">Choose as many as applicable</span>
-                <div class="multiple">
-                  <label class="selector">
-                    <input type="checkbox" value="Automotive" name="SMMEQuestionOne" />
-                    <span>Automotive</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Agriculture, Regenerative agriculture, agro-processing and re-forestry" name="SMMEQuestionOne" />
-                    <span>Agriculture, Regenerative agriculture, agro-processing and re-forestry</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Construction and building" name="SMMEQuestionOne" />
-                    <span>Construction and building</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Creative and Design Industry" name="SMMEQuestionOne" />
-                    <span>Creative and Design Industry</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Engineering" name="SMMEQuestionOne" />
-                    <span>Engineering</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Healthcare" name="SMMEQuestionOne" />
-                    <span>Healthcare</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Mining and minerals" name="SMMEQuestionOne" />
-                    <span>Mining and minerals</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Mine rehabilitation" name="SMMEQuestionOne" />
-                    <span>Mine rehabilitation</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Mine waste beneficiation" name="SMMEQuestionOne" />
-                    <span>Mine waste beneficiation</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="e-Waste" name="SMMEQuestionOne" />
-                    <span>e-Waste</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Renewable energy" name="SMMEQuestionOne" />
-                    <span>Renewable energy</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Small/light manufacturing" name="SMMEQuestionOne" />
-                    <span>Small/light manufacturing</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Services and retail trade" name="SMMEQuestionOne" />
-                    <span>Services and retail trade</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Textiles" name="SMMEQuestionOne" />
-                    <span>Textiles</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Tourism and hospitality" name="SMMEQuestionOne" />
-                    <span>Tourism and hospitality</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Oil and gas" name="SMMEQuestionOne" />
-                    <span>Oil and gas</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Recycling or Upcycling" name="SMMEQuestionOne" />
-                    <span>Recycling or Upcycling</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Waste management" name="SMMEQuestionOne" />
-                    <span>Waste management</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Catering" name="SMMEQuestionOne" />
-                    <span>Catering</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Retail" name="SMMEQuestionOne" />
-                    <span>Retail</span>
-                  </label>
-                </div>
-                <label>
-                  <span>Other</span>
-                  <input type="text" placeholder="Please specify" name="SMMEQuestionOne" />
-                </label>
-              </div>
-              <div class="question">
-                <p>Question 9</p>
-                <fieldset class="radioGroup">
-                  <legend>Are you a service provider to the mine?</legend>
-                  <label>
-                    <input type="radio" value="Yes" name="SMMEQuestionTwo" data-on-change="conditionalPath" data-conditional-path="SMMEOne-yes-SMMEOne-no"/>
-                    <span>Yes</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="No" name="SMMEQuestionTwo" data-on-change="conditionalPath" data-conditional-path="SMMEOne-yes-SMMEOne-no"/>
-                    <span>No</span>
-                  </label>
-                </fieldset>
-                <template data-choice="smmeOne-yes">
-                  <div class="question">
-                    <span>How long have you been supplying the mine?</span>
-                    <div class="multiple">
-                      <label class="selector">
-                        <input type="radio" value="A few months" name="SMMEQuestionTwo" />
-                        <span>A few months</span>
-                      </label>
-                      <label class="selector">
-                        <input type="radio" value="6 months - 1 year" name="SMMEQuestionTwo" />
-                        <span>6 months - 1 year</span>
-                      </label>
-                      <label class="selector">
-                        <input type="radio" value="More than 1 year" name="SMMEQuestionTwo" />
-                        <span>More than 1 year</span>
-                      </label>
-                      <label class="selector">
-                        <input type="radio" value="Over 5 years" name="SMMEQuestionTwo" />
-                        <span>Over 5 years</span>
-                      </label>
-                    </div>
-                  </div>
-                </template>
-                <template data-choice="smmeOne-no">
-                  <div class="question">
-                    <fieldset class="radioGroup">
-                      <legend>Would you like to supply the mine?</legend>
-                      <label>
-                        <input type="radio" value="Yes" name="SMMEQuestionTwo"/>
-                        <span>Yes</span>
-                      </label>
-                      <label>
-                        <input type="radio" value="No" name="SMMEQuestionTwo"/>
-                        <span>No</span>
-                      </label>
-                    </fieldset>
-                  </div>
-                </template>
-              </div>
-              <div class="question">
-                <p>Question 10</p>
-                <label>
-                  <span>What stage would you describe your business at present?</span>
-                  <select name="SMMEQuestionThree">
-                    <option value="">Select an option</option>
-                    <option value="Ideating (A form of idea or concept you are having)">Ideating (A form of idea or concept you are having)</option>
-                    <option value="Concepting (Mapping out the idea on paper)">Concepting (Mapping out the idea on paper)</option>
-                    <option value="Committing (Carrying out the idea)">Committing (Carrying out the idea)</option>
-                    <option value="Validating (Providing the accuracy of the idea)">Validating (Providing the accuracy of the idea)</option>
-                    <option value="Scaling (Initiating growth in a company)">Scaling (Initiating growth in a company)</option>
-                    <option value="Establishing/Maturity (Level off from rapid growth period)">Establishing/Maturity (Level off from rapid growth period)</option>
-                  </select>
-                </label>
-              </div>
-              <div class="question">
-                <p>Question 11</p>
-                <label>
-                  <span>How much revenue would do you earn annually?</span>
-                  <span class="sub">Provide estimates</span>
-                  <select name="SMMEQuestionFour">
-                    <option value="">Select an option</option>
-                    <option value="Less than R100,000">Less than R100,000</option>
-                    <option value="R100,000-R1M">R100,000 - R1M</option>
-                    <option value="R1M-R10M">R1M - R10M</option>
-                    <option value="R10M-R50M">R10M - R50M</option>
-                    <option value="Over R50M">Over R50M</option>
-                  </select>
-                </label>
-              </div>
-              <div class="question">
-                <p>Question 12</p>
-                <fieldset class="radioGroup">
-                  <legend>Can you easily access loan and finances to operate your business?</legend>
-                  <label>
-                    <input type="radio" value="Yes" name="SMMEQuestionFive"/>
-                    <span>Yes</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="No" name="SMMEQuestionFive"/>
-                    <span>No</span>
-                  </label>
-                </fieldset>
-              </div>
-              <div class="question">
-                <p>Question 13</p>
-                <fieldset class="radioGroup">
-                  <legend>Have you applied for any funding/loans?</legend>
-                  <label>
-                    <input type="radio" value="Yes" name="SMMEQuestionSix" data-on-change="conditionalPath" data-conditional-path="SMMESix-yes" />
-                    <span>Yes</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="No" name="SMMEQuestionSix" data-on-change="conditionalPath" data-conditional-path="SMMESix-yes"/>
-                    <span>No</span>
-                  </label>
-                </fieldset>
-                <template data-choice="SMMESix-yes">
-                  <div class="question">
-                    <fieldset class="radioGroup">
-                      <legend>Were you successful in obtaining the loan or grant?</legend>
-                      <label>
-                        <input type="radio" value="Yes" name="SMMEQuestionSixOne" data-on-change="conditionalPath" data-conditional-path="SMMESixOne-yes"/>
-                        <span>Yes</span>
-                      </label>
-                      <label>
-                        <input type="radio" value="No" name="SMMEQuestionSixOne" data-on-change="conditionalPath" data-conditional-path="SMMESixOne-yes"/>
-                        <span>No</span>
-                      </label>
-                    </fieldset>
-                    <template data-choice="SMMESixOne-yes">
-                      <div class="question">
-                        <label>
-                          <span>What were you able to do with the funding support?</span>
-                          <select name="SMMEQuestionSixTwo" data-on-change="free-text">
-                            <option value="">Select an option</option>
-                            <option value="Hire more people">Hire more people</option>
-                            <option value="Expand the business">Expand the business</option>
-                            <option value="Grow a new service offering or product line">Grow a new service offering or product line</option>
-                            <option value="Purchase new equipment or hire additional equipment">Purchase new equipment or hire additional equipment</option>
-                            <option value="Hire new business premises">Hire new business premises</option>
-                            <option value="Purchase new business premises">Purchase new business premises</option>
-                            <option value="Other" data-free-text="true">Other</option>
-                          </select>
-                        </label>
-                      </div>
-                    </template>
-                  </div>
-                </template>
-              </div>
-              <div class="question">
-                <p>Question 14</p>
-                <label>
-                  <span>Have you received any assistance from the following organisations to grow your business?</span>
-                  <select name="SMMEQuestionSeven" data-on-change="free-text">
-                    <option value="">Select an option</option>
-                    <option value="National Government">National Government</option>
-                    <option value="Local Government">Local Government</option>
-                    <option value="Municipality">Municipality</option>
-                    <option value="Mine">Mine</option>
-                    <option value="NGOs">NGOs</option>
-                    <option value="CBOs">CBOs</option>
-                    <option value="Forums">Forums</option>
-                    <option value="Unions">Unions</option>
-                    <option value="Local Businesses/SMMEs/Industrialists">Local Businesses/SMMEs/Industrialists</option>
-                    <option value="Other" data-free-text="true">Other</option>
-                  </select>
-                </label>
-              </div>
-              <div class="question">
-                <p>Question 15</p>
-                <span class="label">Which of the following skills is most needed for future economies of local communities?</span>
-                <span class="sub">Choose as many as applicable</span>
-                <div class="multiple" >
-                  <label class="selector">
-                    <input type="checkbox" value="Language proficiency" name="SMMEQuestionEight" />
-                    <span>Language proficiency</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Numeracy and literacy" name="SMMEQuestionEight"/>
-                    <span>Numeracy and literacy</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Job readiness skills" name="SMMEQuestionEight" />
-                    <span>Job readiness skills</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Digital literacy skills" name="SMMEQuestionEight"/>
-                    <span>Digital literacy skills</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Technical training" name="SMMEQuestionEight"/>
-                    <span>Technical training</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Business skills" name="SMMEQuestionEight"/>
-                    <span>Business skills</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Coaching and mentorship" name="SMMEQuestionEight"/>
-                    <span>Coaching and mentorship</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Ethical Business Practice" name="SMMEQuestionEight"/>
-                    <span>Ethical Business Practice</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Entrepreneurship and Innovation" name="SMMEQuestionEight"/>
-                    <span>Entrepreneurship and Innovation</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Business management" name="SMMEQuestionEight"/>
-                    <span>Business management</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Leadership skills" name="SMMEQuestionEight"/>
-                    <span>Leadership skills</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Black Industrialists Scheme : Grants, Benefits and Incentives" name="SMMEQuestionEight"/>
-                    <span>Black Industrialists Scheme : Grants, Benefits and Incentives</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Adult Based Education & Training" name="SMMEQuestionEight"/>
-                    <span>Adult Based Education & Training</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Communication Skills" name="SMMEQuestionEight"/>
-                    <span>Communication Skills</span>
-                  </label>
-                </div>
-                <label>
-                  <span>Other</span>
-                  <input type="text" placeholder="Please specify" name="SMMEQuestionEight" />
-                </label>
-              </div>
-              <div class="question">
-                <p>Question 16</p>
-                <span class="label">Does your business offer the following opportunities to the community?</span>
-                <div class="multiple">
-                  <label class="selector">
-                    <input type="radio" value="Learnerships" name="SMMEQuestionNine" data-on-change="free-text"/>
-                    <span>Learnerships</span>
-                  </label>
-                  <label class="selector">
-                    <input type="radio" value="Internships" name="SMMEQuestionNine" data-on-change="free-text"/>
-                    <span>Internships</span>
-                  </label>
-                  <label class="selector">
-                    <input type="radio" value="Bursaries" name="SMMEQuestionNine" data-on-change="free-text"/>
-                    <span>Bursaries</span>
-                  </label>
-                  <label class="selector">
-                    <input type="radio" value="Other" name="SMMEQuestionNine" data-on-change="free-text" data-free-text="true" />
-                    <span>Other</span>
-                  </label>
-                </div>
-              </div>
-              <div class="question">
-                <p>Question 17</p>
-                <span class="label">Have you received any training in any of the following industries?</span>
-                <span class="sub">Choose as many as applicable</span>
-                <div class="multiple" >
-                  <label class="selector">
-                    <input type="checkbox" value="Mine waste beneficiation" name="SMMEQuestionTen" />
-                    <span>Mine waste beneficiation</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="e-Waste" name="SMMEQuestionTen"/>
-                    <span>e-Waste</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Recycling or Upcycling" name="SMMEQuestionTen" />
-                    <span>Recycling or Upcycling</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Regenerative agriculture, agro-processing and re-forestry" name="SMMEQuestionTen"/>
-                    <span>Regenerative agriculture, agro-processing and re-forestry</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Renewable energy" name="SMMEQuestionTen"/>
-                    <span>Renewable energy</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Small/light manufacturing" name="SMMEQuestionTen"/>
-                    <span>Small/light manufacturing</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Tourism" name="SMMEQuestionTen"/>
-                    <span>Tourism</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Mine rehabilitation" name="SMMEQuestionTen"/>
-                    <span>Mine rehabilitation</span>
-                  </label>
-                </div>
-                <label>
-                  <span>Other</span>
-                  <input type="text" placeholder="Please specify" name="SMMEQuestionTen" />
-                </label>
-              </div>
-              <div class="question">
-                <p>Question 18</p>
-                <span class="label">Choose the top three (3) skills according to how important they are for SMMEs</span>
-                <div class="multiple" >
-                  <label class="selector">
-                    <input type="checkbox" value="Finance" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3" />
-                    <span>Finance</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Business planning" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3" />
-                    <span>Business planning</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Marketing" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3" />
-                    <span>Marketing</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Registration of business" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3" />
-                    <span>Registration of business</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Tenders" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3" />
-                    <span>Tenders</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Vendor registration" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3" />
-                    <span>Vendor registration</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Health and safety" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3" />
-                    <span>Health and safety</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Digital literacy" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3"/>
-                    <span>Digital literacy</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Ethical business practice" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3"/>
-                    <span>Ethical business practice</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Business management" name="SMMEQuestionEleven" data-on-change="maxCount" data-max-count="3"/>
-                    <span>Business management</span>
-                  </label>
-                </div>
-              </div>
-              <div class="question">
-                <p>Question 19</p>
-                <fieldset class="radioGroup">
-                  <legend>Do you use any natural assets to provide your services?</legend>
-                  <label>
-                    <input type="radio" value="Yes" name="SMMEQuestionTwelve" data-on-change="conditionalPath" data-conditional-path="SMMETwelve-yes"/>
-                    <span>Yes</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="No" name="SMMEQuestionTwelve" data-on-change="conditionalPath" data-conditional-path="SMMETwelve-yes"/>
-                    <span>No</span>
-                  </label>
-                </fieldset>
-                <template data-choice="SMMETwelve-yes">
-                  <div class="question">
-                    <span>Which of the following natural assets assist you in operating your business?</span>
-                    <div class="multiple">
-                      <label class="selector">
-                        <input type="radio" value="Rivers/Streams/Ground water" name="SMMEQuestionTwelveOne" data-on-change="free-text"/>
-                        <span>Rivers/Streams/Ground water</span>
-                      </label>
-                      <label class="selector">
-                        <input type="radio" value="Land" name="SMMEQuestionTwelveOne" data-on-change="free-text"/>
-                        <span>Land</span>
-                      </label>
-                      <label class="selector">
-                        <input type="radio" value="Mine Waste Dump" name="SMMEQuestionTwelveOne" data-on-change="free-text"/>
-                        <span>Mine Waste Dump</span>
-                      </label>
-                      <label class="selector">
-                        <input type="radio" value="Other" name="SMMEQuestionTwelveOne" data-on-change="free-text" data-free-text="true" />
-                        <span>Other</span>
-                      </label>
-                    </div>
-                  </div>
-                </template>
-              </div>
-              <div class="question">
-                <p>Question 20</p>
-                <fieldset class="radioGroup">
-                  <legend>Are you aware of any of such business networks, cooperatives and forums etc.?</legend>
-                  <label>
-                    <input type="radio" value="Yes" name="SMMEQuestionThirteen"/>
-                    <span>Yes</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="No" name="SMMEQuestionThirteen"/>
-                    <span>No</span>
-                  </label>
-                </fieldset>
-              </div>
-              <div class="question">
-                <p>Question 21</p>
-                <fieldset class="radioGroup">
-                  <legend>Do you have other businesses that you partner/work with?</legend>
-                  <label>
-                    <input type="radio" value="Yes" name="SMMEQuestionFourteen"/>
-                    <span>Yes</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="No" name="SMMEQuestionFourteen"/>
-                    <span>No</span>
-                  </label>
-                </fieldset>
-              </div>
-              <div class="question">
-                <p>Question 22</p>
-                <fieldset class="radioGroup">
-                  <legend>Are you part of any business networks, cooperatives and/or forums?</legend>
-                  <label>
-                    <input type="radio" value="Yes" name="SMMEQuestionFifteen" data-on-change="conditionalPath" data-conditional-path="SMMEFifteen-yes"/>
-                    <span>Yes</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="No" name="SMMEQuestionFifteen" data-on-change="conditionalPath" data-conditional-path="SMMEFifteen-yes"/>
-                    <span>No</span>
-                  </label>
-                </fieldset>
-                <template data-choice="SMMEFifteen-yes">
-                  <div class="question">
-                    <span>Which of the following natural assets assist you in operating your business?</span>
-                    <div class="multiple">
-                      <label class="selector">
-                        <input type="radio" value="Business Network" name="SMMEQuestionFifteenOne" data-on-change="free-text"/>
-                        <span>Business Network</span>
-                      </label>
-                      <label class="selector">
-                        <input type="radio" value="Local Business Forum" name="SMMEQuestionFifteenOne" data-on-change="free-text"/>
-                        <span>Local Business Forum</span>
-                      </label>
-                      <label class="selector">
-                        <input type="radio" value="Local Business Cooperatives" name="SMMEQuestionFifteenOne" data-on-change="free-text"/>
-                        <span>Local Business Cooperatives</span>
-                      </label>
-                      <label class="selector">
-                        <input type="radio" value="Not sure" name="SMMEQuestionFifteenOne" data-on-change="free-text"/>
-                        <span>Not sure</span>
-                      </label>
-                      <label class="selector">
-                        <input type="radio" value="Other" name="SMMEQuestionFifteenOne" data-on-change="free-text" data-free-text="true" />
-                        <span>Other</span>
-                      </label>
-                    </div>
-                  </div>
-                </template>
-              </div>
-              <div class="question">
-                <p>Question 23</p>
-                <span>Is your business equipped to <strong>offer on the job training for skills</strong> in the any of the following?</span>
-                <span class="sub">Choose as many as applicable</span>
-                <div class="multiple">
-                  <label class="selector">
-                    <input type="checkbox" value="Gardening" name="SMMEQuestionSixteen" />
-                    <span>Gardening</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Carpentry" name="SMMEQuestionSixteen" />
-                    <span>Carpentry</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Construction" name="SMMEQuestionSixteen" />
-                    <span>Construction</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Ceiling and Lighting" name="SMMEQuestionSixteen" />
-                    <span>Ceiling and Lighting</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Recycling" name="SMMEQuestionSixteen" />
-                    <span>Recycling</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Mine Tailings Management" name="SMMEQuestionSixteen" />
-                    <span>Mine Tailings Management</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Catering" name="SMMEQuestionSixteen" />
-                    <span>Catering</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Retail Trade" name="SMMEQuestionSixteen" />
-                    <span>Retail Trade</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Accommodation" name="SMMEQuestionSixteen" />
-                    <span>Accommodation</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Industrial Engineering" name="SMMEQuestionSixteen" />
-                    <span>Industrial Engineering</span>
-                  </label>
-                </div>
-                <label>
-                  <span>Other</span>
-                  <input type="text" placeholder="Please specify" name="SMMEQuestionSixteen" />
-                </label>
-              </div>
-              <div class="question">
-                <p>Question 24</p>
-                <fieldset class="radioGroup">
-                  <legend>Do you operate out of your own premises?</legend>
-                  <label>
-                    <input type="radio" value="Yes" name="SMMEQuestionSeventeen"/>
-                    <span>Yes</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="No" name="SMMEQuestionSeventeen"/>
-                    <span>No</span>
-                  </label>
-                </fieldset>
-              </div>
-              <div class="question">
-                <p>Question 25</p>
-                <fieldset class="radioGroup">
-                  <legend>Do you have connectivity<sup>*</sup> on your premises?</legend>
-                  <span class="sub"><sup>*</sup>Wi-Fi, mobile/telephone network</span>
-                  <label>
-                    <input type="radio" value="Yes" name="SMMEQuestionEighteen"/>
-                    <span>Yes</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="No" name="SMMEQuestionEighteen"/>
-                    <span>No</span>
-                  </label>
-                </fieldset>
-              </div>
-              <div class="question">
-                <p>Question 26</p>
-                <fieldset class="radioGroup">
-                  <legend>Do you have running water and electricity on your operation premises?</legend>
-                  <label>
-                    <input type="radio" value="Yes" name="SMMEQuestionNineteen"/>
-                    <span>Yes</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="No" name="SMMEQuestionNineteen"/>
-                    <span>No</span>
-                  </label>
-                </fieldset>
-              </div>
-              <div class="question">
-                <p>Question 27</p>
-                <fieldset class="radioGroup">
-                  <legend>Is security an issue for your premises and the operation of your business?</legend>
-                  <label>
-                    <input type="radio" value="Yes" name="SMMEQuestionTwenty"/>
-                    <span>Yes</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="No" name="SMMEQuestionTwenty"/>
-                    <span>No</span>
-                  </label>
-                </fieldset>
-              </div>
-              <div class="question">
-                <p>Question 28</p>
-                <fieldset class="radioGroup">
-                  <legend>Does your business have any initiatives in place to empower marginalised groups in the community? </legend>
-                  <label>
-                    <input type="radio" value="Yes" name="SMMEQuestionTwentyOne" data-on-change="conditionalPath" data-conditional-path="SMMETwentyOne-yes"/>
-                    <span>Yes</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="No" name="SMMEQuestionTwentyOne" data-on-change="conditionalPath" data-conditional-path="SMMETwentyOne-yes"/>
-                    <span>No</span>
-                  </label>
-                </fieldset>
-                <template data-choice="SMMETwentyOne-yes">
-                  <div class="question">
-                    <label>
-                      <span>What are these initiatives?</span> 
-                      <input type="text" name="SMMEQuestionTwentyOneOne" />
-                    </label>
-                  </div>
-                </template>
-              </div>
-              <div class="question">
-                <p>Question 29</p>
-                <fieldset class="radioGroup">
-                  <legend>Do you have information on the other needs in the community that you operate in?</legend>
-                  <label>
-                    <input type="radio" value="Yes" name="SMMEQuestionTwentyTwo"/>
-                    <span>Yes</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="No" name="SMMEQuestionTwentyTwo"/>
-                    <span>No</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="Don't know" name="SMMEQuestionTwentyTwo"/>
-                    <span>Don't know</span>
-                  </label>
-                </fieldset>
-              </div>
-              <div class="question">
-                <p>Question 30</p>
-                <fieldset class="radioGroup">
-                  <legend>Are you aware of any local initiatives, businesses, or groups that are meeting needs in the community?</legend>
-                  <label>
-                    <input type="radio" value="Yes" name="SMMEQuestionTwentyThree" data-on-change="conditionalPath" data-conditional-path="SMMETwentyThree-yes"/>
-                    <span>Yes</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="No" name="SMMEQuestionTwentyThree" data-on-change="conditionalPath" data-conditional-path="SMMETwentyThree-yes"/>
-                    <span>No</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="Don't know" name="SMMEQuestionTwentyThree" data-on-change="conditionalPath" data-conditional-path="SMMETwentyThree-yes"/>
-                    <span>Don't know</span>
-                  </label>
-                </fieldset>
-                <template data-choice="SMMETwentyThree-yes">
-                  <div class="question">
-                    <label>
-                      <span>What are these initiatives, businesses or groups?</span> 
-                      <input type="text" name="SMMEQuestionTwentyThreeOne" />
-                    </label>
-                  </div>
-                  <div class="question">
-                    <label>
-                      <span>What needs are they meeting and how?</span> 
-                      <input type="text" name="SMMEQuestionTwentyThreeTwo" />
-                    </label>
-                  </div>
-                </template>
-              </div>
-              <div class="question">
-                <p>Question 31</p>
-                <fieldset class="radioGroup">
-                  <legend>Are you aware of the Black Industrialists Scheme (BIS) by the Department of Trade and Industry (DTI)?</legend>
-                  <label>
-                    <input type="radio" value="Yes" name="SMMEQuestionTwentyFour" data-on-change="conditionalPath" data-conditional-path="SMMETwentyFour-yes"/>
-                    <span>Yes</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="No" name="SMMEQuestionTwentyFour" data-on-change="conditionalPath" data-conditional-path="SMMETwentyFour-yes"/>
-                    <span>No</span>
-                  </label>
-                </fieldset>
-                <template data-choice="SMMETwentyFour-yes">
-                  <div class="question">
-                    <fieldset class="radioGroup">
-                      <legend>Did you apply for the scheme?</legend>
-                      <label>
-                        <input type="radio" value="Yes" name="SMMEQuestionTwentyFourOne" data-on-change="conditionalPath" data-conditional-path="SMMETwentyFourOne-yes"/>
-                        <span>Yes</span>
-                      </label>
-                      <label>
-                        <input type="radio" value="No" name="SMMEQuestionTwentyFourOne" data-on-change="conditionalPath" data-conditional-path="SMMETwentyFourOne-yes"/>
-                        <span>No</span>
-                      </label>
-                    </fieldset>
-                    <template data-choice="SMMETwentyFourOne-yes">
-                      <div class="question">
-                        <fieldset class="radioGroup">
-                          <legend>Were you successful?</legend>
-                          <label>
-                            <input type="radio" value="Yes" name="SMMEQuestionTwentyFourTwo"/>
-                            <span>Yes</span>
-                          </label>
-                          <label>
-                            <input type="radio" value="No" name="SMMEQuestionTwentyFourTwo"/>
-                            <span>No</span>
-                          </label>
-                        </fieldset>
-                      </div>
-                    </template>
-                  </div>
-                </template>
-              </div>
-              <div class="question">
-                <p>Question 32</p>
-                <label>
-                  <span>Would assistance or partnerships with any of the following organisations assist your business to grow to support the local economy post mining?</span>
-                  <select name="SMMEQuestionTwentyFive" data-on-change="free-text">
-                    <option value="">Select an option</option>
-                    <option value="National Government">National Government</option>
-                    <option value="Local Government">Local Government</option>
-                    <option value="Municipality">Municipality</option>
-                    <option value="Mine">Mine</option>
-                    <option value="NGOs">NGOs</option>
-                    <option value="CBOs">CBOs</option>
-                    <option value="Forums">Forums</option>
-                    <option value="Unions">Unions</option>
-                    <option value="Local Businesses/SMMEs/Industrialists">Local Businesses/SMMEs/Industrialists</option>
-                    <option value="Other" data-free-text="true">Other</option>
-                  </select>
-                </label>
-              </div>
-              <div class="question">
-                <p>Question 33</p>
-                <fieldset class="radioGroup">
-                  <legend>Are there initiatives, programs or businesses that assist with meeting community needs?</legend>
-                  <label>
-                    <input type="radio" value="Yes" name="SMMEQuestionTwentySix"/>
-                    <span>Yes</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="No" name="SMMEQuestionTwentySix"/>
-                    <span>No</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="Unsure/Don't know" name="SMMEQuestionTwentySix"/>
-                    <span>Unsure/Don't know</span>
-                  </label>
-                </fieldset>
-              </div>
-              <div class="question">
-                <p>Question 34</p>
-                <span>Do any of these assets exist within your community?</span>
-                <span class="sub">Choose as many as applicable</span>
-                <div class="multiple">
-                  <label class="selector">
-                    <input type="checkbox" value="Health facilities" name="SMMEQuestionTwentySeven" />
-                    <span>Health facilities</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Community Hall" name="SMMEQuestionTwentySeven" />
-                    <span>Community Hall</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Primary and Secondary Schools" name="SMMEQuestionTwentySeven" />
-                    <span>Primary and Secondary Schools</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Police Station" name="SMMEQuestionTwentySeven" />
-                    <span>Police Station</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Tuckshops/Spaza Shops" name="SMMEQuestionTwentySeven" />
-                    <span>Tuckshops/Spaza Shops</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Transport stations" name="SMMEQuestionTwentySeven" />
-                    <span>Transport stations</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Sports and recreational facilities" name="SMMEQuestionTwentySeven" />
-                    <span>Sports and recreational facilities</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Solid waste disposal and recycling depot" name="SMMEQuestionTwentySeven" />
-                    <span>Solid waste disposal and recycling depot</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Post office" name="SMMEQuestionTwentySeven" />
-                    <span>Post office</span>
-                  </label>
-                  <label class="selector">
-                    <input type="checkbox" value="Agriculture/farming/gardening" name="SMMEQuestionTwentySeven" />
-                    <span>Agriculture/farming/gardening</span>
-                  </label>
-                </div>
-                <label>
-                  <span>Other</span>
-                  <input type="text" placeholder="Please specify" name="SMMEQuestionTwentySeven" />
-                </label>
-              </div>
-            </div>
-          </template>
-          <template data-choice="seven-no">
-            <div class="subQuestion">
-            <div class="question">
-              <p>Question 8</p>
-              <fieldset class="radioGroup">
-                <legend>Are you employed?</legend>
-                <label>
-                  <input type="radio" value="Yes" name="communityQuestionOne" data-on-change="conditionalPath" data-conditional-path="communityOne-yes-communityOne-no"/>
-                  <span>Yes</span>
-                </label>
-                <label>
-                  <input type="radio" value="No" name="communityQuestionOne" data-on-change="conditionalPath" data-conditional-path="communityOne-yes-communityOne-no"/>
-                  <span>No</span>
-                </label>
-              </fieldset>
-              <template data-choice="communityOne-yes">
-                <div class="question">
-                  <label>
-                    <span>What is your employment status?</span>
-                    <select name="communityQuestionOneOne">
-                      <option value="">Select an option</option>
-                      <option value="Formal sector-Fulltime">Formal sector - Full-time</option>
-                      <option value="Formal sector-Part-time">Formal sector - Part-time</option>
-                      <option value="Formal sector-Seasonal">Formal sector - Seasonal</option>
-                      <option value="Informal sector-Full-time">Informal sector - Full-time</option>
-                      <option value="Informal sector-Part-time">Informal sector - Part-time</option>
-                      <option value="Informal sector-Seasonal">Informal sector - Seasonal</option>
-                      <option value="65 or older">65 or older</option>
-                    </select>
-                  </label>
-                </div>
-                <div class="question">
-                  <fieldset class="radioGroup">
-                    <legend>Do you work for the mine?</legend>
-                    <label>
-                      <input type="radio" value="Yes" name="communityQuestionOneTwo"/>
-                      <span>Yes</span>
-                    </label>
-                    <label>
-                      <input type="radio" value="No" name="communityQuestionOneTwo"/>
-                      <span>No</span>
-                    </label>
-                  </fieldset>
-                </div>
-              </template>
-              <template data-choice="communityOne-no">
-                <div class="question">
-                  <label>
-                    <span>What is your source of income?</span>
-                    <select name="communityQuestionOneOne" data-on-change="free-text">
-                      <option value="">Select an option</option>
-                      <option value="Family">Family</option>
-                      <option value="Friends">Friends</option>
-                      <option value="Government (Local or national)">Government (Local or national)</option>
-                      <option value="Local Business/Initiative">Local Business/Initiative</option>
-                      <option value="Social grants">Social grants</option>
-                      <option value="Own my own business">Own my own business</option>
-                      <option value="Other" data-free-text="true">Other</option>
-                    </select>
-                  </label>
-                </div>
-                <div class="question">
-                  <fieldset class="radioGroup">
-                    <legend>Are you looking for a job?</legend>
-                    <label>
-                      <input type="radio" value="Yes" name="communityQuestionOneTwo" data-on-change="conditionalPath" data-conditional-path="communityOneTwo-yes-communityOneTwo-no"/>
-                      <span>Yes</span>
-                    </label>
-                    <label>
-                      <input type="radio" value="No" name="communityQuestionOneTwo" data-on-change="conditionalPath" data-conditional-path="communityOneTwo-yes-communityOneTwo-no"/>
-                      <span>No</span>
-                    </label>
-                  </fieldset>
-                  <template data-choice="communityOneTwo-yes">
-                    <div class="question">
-                      <label>
-                        <span>Select which organisations have assisted you in gaining access to a job</span>
-                        <select name="communityQuestionOneTwoOne">
-                          <option value="">Select an option</option>
-                          <option value="National Government">National Government</option>
-                          <option value="Local Government">Local Government</option>
-                          <option value="Municipality">Municipality</option>
-                          <option value="Mine">Mine</option>
-                          <option value="NGOs">Non-governmental organisation (NGOs)</option>
-                          <option value="CBOs">Community-based organisation (CBOs)</option>
-                          <option value="Forums">Forums</option>
-                          <option value="Unions">Unions</option>
-                          <option value="Local Businesses/SMMEs/Industrialists">Local Businesses/SMMEs/Industrialists</option>
-                          <option value="None">None</option>
-                        </select>
-                      </label>
-                    </div>
-                  </template>
-                  <template data-choice="communityOneTwo-no">
-                    <div class="question">
-                      <label>
-                        <span>Please provide a reason</span>
-                        <input type="text" name="communityQuestionOneTwoOne" />
-                      </label>
-                    </div>
-                  </template>
-                </div>
-              </template>
-            </div>
-            <div class="question">
-              <p>Question 9</p>
-              <label>
-                <span>How often do you have engagements with mines on the needs of your community?</span>
-                <select name="communityQuestionNine">
-                  <option value="">Select an option</option>
-                  <option value="Annually">Annually</option>
-                  <option value="Bi-annually">Bi-annually</option>
-                  <option value="Quarterly">Quarterly</option>
-                  <option value="Monthly">Monthly</option>
-                  <option value="On going as needed">On going as needed</option>
-                  <option value="No engagements/Unaware of engagements">No engagements/Unaware of engagements</option>
-                  <option value="Unsure">Unsure</option>
-                </select>
-              </label>
-            </div>
-            <div class="question">
-              <p>Question 10</p>
-              <fieldset class="radioGroup">
-                <legend>Are there schools in the community you live in?</legend>
-                <span class="sub">Within a walking distance of 5-10 Kms</span>
-                <label>
-                  <input type="radio" value="Yes" name="communityQuestionTen" data-on-change="conditionalPath" data-conditional-path="communityTen-yes"/>
-                  <span>Yes</span>
-                </label>
-                <label>
-                  <input type="radio" value="No" name="communityQuestionTen" data-on-change="conditionalPath" data-conditional-path="communityTen-yes"/>
-                  <span>No</span>
-                </label>
-              </fieldset>
-              <template data-choice="communityTen-yes">
-                <div class="question">
-                  <span>Which of the following are present?</span>
-                  <span class="sub">Choose as many as applicable</span>
-                  <div class="multiple">
-                    <label class="selector">
-                      <input type="checkbox" value="Creche" name="communityQuestionTenOne" />
-                      <span>Creche</span>
-                    </label>
-                    <label class="selector">
-                      <input type="checkbox" value="Primary school" name="communityQuestionTenOne" />
-                      <span>Primary school</span>
-                    </label>
-                    <label class="selector">
-                      <input type="checkbox" value="Secondary school" name="communityQuestionTenOne" />
-                      <span>Secondary school</span>
-                    </label>
-                    <label class="selector">
-                      <input type="checkbox" value="Tertiary - TVET Colleges, Colleges, etc." name="communityQuestionTenOne" />
-                      <span>Tertiary - TVET Colleges, Colleges, etc.</span>
-                    </label>
-                    <label class="selector">
-                      <input type="checkbox" value="Community Training Centre" name="communityQuestionTenOne" />
-                      <span>Community Training Centre</span>
-                    </label>
-                  </div>
-                </div>
-              </template>
-            </div>
-            <div class="question">
-              <p>Question 11</p>
-              <span class="label">How would you rate the living conditions in your community?</span>
-              <div class="multiple">
-                <label class="selector">
-                  <input type="radio" value="Poor" name="communityQuestionEleven"/>
-                  <span>Poor (My living conditions are unsafe and unhealthy)</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Adequate" name="communityQuestionEleven"/>
-                  <span>Adequate (My living conditions need improvement)</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Satisfactory" name="communityQuestionEleven"/>
-                  <span>Satisfactory (I have safe and healthy living conditions)</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Good" name="communityQuestionEleven"/>
-                  <span>Good (My living conditions contribute to my well-being)</span>
-                </label>
-              </div>
-            </div>
-            <div class="question">
-              <p>Question 12</p>
-              <span class="label">How would you rate the level of security in your community?</span>
-              <div class="multiple">
-                <label class="selector">
-                  <input type="radio" value="Poor" name="communityQuestionTwelve"/>
-                  <span>Poor (unsafe)</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Adequate" name="communityQuestionTwelve"/>
-                  <span>Adequate</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Satisfactory" name="communityQuestionTwelve"/>
-                  <span>Satisfactory</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Good" name="communityQuestionTwelve"/>
-                  <span>Good (safe)</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Very Good" name="communityQuestionTwelve"/>
-                  <span>Very good (contributes to my well-being)</span>
-                </label>
-              </div>
-            </div>
-            <div class="question">
-              <p>Question 13</p>
-              <span>Which of the following issues are affecting the community's growth for the post-mine future?</span>
-              <span class="sub">Choose as many as applicable</span>
-              <div class="multiple">
-                <label class="selector">
-                  <input type="checkbox" value="Lack of funding for community initiatives" name="communityQuestionThirteen" />
-                  <span>Lack of funding for community initiatives</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Lack of access to health" name="communityQuestionThirteen" />
-                  <span>Lack of access to health</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Lack of employment opportunities" name="communityQuestionThirteen" />
-                  <span>Lack of employment opportunities</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Social and gender marginalisation" name="communityQuestionThirteen" />
-                  <span>Social and gender marginalisation</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Lack of education" name="communityQuestionThirteen" />
-                  <span>Lack of education</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Lack of skills" name="communityQuestionThirteen" />
-                  <span>Lack of skills</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Lack of infrastructure" name="communityQuestionThirteen" />
-                  <span>Lack of infrastructure</span>
-                </label>
-              </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="communityQuestionThirteen" />
-              </label>
-            </div>
-            <div class="question">
-              <p>Question 14</p>
-              <span>Please select all the items that you believe your community needs</span>
-              <div class="multiple">
-                <label class="selector">
-                  <input type="checkbox" value="Education" name="communityQuestionFourteen" />
-                  <span>Education</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Skills improvement" name="communityQuestionFourteen" />
-                  <span>Skills improvement</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Health care/hospital or clinics/medicine" name="communityQuestionFourteen" />
-                  <span>Health care/hospital or clinics/medicine</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Access to jobs" name="communityQuestionFourteen" />
-                  <span>Access to jobs</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Finances to start a business" name="communityQuestionFourteen" />
-                  <span>Finances to start a business</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Transportation around the community" name="communityQuestionFourteen" />
-                  <span>Transportation around the community</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Security around the community" name="communityQuestionFourteen" />
-                  <span>Security around the community</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Access to technology" name="communityQuestionFourteen" />
-                  <span>Access to technology</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Ecosystem services/natural resources" name="communityQuestionFourteen" />
-                  <span>Ecosystem services/natural resources</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="None" name="communityQuestionFourteen" />
-                  <span>None</span>
-                </label>
-              </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="communityQuestionFourteen" />
-              </label>
-            </div>
-            <div class="question">
-              <p>Question 15</p>
-              <fieldset class="radioGroup">
-                <legend>Do you have access to water?</legend>
-                <label>
-                  <input type="radio" value="Yes" name="communityQuestionFifteen" data-on-change="conditionalPath" data-conditional-path="communityFifteen-yes"/>
-                  <span>Yes</span>
-                </label>
-                <label>
-                  <input type="radio" value="No" name="communityQuestionFifteen" data-on-change="conditionalPath" data-conditional-path="communityFifteen-yes"/>
-                  <span>No</span>
-                </label>
-              </fieldset>
-              <template data-choice="communityFifteen-yes">
-                <div class="question">
-                  <span>Where do get your water?</span>
-                  <div class="multiple">
-                    <label class="selector">
-                      <input type="radio" value="River/Stream" name="communityQuestionFifteenOne" data-on-change="free-text"/>
-                      <span>River/Stream</span>
-                    </label>
-                    <label class="selector">
-                      <input type="radio" value="Dam" name="communityQuestionFifteenOne" data-on-change="free-text" />
-                      <span>Dam</span>
-                    </label>
-                    <label class="selector">
-                      <input type="radio" value="Tap water in household" name="communityQuestionFifteenOne" data-on-change="free-text" />
-                      <span>Tap water in household</span>
-                    </label>
-                    <label class="selector">
-                      <input type="radio" value="Piped water at community stand" name="communityQuestionFifteenOne" data-on-change="free-text" />
-                      <span>Piped water at community stand</span>
-                    </label>
-                    <label class="selector">
-                      <input type="radio" value="Other" name="communityQuestionFifteenOne" data-on-change="free-text" data-free-text="true" />
-                      <span>Other</span>
-                    </label>
-                  </div>
-                </div>
-                <div class="question">
-                  <span class="label">How would you describe your water supply/access?</span>
-                  <div class="multiple">
-                    <label class="selector">
-                      <input type="radio" value="Poor" name="communityQuestionFifteenTwo"/>
-                      <span>Poor (unsafe and irregular water supply, access is communal piped water or from water tankers)</span>
-                    </label>
-                    <label class="selector">
-                      <input type="radio" value="Adequate" name="communityQuestionFifteenTwo"/>
-                      <span>Adequate (clean enough water for domestic use, access from communal piped water source or water tankers)</span>
-                    </label>
-                    <label class="selector">
-                      <input type="radio" value="Satisfactory" name="communityQuestionFifteenTwo"/>
-                      <span>Satisfactory (safe potable water access but could be improved, access is from municipal source with piped water into dwelling, erratic supply)</span>
-                    </label>
-                    <label class="selector">
-                      <input type="radio" value="Good" name="communityQuestionFifteenTwo"/>
-                      <span>Good (adequate water access for household needs, access is from municipal source with piped water into dwelling, regular supply)</span>
-                    </label>
-                    <label class="selector">
-                      <input type="radio" value="Very Good" name="communityQuestionFifteenTwo"/>
-                      <span>Very good (contributes to my well-being)</span>
-                    </label>
-                  </div>
-                </div>
-              </template>
-            </div>
-            <div class="question">
-              <p>Question 16</p>
-              <fieldset class="radioGroup">
-                <legend>Do you have access to food?</legend>
-                <label>
-                  <input type="radio" value="Yes" name="communityQuestionSixteen"/>
-                  <span>Yes</span>
-                </label>
-                <label>
-                  <input type="radio" value="No" name="communityQuestionSixteen"/>
-                  <span>No</span>
-                </label>
-              </fieldset>
-            </div>
-            <div class="question">
-              <p>Question 17</p>
-              <span class="label">How would you describe your access to food?</span>
-              <div class="multiple">
-                <label class="selector">
-                  <input type="radio" value="Poor" name="communityQuestionSeventeen"/>
-                  <span>Poor (I sometimes have to go days without food)</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Adequate" name="communityQuestionSeventeen"/>
-                  <span>Adequate (I am able to eat at least once a day)</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Satisfactory" name="communityQuestionSeventeen"/>
-                  <span>Satisfactory (I have regular meals as I require)</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Good" name="communityQuestionSeventeen"/>
-                  <span>Good (I always have food to eat)</span>
-                </label>
-              </div>
-            </div>
-            <div class="question">
-              <p>Question 18</p>
-              <span class="label">How would you describe your access to shelter/housing?</span>
-              <div class="multiple">
-                <label class="selector">
-                  <input type="radio" value="Poor" name="communityQuestionEighteen"/>
-                  <span>Poor (I do not have a shelter, transient)</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Adequate" name="communityQuestionEighteen"/>
-                  <span>Adequate (I have shelter when I really need it)</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Satisfactory" name="communityQuestionEighteen"/>
-                  <span>Satisfactory (I have a safe shelter to rest)</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Good" name="communityQuestionEighteen"/>
-                  <span>Good (I am not worried about shelter or housing as I have a safe shelter)</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Very Good" name="communityQuestionEighteen"/>
-                  <span>Very good (I have safe and clean housing which is well cared for)</span>
-                </label>
-              </div>
-            </div>
-            <div class="question">
-              <p>Question 19</p>
-              <span class="label">How would you describe your access to shelter/housing?</span>
-              <div class="multiple">
-                <label class="selector">
-                  <input type="radio" value="Poor" name="communityQuestionNineteen"/>
-                  <span>Poor (I do not have access to health care)</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Adequate" name="communityQuestionNineteen"/>
-                  <span>Adequate (I have access to health care in case of emergencies)</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Satisfactory" name="communityQuestionNineteen"/>
-                  <span>Satisfactory (I have access to healthcare whenever I need it)</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Good" name="communityQuestionNineteen"/>
-                  <span>Good (I have access to regular health check ups and good quality health care)</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Very Good" name="communityQuestionNineteen"/>
-                  <span>Very good (I always have access to good quality healthcare)</span>
-                </label>
-              </div>
-            </div>
-            <div class="question">
-              <p>Question Twenty</p>
-              <span>Do any of these assets exist within your community?</span>
-              <span class="sub">Choose as many as applicable</span>
-              <div class="multiple">
-                <label class="selector">
-                  <input type="checkbox" value="Health facilities" name="SMMEQuestionTwenty" />
-                  <span>Health facilities</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Community Hall" name="SMMEQuestionTwenty" />
-                  <span>Community Hall</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Primary and Secondary Schools" name="SMMEQuestionTwenty" />
-                  <span>Primary and Secondary Schools</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Police Station" name="SMMEQuestionTwenty" />
-                  <span>Police Station</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Tuckshops/Spaza Shops" name="SMMEQuestionTwenty" />
-                  <span>Tuckshops/Spaza Shops</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Retail shopping centre" name="SMMEQuestionTwenty" />
-                  <span>Retail shopping centre</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Transport stations" name="SMMEQuestionTwenty" />
-                  <span>Transport stations</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Sports and recreational facilities" name="SMMEQuestionTwenty" />
-                  <span>Sports and recreational facilities</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Solid waste disposal and recycling depot" name="SMMEQuestionTwenty" />
-                  <span>Solid waste disposal and recycling depot</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Post office" name="SMMEQuestionTwenty" />
-                  <span>Post office</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Agriculture/farming/gardening" name="SMMEQuestionTwenty" />
-                  <span>Community agriculture/farming/gardening areas</span>
-                </label>
-              </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="SMMEQuestionTwenty" />
-              </label>
-            </div>
-            <div class="question">
-              <p>Question 21</p>
-              <fieldset class="radioGroup">
-                <legend>Are there initiatives, programs or business that assist with meeting community needs?</legend>
-                <label>
-                  <input type="radio" value="Yes" name="communityQuestionTwentyOne"/>
-                  <span>Yes</span>
-                </label>
-                <label>
-                  <input type="radio" value="No" name="communityQuestionTwentyOne"/>
-                  <span>No</span>
-                </label>
-                <label>
-                  <input type="radio" value="Unsure/Don't know" name="communityQuestionTwentyOne"/>
-                  <span>Unsure/Don't know</span>
-                </label>
-              </fieldset>
-            </div>
-            <div class="question">
-              <p>Question 22</p>
-              <fieldset class="radioGroup">
-                <legend>Are there any recreational activities/sites/initiatives that are in your community?</legend>
-                <label>
-                  <input type="radio" value="Yes" name="communityQuestionTwentyTwo" data-on-change="conditionalPath" data-conditional-path="communityTwentyTwo-yes"/>
-                  <span>Yes</span>
-                </label>
-                <label>
-                  <input type="radio" value="No" name="communityQuestionTwentyTwo" data-on-change="conditionalPath" data-conditional-path="communityTwentyTwo-yes"/>
-                  <span>No</span>
-                </label>
-                <label>
-                  <input type="radio" value="Unsure/Don't know" name="communityQuestionTwentyTwo" data-on-change="conditionalPath" data-conditional-path="communityTwentyTwo-yes"/>
-                  <span>Unsure/Don't know</span>
-                </label>
-              </fieldset>
-              <template data-choice="communityTwentyTwo-yes">
-                <div class="question">
-                  <label>
-                    <span>What are these activities/initiatives?</span> 
-                    <input type="text" name="communityQuestionTwentyTwo" />
-                  </label>
-                </div>
-              </template>
-            </div>
-            <div class="question">
-              <p>Question 23</p>
-              <span>What skills do you have that could be included in the local community economy?</span>
-              <span class="sub">Choose as many as applicable</span>
-              <div class="multiple">
-                <label class="selector">
-                  <input type="checkbox" value="Agricultural" name="communityQuestionTwentyThree" />
-                  <span>Agricultural</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Cleaning and Maintenance" name="communityQuestionTwentyThree" />
-                  <span>Cleaning and Maintenance</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Security" name="communityQuestionTwentyThree" />
-                  <span>Security</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Trade and service" name="communityQuestionTwentyThree" />
-                  <span>Trade and service</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Artisanal" name="communityQuestionTwentyThree" />
-                  <span>Artisanal</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Engineering" name="communityQuestionTwentyThree" />
-                  <span>Engineering</span>
-                </label>
-              </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="communityQuestionTwentyThree" />
-              </label>
-            </div>
-            <div class="question">
-              <p>Question 24</p>
-              <fieldset class="radioGroup">
-                <legend>Would you start a business to sustain the economy post-mining if you were aware of any community needs?</legend>
-                <label>
-                  <input type="radio" value="Yes" name="communityQuestionTwentyFour" data-on-change="conditionalPath" data-conditional-path="communityTwentyFour-yes"/>
-                  <span>Yes</span>
-                </label>
-                <label>
-                  <input type="radio" value="No" name="communityQuestionTwentyFour" data-on-change="conditionalPath" data-conditional-path="communityTwentyFour-yes"/>
-                  <span>No</span>
-                </label>
-                <label>
-                  <input type="radio" value="Unsure/Don't know" name="communityQuestionTwentyFour" data-on-change="conditionalPath" data-conditional-path="communityTwentyFour-yes"/>
-                  <span>Unsure/Don't know</span>
-                </label>
-              </fieldset>
-              <template data-choice="communityTwentyFour-yes">
-                <div class="question">
-                  <label>
-                    <span>What would it be?</span> 
-                    <input type="text" name="communityQuestionTwentyFourOne" />
-                  </label>
-                </div>
-              </template>
-            </div>
-            <div class="question">
-              <p>Question 25</p>
-              <span class="label">Which of the following skills is most needed for future economies of local communities?</span>
-              <span class="sub">Choose as many as applicable</span>
-              <div class="multiple" >
-                <label class="selector">
-                  <input type="checkbox" value="Language proficiency" name="communityQuestionTwentyFive" />
-                  <span>Language proficiency</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Numeracy and literacy" name="communityQuestionTwentyFive"/>
-                  <span>Numeracy and literacy</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Job readiness skills" name="communityQuestionTwentyFive" />
-                  <span>Job readiness skills</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Digital literacy skills" name="communityQuestionTwentyFive"/>
-                  <span>Digital literacy skills</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Technical training" name="communityQuestionTwentyFive"/>
-                  <span>Technical training</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Business skills" name="communityQuestionTwentyFive"/>
-                  <span>Business skills</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Coaching and mentorship" name="communityQuestionTwentyFive"/>
-                  <span>Coaching and mentorship</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Ethical Business Practice" name="communityQuestionTwentyFive"/>
-                  <span>Ethical Business Practice</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Entrepreneurship and Innovation" name="communityQuestionTwentyFive"/>
-                  <span>Entrepreneurship and Innovation</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Business management" name="communityQuestionTwentyFive"/>
-                  <span>Business management</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Leadership skills" name="communityQuestionTwentyFive"/>
-                  <span>Leadership skills</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Black Industrialists Scheme : Grants, Benefits and Incentives" name="communityQuestionTwentyFive"/>
-                  <span>Black Industrialists Scheme : Grants, Benefits and Incentives</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Adult Based Education & Training" name="communityQuestionTwentyFive"/>
-                  <span>Adult Based Education & Training</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Communication Skills" name="communityQuestionTwentyFive"/>
-                  <span>Communication Skills</span>
-                </label>
-              </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="communityQuestionTwentyFive" />
-              </label>
-            </div>
-            <div class="question">
-              <p>Question 26</p>
-              <span class="label">Which of following opportunities would benefit the community?</span>
-              <div class="multiple">
-                <label class="selector">
-                  <input type="radio" value="Learnerships" name="communityQuestionTwentySix" data-on-change="free-text"/>
-                  <span>Learnerships</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Internships" name="communityQuestionTwentySix" data-on-change="free-text"/>
-                  <span>Internships</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Bursaries" name="communityQuestionTwentySix" data-on-change="free-text"/>
-                  <span>Bursaries</span>
-                </label>
-                <label class="selector">
-                  <input type="radio" value="Other" name="communityQuestionTwentySix" data-on-change="free-text" data-free-text="true" />
-                  <span>Other</span>
-                </label>
-              </div>
-            </div>
-            <div class="question">
-              <p>Question 27</p>
-              <span class="label">What do you think is required to make the community a better place for future generations?</span>
-              <span class="sub">Choose as many as applicable</span>
-              <div class="multiple" >
-                <label class="selector">
-                  <input type="checkbox" value="Clean air" name="communityQuestionTwentySeven" />
-                  <span>Clean air</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Healthy fertile soil" name="communityQuestionTwentySeven"/>
-                  <span>Healthy fertile soil</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Access to land" name="communityQuestionTwentySeven" />
-                  <span>Access to land</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Pollution free environment" name="communityQuestionTwentySeven"/>
-                  <span>Pollution free environment</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Functioning waste management system" name="communityQuestionTwentySeven"/>
-                  <span>Functioning waste management system</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Water and sanitation" name="communityQuestionTwentySeven"/>
-                  <span>Water and sanitation</span>
-                </label>
-              </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="communityQuestionTwentySeven" />
-              </label>
-            </div>
-            <div class="question">
-              <p>Question 28</p>
-              <label>
-                <span>What standout initiatives, businesses and SMMEs do you think can be building blocks for the post mine future?</span>
-                <input type="text" name="communityQuestionTwentyEight" />
-              </label>
-            </div>
-            <div class="question">
-              <p>Question 29</p>
-              <span class="label">What sort of businesses do you want to see in the community after the closure of the mine?</span>
-              <span class="sub">Choose as many as applicable</span>
-              <div class="multiple" >
-                <label class="selector">
-                  <input type="checkbox" value="Mine waste beneficiation" name="communityQuestionTwentyNine" />
-                  <span>Mine waste beneficiation</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="e-Waste" name="communityQuestionTwentyNine"/>
-                  <span>e-Waste</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Recycling or Upcycling" name="communityQuestionTwentyNine" />
-                  <span>Recycling or Upcycling</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Regenerative agriculture, agro-processing and re-forestry" name="communityQuestionTwentyNine"/>
-                  <span>Regenerative agriculture, agro-processing and re-forestry</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Renewable energy" name="communityQuestionTwentyNine"/>
-                  <span>Renewable energy</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Small/light manufacturing" name="communityQuestionTwentyNine"/>
-                  <span>Small/light manufacturing</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Tourism" name="communityQuestionTwentyNine"/>
-                  <span>Tourism</span>
-                </label>
-                <label class="selector">
-                  <input type="checkbox" value="Mine rehabilitation" name="communityQuestionTwentyNine"/>
-                  <span>Mine rehabilitation</span>
-                </label>
-              </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="communityQuestionTwentyNine" />
-              </label>
-            </div>
-            </div>
-          </template>
+        </div>
+        <div class="question">
+          <p>Question 8</p>
+          <label>
+            <span>How can the mines make the administrative processes easier?</span>
+            <input type="text" name="questionEight"/>
+          </label>
         </div>
         <button type="submit">Submit</button>
       </form>
@@ -1806,8 +717,8 @@
       </label>
     </template>
   </main>
-  <footer class="hidden">
-    <div class="progress">
+  <footer>
+    <div class="progress hidden">
       <label for="progress"></label>
       <progress id="progress" max="100" value=""></progress>
     </div>
@@ -1823,13 +734,6 @@
     const localSubmissions= JSON.parse(window.localStorage.getItem('submissions')) || []
     
     initialise(suveryKey, localSubmissions)
-    logEvent(analytics, 'survey_start', {
-      name: `${link.package.name} - ${link.package.survey.title}`,
-      user_ref: window.localStorage.getItem('userRef'),
-      link_id: link.linkId,
-      package_id: link.package.docId,
-      time_stamp: dayjs().format('YYYY-MM-DD HH:mm:ssZ')
-    });
 
   </script>
   </body>
