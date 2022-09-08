@@ -6,8 +6,12 @@ import {
   Card,
   createStyles,
   Group,
+  Popover,
   Select,
   Table,
+  Text,
+  TextInput,
+  Title,
 } from '@mantine/core';
 import {
   IconChevronLeft,
@@ -16,8 +20,12 @@ import {
   IconChevronsRight,
   IconTrash,
 } from '@tabler/icons';
-import React, { useMemo } from 'react';
+import { useNavigate } from '@tanstack/react-location';
+import { useQueryClient } from '@tanstack/react-query';
+import React, { useMemo, useState } from 'react';
 import { useTable, usePagination, useRowSelect } from 'react-table';
+import { deleteDoc, doc } from 'firebase/firestore';
+import db from '../firebase';
 
 const useStyles = createStyles((theme) => ({
   td: {
@@ -34,6 +42,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export const PeopleTable = ({ data }) => {
+  const [loading, setLoading] = useState(false);
   const columns = useMemo(
     () => [
       {
@@ -80,6 +89,33 @@ export const PeopleTable = ({ data }) => {
 
   const { classes } = useStyles();
 
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const handleDelete = async (cell) => {
+    setLoading(true);
+    try {
+      // console.log('DOC ID::: ', cell);
+      const itemToDelete = cell.data?.[cell?.cell?.row?.index];
+      await deleteDoc(
+        doc(
+          db,
+          `mines/${window.localStorage.getItem('mineId')}/users`,
+          itemToDelete?.docId
+        )
+      );
+      queryClient.invalidateQueries(['people']);
+      setLoading(false);
+    } catch (error) {
+      showNotification({
+        icon: <IconX size={18} />,
+        color: 'red',
+        message: error?.message || 'Unable to delete notice',
+        disallowClose: true,
+      });
+      setLoading(false);
+    }
+  };
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -120,10 +156,40 @@ export const PeopleTable = ({ data }) => {
         ...columns,
         {
           id: 'delete',
-          Cell: () => (
-            <ActionIcon color="red" variant="light">
-              <IconTrash size={16} />
-            </ActionIcon>
+          Cell: (cell) => (
+            <Popover
+              width={300}
+              trapFocus
+              position="bottom"
+              withArrow
+              shadow="md"
+            >
+              <Popover.Target>
+                <ActionIcon color="red" variant="light">
+                  <IconTrash size={16} />
+                </ActionIcon>
+              </Popover.Target>
+              <Popover.Dropdown
+                sx={(theme) => ({
+                  background:
+                    theme.colorScheme === 'dark'
+                      ? theme.colors.dark[7]
+                      : theme.white,
+                })}
+              >
+                <Title order={5}>Are you sure you want to delete?</Title>
+                <Text color="dimmed" mb={'xl'}>
+                  This action cannot be undone
+                </Text>
+                <Button
+                  fullWidth
+                  color={'red'}
+                  onClick={() => handleDelete(cell)}
+                >
+                  Delete
+                </Button>
+              </Popover.Dropdown>
+            </Popover>
           ),
         },
       ]);

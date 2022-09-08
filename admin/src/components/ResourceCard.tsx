@@ -9,13 +9,20 @@ import {
   Text,
   Tooltip,
 } from '@mantine/core';
-import { IconDots, IconLink, IconTrash } from '@tabler/icons';
+import { showNotification } from '@mantine/notifications';
+import { IconDots, IconLink, IconTrash, IconX } from '@tabler/icons';
+import { useNavigate } from '@tanstack/react-location';
+import { useQueryClient } from '@tanstack/react-query';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { useState } from 'react';
+import db from '../firebase';
 
 interface Props {
   title: string;
   content?: string;
   imageUrl?: string;
   publisher?: string;
+  docId: string;
 }
 
 export const ResourceCard = ({
@@ -23,7 +30,32 @@ export const ResourceCard = ({
   content,
   imageUrl,
   publisher,
+  docId,
 }: Props) => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const handleDelete = async (): Promise<void> => {
+    try {
+      await deleteDoc(
+        doc(
+          db,
+          `mines/${window.localStorage.getItem('mineId')}/resources`,
+          docId
+        )
+      );
+      queryClient.invalidateQueries(['information']);
+      navigate({ to: '/information' });
+    } catch (error: any) {
+      showNotification({
+        icon: <IconX size={18} />,
+        color: 'red',
+        message: error?.message || 'Unable to delete resource',
+        disallowClose: true,
+      });
+    }
+  };
+
   return (
     <Card shadow="sm" p="lg" radius="lg" withBorder>
       <Card.Section withBorder inheritPadding py="xs">
@@ -61,7 +93,11 @@ export const ResourceCard = ({
               </Menu.Target>
 
               <Menu.Dropdown>
-                <Menu.Item icon={<IconTrash size={14} />} color="red">
+                <Menu.Item
+                  onClick={handleDelete}
+                  icon={<IconTrash size={14} />}
+                  color="red"
+                >
                   Delete Notice
                 </Menu.Item>
               </Menu.Dropdown>

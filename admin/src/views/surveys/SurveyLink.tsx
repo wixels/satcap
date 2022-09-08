@@ -14,6 +14,7 @@ import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck, IconChevronsLeft, IconX } from '@tabler/icons';
 import { Link, useMatch, useNavigate } from '@tanstack/react-location';
+import { useQueryClient } from '@tanstack/react-query';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { userGetMine } from '../../context/AuthenticationContext';
@@ -45,6 +46,7 @@ export const SurveyLink = (): JSX.Element => {
   });
 
   const naviagte = useNavigate();
+  const queryClient = useQueryClient();
   const { mine, fetching } = userGetMine();
 
   const createLink = async (values: any) => {
@@ -54,6 +56,7 @@ export const SurveyLink = (): JSX.Element => {
         ...values,
         package: values.package?.map((pack: any) => JSON.parse(pack)),
       });
+      queryClient.invalidateQueries(['links']);
       setLoading(false);
       showNotification({
         message: 'Successfully created link',

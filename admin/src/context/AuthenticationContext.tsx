@@ -59,11 +59,14 @@ function useGetUser() {
           doc.forEach((doc) => {
             setDbUser({
               ...(doc.data() as IUser),
-              mineId: doc.ref.parent.parent?.id || null,
+              mineId: doc.data().mineId || doc.ref.parent.parent?.id || null,
               docId: doc.id,
             });
             // @ts-ignore
-            window.localStorage.setItem('mineId', doc?.ref?.parent?.parent?.id);
+            window.localStorage.setItem(
+              'mineId',
+              doc.data().mineId || doc?.ref?.parent?.parent?.id
+            );
           });
           setFetching(false);
         },

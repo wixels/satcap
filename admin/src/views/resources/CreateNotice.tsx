@@ -14,6 +14,7 @@ import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck, IconX } from '@tabler/icons';
 import { useMatch, useNavigate } from '@tanstack/react-location';
+import { useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { addDoc, collection } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
@@ -33,6 +34,7 @@ export const CreateNotice = (): JSX.Element => {
   const fileId = useNanoId();
   const [loading, setLoading] = useState(false);
   const naviagte = useNavigate();
+  const queryClient = useQueryClient();
   const [uploadFile] = useUploadFile();
   const form = useForm({
     initialValues: {
@@ -83,6 +85,8 @@ export const CreateNotice = (): JSX.Element => {
         message: 'Successfully created notice',
         icon: <IconCheck size={18} />,
       });
+      queryClient.invalidateQueries(['information']);
+
       naviagte({ to: `/information` });
     } catch (error: any) {
       showNotification({

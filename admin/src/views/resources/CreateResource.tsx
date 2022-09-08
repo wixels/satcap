@@ -24,6 +24,7 @@ import { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { ILocation } from '../../types';
 import { useGetLocations } from '../../hooks/network/useLocations';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const CreateResource = (): JSX.Element => {
   const { data: locations, isLoading } = useGetLocations();
@@ -32,6 +33,7 @@ export const CreateResource = (): JSX.Element => {
   const fileId = useNanoId();
   const [loading, setLoading] = useState(false);
   const naviagte = useNavigate();
+  const queryClient = useQueryClient();
   const [uploadFile] = useUploadFile();
 
   const form = useForm({
@@ -82,6 +84,7 @@ export const CreateResource = (): JSX.Element => {
         message: 'Successfully created resource',
         icon: <IconCheck size={18} />,
       });
+      queryClient.invalidateQueries(['information']);
       naviagte({ to: `/information` });
     } catch (error: any) {
       showNotification({

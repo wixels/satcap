@@ -15,10 +15,12 @@ import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { IconChevronLeft, IconPhone, IconX } from '@tabler/icons';
 import { Link, useNavigate } from '@tanstack/react-location';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { addDoc, collection } from 'firebase/firestore';
+import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import ReactInputMask from 'react-input-mask';
-import db from '../../firebase';
+import db, { auth } from '../../firebase';
 import { useGetLocations } from '../../hooks/network/useLocations';
 import { IUser } from '../../types';
 
@@ -42,8 +44,16 @@ export const CreatePerson = (): JSX.Element => {
   const createPerson = async (values: IUser) => {
     setLoading(true);
     try {
+      let tempPass = nanoid(8);
+
+      const authRes = await createUserWithEmailAndPassword(
+        auth,
+        values.email,
+        tempPass
+      );
       await addDoc(collection(db, `mines/${values?.mineId}/users`), {
         ...values,
+        authUid: authRes.user.uid,
         mobile: values.mobile
           ? values.mobile
               .replaceAll(' ', '')
@@ -51,6 +61,15 @@ export const CreatePerson = (): JSX.Element => {
               .replaceAll(')', '')
               .replaceAll('-', '')
           : '',
+      });
+
+      await addDoc(collection(db, 'mail'), {
+        to: [values.email],
+        message: {
+          subject: 'SATCAP',
+          text: `Hi there! Please sign in at SATCAP Admin useing the following password: ${tempPass}`,
+          html: `<p>Hi there! Please sign in at SATCAP Admin useing the following password: ${tempPass}</p>`,
+        },
       });
       naviagte({ to: '/people' });
     } catch (error: any) {
@@ -111,7 +130,7 @@ export const CreatePerson = (): JSX.Element => {
               icon={<IconPhone size={16} />}
               radius={'md'}
               size="md"
-              hideControls
+              hidecontols="true"
               placeholder="Mobile..."
               label={
                 <Text size="sm" color="dimmed">

@@ -40,6 +40,7 @@ export const Information = (): JSX.Element => {
                 content={item.description}
                 imageUrl={item.url}
                 publisher={item?.publishedBy?.name}
+                docId={item.docId}
               />
             );
           } else if (item.type === 'notice') {
@@ -50,6 +51,7 @@ export const Information = (): JSX.Element => {
                 content={item.description}
                 imageUrl={item.url}
                 publisher={item?.publishedBy?.name}
+                docId={item.docId}
               />
             );
           }

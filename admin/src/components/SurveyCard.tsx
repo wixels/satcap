@@ -14,6 +14,7 @@ import {
 import { showNotification } from '@mantine/notifications';
 import { IconClipboardCheck, IconDots, IconTrash, IconX } from '@tabler/icons';
 import { Link, useNavigate } from '@tanstack/react-location';
+import { useQueryClient } from '@tanstack/react-query';
 import { deleteDoc, doc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import db from '../firebase';
@@ -37,6 +38,8 @@ export const SurveyCard = ({
   const [loading, setLoading] = useState(false);
 
   const CORE_URL = 'https://satcap-research.web.app/?linkId=';
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const handleDelete = async () => {
     setLoading(true);
@@ -44,12 +47,13 @@ export const SurveyCard = ({
       await deleteDoc(
         doc(db, `mines/${window.localStorage.getItem('mineId')}/links`, docId)
       );
-      window.location.pathname = '/surveys';
+      queryClient.invalidateQueries(['links']);
+      navigate({ to: '/surveys' });
     } catch (error: any) {
       showNotification({
         icon: <IconX size={18} />,
         color: 'red',
-        message: error?.message || 'Unable to create link',
+        message: error?.message || 'Unable to delete link',
         disallowClose: true,
       });
       setLoading(false);

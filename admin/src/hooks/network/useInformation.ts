@@ -15,12 +15,14 @@ export async function fetchInformation() {
   noticeSnap.forEach((doc) => {
     information.push({
       ...(doc.data() as INotice),
+      docId: doc.id,
       type: 'notice',
     });
   });
   resourceSnap.forEach((doc) => {
     information.push({
       ...(doc.data() as IResource),
+      docId: doc.id,
       type: 'resource',
     });
   });
