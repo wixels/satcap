@@ -37,12 +37,12 @@ export const PeopleTable = ({ data }) => {
   const columns = useMemo(
     () => [
       {
-        Header: 'First Name',
-        accessor: 'firstName',
+        Header: 'Name',
+        accessor: 'name',
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName',
+        Header: 'Email',
+        accessor: 'email',
       },
       {
         Header: 'Mobile',
@@ -53,12 +53,8 @@ export const PeopleTable = ({ data }) => {
         accessor: 'jobTitle',
       },
       {
-        Header: 'Name of Mine',
-        accessor: 'mine',
-      },
-      {
-        Header: 'Operation',
-        accessor: 'operation',
+        Header: 'Locations',
+        accessor: 'locationAdmin',
       },
     ],
     []

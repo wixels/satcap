@@ -18,15 +18,15 @@ import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { userGetMine } from '../../context/AuthenticationContext';
 import db from '../../firebase';
+import { useGetLocations } from '../../hooks/network/useLocations';
 import { ILocation } from '../../types';
 
 export const SurveyLink = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const {
-    data,
     params: { link },
   } = useMatch();
-  const locations: ILocation[] | any = data.locations;
+  const { data: locations, isLoading } = useGetLocations();
 
   const form = useForm({
     initialValues: {
@@ -102,10 +102,13 @@ export const SurveyLink = (): JSX.Element => {
         <Grid gutter={'xl'}>
           <Grid.Col span={6}>
             <Select
-              data={locations.map((location: ILocation) => ({
-                value: location.id,
-                label: location.name,
-              }))}
+              disabled={isLoading}
+              data={
+                locations?.map((location: { id: any; name: any }) => ({
+                  value: location.id,
+                  label: location.name,
+                })) ?? []
+              }
               placeholder="Select Locations"
               radius={'md'}
               size="md"

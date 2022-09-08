@@ -20,13 +20,13 @@ import { getDownloadURL, ref } from 'firebase/storage';
 import { useState } from 'react';
 import { useGetUser, userGetMine } from '../../context/AuthenticationContext';
 import db, { storage } from '../../firebase';
+import { useGetLocations } from '../../hooks/network/useLocations';
 import { useNanoId } from '../../hooks/useNanoId';
 import useUploadFile from '../../hooks/useUploadFile';
 import { ILocation } from '../../types';
 
 export const CreateNotice = (): JSX.Element => {
-  const { data } = useMatch();
-  const locations: ILocation[] | any = data.locations;
+  const { data: locations, isLoading } = useGetLocations();
 
   const { mine, fetching } = userGetMine();
   const { user } = useGetUser();
@@ -150,10 +150,13 @@ export const CreateNotice = (): JSX.Element => {
         </Grid.Col>
         <Grid.Col span={6}>
           <MultiSelect
-            data={locations.map((location: { id: any; name: any }) => ({
-              value: location.id,
-              label: location.name,
-            }))}
+            disabled={isLoading}
+            data={
+              locations?.map((location: { id: any; name: any }) => ({
+                value: location.id,
+                label: location.name,
+              })) ?? []
+            }
             placeholder="Select Locations"
             radius={'md'}
             size="md"

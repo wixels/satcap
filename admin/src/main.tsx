@@ -2,6 +2,7 @@ import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { NotificationsProvider } from '@mantine/notifications';
 import { ReactLocation, Router } from '@tanstack/react-location';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { collection, getDocs } from 'firebase/firestore';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -20,175 +21,117 @@ import { Information } from './views/resources/Information';
 import { SurveyLink } from './views/surveys/SurveyLink';
 import { Surveys } from './views/surveys/Surveys';
 import { SurveySend } from './views/surveys/SurveySend';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { fetchLocations } from './hooks/network/useLocations';
+import { fetchLinks } from './hooks/network/useLinks';
+import { fetchInformation } from './hooks/network/useInformation';
+import { fetchPeople } from './hooks/network/usePeople';
+
 const location = new ReactLocation();
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <MantineProvider withNormalizeCSS withGlobalStyles>
-    <NotificationsProvider>
-      <ModalsProvider>
-        <Router
-          location={location}
-          routes={[
-            {
-              path: '/auth',
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
 
-              children: [
-                {
-                  path: '/login',
-                  element: <Login />,
-                },
-              ],
-            },
-            {
-              path: '/dashboard',
-              element: <Home />,
-            },
-            {
-              path: '/information',
-              loader: async () => {
-                const information: Array<IResource | INotice> = [];
-                const noticeSnap = await getDocs(
-                  collection(
-                    db,
-                    `mines/${window.localStorage.getItem('mineId')}/notices`
-                  )
-                );
-                const resourceSnap = await getDocs(
-                  collection(
-                    db,
-                    `mines/${window.localStorage.getItem('mineId')}/resources`
-                  )
-                );
-                noticeSnap.forEach((doc) => {
-                  information.push({
-                    ...(doc.data() as INotice),
-                    type: 'notice',
-                  });
-                });
-                resourceSnap.forEach((doc) => {
-                  information.push({
-                    ...(doc.data() as IResource),
-                    type: 'resource',
-                  });
-                });
-                return {
-                  information,
-                };
-              },
-              children: [
-                {
-                  path: '/',
-                  element: <Information />,
-                },
-                {
-                  path: '/create',
-                  loader: async () => {
-                    const locations: ILocation[] = [];
-                    const locationsSnap = await getDocs(
-                      collection(
-                        db,
-                        `mines/${window.localStorage.getItem(
-                          'mineId'
-                        )}/locations`
-                      )
-                    );
-                    locationsSnap.forEach((doc) => {
-                      locations.push({
-                        ...(doc.data() as ILocation),
-                        id: doc.id,
-                      });
-                    });
-                    return {
-                      locations,
-                    };
+      <NotificationsProvider>
+        <ModalsProvider>
+          <Router
+            location={location}
+            routes={[
+              {
+                path: '/auth',
+
+                children: [
+                  {
+                    path: '/login',
+                    element: <Login />,
                   },
-                  element: <CreateWrapper />,
-                },
-              ],
-            },
-            {
-              path: '/surveys',
-              loader: async () => {
-                const links: ILink[] = [];
-                const linksSnap = await getDocs(
-                  collection(
-                    db,
-                    `mines/${window.localStorage.getItem('mineId')}/links`
-                  )
-                );
-                linksSnap.forEach((doc) => {
-                  links.push({
-                    ...(doc.data() as ILink),
-                    docId: doc.id,
-                  });
-                });
-                return {
-                  links,
-                };
+                ],
               },
-              children: [
-                {
-                  path: '/',
-                  element: <Surveys />,
-                },
-                {
-                  path: '/:link',
-                  loader: async () => {
-                    const locations: ILocation[] = [];
-                    const locationsSnap = await getDocs(
-                      collection(
-                        db,
-                        `mines/${window.localStorage.getItem(
-                          'mineId'
-                        )}/locations`
-                      )
-                    );
-                    locationsSnap.forEach((doc) => {
-                      locations.push({
-                        ...(doc.data() as ILocation),
-                        id: doc.id,
-                      });
-                    });
-                    return {
-                      locations,
-                    };
+              {
+                path: '/dashboard',
+                element: <Home />,
+              },
+              {
+                path: '/information',
+                loader: () =>
+                  queryClient.getQueryData(['information']) ??
+                  queryClient.fetchQuery(['information'], fetchInformation),
+                children: [
+                  {
+                    path: '/',
+                    element: <Information />,
                   },
-                  children: [
-                    {
-                      path: '/',
-                      element: <SurveyLink />,
-                    },
-                    {
-                      path: '/send',
-                      element: <SurveySend />,
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              path: '/reports',
-              element: <SurveyReports />,
-            },
-            {
-              path: '/people',
-              children: [
-                {
-                  path: '/',
-                  element: <People />,
-                },
-                {
-                  path: '/create',
-                  element: <CreatePerson />,
-                },
-              ],
-            },
-          ]}
-        >
-          <AuthenticationProvider>
-            <App />
-          </AuthenticationProvider>
-        </Router>
-      </ModalsProvider>
-    </NotificationsProvider>
+                  {
+                    path: '/create',
+                    loader: () =>
+                      queryClient.getQueryData(['locations']) ??
+                      queryClient.fetchQuery(['locations'], fetchLocations),
+                    element: <CreateWrapper />,
+                  },
+                ],
+              },
+              {
+                path: '/surveys',
+                loader: () =>
+                  queryClient.getQueryData(['links']) ??
+                  queryClient.fetchQuery(['links'], fetchLinks),
+                children: [
+                  {
+                    path: '/',
+                    element: <Surveys />,
+                  },
+                  {
+                    path: '/:link',
+                    loader: () =>
+                      queryClient.getQueryData(['locations']) ??
+                      queryClient.fetchQuery(['locations'], fetchLocations),
+                    children: [
+                      {
+                        path: '/',
+                        element: <SurveyLink />,
+                      },
+                      {
+                        path: '/send',
+                        element: <SurveySend />,
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                path: '/reports',
+                element: <SurveyReports />,
+              },
+              {
+                path: '/people',
+                loader: () =>
+                  queryClient.getQueryData(['people']) ??
+                  queryClient.fetchQuery(['people'], fetchPeople),
+                children: [
+                  {
+                    path: '/',
+                    element: <People />,
+                  },
+                  {
+                    path: '/create',
+                    loader: () =>
+                      queryClient.getQueryData(['locations']) ??
+                      queryClient.fetchQuery(['locations'], fetchLocations),
+                    element: <CreatePerson />,
+                  },
+                ],
+              },
+            ]}
+          >
+            <AuthenticationProvider>
+              <App />
+            </AuthenticationProvider>
+          </Router>
+        </ModalsProvider>
+      </NotificationsProvider>
+    </QueryClientProvider>
   </MantineProvider>
 );

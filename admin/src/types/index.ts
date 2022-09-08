@@ -75,11 +75,12 @@ export interface IMine {
 }
 
 export interface IUser {
-  authUid: string;
+  authUid?: string;
   email: string;
   isAdmin: boolean;
   locationAdmin: string[];
   mineId: string | null;
   name: string;
   docId?: string;
+  mobile?: string;
 }

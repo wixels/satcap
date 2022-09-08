@@ -33,8 +33,6 @@ function App(): JSX.Element {
   const { user: currentAccount, fetching } = useGetUser();
   const [user, loading, error] = useAuthState(getAuth());
 
-  console.log(currentAccount);
-
   return (
     <>
       <LoadingOverlay
@@ -71,7 +69,7 @@ function App(): JSX.Element {
                   />
                 )}
                 <Box mt={'1rem'}>
-                  <Link to="/dashboard">
+                  <Link to="/dashboard" preload={1}>
                     {({ isActive }) => {
                       return (
                         <NavLink
@@ -82,7 +80,7 @@ function App(): JSX.Element {
                       );
                     }}
                   </Link>
-                  <Link to="./people">
+                  <Link to="./people" preload={1}>
                     {({ isActive }) => {
                       return (
                         <NavLink
@@ -93,7 +91,7 @@ function App(): JSX.Element {
                       );
                     }}
                   </Link>
-                  <Link to="/reports">
+                  <Link to="/reports" preload={1}>
                     {({ isActive }) => {
                       return (
                         <NavLink
@@ -104,7 +102,7 @@ function App(): JSX.Element {
                       );
                     }}
                   </Link>
-                  <Link to="/information">
+                  <Link to="/information" preload={1}>
                     {({ isActive }) => {
                       return (
                         <NavLink
@@ -115,7 +113,7 @@ function App(): JSX.Element {
                       );
                     }}
                   </Link>
-                  <Link to="/surveys">
+                  <Link to="/surveys" preload={1}>
                     {({ isActive }) => {
                       return (
                         <NavLink
@@ -137,7 +135,7 @@ function App(): JSX.Element {
           }
           header={
             <Header height={70} p="md">
-              <Group sx={{ height: '100%' }} px={20} position="apart">
+              <Group sx={{ height: '1%' }} px={20} position="apart">
                 <Group>
                   <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
                     <Burger

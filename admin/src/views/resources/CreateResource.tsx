@@ -23,10 +23,10 @@ import { IconCheck, IconX } from '@tabler/icons';
 import { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { ILocation } from '../../types';
+import { useGetLocations } from '../../hooks/network/useLocations';
 
 export const CreateResource = (): JSX.Element => {
-  const { data } = useMatch();
-  const locations: ILocation[] | any = data.locations;
+  const { data: locations, isLoading } = useGetLocations();
   const { mine, fetching } = userGetMine();
   const { user } = useGetUser();
   const fileId = useNanoId();
@@ -48,7 +48,6 @@ export const CreateResource = (): JSX.Element => {
   });
 
   const createResource = async (values: any) => {
-    console.log(values);
     setLoading(true);
     try {
       const featureRef = ref(
@@ -150,10 +149,13 @@ export const CreateResource = (): JSX.Element => {
         </Grid.Col>
         <Grid.Col span={6}>
           <MultiSelect
-            data={locations.map((location: { id: any; name: any }) => ({
-              value: location.id,
-              label: location.name,
-            }))}
+            disabled={isLoading}
+            data={
+              locations?.map((location: { id: any; name: any }) => ({
+                value: location.id,
+                label: location.name,
+              })) ?? []
+            }
             placeholder="Select Locations"
             radius={'md'}
             size="md"
