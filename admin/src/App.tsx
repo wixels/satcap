@@ -66,7 +66,7 @@ function App(): JSX.Element {
         withGlobalStyles
       >
         <LoadingOverlay
-          visible={(!currentAccount && !error && loading) || fetching}
+          visible={!currentAccount && loading}
           about="This is a test"
         >
           x
