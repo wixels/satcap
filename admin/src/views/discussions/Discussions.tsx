@@ -48,7 +48,6 @@ const Discussions = (props: Props) => {
         },
       ];
     }
-    return [];
   }, [discussions, isLoading, isError]);
   return (
     <>

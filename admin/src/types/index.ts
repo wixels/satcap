@@ -14,7 +14,7 @@ export interface IResource {
   visibility: string;
   type: string;
   publishedBy?: publisher;
-  docId?: string;
+  docId: string;
 }
 export interface INotice {
   createdAt: string;
@@ -26,7 +26,7 @@ export interface INotice {
   visibility: string;
   type: string;
   publishedBy?: publisher;
-  docId?: string;
+  docId: string;
 }
 
 export interface ILocation {

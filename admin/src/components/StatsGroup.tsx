@@ -57,12 +57,12 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface StatsGroupProps {
-  data: { title: string; stats: string; description?: string }[];
+  data: { title?: string; stats?: string; description?: string }[];
 }
 
-export function StatsGroup({ data }: StatsGroupProps) {
+export function StatsGroup({ data }: StatsGroupProps | any) {
   const { classes } = useStyles();
-  const stats = data.map((stat) => (
+  const stats = data.map((stat: any) => (
     <div key={stat.title} className={classes.stat}>
       <Text className={classes.count}>{stat.stats}</Text>
       <Text className={classes.title}>{stat.title}</Text>
