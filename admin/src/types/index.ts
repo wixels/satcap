@@ -1,6 +1,6 @@
 type publisher = {
   authUid: string;
-  email: string;
+  email?: string;
   name: string;
 };
 
@@ -85,4 +85,22 @@ export interface IUser {
   name: string;
   docId?: string;
   mobile?: string;
+}
+
+type status = 'open' | 'resolved' | 'archived';
+export interface IDiscussion {
+  contact: string;
+  createdAt: string;
+  description?: string;
+  image?: string;
+  isAnonymous: boolean;
+  linkDocId: string;
+  locationDocId: string;
+  mineDocId: string;
+  name: string;
+  status: status;
+  title: string;
+  userRef: string;
+  docId: string;
+  publishedBy?: publisher;
 }

@@ -3,14 +3,10 @@ import { ModalsProvider } from '@mantine/modals';
 import { NotificationsProvider } from '@mantine/notifications';
 import { ReactLocation, Router } from '@tanstack/react-location';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { collection, getDocs } from 'firebase/firestore';
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { AuthenticationProvider } from './context/AuthenticationContext';
-import db from './firebase';
 import './index.css';
-import { ILink, ILocation, INotice, IResource } from './types';
 import { Login } from './views/auth/Login';
 import { Home } from './views/home/Home';
 import { CreatePerson } from './views/people/CreatePerson';
@@ -26,112 +22,118 @@ import { fetchLocations } from './hooks/network/useLocations';
 import { fetchLinks } from './hooks/network/useLinks';
 import { fetchInformation } from './hooks/network/useInformation';
 import { fetchPeople } from './hooks/network/usePeople';
+import { Discussions } from './views/discussions/Discussions';
+import { fetchDiscussions } from './hooks/network/useDiscussions';
 
 const location = new ReactLocation();
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <MantineProvider withNormalizeCSS withGlobalStyles>
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
+  <QueryClientProvider client={queryClient}>
+    <ReactQueryDevtools initialIsOpen={false} />
 
-      <NotificationsProvider>
-        <ModalsProvider>
-          <Router
-            location={location}
-            routes={[
-              {
-                path: '/auth',
-
-                children: [
-                  {
-                    path: '/login',
-                    element: <Login />,
-                  },
-                ],
-              },
-              {
-                path: '/dashboard',
-                element: <Home />,
-              },
-              {
-                path: '/information',
-                loader: () =>
-                  queryClient.getQueryData(['information']) ??
-                  queryClient.fetchQuery(['information'], fetchInformation),
-                children: [
-                  {
-                    path: '/',
-                    element: <Information />,
-                  },
-                  {
-                    path: '/create',
-                    loader: () =>
-                      queryClient.getQueryData(['locations']) ??
-                      queryClient.fetchQuery(['locations'], fetchLocations),
-                    element: <CreateWrapper />,
-                  },
-                ],
-              },
-              {
-                path: '/surveys',
-                loader: () =>
-                  queryClient.getQueryData(['links']) ??
-                  queryClient.fetchQuery(['links'], fetchLinks),
-                children: [
-                  {
-                    path: '/',
-                    element: <Surveys />,
-                  },
-                  {
-                    path: '/:link',
-                    loader: () =>
-                      queryClient.getQueryData(['locations']) ??
-                      queryClient.fetchQuery(['locations'], fetchLocations),
-                    children: [
-                      {
-                        path: '/',
-                        element: <SurveyLink />,
-                      },
-                      {
-                        path: '/send',
-                        element: <SurveySend />,
-                      },
-                    ],
-                  },
-                ],
-              },
-              {
-                path: '/reports',
-                element: <SurveyReports />,
-              },
-              {
-                path: '/people',
-                loader: () =>
-                  queryClient.getQueryData(['people']) ??
-                  queryClient.fetchQuery(['people'], fetchPeople),
-                children: [
-                  {
-                    path: '/',
-                    element: <People />,
-                  },
-                  {
-                    path: '/create',
-                    loader: () =>
-                      queryClient.getQueryData(['locations']) ??
-                      queryClient.fetchQuery(['locations'], fetchLocations),
-                    element: <CreatePerson />,
-                  },
-                ],
-              },
-            ]}
-          >
-            <AuthenticationProvider>
-              <App />
-            </AuthenticationProvider>
-          </Router>
-        </ModalsProvider>
-      </NotificationsProvider>
-    </QueryClientProvider>
-  </MantineProvider>
+    <NotificationsProvider>
+      <ModalsProvider>
+        <Router
+          location={location}
+          routes={[
+            {
+              path: '/auth',
+              children: [
+                {
+                  path: '/login',
+                  element: <Login />,
+                },
+              ],
+            },
+            {
+              path: '/dashboard',
+              element: <Home />,
+            },
+            {
+              path: '/information',
+              loader: () =>
+                queryClient.getQueryData(['information']) ??
+                queryClient.fetchQuery(['information'], fetchInformation),
+              children: [
+                {
+                  path: '/',
+                  element: <Information />,
+                },
+                {
+                  path: '/create',
+                  loader: () =>
+                    queryClient.getQueryData(['locations']) ??
+                    queryClient.fetchQuery(['locations'], fetchLocations),
+                  element: <CreateWrapper />,
+                },
+              ],
+            },
+            {
+              path: '/surveys',
+              loader: () =>
+                queryClient.getQueryData(['links']) ??
+                queryClient.fetchQuery(['links'], fetchLinks),
+              children: [
+                {
+                  path: '/',
+                  element: <Surveys />,
+                },
+                {
+                  path: '/:link',
+                  loader: () =>
+                    queryClient.getQueryData(['locations']) ??
+                    queryClient.fetchQuery(['locations'], fetchLocations),
+                  children: [
+                    {
+                      path: '/',
+                      element: <SurveyLink />,
+                    },
+                    {
+                      path: '/send',
+                      element: <SurveySend />,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              path: '/reports',
+              element: <SurveyReports />,
+            },
+            {
+              path: '/people',
+              loader: () =>
+                queryClient.getQueryData(['people']) ??
+                queryClient.fetchQuery(['people'], fetchPeople),
+              children: [
+                {
+                  path: '/',
+                  element: <People />,
+                },
+                {
+                  path: '/create',
+                  loader: () =>
+                    queryClient.getQueryData(['locations']) ??
+                    queryClient.fetchQuery(['locations'], fetchLocations),
+                  element: <CreatePerson />,
+                },
+              ],
+            },
+            {
+              path: '/discussions',
+              loader: () =>
+                queryClient.getQueryData(['discussions']) ??
+                queryClient.fetchQuery(['discussions'], fetchDiscussions),
+              element: <Discussions />,
+            },
+          ]}
+        >
+          <AuthenticationProvider>
+            <App />
+          </AuthenticationProvider>
+        </Router>
+      </ModalsProvider>
+    </NotificationsProvider>
+  </QueryClientProvider>
 );
