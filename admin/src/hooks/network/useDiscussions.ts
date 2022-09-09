@@ -1,0 +1,27 @@
+import { useQuery } from '@tanstack/react-query';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { useEffect } from 'react';
+import db from '../../firebase';
+import { IDiscussion, ILink, INotice, IResource } from '../../types';
+
+export async function fetchDiscussions() {
+  const discussions: IDiscussion[] = [];
+
+  const q = query(
+    collection(db, `mines/${window.localStorage.getItem('mineId')}/queries`),
+    where('mineDocId', '==', window.localStorage.getItem('mineId'))
+  );
+
+  const discSnap = await getDocs(q);
+  discSnap.forEach((doc) => {
+    discussions.push({
+      ...(doc.data() as IDiscussion),
+      docId: doc.id,
+    });
+  });
+  return discussions;
+}
+
+export const useGetDiscussions = () => {
+  return useQuery<IDiscussion[], any>(['discussions'], fetchDiscussions);
+};

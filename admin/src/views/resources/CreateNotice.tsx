@@ -14,24 +14,27 @@ import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck, IconX } from '@tabler/icons';
 import { useMatch, useNavigate } from '@tanstack/react-location';
+import { useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { addDoc, collection } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { useState } from 'react';
 import { useGetUser, userGetMine } from '../../context/AuthenticationContext';
 import db, { storage } from '../../firebase';
+import { useGetLocations } from '../../hooks/network/useLocations';
 import { useNanoId } from '../../hooks/useNanoId';
 import useUploadFile from '../../hooks/useUploadFile';
+import { ILocation } from '../../types';
 
 export const CreateNotice = (): JSX.Element => {
-  const {
-    data: { locations },
-  } = useMatch();
+  const { data: locations, isLoading } = useGetLocations();
+
   const { mine, fetching } = userGetMine();
   const { user } = useGetUser();
   const fileId = useNanoId();
   const [loading, setLoading] = useState(false);
   const naviagte = useNavigate();
+  const queryClient = useQueryClient();
   const [uploadFile] = useUploadFile();
   const form = useForm({
     initialValues: {
@@ -72,7 +75,7 @@ export const CreateNotice = (): JSX.Element => {
         url,
         featureImageUrl,
         publishedBy: {
-          name: user.name,
+          name: user?.name,
           authUid: user?.authUid,
           email: user?.email,
         },
@@ -82,8 +85,10 @@ export const CreateNotice = (): JSX.Element => {
         message: 'Successfully created notice',
         icon: <IconCheck size={18} />,
       });
+      queryClient.invalidateQueries(['information']);
+
       naviagte({ to: `/information` });
-    } catch (error) {
+    } catch (error: any) {
       showNotification({
         icon: <IconX size={18} />,
         color: 'red',
@@ -149,10 +154,13 @@ export const CreateNotice = (): JSX.Element => {
         </Grid.Col>
         <Grid.Col span={6}>
           <MultiSelect
-            data={locations.map((location) => ({
-              value: location.id,
-              label: location.name,
-            }))}
+            disabled={isLoading}
+            data={
+              locations?.map((location: { id: any; name: any }) => ({
+                value: location.id,
+                label: location.name,
+              })) ?? []
+            }
             placeholder="Select Locations"
             radius={'md'}
             size="md"

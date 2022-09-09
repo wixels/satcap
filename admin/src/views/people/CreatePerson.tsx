@@ -4,27 +4,83 @@ import {
   Center,
   Grid,
   Group,
+  InputBase,
+  MultiSelect,
   NumberInput,
   Text,
   TextInput,
   UnstyledButton,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { IconChevronLeft, IconPhone } from '@tabler/icons';
-import { Link } from '@tanstack/react-location';
+import { showNotification } from '@mantine/notifications';
+import { IconChevronLeft, IconPhone, IconX } from '@tabler/icons';
+import { Link, useNavigate } from '@tanstack/react-location';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { addDoc, collection } from 'firebase/firestore';
+import { nanoid } from 'nanoid';
+import { useState } from 'react';
+import ReactInputMask from 'react-input-mask';
+import db, { auth } from '../../firebase';
+import { useGetLocations } from '../../hooks/network/useLocations';
+import { IUser } from '../../types';
 
 export const CreatePerson = (): JSX.Element => {
+  const [loading, setLoading] = useState(false);
+  const { data: locations, isLoading } = useGetLocations();
   const form = useForm({
     initialValues: {
-      firstName: '',
-      lastName: '',
-      mobile: '',
+      name: '',
       email: '',
+      mobile: '',
       jobTitle: '',
-      nameOfMine: '',
-      operation: '',
+      locationAdmin: [],
+      isAdmin: true,
+      mineId: window.localStorage.getItem('mineId'),
     },
+    validate: {},
   });
+  const naviagte = useNavigate();
+
+  const createPerson = async (values: IUser) => {
+    setLoading(true);
+    try {
+      let tempPass = nanoid(8);
+
+      const authRes = await createUserWithEmailAndPassword(
+        auth,
+        values.email,
+        tempPass
+      );
+      await addDoc(collection(db, `mines/${values?.mineId}/users`), {
+        ...values,
+        authUid: authRes.user.uid,
+        mobile: values.mobile
+          ? values.mobile
+              .replaceAll(' ', '')
+              .replaceAll('(', '')
+              .replaceAll(')', '')
+              .replaceAll('-', '')
+          : '',
+      });
+
+      await addDoc(collection(db, 'mail'), {
+        to: [values.email],
+        message: {
+          subject: 'SATCAP',
+          text: `Hi there! Please sign in at SATCAP Admin useing the following password: ${tempPass}`,
+          html: `<p>Hi there! Please sign in at SATCAP Admin useing the following password: ${tempPass}</p>`,
+        },
+      });
+      naviagte({ to: '/people' });
+    } catch (error: any) {
+      showNotification({
+        icon: <IconX size={18} />,
+        color: 'red',
+        message: error?.message || 'Unable to create admin',
+      });
+      setLoading(false);
+    }
+  };
   return (
     <>
       <Link to="/people">
@@ -54,52 +110,41 @@ export const CreatePerson = (): JSX.Element => {
           </Group>
         </UnstyledButton>
       </Link>
-      <form>
+      <form onSubmit={form.onSubmit(createPerson)}>
         <Grid>
-          <Grid.Col span={6}>
+          <Grid.Col span={12}>
             <TextInput
-              placeholder="First Name..."
+              placeholder="Full Name..."
               radius={'md'}
               size="md"
               label={
                 <Text size="sm" color="dimmed">
-                  First Name
+                  Full Name
                 </Text>
               }
-              {...form.getInputProps('firstName')}
+              {...form.getInputProps('name')}
             />
           </Grid.Col>
           <Grid.Col span={6}>
-            <TextInput
-              placeholder="Last Name..."
-              radius={'md'}
-              size="md"
-              label={
-                <Text size="sm" color="dimmed">
-                  Last Name
-                </Text>
-              }
-              {...form.getInputProps('lastName')}
-            />
-          </Grid.Col>
-          <Grid.Col span={6}>
-            <NumberInput
+            <InputBase
               icon={<IconPhone size={16} />}
               radius={'md'}
               size="md"
-              hideControls
-              placeholder="mobile..."
+              hidecontols="true"
+              placeholder="Mobile..."
               label={
                 <Text size="sm" color="dimmed">
                   Mobile Number
                 </Text>
               }
               {...form.getInputProps('mobile')}
+              component={ReactInputMask}
+              mask="+27 (99) 9999-999"
             />
           </Grid.Col>
           <Grid.Col span={6}>
             <TextInput
-              placeholder="email..."
+              placeholder="Email..."
               radius={'md'}
               size="md"
               label={
@@ -113,7 +158,7 @@ export const CreatePerson = (): JSX.Element => {
           </Grid.Col>
           <Grid.Col span={6}>
             <TextInput
-              placeholder="jobTitle..."
+              placeholder="Job Title..."
               radius={'md'}
               size="md"
               label={
@@ -125,24 +170,37 @@ export const CreatePerson = (): JSX.Element => {
             />
           </Grid.Col>
           <Grid.Col span={6}>
-            <TextInput
-              placeholder="Operation..."
-              label={
-                <Text size="sm" color="dimmed">
-                  Operation
-                </Text>
+            <MultiSelect
+              disabled={isLoading}
+              data={
+                locations?.map((location: { id: any; name: any }) => ({
+                  value: location.id,
+                  label: location.name,
+                })) ?? []
               }
+              placeholder="Select Locations"
               radius={'md'}
               size="md"
-              {...form.getInputProps('operation')}
+              label={
+                <Text size="sm" color="dimmed">
+                  Location(s)
+                </Text>
+              }
+              {...form.getInputProps('locationAdmin')}
             />
           </Grid.Col>
         </Grid>
-        <Center mt={'xl'} style={{ width: '100%' }}>
-          <Group>
-            <Button variant="light">Create Admin</Button>
-            <Button>Send Link</Button>
-          </Group>
+        <Center mt={'xl'}>
+          <Button
+            type="submit"
+            style={{ maxWidth: '576px' }}
+            fullWidth
+            radius={'md'}
+            loading={loading}
+            disabled={loading}
+          >
+            Create Admin
+          </Button>
         </Center>
       </form>
     </>

@@ -14,21 +14,24 @@ import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck, IconChevronsLeft, IconX } from '@tabler/icons';
 import { Link, useMatch, useNavigate } from '@tanstack/react-location';
+import { useQueryClient } from '@tanstack/react-query';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { userGetMine } from '../../context/AuthenticationContext';
 import db from '../../firebase';
+import { useGetLocations } from '../../hooks/network/useLocations';
+import { ILocation } from '../../types';
 
 export const SurveyLink = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const {
-    data: { locations },
     params: { link },
   } = useMatch();
+  const { data: locations, isLoading } = useGetLocations();
 
   const form = useForm({
     initialValues: {
-      package: null,
+      package: [],
       locationDocId: null,
       description: '',
       acceptResponses: true,
@@ -43,6 +46,7 @@ export const SurveyLink = (): JSX.Element => {
   });
 
   const naviagte = useNavigate();
+  const queryClient = useQueryClient();
   const { mine, fetching } = userGetMine();
 
   const createLink = async (values: any) => {
@@ -52,13 +56,14 @@ export const SurveyLink = (): JSX.Element => {
         ...values,
         package: values.package?.map((pack: any) => JSON.parse(pack)),
       });
+      queryClient.invalidateQueries(['links']);
       setLoading(false);
       showNotification({
         message: 'Successfully created link',
         icon: <IconCheck size={18} />,
       });
       naviagte({ to: `./send` });
-    } catch (error) {
+    } catch (error: any) {
       showNotification({
         icon: <IconX size={18} />,
         color: 'red',
@@ -100,10 +105,13 @@ export const SurveyLink = (): JSX.Element => {
         <Grid gutter={'xl'}>
           <Grid.Col span={6}>
             <Select
-              data={locations.map((location) => ({
-                value: location.id,
-                label: location.name,
-              }))}
+              disabled={isLoading}
+              data={
+                locations?.map((location: { id: any; name: any }) => ({
+                  value: location.id,
+                  label: location.name,
+                })) ?? []
+              }
               placeholder="Select Locations"
               radius={'md'}
               size="md"

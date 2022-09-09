@@ -22,16 +22,18 @@ import { showNotification } from '@mantine/notifications';
 import { IconCheck, IconX } from '@tabler/icons';
 import { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
+import { ILocation } from '../../types';
+import { useGetLocations } from '../../hooks/network/useLocations';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const CreateResource = (): JSX.Element => {
-  const {
-    data: { locations },
-  } = useMatch();
+  const { data: locations, isLoading } = useGetLocations();
   const { mine, fetching } = userGetMine();
   const { user } = useGetUser();
   const fileId = useNanoId();
   const [loading, setLoading] = useState(false);
   const naviagte = useNavigate();
+  const queryClient = useQueryClient();
   const [uploadFile] = useUploadFile();
 
   const form = useForm({
@@ -48,7 +50,6 @@ export const CreateResource = (): JSX.Element => {
   });
 
   const createResource = async (values: any) => {
-    console.log(values);
     setLoading(true);
     try {
       const featureRef = ref(
@@ -73,7 +74,7 @@ export const CreateResource = (): JSX.Element => {
         url,
         featureImageUrl,
         publishedBy: {
-          name: user.name,
+          name: user?.name,
           authUid: user?.authUid,
           email: user?.email,
         },
@@ -83,8 +84,9 @@ export const CreateResource = (): JSX.Element => {
         message: 'Successfully created resource',
         icon: <IconCheck size={18} />,
       });
+      queryClient.invalidateQueries(['information']);
       naviagte({ to: `/information` });
-    } catch (error) {
+    } catch (error: any) {
       showNotification({
         icon: <IconX size={18} />,
         color: 'red',
@@ -150,10 +152,13 @@ export const CreateResource = (): JSX.Element => {
         </Grid.Col>
         <Grid.Col span={6}>
           <MultiSelect
-            data={locations.map((location) => ({
-              value: location.id,
-              label: location.name,
-            }))}
+            disabled={isLoading}
+            data={
+              locations?.map((location: { id: any; name: any }) => ({
+                value: location.id,
+                label: location.name,
+              })) ?? []
+            }
             placeholder="Select Locations"
             radius={'md'}
             size="md"

@@ -2,12 +2,10 @@ import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { NotificationsProvider } from '@mantine/notifications';
 import { ReactLocation, Router } from '@tanstack/react-location';
-import { collection, getDocs } from 'firebase/firestore';
-import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { AuthenticationProvider } from './context/AuthenticationContext';
-import db from './firebase';
 import './index.css';
 import { Login } from './views/auth/Login';
 import { Home } from './views/home/Home';
@@ -19,9 +17,21 @@ import { Information } from './views/resources/Information';
 import { SurveyLink } from './views/surveys/SurveyLink';
 import { Surveys } from './views/surveys/Surveys';
 import { SurveySend } from './views/surveys/SurveySend';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { fetchLocations } from './hooks/network/useLocations';
+import { fetchLinks } from './hooks/network/useLinks';
+import { fetchInformation } from './hooks/network/useInformation';
+import { fetchPeople } from './hooks/network/usePeople';
+import { Discussions } from './views/discussions/Discussions';
+import { fetchDiscussions } from './hooks/network/useDiscussions';
+
 const location = new ReactLocation();
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <MantineProvider withNormalizeCSS withGlobalStyles>
+  <QueryClientProvider client={queryClient}>
+    <ReactQueryDevtools initialIsOpen={false} />
+
     <NotificationsProvider>
       <ModalsProvider>
         <Router
@@ -29,7 +39,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           routes={[
             {
               path: '/auth',
-
               children: [
                 {
                   path: '/login',
@@ -43,36 +52,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             },
             {
               path: '/information',
-              loader: async () => {
-                const information = [];
-                const noticeSnap = await getDocs(
-                  collection(
-                    db,
-                    `mines/${window.localStorage.getItem('mineId')}/notices`
-                  )
-                );
-                const resourceSnap = await getDocs(
-                  collection(
-                    db,
-                    `mines/${window.localStorage.getItem('mineId')}/resources`
-                  )
-                );
-                noticeSnap.forEach((doc) => {
-                  information.push({
-                    ...doc.data(),
-                    type: 'notice',
-                  });
-                });
-                resourceSnap.forEach((doc) => {
-                  information.push({
-                    ...doc.data(),
-                    type: 'resource',
-                  });
-                });
-                return {
-                  information,
-                };
-              },
+              loader: () =>
+                queryClient.getQueryData(['information']) ??
+                queryClient.fetchQuery(['information'], fetchInformation),
               children: [
                 {
                   path: '/',
@@ -80,50 +62,18 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 },
                 {
                   path: '/create',
-                  loader: async () => {
-                    const locations = [];
-                    const locationsSnap = await getDocs(
-                      collection(
-                        db,
-                        `mines/${window.localStorage.getItem(
-                          'mineId'
-                        )}/locations`
-                      )
-                    );
-                    locationsSnap.forEach((doc) => {
-                      locations.push({
-                        ...doc.data(),
-                        id: doc.id,
-                      });
-                    });
-                    return {
-                      locations,
-                    };
-                  },
+                  loader: () =>
+                    queryClient.getQueryData(['locations']) ??
+                    queryClient.fetchQuery(['locations'], fetchLocations),
                   element: <CreateWrapper />,
                 },
               ],
             },
             {
               path: '/surveys',
-              loader: async () => {
-                const links = [];
-                const linksSnap = await getDocs(
-                  collection(
-                    db,
-                    `mines/${window.localStorage.getItem('mineId')}/links`
-                  )
-                );
-                linksSnap.forEach((doc) => {
-                  links.push({
-                    docId: doc.id,
-                    ...doc.data(),
-                  });
-                });
-                return {
-                  links,
-                };
-              },
+              loader: () =>
+                queryClient.getQueryData(['links']) ??
+                queryClient.fetchQuery(['links'], fetchLinks),
               children: [
                 {
                   path: '/',
@@ -131,26 +81,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 },
                 {
                   path: '/:link',
-                  loader: async () => {
-                    const locations = [];
-                    const locationsSnap = await getDocs(
-                      collection(
-                        db,
-                        `mines/${window.localStorage.getItem(
-                          'mineId'
-                        )}/locations`
-                      )
-                    );
-                    locationsSnap.forEach((doc) => {
-                      locations.push({
-                        ...doc.data(),
-                        id: doc.id,
-                      });
-                    });
-                    return {
-                      locations,
-                    };
-                  },
+                  loader: () =>
+                    queryClient.getQueryData(['locations']) ??
+                    queryClient.fetchQuery(['locations'], fetchLocations),
                   children: [
                     {
                       path: '/',
@@ -170,6 +103,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             },
             {
               path: '/people',
+              loader: () =>
+                queryClient.getQueryData(['people']) ??
+                queryClient.fetchQuery(['people'], fetchPeople),
               children: [
                 {
                   path: '/',
@@ -177,9 +113,19 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 },
                 {
                   path: '/create',
+                  loader: () =>
+                    queryClient.getQueryData(['locations']) ??
+                    queryClient.fetchQuery(['locations'], fetchLocations),
                   element: <CreatePerson />,
                 },
               ],
+            },
+            {
+              path: '/discussions',
+              loader: () =>
+                queryClient.getQueryData(['discussions']) ??
+                queryClient.fetchQuery(['discussions'], fetchDiscussions),
+              element: <Discussions />,
             },
           ]}
         >
@@ -189,5 +135,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         </Router>
       </ModalsProvider>
     </NotificationsProvider>
-  </MantineProvider>
+  </QueryClientProvider>
 );

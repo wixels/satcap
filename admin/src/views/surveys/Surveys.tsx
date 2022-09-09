@@ -19,15 +19,17 @@ import {
 } from '@tabler/icons';
 import { Link, useMatch } from '@tanstack/react-location';
 import { SurveyCard } from '../../components/SurveyCard';
+import { useGetLinks } from '../../hooks/network/useLinks';
 import { useNanoId } from '../../hooks/useNanoId';
+import { ILink, IPackage } from '../../types';
 
 export const Surveys = (): JSX.Element => {
   const linkId = useNanoId();
-  const {
-    data: { links },
-  } = useMatch();
+  const { data } = useMatch();
 
-  console.log(links);
+  // @ts-ignore
+  // const links: ILink[] = data.links;
+  const { data: links } = useGetLinks();
   return (
     <Stack>
       <Group mb={'1rem'} position="apart">
@@ -49,12 +51,14 @@ export const Surveys = (): JSX.Element => {
           { maxWidth: 'lg', cols: 2, spacing: 'lg' },
         ]}
       >
-        {links.map((link) => (
+        {links?.map((link: ILink) => (
           <SurveyCard
             linkId={link?.linkId}
             name={
               Array.isArray(link?.package)
-                ? `${link.package?.map((pack) => pack.name).join(', ')}`
+                ? `${link.package
+                    ?.map((pack: IPackage) => pack.name)
+                    .join(', ')}`
                 : link?.package?.name
             }
             title={
@@ -66,7 +70,7 @@ export const Surveys = (): JSX.Element => {
             description={link?.description}
             key={link.linkId}
           />
-        ))}
+        )) ?? []}
       </SimpleGrid>
     </Stack>
   );

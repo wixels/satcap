@@ -3,13 +3,13 @@ import { IconCirclePlus, IconDots, IconTrash } from '@tabler/icons';
 import { Link, useMatch } from '@tanstack/react-location';
 import { NoticeCard } from '../../components/NoticeCard';
 import { ResourceCard } from '../../components/ResourceCard';
+import { useGetInformation } from '../../hooks/network/useInformation';
+import { INotice, IResource } from '../../types';
 
 export const Information = (): JSX.Element => {
-  const {
-    data: { information },
-  } = useMatch();
+  const { data } = useMatch();
 
-  console.log(information);
+  const { data: information } = useGetInformation();
   return (
     <Stack>
       <Group mb={'1rem'} position="apart">
@@ -31,7 +31,7 @@ export const Information = (): JSX.Element => {
           { maxWidth: 'lg', cols: 2, spacing: 'lg' },
         ]}
       >
-        {information.map((item) => {
+        {information?.map((item: INotice | IResource) => {
           if (item.type === 'resource') {
             return (
               <ResourceCard
@@ -40,6 +40,7 @@ export const Information = (): JSX.Element => {
                 content={item.description}
                 imageUrl={item.url}
                 publisher={item?.publishedBy?.name}
+                docId={item.docId}
               />
             );
           } else if (item.type === 'notice') {
@@ -50,6 +51,7 @@ export const Information = (): JSX.Element => {
                 content={item.description}
                 imageUrl={item.url}
                 publisher={item?.publishedBy?.name}
+                docId={item.docId}
               />
             );
           }

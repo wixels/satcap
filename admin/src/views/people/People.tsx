@@ -1,24 +1,12 @@
 import { Button, Group, ScrollArea, Stack, Text } from '@mantine/core';
 import { IconCirclePlus } from '@tabler/icons';
 import { Link } from '@tanstack/react-location';
-import { useMemo } from 'react';
+import { useGetPeople } from '../../hooks/network/usePeople';
+// @ts-ignore
 import { PeopleTable } from '../../components/PeopleTable';
 
 export const People = (): JSX.Element => {
-  const data = useMemo(() => {
-    const item = [];
-    for (let i = 0; i < 100; i++) {
-      item.push({
-        firstName: `Dan ${i + 1}`,
-        lastName: 'Sivewright',
-        mobile: '0725077755',
-        jobTitle: 'Developer',
-        mine: 'Wixels',
-        operation: 'Digital',
-      });
-    }
-    return item;
-  }, []);
+  const { data } = useGetPeople();
   return (
     <Stack>
       <Group mb={'1rem'} position="apart">

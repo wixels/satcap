@@ -1,7 +1,9 @@
 import { Avatar, Group, Tabs, Text, UnstyledButton } from '@mantine/core';
 import { IconChevronLeft } from '@tabler/icons';
 import { Link } from '@tanstack/react-location';
+import { collection, query } from 'firebase/firestore';
 import React from 'react';
+import db from '../../firebase';
 import { CreateNotice } from './CreateNotice';
 import { CreateResource } from './CreateResource';
 
