@@ -36,7 +36,7 @@
     },
     {
       "target": "admin",
-      "public": "admin/build",
+      "public": "admin/dist",
       "ignore": [
         "firebase.json",
         "**/.*",
