@@ -99,7 +99,7 @@ function App(): JSX.Element {
                     />
                   )}
                   <Box mt={'1rem'}>
-                    <Link to="/dashboard" preload={1}>
+                    <Link to="/" preload={1}>
                       {({ isActive }) => {
                         return (
                           <NavLink
@@ -167,7 +167,7 @@ function App(): JSX.Element {
                     </Link>
                   </Box>
                 </Navbar.Section>
-                <Navbar.Section>x</Navbar.Section>
+                {/* <Navbar.Section>x</Navbar.Section> */}
               </Navbar>
             }
             header={

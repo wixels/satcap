@@ -116,7 +116,7 @@ export const Login = (): JSX.Element => {
             mt="md"
             mb={50}
           >
-            Welcome back to Mantine!
+            Welcome back to SATCAP!
           </Title>
 
           <TextInput
@@ -141,9 +141,10 @@ export const Login = (): JSX.Element => {
             }
             {...form.getInputProps('password')}
           />
-          <Checkbox label="Keep me logged in" mt="xl" size="sm" />
+          {/* <Checkbox label="Keep me logged in§" mt="xl" size="sm" /> */}
           <Button
             loading={loading}
+            disabled={loading}
             type="submit"
             mt="xl"
             radius={'md'}
