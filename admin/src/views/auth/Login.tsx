@@ -154,40 +154,6 @@ export const Login = (): JSX.Element => {
           </Button>
         </Paper>
       </div>
-      {/* <form onSubmit={form.onSubmit(handleSubmit)}>
-        <Text size={'xl'} weight={700}>
-          Sign in to your account
-        </Text>
-        <TextInput
-          pt={'lg'}
-          radius={'md'}
-          size="md"
-          label={
-            <Text size="sm" color="dimmed">
-              Email
-            </Text>
-          }
-          {...form.getInputProps('email')}
-        />
-        <PasswordInput
-          pt={'lg'}
-          radius={'md'}
-          size="md"
-          label={
-            <Text size="sm" color="dimmed">
-              Password
-            </Text>
-          }
-          {...form.getInputProps('password')}
-        />
-        <Group pt={'xl'} position="apart">
-          <Checkbox label="Remember me" />
-          <Button variant="white">Forgot Password?</Button>
-        </Group>
-        <Button loading={loading} type="submit" mt="xl" radius={'md'} fullWidth>
-          Sign In
-        </Button>
-      </form> */}
     </>
   );
 };
