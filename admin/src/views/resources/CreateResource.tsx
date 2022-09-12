@@ -39,7 +39,6 @@ export const CreateResource = (): JSX.Element => {
   const form = useForm({
     initialValues: {
       createdAt: dayjs().format('YYYY-MM-DD HH:mm:ssZ'),
-      date: '',
       description: '',
       packageDocId: '',
       title: '',
@@ -106,7 +105,7 @@ export const CreateResource = (): JSX.Element => {
             size="md"
             label={
               <Text size="sm" color="dimmed">
-                Resource
+                Your File
               </Text>
             }
             {...form.getInputProps('url')}
@@ -116,6 +115,7 @@ export const CreateResource = (): JSX.Element => {
             placeholder="Image"
             radius={'md'}
             size="md"
+            accept="image/*"
             label={
               <Text size="sm" color="dimmed">
                 Feature Image
@@ -124,7 +124,7 @@ export const CreateResource = (): JSX.Element => {
             {...form.getInputProps('featureImageUrl')}
           />
         </Grid.Col>
-        <Grid.Col span={6}>
+        <Grid.Col span={12}>
           <TextInput
             placeholder="Title"
             radius={'md'}
@@ -135,19 +135,6 @@ export const CreateResource = (): JSX.Element => {
               </Text>
             }
             {...form.getInputProps('title')}
-          />
-        </Grid.Col>
-        <Grid.Col span={6}>
-          <DatePicker
-            placeholder="Pick Date"
-            radius={'md'}
-            size="md"
-            label={
-              <Text size="sm" color="dimmed">
-                Date
-              </Text>
-            }
-            {...form.getInputProps('date')}
           />
         </Grid.Col>
         <Grid.Col span={6}>

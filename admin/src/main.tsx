@@ -47,7 +47,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
               ],
             },
             {
-              path: '/dashboard',
+              path: '/',
               element: <Home />,
             },
             {
