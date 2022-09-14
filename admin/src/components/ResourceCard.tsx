@@ -98,7 +98,7 @@ export const ResourceCard = ({
                   icon={<IconTrash size={14} />}
                   color="red"
                 >
-                  Delete Notice
+                  Delete Resource
                 </Menu.Item>
               </Menu.Dropdown>
             </Menu>

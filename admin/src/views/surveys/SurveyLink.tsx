@@ -2,6 +2,7 @@ import {
   Avatar,
   Button,
   Center,
+  Divider,
   Grid,
   Group,
   MultiSelect,
@@ -12,11 +13,16 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
-import { IconCheck, IconChevronsLeft, IconX } from '@tabler/icons';
+import {
+  IconCheck,
+  IconChevronsLeft,
+  IconGrillFork,
+  IconX,
+} from '@tabler/icons';
 import { Link, useMatch, useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { userGetMine } from '../../context/AuthenticationContext';
 import db from '../../firebase';
 import { useGetLocations } from '../../hooks/network/useLocations';
@@ -45,6 +51,37 @@ export const SurveyLink = (): JSX.Element => {
     },
   });
 
+  const parsedPackage = useMemo(() => {
+    if (form.values?.package) {
+      // form.setFieldValue('customAnswers', );
+      const parsedPackage = JSON.parse(form.values?.package);
+      if (
+        !parsedPackage?.survey?.customAnswers ||
+        !parsedPackage?.survey?.customAnswers?.length
+      ) {
+        return null;
+      }
+      const mapCustomAnswers = parsedPackage?.survey?.customAnswers?.map(
+        (ans: {
+          description: string;
+          key: string;
+          label: string;
+          title: string;
+        }) => ({
+          description: ans?.description,
+          key: ans?.key,
+          label: ans?.label,
+          title: ans?.title,
+        })
+      );
+      form.setFieldValue('customAnswers', mapCustomAnswers);
+
+      return 'Hello World';
+    }
+  }, [form.values?.package]);
+
+  console.log(form.values);
+
   const naviagte = useNavigate();
   const queryClient = useQueryClient();
   const { mine, fetching } = userGetMine();
@@ -72,6 +109,7 @@ export const SurveyLink = (): JSX.Element => {
       setLoading(false);
     }
   };
+
   return (
     <>
       <Link to="/surveys">

@@ -38,7 +38,7 @@ export const Information = (): JSX.Element => {
                 key={`${item.title}-${item.packageDocId}`}
                 title={item.title}
                 content={item.description}
-                imageUrl={item.url}
+                imageUrl={item.featureImageUrl}
                 publisher={item?.publishedBy?.name}
                 docId={item.docId}
               />
@@ -49,7 +49,7 @@ export const Information = (): JSX.Element => {
                 key={`${item.title}-${item.packageDocId}`}
                 title={item.title}
                 content={item.description}
-                imageUrl={item.url}
+                imageUrl={item.featureImageUrl}
                 publisher={item?.publishedBy?.name}
                 docId={item.docId}
               />
