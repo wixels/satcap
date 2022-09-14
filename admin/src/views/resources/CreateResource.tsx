@@ -59,10 +59,10 @@ export const CreateResource = (): JSX.Element => {
         storage,
         `mines/${mine?.mineId}/resources/${fileId}-${values.url.name}`
       );
-      await uploadFile(featureRef, values.url, {
+      await uploadFile(urlRef, values.url, {
         contentType: values.url?.type,
       });
-      await uploadFile(urlRef, values.featureImageUrl, {
+      await uploadFile(featureRef, values.featureImageUrl, {
         contentType: values.featureImageUrl?.type,
       });
       const url = await getDownloadURL(urlRef);
