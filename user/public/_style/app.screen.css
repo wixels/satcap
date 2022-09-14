@@ -7,7 +7,7 @@
   --color-error: 0, 48%, 43%;
   --font-default: "Poppins","Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
   --font-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-  --box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.2);
+  --box-shadow: 4px 4px 25px #00000033;
   --border-radius: 0.75rem;
   --max-width: 540px;
   --spacer: 1rem;
@@ -89,6 +89,10 @@ button[type="submit"], button.primary {
   color: white;
   margin-top: 1rem;
 }
+button:disabled {
+  background-color: hsla(var(--color-tertiary), 20%);
+  color: hsl(var(--color-tertiary));
+}
 button.danger {
   background-color: hsl(var(--color-error));
   color: white;
@@ -140,7 +144,7 @@ section {
   padding-right: var(--spacer);
 }
 section.survey {
-  background-color: hsla(var(--color-tertiary), 50%);
+  background-color: hsla(var(--color-tertiary), 20%);
   padding: var(--spacer);
 }
 section.survey a {

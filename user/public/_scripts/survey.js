@@ -299,7 +299,7 @@ const setProgressTracker = function () {
       keysChecked.push(key)
     }
   }
-  document.querySelector('form button[type="submit"]').setAttribute('disabled', completed < total)
+  document.querySelector('form.survey button[type="submit"]').setAttribute('disabled', (completed < total))
   document.querySelector('label[for="progress"]').textContent = `${completed} of ${total} answered`
   document.getElementById('progress').setAttribute('value', (completed / total) * 100)
   document.querySelector('.progress').classList.remove('hidden')
