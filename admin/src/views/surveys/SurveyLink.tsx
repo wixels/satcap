@@ -31,14 +31,14 @@ export const SurveyLink = (): JSX.Element => {
 
   const form = useForm({
     initialValues: {
-      package: [],
+      package: null,
       locationDocId: null,
       description: '',
       acceptResponses: true,
       linkId: link,
     },
     validate: {
-      package: (value) => (!value?.length ? 'Package is required' : null),
+      package: (value) => (!value ? 'Package is required' : null),
       locationDocId: (value) => (!value ? 'Location is required' : null),
       description: (value) =>
         value === '' || !value ? 'Description is required' : null,
@@ -54,7 +54,7 @@ export const SurveyLink = (): JSX.Element => {
     try {
       await addDoc(collection(db, `mines/${mine?.mineId}/links`), {
         ...values,
-        package: values.package?.map((pack: any) => JSON.parse(pack)),
+        package: JSON.parse(values.package),
       });
       queryClient.invalidateQueries(['links']);
       setLoading(false);
@@ -122,7 +122,7 @@ export const SurveyLink = (): JSX.Element => {
               }
               {...form.getInputProps('locationDocId')}
             />
-            <MultiSelect
+            <Select
               mt={'xl'}
               disabled={fetching}
               data={

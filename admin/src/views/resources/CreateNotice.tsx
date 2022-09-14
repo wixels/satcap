@@ -38,7 +38,7 @@ export const CreateNotice = (): JSX.Element => {
   const [uploadFile] = useUploadFile();
   const form = useForm({
     initialValues: {
-      createdAt: dayjs().format('YYYY-MM-DD HH:mm:ssZ'),
+      createdAt: dayjs().format('YYYY-MM-DDTHH:mm:ssZ'),
       date: '',
       description: '',
       packageDocId: '',

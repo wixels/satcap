@@ -38,7 +38,7 @@ export const CreateResource = (): JSX.Element => {
 
   const form = useForm({
     initialValues: {
-      createdAt: dayjs().format('YYYY-MM-DD HH:mm:ssZ'),
+      createdAt: dayjs().format('YYYY-MM-DDTHH:mm:ssZ'),
       description: '',
       packageDocId: '',
       title: '',
