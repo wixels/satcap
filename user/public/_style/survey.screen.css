@@ -60,8 +60,12 @@ main {
   padding-left: 2rem;
 }
 
+label input[type="checkbox"] {
+  margin-right: var(--spacer);
+}
+
 .question {
-  margin-bottom: 1.5rem;
+  margin-bottom: calc(var(--spacer) * 2);
 }
 
 .question p {
@@ -282,7 +286,7 @@ progress {
 .listItem {
   background-color: white;
   padding: var(--spacer) var(--spacer) var(--spacer) calc(var(--spacer) * 2);
-  width: calc(100vw - (var(--spacer) * 2));
+  width: 100%;
   margin: auto;
   border-top-right-radius: var(--border-radius);
   border-bottom-right-radius: var(--border-radius);

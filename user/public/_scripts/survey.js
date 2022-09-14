@@ -47,7 +47,8 @@ const initialise = async function (suveryKey, localSubmissions) {
       const loader = document.querySelector('.init')
       if (loader) loader.remove()
     } else {
-      window.location.href = `./closed?title=${link.package.survey.title}&linkId=${link.linkId}`
+      console.log(link.package.survey)
+      // window.location.href = `./closed?title=${link.package.survey.title}&linkId=${link.linkId}`
     }
   }
 }
@@ -91,8 +92,9 @@ const giveConsent = function (e) {
       setOnChange(form)
       setProgressTracker()
       setEmbeddables()
+      setCustomAnswers()
       logEvent(analytics, 'survey_start', {
-        name: `${link.package.name} - ${link.package.survey.title}`,
+        name: `${link.package.name} - ${link.package.survey.key}`,
         user_ref: window.localStorage.getItem('userRef'),
         link_id: link.linkId,
         package_id: link.package.docId,
@@ -114,7 +116,7 @@ const submitSurvey = async function (e) {
     if (res.ok) {
       const link = JSON.parse(window.localStorage.getItem('link'))
       logEvent(analytics, 'survey_complete', { 
-        name: `${link.package.name} - ${link.package.survey.title}`,
+        name: `${link.package.name} - ${link.package.survey.key}`,
         user_ref: window.localStorage.getItem('userRef'),
         link_id: link.linkId,
         package_id: link.package.docId,
@@ -123,15 +125,30 @@ const submitSurvey = async function (e) {
       // const resBody = await res.json()
       const localSubmissions = JSON.parse(window.localStorage.getItem('submissions')) || []
       localSubmissions.push(body.get('linkId'))
-      window.location.href = `./complete?linkId=${link.linkId}`
+      window.location.href = `./complete?linkId=${link.linkId}&key=${body.get('survey')}`
     } else {
-      window.location.href = `./complete?linkId=${link.linkId}`
-      // throw new Error('An error occured whilst processing your request, please try again')
+      throw new Error('An error occured whilst processing your request, please try again')
     }
   } catch (error) {
     form.querySelector('button[type="submit"]').textContent = 'Submit'
     console.error(error)
   }
+}
+
+const setCustomAnswers = function () {
+  const questions = document.querySelectorAll('[data-answers]')
+  questions.forEach((el) => {
+    const answers = link.package.survey.customAnswers[el.dataset.answers]
+    if (Array.isArray(answers) && answers.length) {
+      const optionsHtml = []
+      answers.forEach((option) => {
+        optionsHtml.push(`
+          <option value="${option}">${option}</option>
+        `)
+      })
+      el.innerHTML = optionsHtml.join('')
+    }
+  })
 }
 
 const setEmbeddables = function () {
@@ -282,6 +299,7 @@ const setProgressTracker = function () {
       keysChecked.push(key)
     }
   }
+  document.querySelector('form button[type="submit"]').setAttribute('disabled', completed < total)
   document.querySelector('label[for="progress"]').textContent = `${completed} of ${total} answered`
   document.getElementById('progress').setAttribute('value', (completed / total) * 100)
   document.querySelector('.progress').classList.remove('hidden')

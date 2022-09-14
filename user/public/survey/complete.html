@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" media="screen" href="../_style/app.screen.css">
-    <title>Survey Submitted</title>
+    <title>Completed</title>
     <style>
       body {
         display: grid;
@@ -40,19 +40,32 @@
   </head>
   <body>
   <main>
-    <h2><em>🎉</em><br>Thank you for completing the survey</h2>
-    <a class="link hidden" href="/survey">Click here to start the survey again</a>
+    <h2><em>🎉</em><br><span class="hidden">Thank you for completing the <span class="type"></span></span></h2>
+    <a class="link hidden" href="/survey">Click here to start the <span class="type"></span> again</a>
+    <p id="message"></p>
   </main>
   <footer></footer>
   <script defer src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"></script>
   <script type="module">
-    import { getLink, initMenu } from '../_scripts/init.js'
+    import { link, initMenu } from '../_scripts/init.js'
     
-    const link = await getLink()
+    console.log(link)
     if (link.package.survey?.allowMultipleResponses) {
       const el = document.querySelector('a[href="/survey"].hidden')
       el.setAttribute('href', `${el.getAttribute('href')}?linkId=${link.linkId}`)
       el.classList.remove('hidden')
+    }
+
+    const params = new URLSearchParams(window.location.search)
+    const type = link.package.survey?.complete?.[params.get('key')]?.type || 'survey'
+    const typeEls = document.querySelectorAll('.type')
+    typeEls.forEach((el) => {
+      el.textContent = type
+    })
+    const heading = document.querySelector('h2 .hidden')
+    heading.classList.remove('hidden')
+    if (link.package.survey?.complete[params.get('key')]?.message) {
+      document.getElementById('message').innerHTML = link.package.survey?.complete[params.get('key')]?.message
     }
 
     if (link.package.scopes?.length) {

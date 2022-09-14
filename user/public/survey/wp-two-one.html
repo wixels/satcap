@@ -49,14 +49,18 @@
         <label>
           <span>Which town/community do you currently live in?</span> 
           <span class="sub">Please provide the place name and/or location</span>
-          <input type="text" name="questionOne" />
+          <select name="questionOne" data-answers="area">
+            <option value="">Select an option</option>
+          </select>
         </label>
       </div>
       <div class="question">
         <p>Question 2</p>
         <label>
           <span>Where do you work currently?</span>
-          <input type="text" name="questionTwo" />
+          <select name="questionTwo" data-answers="area">
+            <option value="">Select an option</option>
+          </select>
         </label>
       </div>
       <!-- <h2>Demographics</h2> -->
@@ -165,186 +169,186 @@
             <div class="question">
               <p>Question 7.1</p>
               <span>What type of training did you receive?</span>
-              <span class="sub">Choose as many as applicable</span>
+              <span class="sub">Choose up to five (5)</span>
               <div class="multiple">
                 <label class="selector">
-                  <input type="checkbox" value="Job readiness skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Job readiness skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Job readiness skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Digital literacy skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Digital literacy skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Digital literacy skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Digital strategy skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Digital strategy skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Digital strategy skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Basic IT knowledge skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Basic IT knowledge skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Basic IT knowledge skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Computer software skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Computer software skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Computer software skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Technological/Technical training" name="questionSevenOne" />
+                  <input type="checkbox" value="Technological/Technical training" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Technological/Technical training</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Coaching and mentorship" name="questionSevenOne" />
+                  <input type="checkbox" value="Coaching and mentorship" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Coaching and mentorship</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Entrepreneurship and Innovation" name="questionSevenOne" />
+                  <input type="checkbox" value="Entrepreneurship and Innovation" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Entrepreneurship and Innovation</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Business Management" name="questionSevenOne" />
+                  <input type="checkbox" value="Business Management" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Business Management</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Internships" name="questionSevenOne" />
+                  <input type="checkbox" value="Internships" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Internships</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Learnerships" name="questionSevenOne" />
+                  <input type="checkbox" value="Learnerships" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Learnerships</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Adult Based Education and Training" name="questionSevenOne" />
+                  <input type="checkbox" value="Adult Based Education and Training" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Adult Based Education and Training</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Communication skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Communication skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Communication skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Agricultural skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Agricultural skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Agricultural skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Financial skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Financial skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Financial skills</span> 
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Administrative skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Administrative skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Administrative skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Vocational skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Vocational skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Vocational skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Community Education and Training" name="questionSevenOne" />
+                  <input type="checkbox" value="Community Education and Training" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Community Education and Training</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Waste management skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Waste management skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Waste management skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Land management skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Land management skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Land management skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Biodiversity management skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Biodiversity management skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Biodiversity management skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Decision-making skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Decision-making skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Decision-making skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Leadership skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Leadership skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Leadership skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Safety and risk management" name="questionSevenOne" />
+                  <input type="checkbox" value="Safety and risk management" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Safety and risk management</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Safety compliance" name="questionSevenOne" />
+                  <input type="checkbox" value="Safety compliance" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Safety compliance</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Machine operations" name="questionSevenOne" />
+                  <input type="checkbox" value="Machine operations" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Machine operations</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Mine beneficiation" name="questionSevenOne" />
+                  <input type="checkbox" value="Mine beneficiation" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Mine beneficiation</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Project management" name="questionSevenOne" />
+                  <input type="checkbox" value="Project management" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Project management</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Interpersonal skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Interpersonal skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Interpersonal skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Problem-solving skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Problem-solving skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Problem-solving skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Writing skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Writing skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Writing skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Analytical skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Analytical skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Analytical skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Management skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Management skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Management skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Heavy equipment operation skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Heavy equipment operation skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Heavy equipment operation skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Maritime skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Maritime skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Maritime skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Future mining skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Future mining skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Future mining skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Supervisory development skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Supervisory development skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Supervisory development skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Entrepreneurial skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Entrepreneurial skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Entrepreneurial skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Networking skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Networking skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Networking skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Customer services" name="questionSevenOne" />
+                  <input type="checkbox" value="Customer services" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Customer services</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Organisational skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Organisational skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Organisational skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Cultural awareness skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Cultural awareness skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Cultural awareness skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Language skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Language skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Language skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Site-management skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Site-management skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Site-management skills</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Interpretational skills" name="questionSevenOne" />
+                  <input type="checkbox" value="Interpretational skills" name="questionSevenOne" data-on-change="maxCount" data-max-count="5" />
                   <span>Interpretational skills</span>
                 </label>
               </div>
@@ -352,86 +356,86 @@
             <div class="question">
               <p>Question 7.2</p>
               <span>Have you received skills related training in any of the following industries?</span>
-              <span class="sub">Choose as many as applicable</span>
+              <span class="sub">Choose up to five (5)</span>
               <div class="multiple">
                 <label class="selector">
-                  <input type="checkbox" value="Automotive" name="questionSevenTwo" />
+                  <input type="checkbox" value="Automotive" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Automotive</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Agriculture, Regenerative agriculture, agro-processing and re-forestry" name="questionSevenTwo" />
+                  <input type="checkbox" value="Agriculture, Regenerative agriculture, agro-processing and re-forestry" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Agriculture, Regenerative agriculture, agro-processing and re-forestry</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Construction and building" name="questionSevenTwo" />
+                  <input type="checkbox" value="Construction and building" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Construction and building</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Creative and Design Industry" name="questionSevenTwo" />
+                  <input type="checkbox" value="Creative and Design Industry" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Creative and Design Industry</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Engineering" name="questionSevenTwo" />
+                  <input type="checkbox" value="Engineering" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Engineering</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Healthcare" name="questionSevenTwo" />
+                  <input type="checkbox" value="Healthcare" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Healthcare</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Mining and minerals" name="questionSevenTwo" />
+                  <input type="checkbox" value="Mining and minerals" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Mining and minerals</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Mine rehabilitation" name="questionSevenTwo" />
+                  <input type="checkbox" value="Mine rehabilitation" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Mine rehabilitation</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Mine waste beneficiation" name="questionSevenTwo" />
+                  <input type="checkbox" value="Mine waste beneficiation" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Mine waste beneficiation</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="e-Waste" name="questionSevenTwo" />
+                  <input type="checkbox" value="e-Waste" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>e-Waste</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Renewable energy" name="questionSevenTwo" />
+                  <input type="checkbox" value="Renewable energy" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Renewable energy</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Small/light manufacturing" name="questionSevenTwo" />
+                  <input type="checkbox" value="Small/light manufacturing" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Small/light manufacturing</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Services and retail trade" name="questionSevenTwo" />
+                  <input type="checkbox" value="Services and retail trade" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Services and retail trade</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Textiles" name="questionSevenTwo" />
+                  <input type="checkbox" value="Textiles" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Textiles</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Tourism and hospitality" name="questionSevenTwo" />
+                  <input type="checkbox" value="Tourism and hospitality" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Tourism and hospitality (accomodation and catering)</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Oil and gas" name="questionSevenTwo" />
+                  <input type="checkbox" value="Oil and gas" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Oil and gas</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Recycling or Upcycling" name="questionSevenTwo" />
+                  <input type="checkbox" value="Recycling or Upcycling" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Recycling or Upcycling</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Waste management" name="questionSevenTwo" />
+                  <input type="checkbox" value="Waste management" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Waste management</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Catering" name="questionSevenTwo" />
+                  <input type="checkbox" value="Catering" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Catering</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Retail" name="questionSevenTwo" />
+                  <input type="checkbox" value="Retail" name="questionSevenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Retail</span>
                 </label>
               </div>
@@ -443,26 +447,26 @@
             <div class="question">
               <p>Question 7.3</p>
               <span>Which organisation(s) provided the training?</span>
-              <span class="sub">Choose as many as applicable</span>
+              <span class="sub">Choose up to two (2)</span>
               <div class="multiple">
                 <label class="selector">
-                  <input type="checkbox" value="Business chamber" name="questionSevenThree" />
+                  <input type="checkbox" value="Business chamber" name="questionSevenThree"  data-on-change="maxCount" data-max-count="2" />
                   <span>Business chamber</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Capacity building institution" name="questionSevenThree" />
+                  <input type="checkbox" value="Capacity building institution" name="questionSevenThree" data-on-change="maxCount" data-max-count="2" />
                   <span>Capacity building institution</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Educational institutions" name="questionSevenThree" />
+                  <input type="checkbox" value="Educational institutions" name="questionSevenThree" data-on-change="maxCount" data-max-count="2" />
                   <span>Educational institutions</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="NGO/NPO" name="questionSevenThree" />
+                  <input type="checkbox" value="NGO/NPO" name="questionSevenThree" data-on-change="maxCount" data-max-count="2" />
                   <span>NGO/NPO</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Mining company programme" name="questionSevenThree" />
+                  <input type="checkbox" value="Mining company programme" name="questionSevenThree" data-on-change="maxCount" data-max-count="2" />
                   <span>Mining company programme</span>
                 </label>
               </div>
@@ -504,55 +508,54 @@
           </div>
         </template>
       </div>
-      <!-- <h2>Learning style</h2> -->
       <div class="question">
         <p>Question 8</p>
         <span class="label">What type of learning styles do you prefer?</span>
-        <span class="sub">Choose as many as applicable</span>
+        <span class="sub">Choose up to three (3)</span>
         <button type="button" data-embed-type="image/jpeg" data-embed-src="https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2F2.1question8.jpeg?alt=media">View image for visual description</button>
         <div class="multiple">
           <label class="selector">
-            <input type="checkbox" value="Visual learning (Watching)" name="questionEight" />
+            <input type="checkbox" value="Visual learning (Watching)" name="questionEight" data-on-change="maxCount" data-max-count="3" />
             <span>Visual learning (Watching)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Auditory learning (Listening)" name="questionEight" />
+            <input type="checkbox" value="Auditory learning (Listening)" name="questionEight" data-on-change="maxCount" data-max-count="3" />
             <span>Auditory learning (Listening)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Tactile/Kinesthetic learning (Learn material through touch)" name="questionEight" />
+            <input type="checkbox" value="Tactile/Kinesthetic learning (Learn material through touch)" name="questionEight" data-on-change="maxCount" data-max-count="3" />
             <span>Tactile/Kinesthetic learning (Learn material through touch)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Sequential learning (learn step by step)" name="questionEight" />
+            <input type="checkbox" value="Sequential learning (learn step by step)" name="questionEight" data-on-change="maxCount" data-max-count="3" />
             <span>Sequential learning (learn step by step)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Simultaneous learning (categorizing, mindmapping, looking at bigger picture)" name="questionEight" />
+            <input type="checkbox" value="Simultaneous learning (categorizing, mindmapping, looking at bigger picture)" name="questionEight" data-on-change="maxCount" data-max-count="3" />
             <span>Simultaneous learning (categorizing, mindmapping, looking at bigger picture)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Verbal learning (Thinking aloud)" name="questionEight" />
+            <input type="checkbox" value="Verbal learning (Thinking aloud)" name="questionEight" data-on-change="maxCount" data-max-count="3" />
             <span>Verbal learning (Thinking aloud)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Interactive learning (learning with others)" name="questionEight" />
+            <input type="checkbox" value="Interactive learning (learning with others)" name="questionEight" data-on-change="maxCount" data-max-count="3" />
             <span>Interactive learning (learning with others)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Reflective/Logical learning (thinking/reflecting on information)" name="questionEight" />
+            <input type="checkbox" value="Reflective/Logical learning (thinking/reflecting on information)" name="questionEight" data-on-change="maxCount" data-max-count="3" />
             <span>Reflective/Logical learning (thinking/reflecting on information)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Direct experience (learning through life experiences)" name="questionEight" />
+            <input type="checkbox" value="Direct experience (learning through life experiences)" name="questionEight" data-on-change="maxCount" data-max-count="3" />
             <span>Direct experience (learning through life experiences)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Indirect experience (learn better through demonstrations)" name="questionEight" />
+            <input type="checkbox" value="Indirect experience (learn better through demonstrations)" name="questionEight" data-on-change="maxCount" data-max-count="3" />
             <span>Indirect experience (learn better through demonstrations)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Rhythmic Melodic learning (learn better with rhythm and beats/music)" name="questionEight" />
+            <input type="checkbox" value="Rhythmic Melodic learning (learn better with rhythm and beats/music)" name="questionEight" data-on-change="maxCount" data-max-count="3" />
             <span>Rhythmic Melodic learning (learn better with rhythm and beats/music)</span>
           </label>
         </div>
@@ -564,47 +567,47 @@
       <div class="question">
         <p>Question 9</p>
         <span class="label">What mode of learning do you prefer to learn through?</span>
-        <span class="sub">Choose as many as applicable</span>
+        <span class="sub">Choose up to three (3)</span>
         <button type="button" data-embed-type="image/png" data-embed-src="https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2F2.1question9.png?alt=media">View image for visual description</button>
         <div class="multiple">
           <label class="selector">
-            <input type="checkbox" value="Collaboration (Learn with others)" name="questionNine" />
+            <input type="checkbox" value="Collaboration (Learn with others)" name="questionNine" data-on-change="maxCount" data-max-count="3" />
             <span>Collaboration (Learn with others)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Discussion (Talk about and share ideas)" name="questionNine" />
+            <input type="checkbox" value="Discussion (Talk about and share ideas)" name="questionNine" data-on-change="maxCount" data-max-count="3" />
             <span>Discussion (Talk about and share ideas)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Feedback reflection (Learn about my learning)" name="questionNine" />
+            <input type="checkbox" value="Feedback reflection (Learn about my learning)" name="questionNine" data-on-change="maxCount" data-max-count="3" />
             <span>Feedback reflection (Learn about my learning)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Guided (Learn with an expert)" name="questionNine" />
+            <input type="checkbox" value="Guided (Learn with an expert)" name="questionNine" data-on-change="maxCount" data-max-count="3" />
             <span>Guided (Learn with an expert)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Explicit (Learn from an expert)" name="questionNine" />
+            <input type="checkbox" value="Explicit (Learn from an expert)" name="questionNine" data-on-change="maxCount" data-max-count="3" />
             <span>Explicit (Learn from an expert)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Demonstration (Present my learning)" name="questionNine" />
+            <input type="checkbox" value="Demonstration (Present my learning)" name="questionNine" data-on-change="maxCount" data-max-count="3" />
             <span>Demonstration (Present my learning)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Experiential (Make, explore and investigate)" name="questionNine" />
+            <input type="checkbox" value="Experiential (Make, explore and investigate)" name="questionNine" data-on-change="maxCount" data-max-count="3" />
             <span>Experiential (Make, explore and investigate)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Independent (Learn by myself)" name="questionNine" />
+            <input type="checkbox" value="Independent (Learn by myself)" name="questionNine" data-on-change="maxCount" data-max-count="3" />
             <span>Independent (Learn by myself)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Unsure" name="questionNine" />
+            <input type="checkbox" value="Unsure" name="questionNine" data-on-change="maxCount" data-max-count="3" />
             <span>Unsure</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="None" name="questionNine" />
+            <input type="checkbox" value="None" name="questionNine" data-on-change="maxCount" data-max-count="3" />
             <span>None</span>
           </label>
         </div>
@@ -753,114 +756,114 @@
       <div class="question">
         <p>Question 12</p>
         <span class="label">Which of the following skills are needed for local communities the most?</span>
-        <span class="sub">Choose as many as applicable</span>
+        <span class="sub">Choose up to five (5)</span>
         <div class="multiple" >
           <label class="selector">
-            <input type="checkbox" value="Language proficiency" name="questionTwelve" />
+            <input type="checkbox" value="Language proficiency" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Language proficiency</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Numeracy and literacy" name="questionTwelve"/>
+            <input type="checkbox" value="Numeracy and literacy" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Numeracy and literacy</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Job readiness skills" name="questionTwelve" />
+            <input type="checkbox" value="Job readiness skills" name="questionTwelve"  data-on-change="maxCount" data-max-count="5" />
             <span>Job readiness skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Technological/Technical skills" name="questionTwelve"/>
+            <input type="checkbox" value="Technological/Technical skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Technological/Technical skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Digital literacy" name="questionTwelve"/>
+            <input type="checkbox" value="Digital literacy" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Digital literacy</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Digital strategy skills" name="questionTwelve"/>
+            <input type="checkbox" value="Digital strategy skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Digital strategy skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Decision-making" name="questionTwelve"/>
+            <input type="checkbox" value="Decision-making" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Decision-making</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Communication skills" name="questionTwelve"/>
+            <input type="checkbox" value="Communication skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Communication skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Leadership skills" name="questionTwelve"/>
+            <input type="checkbox" value="Leadership skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Leadership skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Project management skills" name="questionTwelve"/>
+            <input type="checkbox" value="Project management skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Project management skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Interpersonal skills" name="questionTwelve"/>
+            <input type="checkbox" value="Interpersonal skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Interpersonal skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Problem-solving skills" name="questionTwelve"/>
+            <input type="checkbox" value="Problem-solving skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Problem-solving skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Writing skills" name="questionTwelve"/>
+            <input type="checkbox" value="Writing skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Writing skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Analytical skills" name="questionTwelve"/>
+            <input type="checkbox" value="Analytical skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Analytical skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Administrative skills" name="questionTwelve"/>
+            <input type="checkbox" value="Administrative skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Administrative skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Financial skills" name="questionTwelve"/>
+            <input type="checkbox" value="Financial skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Financial skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Management skills" name="questionTwelve"/>
+            <input type="checkbox" value="Management skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Management skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Business management skills" name="questionTwelve"/>
+            <input type="checkbox" value="Business management skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Business management skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Entrepreneurial skills" name="questionTwelve"/>
+            <input type="checkbox" value="Entrepreneurial skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Entrepreneurial skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Coaching and mentorship" name="questionTwelve"/>
+            <input type="checkbox" value="Coaching and mentorship" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Coaching and mentorship</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Networking skills" name="questionTwelve"/>
+            <input type="checkbox" value="Networking skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Networking skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Organisational skills" name="questionTwelve"/>
+            <input type="checkbox" value="Organisational skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Organisational skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Cultural awareness skills" name="questionTwelve"/>
+            <input type="checkbox" value="Cultural awareness skills" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Cultural awareness skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Computer literacy" name="questionTwelve"/>
+            <input type="checkbox" value="Computer literacy" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Computer literacy</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Computer software skills " name="questionTwelve"/>
+            <input type="checkbox" value="Computer software skills " name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Computer software skills </span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Electronic/computer (IT)" name="questionTwelve"/>
+            <input type="checkbox" value="Electronic/computer (IT)" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Electronic/computer (IT)</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Administrative/Clerical" name="questionTwelve"/>
+            <input type="checkbox" value="Administrative/Clerical" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Administrative/Clerical</span>
           </label>
         </div>
@@ -982,6 +985,10 @@
             <span>ICT (Information and Communication Technology)</span>
           </label>
         </div>
+        <label>
+          <span>Other</span>
+          <input type="text" placeholder="Please specify" name="questionFifteen" />
+        </label>
       </div>
       <div class="question">
         <p>Question 16</p>
@@ -1081,86 +1088,86 @@
             <div class="question">
               <p>Question 17.2</p>
               <span>What type of services does your business offer?</span>
-              <span class="sub">Choose as many as applicable</span>
+              <span class="sub">Choose up to five (5)</span>
               <div class="multiple">
                 <label class="selector">
-                  <input type="checkbox" value="Automotive" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Automotive" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Automotive</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Agriculture, Regenerative agriculture, agro-processing and re-forestry" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Agriculture, Regenerative agriculture, agro-processing and re-forestry" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Agriculture, Regenerative agriculture, agro-processing and re-forestry</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Construction and building" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Construction and building" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Construction and building</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Creative and Design Industry" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Creative and Design Industry" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Creative and Design Industry</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Engineering" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Engineering" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Engineering</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Healthcare" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Healthcare" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Healthcare</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Mining and minerals" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Mining and minerals" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Mining and minerals</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Mine rehabilitation" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Mine rehabilitation" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Mine rehabilitation</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Mine waste beneficiation" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Mine waste beneficiation" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Mine waste beneficiation</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="e-Waste" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="e-Waste" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>e-Waste</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Renewable energy" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Renewable energy" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Renewable energy</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Small/light manufacturing" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Small/light manufacturing" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Small/light manufacturing</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Services and retail trade" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Services and retail trade" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Services and retail trade</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Textiles" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Textiles" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Textiles</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Tourism and hospitality" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Tourism and hospitality" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Tourism and hospitality</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Oil and gas" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Oil and gas" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Oil and gas</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Recycling or Upcycling" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Recycling or Upcycling" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Recycling or Upcycling</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Waste management" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Waste management" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Waste management</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Catering" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Catering" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Catering</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Retail" name="questionSeventeenTwo" />
+                  <input type="checkbox" value="Retail" name="questionSeventeenTwo" data-on-change="maxCount" data-max-count="5" />
                   <span>Retail</span>
                 </label>
               </div>
@@ -1376,142 +1383,142 @@
                   <div class="question">
                     <p>Question 17.5.2</p>
                     <span>What type of training did you receive?</span>
-                    <span class="sub">Choose as many as applicable</span>
+                    <span class="sub">Choose up to five (5)</span>
                     <div class="multiple" >
                       <label class="selector">
-                        <input type="checkbox" value="Finance" name="questionSeventeenFiveTwo" />
+                        <input type="checkbox" value="Finance" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Finance</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Business planning" name="questionSeventeenFiveTwo" />
+                        <input type="checkbox" value="Business planning" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Business planning</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Marketing" name="questionSeventeenFiveTwo" />
+                        <input type="checkbox" value="Marketing" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Marketing</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Registration of business" name="questionSeventeenFiveTwo" />
+                        <input type="checkbox" value="Registration of business" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Registration of business</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Tenders" name="questionSeventeenFiveTwo" />
+                        <input type="checkbox" value="Tenders" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Tenders</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Vendor registration" name="questionSeventeenFiveTwo" />
+                        <input type="checkbox" value="Vendor registration" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Vendor registration</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Health and safety" name="questionSeventeenFiveTwo" />
+                        <input type="checkbox" value="Health and safety" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Health and safety</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Language proficiency" name="questionSeventeenFiveTwo" />
+                        <input type="checkbox" value="Language proficiency" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Language proficiency</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Numeracy and literacy" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Numeracy and literacy" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Numeracy and literacy</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Job readiness skills" name="questionSeventeenFiveTwo" />
+                        <input type="checkbox" value="Job readiness skills" name="questionSeventeenFiveTwo"  data-on-change="maxCount" data-max-count="5" />
                         <span>Job readiness skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Technological/Technical skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Technological/Technical skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Technological/Technical skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Digital literacy" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Digital literacy" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Digital literacy</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Digital strategy skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Digital strategy skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Digital strategy skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Decision-making" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Decision-making" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Decision-making</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Communication skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Communication skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Communication skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Leadership skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Leadership skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Leadership skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Project management skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Project management skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Project management skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Interpersonal skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Interpersonal skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Interpersonal skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Problem-solving skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Problem-solving skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Problem-solving skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Writing skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Writing skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Writing skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Analytical skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Analytical skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Analytical skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Administrative skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Administrative skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Administrative skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Financial skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Financial skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Financial skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Management skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Management skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Management skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Business management skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Business management skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Business management skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Entrepreneurial skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Entrepreneurial skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Entrepreneurial skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Coaching and mentorship" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Coaching and mentorship" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Coaching and mentorship</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Networking skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Networking skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Networking skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Organisational skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Organisational skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Organisational skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Cultural awareness skills" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Cultural awareness skills" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Cultural awareness skills</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Computer literacy" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Computer literacy" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Computer literacy</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Computer software skills " name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Computer software skills " name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Computer software skills </span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Electronic/computer (IT)" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Electronic/computer (IT)" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Electronic/computer (IT)</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="Administrative/Clerical" name="questionSeventeenFiveTwo"/>
+                        <input type="checkbox" value="Administrative/Clerical" name="questionSeventeenFiveTwo" data-on-change="maxCount" data-max-count="5" />
                         <span>Administrative/Clerical</span>
                       </label>
                     </div>
@@ -1552,27 +1559,27 @@
                   </div>
                   <div class="question">
                     <p>Question 17.5.4</p>
-                    <span>Have you been able to access the following opportunities post training?</span>
-                    <span class="sub">Choose as many as applicable</span>
+                    <span>Select the opportunities that you have been able to access post training</span>
+                    <span class="sub">Choose up to three (3)</span>
                     <div class="multiple">
                       <label class="selector">
-                        <input type="checkbox" value="I was able to submit a vendor application successfully" name="questionSeventeenFiveFour" />
+                        <input type="checkbox" value="I was able to submit a vendor application successfully" name="questionSeventeenFiveFour" data-on-change="maxCount" data-max-count="3" />
                         <span>I was able to submit a vendor application successfully</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="I was able to better comply with health and safety requirements" name="questionSeventeenFiveFour" />
+                        <input type="checkbox" value="I was able to better comply with health and safety requirements" name="questionSeventeenFiveFour" data-on-change="maxCount" data-max-count="3" />
                         <span>I was able to better comply with health and safety requirements</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="I was able to secure funding" name="questionSeventeenFiveFour" />
+                        <input type="checkbox" value="I was able to secure funding" name="questionSeventeenFiveFour" data-on-change="maxCount" data-max-count="3" />
                         <span>I was able to secure funding</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="I was able to provide goods/services in a new industry" name="questionSeventeenFiveFour" />
+                        <input type="checkbox" value="I was able to provide goods/services in a new industry" name="questionSeventeenFiveFour" data-on-change="maxCount" data-max-count="3" />
                         <span>I was able to provide goods/services in a new industry</span>
                       </label>
                       <label class="selector">
-                        <input type="checkbox" value="I was able to expand my business" name="questionSeventeenFiveFour" />
+                        <input type="checkbox" value="I was able to expand my business" name="questionSeventeenFiveFour" data-on-change="maxCount" data-max-count="3" />
                         <span>I was able to expand my business</span>
                       </label>
                     </div>
@@ -1605,50 +1612,50 @@
                 <div class="question">
                   <p>Question 17.6.1</p>
                   <span>What type of support are you receiving?</span>
-                  <span class="sub">Choose as many as applicable</span>
+                  <span class="sub">Choose up to five (5)</span>
                   <div class="multiple">
                     <label class="selector">
-                      <input type="checkbox" value="Finance" name="questionSeventeenSixOne" />
+                      <input type="checkbox" value="Finance" name="questionSeventeenSixOne" data-on-change="maxCount" data-max-count="5" />
                       <span>Finance</span>
                     </label>
                     <label class="selector">
-                      <input type="checkbox" value="Business planning" name="questionSeventeenSixOne" />
+                      <input type="checkbox" value="Business planning" name="questionSeventeenSixOne" data-on-change="maxCount" data-max-count="5" />
                       <span>Business planning</span>
                     </label>
                     <label class="selector">
-                      <input type="checkbox" value="Marketing" name="questionSeventeenSixOne" />
+                      <input type="checkbox" value="Marketing" name="questionSeventeenSixOne" data-on-change="maxCount" data-max-count="5" />
                       <span>Marketing</span>
                     </label>
                     <label class="selector">
-                      <input type="checkbox" value="Registration of business" name="questionSeventeenSixOne" />
+                      <input type="checkbox" value="Registration of business" name="questionSeventeenSixOne" data-on-change="maxCount" data-max-count="5" />
                       <span>Registration of business</span>
                     </label>
                     <label class="selector">
-                      <input type="checkbox" value="Tenders" name="questionSeventeenSixOne" />
+                      <input type="checkbox" value="Tenders" name="questionSeventeenSixOne" data-on-change="maxCount" data-max-count="5" />
                       <span>Tenders</span>
                     </label>
                     <label class="selector">
-                      <input type="checkbox" value="Vendor registration" name="questionSeventeenSixOne" />
+                      <input type="checkbox" value="Vendor registration" name="questionSeventeenSixOne" data-on-change="maxCount" data-max-count="5" />
                       <span>Vendor registration</span>
                     </label>
                     <label class="selector">
-                      <input type="checkbox" value="Skills in latest technology" name="questionSeventeenSixOne" />
+                      <input type="checkbox" value="Skills in latest technology" name="questionSeventeenSixOne" data-on-change="maxCount" data-max-count="5" />
                       <span>Skills in latest technology</span>
                     </label>
                     <label class="selector">
-                      <input type="checkbox" value="Business Management" name="questionSeventeenSixOne" />
+                      <input type="checkbox" value="Business Management" name="questionSeventeenSixOne" data-on-change="maxCount" data-max-count="5" />
                       <span>Business Management</span>
                     </label>
                     <label class="selector">
-                      <input type="checkbox" value="Ethical business practice" name="questionSeventeenSixOne" />
+                      <input type="checkbox" value="Ethical business practice" name="questionSeventeenSixOne" data-on-change="maxCount" data-max-count="5" />
                       <span>Ethical business practice</span>
                     </label>
                     <label class="selector">
-                      <input type="checkbox" value="Digital literacy" name="questionSeventeenSixOne" />
+                      <input type="checkbox" value="Digital literacy" name="questionSeventeenSixOne" data-on-change="maxCount" data-max-count="5" />
                       <span>Digital literacy</span>
                     </label>
                     <label class="selector">
-                      <input type="checkbox" value="Health and safety" name="questionSeventeenSixOne" />
+                      <input type="checkbox" value="Health and safety" name="questionSeventeenSixOne" data-on-change="maxCount" data-max-count="5" />
                       <span>Health and safety</span>
                     </label>
                   </div>
@@ -1971,110 +1978,110 @@
       <div class="question">
         <p>Question 21</p>
         <span class="label">If the mine were to close, what technical skills would you consider most important for you to access other job opportunities?</span>
-        <span class="sub">Choose as many as applicable</span>
+        <span class="sub">Choose up to five (5)</span>
         <div class="multiple">
           <label class="selector">
-            <input type="checkbox" value="Job readiness skills" name="questionTwentyOne" />
+            <input type="checkbox" value="Job readiness skills" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Job readiness skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Digital literacy skills" name="questionTwentyOne" />
+            <input type="checkbox" value="Digital literacy skills" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Digital literacy skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Technical training" name="questionTwentyOne" />
+            <input type="checkbox" value="Technical training" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Technical training</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Business acumen" name="questionTwentyOne" />
+            <input type="checkbox" value="Business acumen" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Business acumen</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Coaching and mentorship" name="questionTwentyOne" />
+            <input type="checkbox" value="Coaching and mentorship" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Coaching and mentorship</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Ethical business practice" name="questionTwentyOne" />
+            <input type="checkbox" value="Ethical business practice" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Ethical business practice</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Entrepreneurship and Innovation" name="questionTwentyOne" />
+            <input type="checkbox" value="Entrepreneurship and Innovation" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Entrepreneurship and Innovation</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Business Management" name="questionTwentyOne" />
+            <input type="checkbox" value="Business Management" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Business Management</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Internships" name="questionTwentyOne" />
+            <input type="checkbox" value="Internships" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Internships</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Learnerships" name="questionTwentyOne" />
+            <input type="checkbox" value="Learnerships" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Learnerships</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Artisans skills" name="questionTwentyOne" />
+            <input type="checkbox" value="Artisans skills" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Artisans skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Adult Based Education and Training" name="questionTwentyOne" />
+            <input type="checkbox" value="Adult Based Education and Training" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Adult Based Education and Training</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Communication skills" name="questionTwentyOne" />
+            <input type="checkbox" value="Communication skills" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Communication skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Computer software skills" name="questionTwentyOne" />
+            <input type="checkbox" value="Computer software skills" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Computer software skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Site management skills" name="questionTwentyOne" />
+            <input type="checkbox" value="Site management skills" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Site management skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Customer service skills" name="questionTwentyOne" />
+            <input type="checkbox" value="Customer service skills" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Customer service skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Future mining skills" name="questionTwentyOne" />
+            <input type="checkbox" value="Future mining skills" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Future mining skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Biodiversity management skills" name="questionTwentyOne" />
+            <input type="checkbox" value="Biodiversity management skills" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Biodiversity management skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Land management skills" name="questionTwentyOne" />
+            <input type="checkbox" value="Land management skills" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Land management skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Water management skills" name="questionTwentyOne" />
+            <input type="checkbox" value="Water management skills" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Water management skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Maritime skills" name="questionTwentyOne" />
+            <input type="checkbox" value="Maritime skills" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Maritime skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Agricultural skills" name="questionTwentyOne" />
+            <input type="checkbox" value="Agricultural skills" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Agricultural skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Project management skills" name="questionTwentyOne" />
+            <input type="checkbox" value="Project management skills" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Project management skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Mine beneficiation" name="questionTwentyOne" />
+            <input type="checkbox" value="Mine beneficiation" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Mine beneficiation</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Safety and risk management" name="questionTwentyOne" />
+            <input type="checkbox" value="Safety and risk management" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Safety and risk management</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Waste management" name="questionTwentyOne" />
+            <input type="checkbox" value="Waste management" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Waste management</span>
           </label>
         </div>
@@ -2086,34 +2093,34 @@
       <div class="question">
         <p>Question 22</p>
         <span class="label">If the mine were to close, what skills would you consider most important for you to start your own business?</span>
-        <span class="sub">Choose as many as applicable</span>
+        <span class="sub">Choose up to five (5)</span>
         <div class="multiple">
           <label class="selector">
-            <input type="checkbox" value="Finance skills" name="questionTwentyTwo" />
+            <input type="checkbox" value="Finance skills" name="questionTwentyTwo" data-on-change="maxCount" data-max-count="5" />
             <span>Finance skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Future mining skills" name="questionTwentyTwo" />
+            <input type="checkbox" value="Future mining skills" name="questionTwentyTwo" data-on-change="maxCount" data-max-count="5" />
             <span>Future mining skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Business Management and entrepreneurial skills" name="questionTwentyTwo" />
+            <input type="checkbox" value="Business Management and entrepreneurial skills" name="questionTwentyTwo" data-on-change="maxCount" data-max-count="5" />
             <span>Business Management and entrepreneurial skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Skills in latest technologies" name="questionTwentyTwo" />
+            <input type="checkbox" value="Skills in latest technologies" name="questionTwentyTwo" data-on-change="maxCount" data-max-count="5" />
             <span>Skills in latest technologies</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Professional skills" name="questionTwentyTwo" />
+            <input type="checkbox" value="Professional skills" name="questionTwentyTwo" data-on-change="maxCount" data-max-count="5" />
             <span>Professional skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Business acumen skills" name="questionTwentyTwo" />
+            <input type="checkbox" value="Business acumen skills" name="questionTwentyTwo" data-on-change="maxCount" data-max-count="5" />
             <span>Business acumen skills</span>
           </label>
           <label class="selector">
-            <input type="checkbox" value="Digital literacy skills" name="questionTwentyTwo" />
+            <input type="checkbox" value="Digital literacy skills" name="questionTwentyTwo" data-on-change="maxCount" data-max-count="5" />
             <span>Digital literacy skills</span>
           </label>
         </div>

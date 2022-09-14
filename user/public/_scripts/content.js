@@ -160,6 +160,7 @@ const viewItem = function (item) {
   const link = subContent.querySelector('a')
   if (link && item.url) {
     link.setAttribute('href', item.url)
+    link.classList.remove('hidden')
   }
 
   content.querySelector('.item').appendChild(subContent)

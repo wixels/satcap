@@ -4,9 +4,11 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: white;
+  background-color: rgba(0,0,0,.2);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   z-index: 10;
-  animation: slideUp .5s forwards;
+  animation: slideUp .45s ease forwards;
 }
 
 #view-information button {
@@ -15,6 +17,18 @@
   left: var(--spacer);
   margin: 0;
   border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  background-color: hsl(var(--color-primary));
+}
+
+#view-information .content {
+  width: 100vw;
+  min-height: 100vh;
+  max-width: var(--max-width);
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .feature {
@@ -22,12 +36,13 @@
   background-position: center;
   background-size: cover;
   aspect-ratio: 16/9;
-  width: 100vw;
+  width: 100%;
   background-repeat: no-repeat;
 }
 
 .item {
   margin-top: -10vh;
+  width: 100%;
 }
 
 .header {
