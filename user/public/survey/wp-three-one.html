@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" media="screen" href="../_style/app.screen.css">
-    <link rel="stylesheet" media="screen" href="../_style/survey.screen.css">
+    <link rel="stylesheet" media="screen" href="../_style/app.screen.css?v=1">
+    <link rel="stylesheet" media="screen" href="../_style/survey.screen.css?v=1">
     <title>Checklists</title>
   </head>
   <body>
@@ -17,9 +17,12 @@
     <div id="surveyList"></div>
     <template id="surveyItem">
       <div class="listItem">
-        <h3></h3>
-        <p></p>
-        <button type="button">Start Checklist</button>
+        <div class="line"></div>
+        <div class="content">
+          <h3></h3>
+          <p></p>
+          <button type="button">Start Checklist</button>
+        </div>
       </div>
     </template>
     <template id="wp-three-one-pre">
