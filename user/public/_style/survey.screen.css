@@ -47,6 +47,7 @@ main {
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   margin-bottom: var(--spacer);
+  max-width: var(--max-width);
 }
 .consent .content h2 {
   text-align: center;
@@ -285,14 +286,23 @@ progress {
 
 .listItem {
   background-color: white;
-  padding: var(--spacer) var(--spacer) var(--spacer) calc(var(--spacer) * 2);
+  padding: var(--spacer);
   width: 100%;
   margin: auto;
-  border-top-right-radius: var(--border-radius);
-  border-bottom-right-radius: var(--border-radius);
-  border-left: var(--spacer) solid;
+  border-radius: var(--border-radius);
+  display: grid;
+  grid-template-columns: 0.5rem auto;
+  gap: var(--spacer);
   box-shadow: var(--box-shadow);
 }
+
+.listItem .line {
+  height: 100%;
+  width: 100%;
+  background-color: hsl(var( --color-primary));
+  border-radius: var(--border-radius);
+}
+
 .listItem p {
   font-size: .9rem;
 }

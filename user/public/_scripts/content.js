@@ -99,7 +99,6 @@ const insertQueryContent = function (parent, data) {
 }
 
 const insertSurvey = function (linkId, survey) {
-  console.log('survey: ', survey)
   const content = document.querySelector('.survey')
   const localSubmissions = JSON.parse(window.localStorage.getItem('submissions')) || []
   content.querySelector('h3').textContent = survey.title

@@ -20,7 +20,7 @@ const initialise = async function (suveryKey, localSubmissions) {
           const description = content.querySelector('p')
           const btn = content.querySelector('button')
 
-          content.querySelector('.listItem').style.borderColor = survey.color
+          content.querySelector('.listItem .line').style.backgroundColor = survey.color
           title.textContent = survey.title
           description.textContent = survey.description
           btn.dataset.key = survey.key
@@ -302,7 +302,7 @@ const setProgressTracker = function () {
   // document.querySelector('form.survey button[type="submit"]').setAttribute('disabled', (completed < total))
   document.querySelector('label[for="progress"]').textContent = `${completed} of ${total} answered`
   document.getElementById('progress').setAttribute('value', (completed / total) * 100)
-  document.querySelector('footer').classList.remove('hidden')
+  document.querySelector('.progress').classList.remove('hidden')
 }
 
 export {
