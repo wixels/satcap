@@ -161,8 +161,15 @@ const viewItem = function (item) {
   })
   const title = subContent.querySelector('h3')
   title.textContent = item.title
-  const date = subContent.querySelector('.date')
-  date.textContent = dayjs(item.createdAt).format('DD MMMM YYYY')
+  if (item.type === 'notices') {
+    const month = subContent.querySelector('.month')
+    const day = subContent.querySelector('.day')
+    month.textContent = dayjs(item.createdAt).format('MMM')
+    day.textContent = dayjs(item.createdAt).format('DD')
+  } else {
+    const date = subContent.querySelector('.date')
+    date.textContent = dayjs(item.createdAt).format('DD MMMM YYYY')
+  }
   const link = subContent.querySelector('a')
   if (link && item.url) {
     link.setAttribute('href', item.url)
@@ -174,7 +181,7 @@ const viewItem = function (item) {
   content.querySelector('.item').appendChild(subContent)
   const existing = document.getElementById('view-information')
   if (existing) existing.remove()
-  document.body.appendChild(content)
+  document.body.prepend(content)
 }
 
 const getAllContent = async function (type, mineId, locationId, packageId) {

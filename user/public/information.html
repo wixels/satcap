@@ -3,9 +3,9 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" media="screen" href="./_style/app.screen.css">
-    <link rel="stylesheet" media="screen" href="./_style/tabs.screen.css">
-    <link rel="stylesheet" media="screen" href="./_style/info.screen.css">
+    <link rel="stylesheet" media="screen" href="./_style/app.screen.css?v=1">
+    <link rel="stylesheet" media="screen" href="./_style/tabs.screen.css?v=1">
+    <link rel="stylesheet" media="screen" href="./_style/info.screen.css?v=1.1">
     <title>Information</title>
   </head>
   <body>
@@ -31,7 +31,7 @@
         >
         <ul hidden aria-hidden="true">
           <li><label class="tabsetClicker" for="tabset-notices">Notice Board</label></li>
-          <li><label class="tabsetClicker" for="tabset-resources">Resources</label></li>
+          <li><label class="tabsetClicker" for="tabset-resources">Resource Library</label></li>
         </ul>
         <div>
           <section class="notice-board hidden">
@@ -39,7 +39,7 @@
             <div class="list"></div>
           </section>
           <section class="resources hidden">
-            <h2 class="sr-only">Resources</h2>
+            <h2 class="sr-only">Resource Library</h2>
             <div class="list"></div>
           </section>
         </div>
@@ -62,11 +62,11 @@
       </div>
       <div class="subContent">
         <p class="description"></p>
-        <a class="link" href="">View / Download</a>
+        <a class="link primary" href="">View / Download</a>
       </div>
     </template>
     <template id="template-notices">
-      <div class="header">
+      <div class="header notice">
         <p class="date">
           <span class="month"></span>
           <span class="day"></span>
@@ -75,14 +75,14 @@
       </div>
       <div class="subContent">
         <p class="description"></p>
-        <a class="hidden link" href="">More details</a>
+        <a class="hidden link primary" href="">More details</a>
       </div>
     </template>
     <template id="templateItem">
       <div id="view-information">
         <div class="content">
           <div class="feature">
-            <button type="button">&#10229;</button>
+            <button type="button"><img src="./_style/images/prev.png" alt="Arrow pointing backwards"></button>
           </div>
           <div class="item"></div>
         </div>

@@ -86,7 +86,7 @@ button[type="button"] {
   background-color: white;
   color: hsl(var(--color-primary));
 }
-button[type="submit"], button.primary {
+button[type="submit"], button.primary, .link.primary {
   background-color: hsl(var(--color-primary));
   color: white;
   margin-top: 1rem;
@@ -119,13 +119,14 @@ header {
   transition: all 0.1s ease;
   padding: var(--spacer);
   display: grid;
-  margin-bottom: var(--spacer);
   gap: 0.25rem;
   grid-template-columns: auto 2rem;
   place-items: center;
 }
 header h1 {
   margin-left: 2rem;
+  width: calc(100% - 2rem);
+  text-align: center;
 }
 header a {
   font-size: 1.6rem;
@@ -142,7 +143,7 @@ header img {
 }
 
 section {
-  margin-bottom: calc(var(--spacer) * 2);
+  margin-bottom: calc(var(--spacer) * 1.5);
   padding-left: var(--spacer);
   padding-right: var(--spacer);
 }

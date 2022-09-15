@@ -282,6 +282,9 @@ progress {
 #surveyList {
   display: grid;
   gap: calc(var(--spacer) * 2);
+  max-width: var(--max-width);
+  width: calc(100vw - (var(--spacer) * 2));
+  margin: auto;
 }
 
 .listItem {
