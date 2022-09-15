@@ -28,6 +28,9 @@ fieldset,
 button {
   border: none;
 }
+h1, h2, h3 {
+  font-weight: 600;
+}
 .sr-only {
   position: absolute;
   left: -100000px;
@@ -52,7 +55,6 @@ main {
 }
 img { max-width: 100%; }
 h1 {
-  color: hsl(var( --color-primary));
   font-size: 1.6rem;
   transition: all 0.1s ease;
   white-space: nowrap;
@@ -115,22 +117,23 @@ button.danger {
 }
 header {
   transition: all 0.1s ease;
-  box-shadow: var(--box-shadow);
   padding: var(--spacer);
   display: grid;
   margin-bottom: var(--spacer);
-}
-header:not(.withLink) {
-  place-content: center;
-}
-header.withLink {
   gap: 0.25rem;
   grid-template-columns: auto 2rem;
+  place-items: center;
+}
+header h1 {
+  margin-left: 2rem;
 }
 header a {
   font-size: 1.6rem;
   text-decoration: none;
   text-align: center;
+}
+header img {
+  width: 2rem;
 }
 
 .empty {
@@ -139,16 +142,29 @@ header a {
 }
 
 section {
-  margin-bottom: var(--spacer);
+  margin-bottom: calc(var(--spacer) * 2);
   padding-left: var(--spacer);
   padding-right: var(--spacer);
 }
 section.survey {
+  display: grid;
+  grid-template-columns: 0.5rem auto;
+  gap: var(--spacer);
   background-color: hsla(var(--color-tertiary), 20%);
   padding: var(--spacer);
 }
 section.survey a {
   margin: 0.5rem 0;
+}
+section.survey .line {
+  height: 100%;
+  width: 100%;
+  background-color: hsl(var( --color-primary));
+  border-radius: var(--border-radius);
+}
+
+section h2 {
+  margin: var(--spacer) auto;
 }
 
 .modal {
@@ -275,9 +291,13 @@ footer ul li img {
   background-color: hsl(var(--color-primary));
   border-top-left-radius: 1.5rem;
   border-bottom-left-radius: 1.5rem;
+  font-size: 0.8rem;
 }
 .card h3 {
   padding-bottom: var(--spacer);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .card .info {
   color: white;

@@ -74,6 +74,7 @@ const insertListContent = function (parent, data) {
         list.appendChild(setCard(item))
       })
     } else {
+      list.classList.remove('inline')
       list.innerHTML = '<p class="empty">Nothing found...</p>'
     }
     
@@ -89,6 +90,7 @@ const insertQueryContent = function (parent, data) {
         list.appendChild(setQuery(item))
       })
     } else {
+      list.classList.remove('inline')
       list.innerHTML = '<p class="empty">Nothing found...</p>'
     }
     
@@ -97,9 +99,11 @@ const insertQueryContent = function (parent, data) {
 }
 
 const insertSurvey = function (linkId, survey) {
+  console.log('survey: ', survey)
   const content = document.querySelector('.survey')
   const localSubmissions = JSON.parse(window.localStorage.getItem('submissions')) || []
   content.querySelector('h3').textContent = survey.title
+  content.querySelector('p').textContent = survey.shortDescription || ''
   const link = content.querySelector('a')
   link.setAttribute('href', `/survey/${survey.key}?linkId=${linkId}`)
 
@@ -108,7 +112,10 @@ const insertSurvey = function (linkId, survey) {
     if (localSubmissions.includes(linkId)) {
       link.textContent = 'Retake survey'
     }
-  } 
+  }
+  if (survey.title === 'Checklists') {
+    link.textContent = 'Begin checklists'
+  }
 }
 
 const getRecentContent = async function (type, mineId, locationId, packageId) {
@@ -162,6 +169,8 @@ const viewItem = function (item) {
     link.setAttribute('href', item.url)
     link.classList.remove('hidden')
   }
+  const description = subContent.querySelector('p.description')
+  description.textContent = item.description
 
   content.querySelector('.item').appendChild(subContent)
   const existing = document.getElementById('view-information')

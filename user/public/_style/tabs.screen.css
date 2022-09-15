@@ -28,6 +28,9 @@
   border-right-width: 0;
   width: 100%;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tabset > ul li:first-child label {
