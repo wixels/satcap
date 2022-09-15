@@ -65,15 +65,15 @@
         <span>Which option generally describes your current job function?</span>
         <div class="multiple">
           <label class="selector">
-            <input type="radio" value="Operator" name="questionTwo"/>
+            <input type="radio" value="Operator" name="questionTwo" data-on-change="conditionalPath" data-conditional-path="two-supervisor-two-manager" />
             <span>Operator</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Supervisor" name="questionTwo"/>
+            <input type="radio" value="Supervisor" name="questionTwo" data-on-change="conditionalPath" data-conditional-path="two-supervisor-two-manager" />
             <span>Supervisor</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Manager" name="questionTwo"/>
+            <input type="radio" value="Manager" name="questionTwo" data-on-change="conditionalPath" data-conditional-path="two-supervisor-two-manager" />
             <span>Manager</span>
           </label>
         </div>
@@ -689,439 +689,625 @@
           <label for="questionThirtySixFive">Very Confident</label>
         </div>
       </div>
-      <div class="question">
-        <p>Question 37</p>
-        <span class="label">How proactively do you find and collect information from the internet to apply to your job role?</span>
-        <span class="sub"><sup>*</sup>without instruction from superviors</span>
-        <div class="numberRating lrg">
-          <input type="radio" id="questionThirtySevenOne" class="hidden" name="questionThirtySeven" value="1 - Never" />
-          <input type="radio" id="questionThirtySevenTwo" class="hidden" name="questionThirtySeven" value="2 - Rarely" />
-          <input type="radio" id="questionThirtySevenThree" class="hidden" name="questionThirtySeven" value="3 - Occasionally" />
-          <input type="radio" id="questionThirtySevenFour" class="hidden" name="questionThirtySeven" value="4 - Frequently" />
-          <input type="radio" id="questionThirtySevenFive" class="hidden" name="questionThirtySeven" value="5 - Very Frequently" />
-          <label for="questionThirtySevenOne">Never</label>
-          <label for="questionThirtySevenTwo">Rarely</label>
-          <label for="questionThirtySevenThree">Occasionally</label>
-          <label for="questionThirtySevenFour">Frequently</label>
-          <label for="questionThirtySevenFive">Very Frequently</label>
+      <template data-choice="two-supervisor">
+        <div class="subQuestion">
+          <div class="question">
+            <p>Question 37</p>
+            <span class="label">How proactively do you find and collect information from the internet to apply to your job role?</span>
+            <span class="sub"><sup>*</sup>without instruction from superviors</span>
+            <div class="numberRating lrg">
+              <input type="radio" id="questionThirtySevenOne" class="hidden" name="questionThirtySeven" value="1 - Never" />
+              <input type="radio" id="questionThirtySevenTwo" class="hidden" name="questionThirtySeven" value="2 - Rarely" />
+              <input type="radio" id="questionThirtySevenThree" class="hidden" name="questionThirtySeven" value="3 - Occasionally" />
+              <input type="radio" id="questionThirtySevenFour" class="hidden" name="questionThirtySeven" value="4 - Frequently" />
+              <input type="radio" id="questionThirtySevenFive" class="hidden" name="questionThirtySeven" value="5 - Very Frequently" />
+              <label for="questionThirtySevenOne">Never</label>
+              <label for="questionThirtySevenTwo">Rarely</label>
+              <label for="questionThirtySevenThree">Occasionally</label>
+              <label for="questionThirtySevenFour">Frequently</label>
+              <label for="questionThirtySevenFive">Very Frequently</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 38</p>
+            <span class="label">Rate your interest in finding and applying new technologies and software to your job</span>
+            <div class="numberRating">
+              <input type="radio" id="questionThirtyEightOne" class="hidden" name="questionThirtyEight" value="1 - Very Low" />
+              <input type="radio" id="questionThirtyEightTwo" class="hidden" name="questionThirtyEight" value="2 - Low" />
+              <input type="radio" id="questionThirtyEightThree" class="hidden" name="questionThirtyEight" value="3 - Neutral" />
+              <input type="radio" id="questionThirtyEightFour" class="hidden" name="questionThirtyEight" value="4 - High" />
+              <input type="radio" id="questionThirtyEightFive" class="hidden" name="questionThirtyEight" value="5 - Very High" />
+              <label for="questionThirtyEightOne">Very Low</label>
+              <label for="questionThirtyEightTwo">Low</label>
+              <label for="questionThirtyEightThree">Neutral</label>
+              <label for="questionThirtyEightFour">High</label>
+              <label for="questionThirtyEightFive">Very High</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 39</p>
+            <span class="label">How do you respond to change within your organisation?</span>
+            <span class="sub">Select the hypothetical response that most closely aligns with your response</span>
+            <div class="multiple">
+              <label class="selector">
+                <input type="radio" value="2 - I'm not sure what to do" name="questionThirtyNine" />
+                <span>"I'm not sure what to do"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="1 - It's fine the way it is" name="questionThirtyNine" />
+                <span>"It's fine the way it is"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="2 - No one is considering how this will impact me" name="questionThirtyNine" />
+                <span>"No one is considering how this will impact me"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="1 - Haven't we tried this before and it didn't work" name="questionThirtyNine" />
+                <span>"Haven't we tried this before and it didn't work"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="4 - I'm fine with it - but other people are not" name="questionThirtyNine" />
+                <span>"I'm fine with it - but other people are not"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="0 - We don't have time for this" name="questionThirtyNine" />
+                <span>"We don't have time for this"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="0 - This won't be permanent" name="questionThirtyNine" />
+                <span>"This won't be permanent"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="5 - I'm willing to adapt" name="questionThirtyNine" />
+                <span>"I'm willing to adapt"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="0 - No comment" name="questionThirtyNine" />
+                <span>"No comment"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="0 - None of the above" name="questionThirtyNine" />
+                <span>"None of the above"</span>
+              </label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 40</p>
+            <span class="label">Rate your level of understanding of the impact of digital transformation within your organisation</span>
+            <div class="numberRating">
+              <input type="radio" id="questionFortyOne" class="hidden" name="questionForty" value="1 - Very Low" />
+              <input type="radio" id="questionFortyTwo" class="hidden" name="questionForty" value="2 - Low" />
+              <input type="radio" id="questionFortyThree" class="hidden" name="questionForty" value="3 - Neutral" />
+              <input type="radio" id="questionFortyFour" class="hidden" name="questionForty" value="4 - High" />
+              <input type="radio" id="questionFortyFive" class="hidden" name="questionForty" value="5 - Very High" />
+              <label for="questionFortyOne">Very Low</label>
+              <label for="questionFortyTwo">Low</label>
+              <label for="questionFortyThree">Neutral</label>
+              <label for="questionFortyFour">High</label>
+              <label for="questionFortyFive">Very High</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 41</p>
+            <span class="label">How often do you use digital assets<sup>*</sup> for innovation within your job role?</span>
+            <span class="sub"><sup>*</sup>E.g. Microsoft Teams, Zoom, Microsoft Office Suit, Spreadsheet Software</span>
+            <div class="numberRating">
+              <input type="radio" id="questionFortyOneOne" class="hidden" name="questionFortyOne" value="1 - Not at all" />
+              <input type="radio" id="questionFortyOneTwo" class="hidden" name="questionFortyOne" value="2 - Sometimes (bi-monthly)" />
+              <input type="radio" id="questionFortyOneThree" class="hidden" name="questionFortyOne" value="3 - Often (monthly)" />
+              <input type="radio" id="questionFortyOneFour" class="hidden" name="questionFortyOne" value="4 - More than others I know (weekly)" />
+              <input type="radio" id="questionFortyOneFive" class="hidden" name="questionFortyOne" value="5 - All the time (daily)" />
+              <label for="questionFortyOneOne">Never</label>
+              <label for="questionFortyOneTwo">Bi-monthly</label>
+              <label for="questionFortyOneThree">Monthly</label>
+              <label for="questionFortyOneFour">Weekly</label>
+              <label for="questionFortyOneFive">Daily</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 42</p>
+            <span class="label">How often do you collaborate using a digital asset?</span>
+            <span class="sub"><sup>*</sup>E.g. Microsoft Teams, Zoom, Microsoft Office Suit, Spreadsheet Software</span>
+            <div class="numberRating">
+              <input type="radio" id="questionFortyTwoOne" class="hidden" name="questionFortyTwo" value="1 - Not at all" />
+              <input type="radio" id="questionFortyTwoTwo" class="hidden" name="questionFortyTwo" value="2 - Sometimes (bi-monthly)" />
+              <input type="radio" id="questionFortyTwoThree" class="hidden" name="questionFortyTwo" value="3 - Often (monthly)" />
+              <input type="radio" id="questionFortyTwoFour" class="hidden" name="questionFortyTwo" value="4 - More than others I know (weekly)" />
+              <input type="radio" id="questionFortyTwoFive" class="hidden" name="questionFortyTwo" value="5 - All the time (daily)" />
+              <label for="questionFortyTwoOne">Never</label>
+              <label for="questionFortyTwoTwo">Bi-monthly</label>
+              <label for="questionFortyTwoThree">Monthly</label>
+              <label for="questionFortyTwoFour">Weekly</label>
+              <label for="questionFortyTwoFive">Daily</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 43</p>
+            <span class="label">How often do you identify talent in the workforce and encourage personal development?</span>
+            <div class="numberRating">
+              <input type="radio" id="questionFortyThreeOne" class="hidden" name="questionFortyThree" value="1 - Not at all" />
+              <input type="radio" id="questionFortyThreeTwo" class="hidden" name="questionFortyThree" value="2 - Sometimes (bi-monthly)" />
+              <input type="radio" id="questionFortyThreeThree" class="hidden" name="questionFortyThree" value="3 - Often (monthly)" />
+              <input type="radio" id="questionFortyThreeFour" class="hidden" name="questionFortyThree" value="4 - More than others I know (weekly)" />
+              <input type="radio" id="questionFortyThreeFive" class="hidden" name="questionFortyThree" value="5 - All the time (daily)" />
+              <label for="questionFortyThreeOne">Never</label>
+              <label for="questionFortyThreeTwo">Bi-monthly</label>
+              <label for="questionFortyThreeThree">Monthly</label>
+              <label for="questionFortyThreeFour">Weekly</label>
+              <label for="questionFortyThreeFive">Daily</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 44</p>
+            <span class="label">How often do you solve problems using the digital assets at your disposal?</span>
+            <div class="numberRating">
+              <input type="radio" id="questionFortyFourOne" class="hidden" name="questionFortyFour" value="1 - Not at all" />
+              <input type="radio" id="questionFortyFourTwo" class="hidden" name="questionFortyFour" value="2 - Sometimes (bi-monthly)" />
+              <input type="radio" id="questionFortyFourThree" class="hidden" name="questionFortyFour" value="3 - Often (monthly)" />
+              <input type="radio" id="questionFortyFourFour" class="hidden" name="questionFortyFour" value="4 - More than others I know (weekly)" />
+              <input type="radio" id="questionFortyFourFive" class="hidden" name="questionFortyFour" value="5 - All the time (daily)" />
+              <label for="questionFortyFourOne">Never</label>
+              <label for="questionFortyFourTwo">Bi-monthly</label>
+              <label for="questionFortyFourThree">Monthly</label>
+              <label for="questionFortyFourFour">Weekly</label>
+              <label for="questionFortyFourFive">Daily</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 45</p>
+            <span class="label">I understand my organisation's business model</span>
+            <div class="numberRating lrg">
+              <input type="radio" id="questionFortyFiveOne" class="hidden" name="questionFortyFive" value="1 - Strongly Disagree" />
+              <input type="radio" id="questionFortyFiveTwo" class="hidden" name="questionFortyFive" value="2 - Disagree" />
+              <input type="radio" id="questionFortyFiveThree" class="hidden" name="questionFortyFive" value="3 - Neutral" />
+              <input type="radio" id="questionFortyFiveFour" class="hidden" name="questionFortyFive" value="4 - Agree" />
+              <input type="radio" id="questionFortyFiveFive" class="hidden" name="questionFortyFive" value="5 - Strongly Agree" />
+              <label for="questionFortyFiveOne">Strongly Disagree</label>
+              <label for="questionFortyFiveTwo">Disagree</label>
+              <label for="questionFortyFiveThree">Neutral</label>
+              <label for="questionFortyFiveFour">Agree</label>
+              <label for="questionFortyFiveFive">Strongly Agree</label>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="question">
-        <p>Question 38</p>
-        <span class="label">Rate your interest in finding and applying new technologies and software to your job</span>
-        <div class="numberRating">
-          <input type="radio" id="questionThirtyEightOne" class="hidden" name="questionThirtyEight" value="1 - Very Low" />
-          <input type="radio" id="questionThirtyEightTwo" class="hidden" name="questionThirtyEight" value="2 - Low" />
-          <input type="radio" id="questionThirtyEightThree" class="hidden" name="questionThirtyEight" value="3 - Neutral" />
-          <input type="radio" id="questionThirtyEightFour" class="hidden" name="questionThirtyEight" value="4 - High" />
-          <input type="radio" id="questionThirtyEightFive" class="hidden" name="questionThirtyEight" value="5 - Very High" />
-          <label for="questionThirtyEightOne">Very Low</label>
-          <label for="questionThirtyEightTwo">Low</label>
-          <label for="questionThirtyEightThree">Neutral</label>
-          <label for="questionThirtyEightFour">High</label>
-          <label for="questionThirtyEightFive">Very High</label>
+      </template>
+      <template data-choice="two-manager">
+        <div class="subQuestion">
+          <div class="question">
+            <p>Question 37</p>
+            <span class="label">How proactively do you find and collect information from the internet to apply to your job role?</span>
+            <span class="sub"><sup>*</sup>without instruction from superviors</span>
+            <div class="numberRating lrg">
+              <input type="radio" id="questionThirtySevenOne" class="hidden" name="questionThirtySeven" value="1 - Never" />
+              <input type="radio" id="questionThirtySevenTwo" class="hidden" name="questionThirtySeven" value="2 - Rarely" />
+              <input type="radio" id="questionThirtySevenThree" class="hidden" name="questionThirtySeven" value="3 - Occasionally" />
+              <input type="radio" id="questionThirtySevenFour" class="hidden" name="questionThirtySeven" value="4 - Frequently" />
+              <input type="radio" id="questionThirtySevenFive" class="hidden" name="questionThirtySeven" value="5 - Very Frequently" />
+              <label for="questionThirtySevenOne">Never</label>
+              <label for="questionThirtySevenTwo">Rarely</label>
+              <label for="questionThirtySevenThree">Occasionally</label>
+              <label for="questionThirtySevenFour">Frequently</label>
+              <label for="questionThirtySevenFive">Very Frequently</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 38</p>
+            <span class="label">Rate your interest in finding and applying new technologies and software to your job</span>
+            <div class="numberRating">
+              <input type="radio" id="questionThirtyEightOne" class="hidden" name="questionThirtyEight" value="1 - Very Low" />
+              <input type="radio" id="questionThirtyEightTwo" class="hidden" name="questionThirtyEight" value="2 - Low" />
+              <input type="radio" id="questionThirtyEightThree" class="hidden" name="questionThirtyEight" value="3 - Neutral" />
+              <input type="radio" id="questionThirtyEightFour" class="hidden" name="questionThirtyEight" value="4 - High" />
+              <input type="radio" id="questionThirtyEightFive" class="hidden" name="questionThirtyEight" value="5 - Very High" />
+              <label for="questionThirtyEightOne">Very Low</label>
+              <label for="questionThirtyEightTwo">Low</label>
+              <label for="questionThirtyEightThree">Neutral</label>
+              <label for="questionThirtyEightFour">High</label>
+              <label for="questionThirtyEightFive">Very High</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 39</p>
+            <span class="label">How do you respond to change within your organisation?</span>
+            <span class="sub">Select the hypothetical response that most closely aligns with your response</span>
+            <div class="multiple">
+              <label class="selector">
+                <input type="radio" value="2 - I'm not sure what to do" name="questionThirtyNine" />
+                <span>"I'm not sure what to do"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="1 - It's fine the way it is" name="questionThirtyNine" />
+                <span>"It's fine the way it is"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="2 - No one is considering how this will impact me" name="questionThirtyNine" />
+                <span>"No one is considering how this will impact me"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="1 - Haven't we tried this before and it didn't work" name="questionThirtyNine" />
+                <span>"Haven't we tried this before and it didn't work"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="4 - I'm fine with it - but other people are not" name="questionThirtyNine" />
+                <span>"I'm fine with it - but other people are not"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="0 - We don't have time for this" name="questionThirtyNine" />
+                <span>"We don't have time for this"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="0 - This won't be permanent" name="questionThirtyNine" />
+                <span>"This won't be permanent"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="5 - I'm willing to adapt" name="questionThirtyNine" />
+                <span>"I'm willing to adapt"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="0 - No comment" name="questionThirtyNine" />
+                <span>"No comment"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="0 - None of the above" name="questionThirtyNine" />
+                <span>"None of the above"</span>
+              </label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 40</p>
+            <span class="label">Rate your level of understanding of the impact of digital transformation within your organisation</span>
+            <div class="numberRating">
+              <input type="radio" id="questionFortyOne" class="hidden" name="questionForty" value="1 - Very Low" />
+              <input type="radio" id="questionFortyTwo" class="hidden" name="questionForty" value="2 - Low" />
+              <input type="radio" id="questionFortyThree" class="hidden" name="questionForty" value="3 - Neutral" />
+              <input type="radio" id="questionFortyFour" class="hidden" name="questionForty" value="4 - High" />
+              <input type="radio" id="questionFortyFive" class="hidden" name="questionForty" value="5 - Very High" />
+              <label for="questionFortyOne">Very Low</label>
+              <label for="questionFortyTwo">Low</label>
+              <label for="questionFortyThree">Neutral</label>
+              <label for="questionFortyFour">High</label>
+              <label for="questionFortyFive">Very High</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 41</p>
+            <span class="label">How often do you use digital assets<sup>*</sup> for innovation within your job role?</span>
+            <span class="sub"><sup>*</sup>E.g. Microsoft Teams, Zoom, Microsoft Office Suit, Spreadsheet Software</span>
+            <div class="numberRating">
+              <input type="radio" id="questionFortyOneOne" class="hidden" name="questionFortyOne" value="1 - Not at all" />
+              <input type="radio" id="questionFortyOneTwo" class="hidden" name="questionFortyOne" value="2 - Sometimes (bi-monthly)" />
+              <input type="radio" id="questionFortyOneThree" class="hidden" name="questionFortyOne" value="3 - Often (monthly)" />
+              <input type="radio" id="questionFortyOneFour" class="hidden" name="questionFortyOne" value="4 - More than others I know (weekly)" />
+              <input type="radio" id="questionFortyOneFive" class="hidden" name="questionFortyOne" value="5 - All the time (daily)" />
+              <label for="questionFortyOneOne">Never</label>
+              <label for="questionFortyOneTwo">Bi-monthly</label>
+              <label for="questionFortyOneThree">Monthly</label>
+              <label for="questionFortyOneFour">Weekly</label>
+              <label for="questionFortyOneFive">Daily</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 42</p>
+            <span class="label">How often do you collaborate using a digital asset?</span>
+            <span class="sub"><sup>*</sup>E.g. Microsoft Teams, Zoom, Microsoft Office Suit, Spreadsheet Software</span>
+            <div class="numberRating">
+              <input type="radio" id="questionFortyTwoOne" class="hidden" name="questionFortyTwo" value="1 - Not at all" />
+              <input type="radio" id="questionFortyTwoTwo" class="hidden" name="questionFortyTwo" value="2 - Sometimes (bi-monthly)" />
+              <input type="radio" id="questionFortyTwoThree" class="hidden" name="questionFortyTwo" value="3 - Often (monthly)" />
+              <input type="radio" id="questionFortyTwoFour" class="hidden" name="questionFortyTwo" value="4 - More than others I know (weekly)" />
+              <input type="radio" id="questionFortyTwoFive" class="hidden" name="questionFortyTwo" value="5 - All the time (daily)" />
+              <label for="questionFortyTwoOne">Never</label>
+              <label for="questionFortyTwoTwo">Bi-monthly</label>
+              <label for="questionFortyTwoThree">Monthly</label>
+              <label for="questionFortyTwoFour">Weekly</label>
+              <label for="questionFortyTwoFive">Daily</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 43</p>
+            <span class="label">How often do you identify talent in the workforce and encourage personal development?</span>
+            <div class="numberRating">
+              <input type="radio" id="questionFortyThreeOne" class="hidden" name="questionFortyThree" value="1 - Not at all" />
+              <input type="radio" id="questionFortyThreeTwo" class="hidden" name="questionFortyThree" value="2 - Sometimes (bi-monthly)" />
+              <input type="radio" id="questionFortyThreeThree" class="hidden" name="questionFortyThree" value="3 - Often (monthly)" />
+              <input type="radio" id="questionFortyThreeFour" class="hidden" name="questionFortyThree" value="4 - More than others I know (weekly)" />
+              <input type="radio" id="questionFortyThreeFive" class="hidden" name="questionFortyThree" value="5 - All the time (daily)" />
+              <label for="questionFortyThreeOne">Never</label>
+              <label for="questionFortyThreeTwo">Bi-monthly</label>
+              <label for="questionFortyThreeThree">Monthly</label>
+              <label for="questionFortyThreeFour">Weekly</label>
+              <label for="questionFortyThreeFive">Daily</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 44</p>
+            <span class="label">How often do you solve problems using the digital assets at your disposal?</span>
+            <div class="numberRating">
+              <input type="radio" id="questionFortyFourOne" class="hidden" name="questionFortyFour" value="1 - Not at all" />
+              <input type="radio" id="questionFortyFourTwo" class="hidden" name="questionFortyFour" value="2 - Sometimes (bi-monthly)" />
+              <input type="radio" id="questionFortyFourThree" class="hidden" name="questionFortyFour" value="3 - Often (monthly)" />
+              <input type="radio" id="questionFortyFourFour" class="hidden" name="questionFortyFour" value="4 - More than others I know (weekly)" />
+              <input type="radio" id="questionFortyFourFive" class="hidden" name="questionFortyFour" value="5 - All the time (daily)" />
+              <label for="questionFortyFourOne">Never</label>
+              <label for="questionFortyFourTwo">Bi-monthly</label>
+              <label for="questionFortyFourThree">Monthly</label>
+              <label for="questionFortyFourFour">Weekly</label>
+              <label for="questionFortyFourFive">Daily</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 45</p>
+            <span class="label">I understand my organisation's business model</span>
+            <div class="numberRating lrg">
+              <input type="radio" id="questionFortyFiveOne" class="hidden" name="questionFortyFive" value="1 - Strongly Disagree" />
+              <input type="radio" id="questionFortyFiveTwo" class="hidden" name="questionFortyFive" value="2 - Disagree" />
+              <input type="radio" id="questionFortyFiveThree" class="hidden" name="questionFortyFive" value="3 - Neutral" />
+              <input type="radio" id="questionFortyFiveFour" class="hidden" name="questionFortyFive" value="4 - Agree" />
+              <input type="radio" id="questionFortyFiveFive" class="hidden" name="questionFortyFive" value="5 - Strongly Agree" />
+              <label for="questionFortyFiveOne">Strongly Disagree</label>
+              <label for="questionFortyFiveTwo">Disagree</label>
+              <label for="questionFortyFiveThree">Neutral</label>
+              <label for="questionFortyFiveFour">Agree</label>
+              <label for="questionFortyFiveFive">Strongly Agree</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 46</p>
+            <span class="label">I am aware of the strategic direction, objectives, and Key Performance Indictors (KPIs) of the organisation</span>
+            <div class="numberRating lrg">
+              <input type="radio" id="questionFortySixOne" class="hidden" name="questionFortySix" value="1 - Strongly Disagree" />
+              <input type="radio" id="questionFortySixTwo" class="hidden" name="questionFortySix" value="2 - Disagree" />
+              <input type="radio" id="questionFortySixThree" class="hidden" name="questionFortySix" value="3 - Neutral" />
+              <input type="radio" id="questionFortySixFour" class="hidden" name="questionFortySix" value="4 - Agree" />
+              <input type="radio" id="questionFortySixFive" class="hidden" name="questionFortySix" value="5 - Strongly Agree" />
+              <label for="questionFortySixOne">Strongly Disagree</label>
+              <label for="questionFortySixTwo">Disagree</label>
+              <label for="questionFortySixThree">Neutral</label>
+              <label for="questionFortySixFour">Agree</label>
+              <label for="questionFortySixFive">Strongly Agree</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 47</p>
+            <span class="label">How often do you encourage the use of digital assets within your organisation?</span>
+            <div class="numberRating">
+              <input type="radio" id="questionFortySevenOne" class="hidden" name="questionFortySeven" value="1 - Not at all" />
+              <input type="radio" id="questionFortySevenTwo" class="hidden" name="questionFortySeven" value="2 - Sometimes (bi-monthly)" />
+              <input type="radio" id="questionFortySevenThree" class="hidden" name="questionFortySeven" value="3 - Often (monthly)" />
+              <input type="radio" id="questionFortySevenFour" class="hidden" name="questionFortySeven" value="4 - More than others I know (weekly)" />
+              <input type="radio" id="questionFortySevenFive" class="hidden" name="questionFortySeven" value="5 - All the time (daily)" />
+              <label for="questionFortySevenOne">Never</label>
+              <label for="questionFortySevenTwo">Bi-monthly</label>
+              <label for="questionFortySevenThree">Monthly</label>
+              <label for="questionFortySevenFour">Weekly</label>
+              <label for="questionFortySevenFive">Daily</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 48</p>
+            <span class="label">Rate your ability to act-on/implement/execute on the strategic intent of the organisation</span>
+            <div class="numberRating">
+              <input type="radio" id="questionFortyEightOne" class="hidden" name="questionFortyEight" value="1 - Very Low" />
+              <input type="radio" id="questionFortyEightTwo" class="hidden" name="questionFortyEight" value="2 - Low" />
+              <input type="radio" id="questionFortyEightThree" class="hidden" name="questionFortyEight" value="3 - Neutral" />
+              <input type="radio" id="questionFortyEightFour" class="hidden" name="questionFortyEight" value="4 - High" />
+              <input type="radio" id="questionFortyEightFive" class="hidden" name="questionFortyEight" value="5 - Very High" />
+              <label for="questionFortyEightOne">Very Low</label>
+              <label for="questionFortyEightTwo">Low</label>
+              <label for="questionFortyEightThree">Neutral</label>
+              <label for="questionFortyEightFour">High</label>
+              <label for="questionFortyEightFive">Very High</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 49</p>
+            <span class="label">How often do you set targets for your team with monitoring and evaluating metrics using digital assets?</span>
+            <div class="numberRating">
+              <input type="radio" id="questionFortyNineOne" class="hidden" name="questionFortyNine" value="1 - Not at all" />
+              <input type="radio" id="questionFortyNineTwo" class="hidden" name="questionFortyNine" value="2 - Sometimes (bi-monthly)" />
+              <input type="radio" id="questionFortyNineThree" class="hidden" name="questionFortyNine" value="3 - Often (monthly)" />
+              <input type="radio" id="questionFortyNineFour" class="hidden" name="questionFortyNine" value="4 - More than others I know (weekly)" />
+              <input type="radio" id="questionFortyNineFive" class="hidden" name="questionFortyNine" value="5 - All the time (daily)" />
+              <label for="questionFortyNineOne">Never</label>
+              <label for="questionFortyNineTwo">Bi-monthly</label>
+              <label for="questionFortyNineThree">Monthly</label>
+              <label for="questionFortyNineFour">Weekly</label>
+              <label for="questionFortyNineFive">Daily</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 50</p>
+            <span class="label">Rate your ability to influence others through digital channels</span>
+            <div class="numberRating">
+              <input type="radio" id="questionFiftyOne" class="hidden" name="questionFifty" value="1 - Very Low" />
+              <input type="radio" id="questionFiftyTwo" class="hidden" name="questionFifty" value="2 - Low" />
+              <input type="radio" id="questionFiftyThree" class="hidden" name="questionFifty" value="3 - Neutral" />
+              <input type="radio" id="questionFiftyFour" class="hidden" name="questionFifty" value="4 - High" />
+              <input type="radio" id="questionFiftyFive" class="hidden" name="questionFifty" value="5 - Very High" />
+              <label for="questionFiftyOne">Very Low</label>
+              <label for="questionFiftyTwo">Low</label>
+              <label for="questionFiftyThree">Neutral</label>
+              <label for="questionFiftyFour">High</label>
+              <label for="questionFiftyFive">Very High</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 51</p>
+            <span class="label">I am capable of sound judgement through analysis of digital and non-digital information</span>
+            <div class="numberRating lrg">
+              <input type="radio" id="questionFiftyOneOne" class="hidden" name="questionFiftyOne" value="1 - Strongly Disagree" />
+              <input type="radio" id="questionFiftyOneTwo" class="hidden" name="questionFiftyOne" value="2 - Disagree" />
+              <input type="radio" id="questionFiftyOneThree" class="hidden" name="questionFiftyOne" value="3 - Neutral" />
+              <input type="radio" id="questionFiftyOneFour" class="hidden" name="questionFiftyOne" value="4 - Agree" />
+              <input type="radio" id="questionFiftyOneFive" class="hidden" name="questionFiftyOne" value="5 - Strongly Agree" />
+              <label for="questionFiftyOneOne">Strongly Disagree</label>
+              <label for="questionFiftyOneTwo">Disagree</label>
+              <label for="questionFiftyOneThree">Neutral</label>
+              <label for="questionFiftyOneFour">Agree</label>
+              <label for="questionFiftyOneFive">Strongly Agree</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 52</p>
+            <span class="label">I am curious about alternative digital assets that can improve my ability to lead</span>
+            <div class="numberRating lrg">
+              <input type="radio" id="questionFiftyTwoOne" class="hidden" name="questionFiftyTwo" value="1 - Strongly Disagree" />
+              <input type="radio" id="questionFiftyTwoTwo" class="hidden" name="questionFiftyTwo" value="2 - Disagree" />
+              <input type="radio" id="questionFiftyTwoThree" class="hidden" name="questionFiftyTwo" value="3 - Neutral" />
+              <input type="radio" id="questionFiftyTwoFour" class="hidden" name="questionFiftyTwo" value="4 - Agree" />
+              <input type="radio" id="questionFiftyTwoFive" class="hidden" name="questionFiftyTwo" value="5 - Strongly Agree" />
+              <label for="questionFiftyTwoOne">Strongly Disagree</label>
+              <label for="questionFiftyTwoTwo">Disagree</label>
+              <label for="questionFiftyTwoThree">Neutral</label>
+              <label for="questionFiftyTwoFour">Agree</label>
+              <label for="questionFiftyTwoFive">Strongly Agree</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 53</p>
+            <span class="label">I am aware of the security risks involved with the use of digital assets</span>
+            <div class="numberRating lrg">
+              <input type="radio" id="questionFiftyThreeOne" class="hidden" name="questionFiftyThree" value="1 - Strongly Disagree" />
+              <input type="radio" id="questionFiftyThreeTwo" class="hidden" name="questionFiftyThree" value="2 - Disagree" />
+              <input type="radio" id="questionFiftyThreeThree" class="hidden" name="questionFiftyThree" value="3 - Neutral" />
+              <input type="radio" id="questionFiftyThreeFour" class="hidden" name="questionFiftyThree" value="4 - Agree" />
+              <input type="radio" id="questionFiftyThreeFive" class="hidden" name="questionFiftyThree" value="5 - Strongly Agree" />
+              <label for="questionFiftyThreeOne">Strongly Disagree</label>
+              <label for="questionFiftyThreeTwo">Disagree</label>
+              <label for="questionFiftyThreeThree">Neutral</label>
+              <label for="questionFiftyThreeFour">Agree</label>
+              <label for="questionFiftyThreeFive">Strongly Agree</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 54</p>
+            <span class="label">I am a mentor/coach to others for the adoption and use of digital assets</span>
+            <div class="numberRating lrg">
+              <input type="radio" id="questionFiftyFourOne" class="hidden" name="questionFiftyFour" value="1 - Strongly Disagree" />
+              <input type="radio" id="questionFiftyFourTwo" class="hidden" name="questionFiftyFour" value="2 - Disagree" />
+              <input type="radio" id="questionFiftyFourThree" class="hidden" name="questionFiftyFour" value="3 - Neutral" />
+              <input type="radio" id="questionFiftyFourFour" class="hidden" name="questionFiftyFour" value="4 - Agree" />
+              <input type="radio" id="questionFiftyFourFive" class="hidden" name="questionFiftyFour" value="5 - Strongly Agree" />
+              <label for="questionFiftyFourOne">Strongly Disagree</label>
+              <label for="questionFiftyFourTwo">Disagree</label>
+              <label for="questionFiftyFourThree">Neutral</label>
+              <label for="questionFiftyFourFour">Agree</label>
+              <label for="questionFiftyFourFive">Strongly Agree</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 55</p>
+            <span class="label">I have an understanding of some of the measures that need to put in place to ensure that digital transformation is encouraged in my company</span>
+            <div class="numberRating lrg">
+              <input type="radio" id="questionFiftyFiveOne" class="hidden" name="questionFiftyFive" value="1 - Strongly Disagree" />
+              <input type="radio" id="questionFiftyFiveTwo" class="hidden" name="questionFiftyFive" value="2 - Disagree" />
+              <input type="radio" id="questionFiftyFiveThree" class="hidden" name="questionFiftyFive" value="3 - Neutral" />
+              <input type="radio" id="questionFiftyFiveFour" class="hidden" name="questionFiftyFive" value="4 - Agree" />
+              <input type="radio" id="questionFiftyFiveFive" class="hidden" name="questionFiftyFive" value="5 - Strongly Agree" />
+              <label for="questionFiftyFiveOne">Strongly Disagree</label>
+              <label for="questionFiftyFiveTwo">Disagree</label>
+              <label for="questionFiftyFiveThree">Neutral</label>
+              <label for="questionFiftyFiveFour">Agree</label>
+              <label for="questionFiftyFiveFive">Strongly Agree</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 56</p>
+            <span class="label">I use digital information to monitor new developments in my industry</span>
+            <div class="numberRating lrg">
+              <input type="radio" id="questionFiftySixOne" class="hidden" name="questionFiftySix" value="1 - Strongly Disagree" />
+              <input type="radio" id="questionFiftySixTwo" class="hidden" name="questionFiftySix" value="2 - Disagree" />
+              <input type="radio" id="questionFiftySixThree" class="hidden" name="questionFiftySix" value="3 - Neutral" />
+              <input type="radio" id="questionFiftySixFour" class="hidden" name="questionFiftySix" value="4 - Agree" />
+              <input type="radio" id="questionFiftySixFive" class="hidden" name="questionFiftySix" value="5 - Strongly Agree" />
+              <label for="questionFiftySixOne">Strongly Disagree</label>
+              <label for="questionFiftySixTwo">Disagree</label>
+              <label for="questionFiftySixThree">Neutral</label>
+              <label for="questionFiftySixFour">Agree</label>
+              <label for="questionFiftySixFive">Strongly Agree</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 57</p>
+            <span class="label">I consider myself as someone who has the desire to constantly be right</span>
+            <div class="numberRating lrg">
+              <input type="radio" id="questionFiftySevenOne" class="hidden" name="questionFiftySeven" value="1 - Strongly Disagree" />
+              <input type="radio" id="questionFiftySevenTwo" class="hidden" name="questionFiftySeven" value="2 - Disagree" />
+              <input type="radio" id="questionFiftySevenThree" class="hidden" name="questionFiftySeven" value="3 - Neutral" />
+              <input type="radio" id="questionFiftySevenFour" class="hidden" name="questionFiftySeven" value="4 - Agree" />
+              <input type="radio" id="questionFiftySevenFive" class="hidden" name="questionFiftySeven" value="5 - Strongly Agree" />
+              <label for="questionFiftySevenOne">Strongly Disagree</label>
+              <label for="questionFiftySevenTwo">Disagree</label>
+              <label for="questionFiftySevenThree">Neutral</label>
+              <label for="questionFiftySevenFour">Agree</label>
+              <label for="questionFiftySevenFive">Strongly Agree</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 58</p>
+            <span class="label">How often do you use digital tools to reach consensus, find alignment, or promote decision making?</span>
+            <div class="numberRating">
+              <input type="radio" id="questionFiftyEightOne" class="hidden" name="questionFiftyEight" value="1 - Not at all" />
+              <input type="radio" id="questionFiftyEightTwo" class="hidden" name="questionFiftyEight" value="2 - Sometimes (bi-monthly)" />
+              <input type="radio" id="questionFiftyEightThree" class="hidden" name="questionFiftyEight" value="3 - Often (monthly)" />
+              <input type="radio" id="questionFiftyEightFour" class="hidden" name="questionFiftyEight" value="4 - More than others I know (weekly)" />
+              <input type="radio" id="questionFiftyEightFive" class="hidden" name="questionFiftyEight" value="5 - All the time (daily)" />
+              <label for="questionFiftyEightOne">Never</label>
+              <label for="questionFiftyEightTwo">Bi-monthly</label>
+              <label for="questionFiftyEightThree">Monthly</label>
+              <label for="questionFiftyEightFour">Weekly</label>
+              <label for="questionFiftyEightFive">Daily</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>Question 59</p>
+            <span class="label">What do you think about pivotting from legacy technology that cannot meet the current needs of your organisation?</span>
+            <span class="sub">Select the hypothetical response that most closely aligns with your response</span>
+            <div class="multiple">
+              <label class="selector">
+                <input type="radio" value="2 - I'm not sure what to do" name="questionFiftyNine" />
+                <span>"I'm not sure what to do"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="1 - It's fine the way it is" name="questionFiftyNine" />
+                <span>"It's fine the way it is"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="2 - No one is considering how this will impact me" name="questionFiftyNine" />
+                <span>"No one is considering how this will impact me"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="1 - Haven't we tried this before and it didn't work" name="questionFiftyNine" />
+                <span>"Haven't we tried this before and it didn't work"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="4 - I'm fine with it - but other people are not" name="questionFiftyNine" />
+                <span>"I'm fine with it - but other people are not"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="0 - We don't have time for this" name="questionFiftyNine" />
+                <span>"We don't have time for this"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="0 - This won't be permanent" name="questionFiftyNine" />
+                <span>"This won't be permanent"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="5 - I'm willing to adapt" name="questionFiftyNine" />
+                <span>"I'm willing to adapt"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="0 - No comment" name="questionFiftyNine" />
+                <span>"No comment"</span>
+              </label>
+              <label class="selector">
+                <input type="radio" value="0 - None of the above" name="questionFiftyNine" />
+                <span>"None of the above"</span>
+              </label>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="question">
-        <p>Question 39</p>
-        <span class="label">How do you respond to change within your organisation?</span>
-        <span class="sub">Select the hypothetical response that most closely aligns with your response</span>
-        <div class="multiple">
-          <label class="selector">
-            <input type="radio" value="2 - I'm not sure what to do" name="questionThirtyNine" />
-            <span>"I'm not sure what to do"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="1 - It's fine the way it is" name="questionThirtyNine" />
-            <span>"It's fine the way it is"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="2 - No one is considering how this will impact me" name="questionThirtyNine" />
-            <span>"No one is considering how this will impact me"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="1 - Haven't we tried this before and it didn't work" name="questionThirtyNine" />
-            <span>"Haven't we tried this before and it didn't work"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="4 - I'm fine with it - but other people are not" name="questionThirtyNine" />
-            <span>"I'm fine with it - but other people are not"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="0 - We don't have time for this" name="questionThirtyNine" />
-            <span>"We don't have time for this"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="0 - This won't be permanent" name="questionThirtyNine" />
-            <span>"This won't be permanent"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="5 - I'm willing to adapt" name="questionThirtyNine" />
-            <span>"I'm willing to adapt"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="0 - No comment" name="questionThirtyNine" />
-            <span>"No comment"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="0 - None of the above" name="questionThirtyNine" />
-            <span>"None of the above"</span>
-          </label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 40</p>
-        <span class="label">Rate your level of understanding of the impact of digital transformation within your organisation</span>
-        <div class="numberRating">
-          <input type="radio" id="questionFortyOne" class="hidden" name="questionForty" value="1 - Very Low" />
-          <input type="radio" id="questionFortyTwo" class="hidden" name="questionForty" value="2 - Low" />
-          <input type="radio" id="questionFortyThree" class="hidden" name="questionForty" value="3 - Neutral" />
-          <input type="radio" id="questionFortyFour" class="hidden" name="questionForty" value="4 - High" />
-          <input type="radio" id="questionFortyFive" class="hidden" name="questionForty" value="5 - Very High" />
-          <label for="questionFortyOne">Very Low</label>
-          <label for="questionFortyTwo">Low</label>
-          <label for="questionFortyThree">Neutral</label>
-          <label for="questionFortyFour">High</label>
-          <label for="questionFortyFive">Very High</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 41</p>
-        <span class="label">How often do you use digital assets<sup>*</sup> for innovation within your job role?</span>
-        <span class="sub"><sup>*</sup>E.g. Microsoft Teams, Zoom, Microsoft Office Suit, Spreadsheet Software</span>
-        <div class="numberRating">
-          <input type="radio" id="questionFortyOneOne" class="hidden" name="questionFortyOne" value="1 - Not at all" />
-          <input type="radio" id="questionFortyOneTwo" class="hidden" name="questionFortyOne" value="2 - Sometimes (bi-monthly)" />
-          <input type="radio" id="questionFortyOneThree" class="hidden" name="questionFortyOne" value="3 - Often (monthly)" />
-          <input type="radio" id="questionFortyOneFour" class="hidden" name="questionFortyOne" value="4 - More than others I know (weekly)" />
-          <input type="radio" id="questionFortyOneFive" class="hidden" name="questionFortyOne" value="5 - All the time (daily)" />
-          <label for="questionFortyOneOne">Never</label>
-          <label for="questionFortyOneTwo">Bi-monthly</label>
-          <label for="questionFortyOneThree">Monthly</label>
-          <label for="questionFortyOneFour">Weekly</label>
-          <label for="questionFortyOneFive">Daily</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 42</p>
-        <span class="label">How often do you collaborate using a digital asset?</span>
-        <span class="sub"><sup>*</sup>E.g. Microsoft Teams, Zoom, Microsoft Office Suit, Spreadsheet Software</span>
-        <div class="numberRating">
-          <input type="radio" id="questionFortyTwoOne" class="hidden" name="questionFortyTwo" value="1 - Not at all" />
-          <input type="radio" id="questionFortyTwoTwo" class="hidden" name="questionFortyTwo" value="2 - Sometimes (bi-monthly)" />
-          <input type="radio" id="questionFortyTwoThree" class="hidden" name="questionFortyTwo" value="3 - Often (monthly)" />
-          <input type="radio" id="questionFortyTwoFour" class="hidden" name="questionFortyTwo" value="4 - More than others I know (weekly)" />
-          <input type="radio" id="questionFortyTwoFive" class="hidden" name="questionFortyTwo" value="5 - All the time (daily)" />
-          <label for="questionFortyTwoOne">Never</label>
-          <label for="questionFortyTwoTwo">Bi-monthly</label>
-          <label for="questionFortyTwoThree">Monthly</label>
-          <label for="questionFortyTwoFour">Weekly</label>
-          <label for="questionFortyTwoFive">Daily</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 43</p>
-        <span class="label">How often do you identify talent in the workforce and encourage personal development?</span>
-        <div class="numberRating">
-          <input type="radio" id="questionFortyThreeOne" class="hidden" name="questionFortyThree" value="1 - Not at all" />
-          <input type="radio" id="questionFortyThreeTwo" class="hidden" name="questionFortyThree" value="2 - Sometimes (bi-monthly)" />
-          <input type="radio" id="questionFortyThreeThree" class="hidden" name="questionFortyThree" value="3 - Often (monthly)" />
-          <input type="radio" id="questionFortyThreeFour" class="hidden" name="questionFortyThree" value="4 - More than others I know (weekly)" />
-          <input type="radio" id="questionFortyThreeFive" class="hidden" name="questionFortyThree" value="5 - All the time (daily)" />
-          <label for="questionFortyThreeOne">Never</label>
-          <label for="questionFortyThreeTwo">Bi-monthly</label>
-          <label for="questionFortyThreeThree">Monthly</label>
-          <label for="questionFortyThreeFour">Weekly</label>
-          <label for="questionFortyThreeFive">Daily</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 44</p>
-        <span class="label">How often do you solve problems using the digital assets at your disposal?</span>
-        <div class="numberRating">
-          <input type="radio" id="questionFortyFourOne" class="hidden" name="questionFortyFour" value="1 - Not at all" />
-          <input type="radio" id="questionFortyFourTwo" class="hidden" name="questionFortyFour" value="2 - Sometimes (bi-monthly)" />
-          <input type="radio" id="questionFortyFourThree" class="hidden" name="questionFortyFour" value="3 - Often (monthly)" />
-          <input type="radio" id="questionFortyFourFour" class="hidden" name="questionFortyFour" value="4 - More than others I know (weekly)" />
-          <input type="radio" id="questionFortyFourFive" class="hidden" name="questionFortyFour" value="5 - All the time (daily)" />
-          <label for="questionFortyFourOne">Never</label>
-          <label for="questionFortyFourTwo">Bi-monthly</label>
-          <label for="questionFortyFourThree">Monthly</label>
-          <label for="questionFortyFourFour">Weekly</label>
-          <label for="questionFortyFourFive">Daily</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 45</p>
-        <span class="label">I understand my organisation's business model</span>
-        <div class="numberRating lrg">
-          <input type="radio" id="questionFortyFiveOne" class="hidden" name="questionFortyFive" value="1 - Strongly Disagree" />
-          <input type="radio" id="questionFortyFiveTwo" class="hidden" name="questionFortyFive" value="2 - Disagree" />
-          <input type="radio" id="questionFortyFiveThree" class="hidden" name="questionFortyFive" value="3 - Neutral" />
-          <input type="radio" id="questionFortyFiveFour" class="hidden" name="questionFortyFive" value="4 - Agree" />
-          <input type="radio" id="questionFortyFiveFive" class="hidden" name="questionFortyFive" value="5 - Strongly Agree" />
-          <label for="questionFortyFiveOne">Strongly Disagree</label>
-          <label for="questionFortyFiveTwo">Disagree</label>
-          <label for="questionFortyFiveThree">Neutral</label>
-          <label for="questionFortyFiveFour">Agree</label>
-          <label for="questionFortyFiveFive">Strongly Agree</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 46</p>
-        <span class="label">I am aware of the strategic direction, objectives, and Key Performance Indictors (KPIs) of the organisation</span>
-        <div class="numberRating lrg">
-          <input type="radio" id="questionFortySixOne" class="hidden" name="questionFortySix" value="1 - Strongly Disagree" />
-          <input type="radio" id="questionFortySixTwo" class="hidden" name="questionFortySix" value="2 - Disagree" />
-          <input type="radio" id="questionFortySixThree" class="hidden" name="questionFortySix" value="3 - Neutral" />
-          <input type="radio" id="questionFortySixFour" class="hidden" name="questionFortySix" value="4 - Agree" />
-          <input type="radio" id="questionFortySixFive" class="hidden" name="questionFortySix" value="5 - Strongly Agree" />
-          <label for="questionFortySixOne">Strongly Disagree</label>
-          <label for="questionFortySixTwo">Disagree</label>
-          <label for="questionFortySixThree">Neutral</label>
-          <label for="questionFortySixFour">Agree</label>
-          <label for="questionFortySixFive">Strongly Agree</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 47</p>
-        <span class="label">How often do you encourage the use of digital assets within your organisation?</span>
-        <div class="numberRating">
-          <input type="radio" id="questionFortySevenOne" class="hidden" name="questionFortySeven" value="1 - Not at all" />
-          <input type="radio" id="questionFortySevenTwo" class="hidden" name="questionFortySeven" value="2 - Sometimes (bi-monthly)" />
-          <input type="radio" id="questionFortySevenThree" class="hidden" name="questionFortySeven" value="3 - Often (monthly)" />
-          <input type="radio" id="questionFortySevenFour" class="hidden" name="questionFortySeven" value="4 - More than others I know (weekly)" />
-          <input type="radio" id="questionFortySevenFive" class="hidden" name="questionFortySeven" value="5 - All the time (daily)" />
-          <label for="questionFortySevenOne">Never</label>
-          <label for="questionFortySevenTwo">Bi-monthly</label>
-          <label for="questionFortySevenThree">Monthly</label>
-          <label for="questionFortySevenFour">Weekly</label>
-          <label for="questionFortySevenFive">Daily</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 48</p>
-        <span class="label">Rate your ability to act-on/implement/execute on the strategic intent of the organisation</span>
-        <div class="numberRating">
-          <input type="radio" id="questionFortyEightOne" class="hidden" name="questionFortyEight" value="1 - Very Low" />
-          <input type="radio" id="questionFortyEightTwo" class="hidden" name="questionFortyEight" value="2 - Low" />
-          <input type="radio" id="questionFortyEightThree" class="hidden" name="questionFortyEight" value="3 - Neutral" />
-          <input type="radio" id="questionFortyEightFour" class="hidden" name="questionFortyEight" value="4 - High" />
-          <input type="radio" id="questionFortyEightFive" class="hidden" name="questionFortyEight" value="5 - Very High" />
-          <label for="questionFortyEightOne">Very Low</label>
-          <label for="questionFortyEightTwo">Low</label>
-          <label for="questionFortyEightThree">Neutral</label>
-          <label for="questionFortyEightFour">High</label>
-          <label for="questionFortyEightFive">Very High</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 49</p>
-        <span class="label">How often do you set targets for your team with monitoring and evaluating metrics using digital assets?</span>
-        <div class="numberRating">
-          <input type="radio" id="questionFortyNineOne" class="hidden" name="questionFortyNine" value="1 - Not at all" />
-          <input type="radio" id="questionFortyNineTwo" class="hidden" name="questionFortyNine" value="2 - Sometimes (bi-monthly)" />
-          <input type="radio" id="questionFortyNineThree" class="hidden" name="questionFortyNine" value="3 - Often (monthly)" />
-          <input type="radio" id="questionFortyNineFour" class="hidden" name="questionFortyNine" value="4 - More than others I know (weekly)" />
-          <input type="radio" id="questionFortyNineFive" class="hidden" name="questionFortyNine" value="5 - All the time (daily)" />
-          <label for="questionFortyNineOne">Never</label>
-          <label for="questionFortyNineTwo">Bi-monthly</label>
-          <label for="questionFortyNineThree">Monthly</label>
-          <label for="questionFortyNineFour">Weekly</label>
-          <label for="questionFortyNineFive">Daily</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 50</p>
-        <span class="label">Rate your ability to influence others through digital channels</span>
-        <div class="numberRating">
-          <input type="radio" id="questionFiftyOne" class="hidden" name="questionFifty" value="1 - Very Low" />
-          <input type="radio" id="questionFiftyTwo" class="hidden" name="questionFifty" value="2 - Low" />
-          <input type="radio" id="questionFiftyThree" class="hidden" name="questionFifty" value="3 - Neutral" />
-          <input type="radio" id="questionFiftyFour" class="hidden" name="questionFifty" value="4 - High" />
-          <input type="radio" id="questionFiftyFive" class="hidden" name="questionFifty" value="5 - Very High" />
-          <label for="questionFiftyOne">Very Low</label>
-          <label for="questionFiftyTwo">Low</label>
-          <label for="questionFiftyThree">Neutral</label>
-          <label for="questionFiftyFour">High</label>
-          <label for="questionFiftyFive">Very High</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 51</p>
-        <span class="label">I am capable of sound judgement through analysis of digital and non-digital information</span>
-        <div class="numberRating lrg">
-          <input type="radio" id="questionFiftyOneOne" class="hidden" name="questionFiftyOne" value="1 - Strongly Disagree" />
-          <input type="radio" id="questionFiftyOneTwo" class="hidden" name="questionFiftyOne" value="2 - Disagree" />
-          <input type="radio" id="questionFiftyOneThree" class="hidden" name="questionFiftyOne" value="3 - Neutral" />
-          <input type="radio" id="questionFiftyOneFour" class="hidden" name="questionFiftyOne" value="4 - Agree" />
-          <input type="radio" id="questionFiftyOneFive" class="hidden" name="questionFiftyOne" value="5 - Strongly Agree" />
-          <label for="questionFiftyOneOne">Strongly Disagree</label>
-          <label for="questionFiftyOneTwo">Disagree</label>
-          <label for="questionFiftyOneThree">Neutral</label>
-          <label for="questionFiftyOneFour">Agree</label>
-          <label for="questionFiftyOneFive">Strongly Agree</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 52</p>
-        <span class="label">I am curious about alternative digital assets that can improve my ability to lead</span>
-        <div class="numberRating lrg">
-          <input type="radio" id="questionFiftyTwoOne" class="hidden" name="questionFiftyTwo" value="1 - Strongly Disagree" />
-          <input type="radio" id="questionFiftyTwoTwo" class="hidden" name="questionFiftyTwo" value="2 - Disagree" />
-          <input type="radio" id="questionFiftyTwoThree" class="hidden" name="questionFiftyTwo" value="3 - Neutral" />
-          <input type="radio" id="questionFiftyTwoFour" class="hidden" name="questionFiftyTwo" value="4 - Agree" />
-          <input type="radio" id="questionFiftyTwoFive" class="hidden" name="questionFiftyTwo" value="5 - Strongly Agree" />
-          <label for="questionFiftyTwoOne">Strongly Disagree</label>
-          <label for="questionFiftyTwoTwo">Disagree</label>
-          <label for="questionFiftyTwoThree">Neutral</label>
-          <label for="questionFiftyTwoFour">Agree</label>
-          <label for="questionFiftyTwoFive">Strongly Agree</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 53</p>
-        <span class="label">I am aware of the security risks involved with the use of digital assets</span>
-        <div class="numberRating lrg">
-          <input type="radio" id="questionFiftyThreeOne" class="hidden" name="questionFiftyThree" value="1 - Strongly Disagree" />
-          <input type="radio" id="questionFiftyThreeTwo" class="hidden" name="questionFiftyThree" value="2 - Disagree" />
-          <input type="radio" id="questionFiftyThreeThree" class="hidden" name="questionFiftyThree" value="3 - Neutral" />
-          <input type="radio" id="questionFiftyThreeFour" class="hidden" name="questionFiftyThree" value="4 - Agree" />
-          <input type="radio" id="questionFiftyThreeFive" class="hidden" name="questionFiftyThree" value="5 - Strongly Agree" />
-          <label for="questionFiftyThreeOne">Strongly Disagree</label>
-          <label for="questionFiftyThreeTwo">Disagree</label>
-          <label for="questionFiftyThreeThree">Neutral</label>
-          <label for="questionFiftyThreeFour">Agree</label>
-          <label for="questionFiftyThreeFive">Strongly Agree</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 54</p>
-        <span class="label">I am a mentor/coach to others for the adoption and use of digital assets</span>
-        <div class="numberRating lrg">
-          <input type="radio" id="questionFiftyFourOne" class="hidden" name="questionFiftyFour" value="1 - Strongly Disagree" />
-          <input type="radio" id="questionFiftyFourTwo" class="hidden" name="questionFiftyFour" value="2 - Disagree" />
-          <input type="radio" id="questionFiftyFourThree" class="hidden" name="questionFiftyFour" value="3 - Neutral" />
-          <input type="radio" id="questionFiftyFourFour" class="hidden" name="questionFiftyFour" value="4 - Agree" />
-          <input type="radio" id="questionFiftyFourFive" class="hidden" name="questionFiftyFour" value="5 - Strongly Agree" />
-          <label for="questionFiftyFourOne">Strongly Disagree</label>
-          <label for="questionFiftyFourTwo">Disagree</label>
-          <label for="questionFiftyFourThree">Neutral</label>
-          <label for="questionFiftyFourFour">Agree</label>
-          <label for="questionFiftyFourFive">Strongly Agree</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 55</p>
-        <span class="label">I have an understanding of some of the measures that need to put in place to ensure that digital transformation is encouraged in my company</span>
-        <div class="numberRating lrg">
-          <input type="radio" id="questionFiftyFiveOne" class="hidden" name="questionFiftyFive" value="1 - Strongly Disagree" />
-          <input type="radio" id="questionFiftyFiveTwo" class="hidden" name="questionFiftyFive" value="2 - Disagree" />
-          <input type="radio" id="questionFiftyFiveThree" class="hidden" name="questionFiftyFive" value="3 - Neutral" />
-          <input type="radio" id="questionFiftyFiveFour" class="hidden" name="questionFiftyFive" value="4 - Agree" />
-          <input type="radio" id="questionFiftyFiveFive" class="hidden" name="questionFiftyFive" value="5 - Strongly Agree" />
-          <label for="questionFiftyFiveOne">Strongly Disagree</label>
-          <label for="questionFiftyFiveTwo">Disagree</label>
-          <label for="questionFiftyFiveThree">Neutral</label>
-          <label for="questionFiftyFiveFour">Agree</label>
-          <label for="questionFiftyFiveFive">Strongly Agree</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 56</p>
-        <span class="label">I use digital information to monitor new developments in my industry</span>
-        <div class="numberRating lrg">
-          <input type="radio" id="questionFiftySixOne" class="hidden" name="questionFiftySix" value="1 - Strongly Disagree" />
-          <input type="radio" id="questionFiftySixTwo" class="hidden" name="questionFiftySix" value="2 - Disagree" />
-          <input type="radio" id="questionFiftySixThree" class="hidden" name="questionFiftySix" value="3 - Neutral" />
-          <input type="radio" id="questionFiftySixFour" class="hidden" name="questionFiftySix" value="4 - Agree" />
-          <input type="radio" id="questionFiftySixFive" class="hidden" name="questionFiftySix" value="5 - Strongly Agree" />
-          <label for="questionFiftySixOne">Strongly Disagree</label>
-          <label for="questionFiftySixTwo">Disagree</label>
-          <label for="questionFiftySixThree">Neutral</label>
-          <label for="questionFiftySixFour">Agree</label>
-          <label for="questionFiftySixFive">Strongly Agree</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 57</p>
-        <span class="label">I consider myself as someone who has the desire to constantly be right</span>
-        <div class="numberRating lrg">
-          <input type="radio" id="questionFiftySevenOne" class="hidden" name="questionFiftySeven" value="1 - Strongly Disagree" />
-          <input type="radio" id="questionFiftySevenTwo" class="hidden" name="questionFiftySeven" value="2 - Disagree" />
-          <input type="radio" id="questionFiftySevenThree" class="hidden" name="questionFiftySeven" value="3 - Neutral" />
-          <input type="radio" id="questionFiftySevenFour" class="hidden" name="questionFiftySeven" value="4 - Agree" />
-          <input type="radio" id="questionFiftySevenFive" class="hidden" name="questionFiftySeven" value="5 - Strongly Agree" />
-          <label for="questionFiftySevenOne">Strongly Disagree</label>
-          <label for="questionFiftySevenTwo">Disagree</label>
-          <label for="questionFiftySevenThree">Neutral</label>
-          <label for="questionFiftySevenFour">Agree</label>
-          <label for="questionFiftySevenFive">Strongly Agree</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 58</p>
-        <span class="label">How often do you use digital tools to reach consensus, find alignment, or promote decision making?</span>
-        <div class="numberRating">
-          <input type="radio" id="questionFiftyEightOne" class="hidden" name="questionFiftyEight" value="1 - Not at all" />
-          <input type="radio" id="questionFiftyEightTwo" class="hidden" name="questionFiftyEight" value="2 - Sometimes (bi-monthly)" />
-          <input type="radio" id="questionFiftyEightThree" class="hidden" name="questionFiftyEight" value="3 - Often (monthly)" />
-          <input type="radio" id="questionFiftyEightFour" class="hidden" name="questionFiftyEight" value="4 - More than others I know (weekly)" />
-          <input type="radio" id="questionFiftyEightFive" class="hidden" name="questionFiftyEight" value="5 - All the time (daily)" />
-          <label for="questionFiftyEightOne">Never</label>
-          <label for="questionFiftyEightTwo">Bi-monthly</label>
-          <label for="questionFiftyEightThree">Monthly</label>
-          <label for="questionFiftyEightFour">Weekly</label>
-          <label for="questionFiftyEightFive">Daily</label>
-        </div>
-      </div>
-      <div class="question">
-        <p>Question 59</p>
-        <span class="label">What do you think about pivotting from legacy technology that cannot meet the current needs of your organisation?</span>
-        <span class="sub">Select the hypothetical response that most closely aligns with your response</span>
-        <div class="multiple">
-          <label class="selector">
-            <input type="radio" value="2 - I'm not sure what to do" name="questionFiftyNine" />
-            <span>"I'm not sure what to do"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="1 - It's fine the way it is" name="questionFiftyNine" />
-            <span>"It's fine the way it is"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="2 - No one is considering how this will impact me" name="questionFiftyNine" />
-            <span>"No one is considering how this will impact me"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="1 - Haven't we tried this before and it didn't work" name="questionFiftyNine" />
-            <span>"Haven't we tried this before and it didn't work"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="4 - I'm fine with it - but other people are not" name="questionFiftyNine" />
-            <span>"I'm fine with it - but other people are not"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="0 - We don't have time for this" name="questionFiftyNine" />
-            <span>"We don't have time for this"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="0 - This won't be permanent" name="questionFiftyNine" />
-            <span>"This won't be permanent"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="5 - I'm willing to adapt" name="questionFiftyNine" />
-            <span>"I'm willing to adapt"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="0 - No comment" name="questionFiftyNine" />
-            <span>"No comment"</span>
-          </label>
-          <label class="selector">
-            <input type="radio" value="0 - None of the above" name="questionFiftyNine" />
-            <span>"None of the above"</span>
-          </label>
-        </div>
-      </div>
+      </template>
       <button type="submit">Submit</button>
     </form>
     <template id="modal">
