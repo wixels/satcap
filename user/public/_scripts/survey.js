@@ -138,7 +138,7 @@ const submitSurvey = async function (e) {
 const setCustomAnswers = function () {
   const questions = document.querySelectorAll('[data-answers]')
   questions.forEach((el) => {
-    const answers = link.package.survey.customAnswers[el.dataset.answers]
+    const answers = link.package.survey?.customAnswers?.[el.dataset.answers]
     if (Array.isArray(answers) && answers.length) {
       const optionsHtml = []
       answers.forEach((option) => {
@@ -302,7 +302,7 @@ const setProgressTracker = function () {
   document.querySelector('form.survey button[type="submit"]').setAttribute('disabled', (completed < total))
   document.querySelector('label[for="progress"]').textContent = `${completed} of ${total} answered`
   document.getElementById('progress').setAttribute('value', (completed / total) * 100)
-  document.querySelector('.progress').classList.remove('hidden')
+  document.querySelector('footer').classList.remove('hidden')
 }
 
 export {

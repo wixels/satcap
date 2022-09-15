@@ -45,6 +45,10 @@
   width: 100%;
 }
 
+.subContent {
+  padding: var(--spacer);
+}
+
 .header {
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
