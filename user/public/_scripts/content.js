@@ -103,7 +103,7 @@ const insertSurvey = function (linkId, survey) {
   const content = document.querySelector('.survey')
   const localSubmissions = JSON.parse(window.localStorage.getItem('submissions')) || []
   content.querySelector('h3').textContent = survey.title
-  content.querySelector('p').textContent = survey.description
+  content.querySelector('p').textContent = survey.shortDescription || ''
   const link = content.querySelector('a')
   link.setAttribute('href', `/survey/${survey.key}?linkId=${linkId}`)
 
