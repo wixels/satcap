@@ -127,8 +127,9 @@ export const SurveyLink = (): JSX.Element => {
 
   const fields = (
     <>
+      <Text>{parsedPackage?.['area']?.label}</Text>
       <Text size="sm" color="dimmed">
-        {parsedPackage?.['area']?.label}: {parsedPackage?.['area']?.description}
+        {parsedPackage?.['area']?.description}
       </Text>
       {/* @ts-ignore */}
       {form?.values?.['area-customAnswers']?.map((item, index) => (
@@ -137,6 +138,8 @@ export const SurveyLink = (): JSX.Element => {
             <TextInput
               placeholder="Answer..."
               sx={{ flex: 1 }}
+              radius={'md'}
+              size="md"
               {...form.getInputProps(`area-customAnswers.${index}.answer`)}
             />
 
