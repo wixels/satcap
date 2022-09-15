@@ -282,6 +282,7 @@ const setProgressTracker = function () {
             switch (el.type) {
               case 'text':
               case 'select-one':
+              case 'date':
                 if (answers.get(key).length > 3) {
                   isComplete = true
                 }
@@ -299,7 +300,11 @@ const setProgressTracker = function () {
       keysChecked.push(key)
     }
   }
-  // document.querySelector('form.survey button[type="submit"]').setAttribute('disabled', (completed < total))
+  if (completed < total) {
+    document.querySelector('form.survey button[type="submit"]').setAttribute('disabled', true)
+  } else {
+    document.querySelector('form.survey button[type="submit"]').removeAttribute('disabled')
+  }
   document.querySelector('label[for="progress"]').textContent = `${completed} of ${total} answered`
   document.getElementById('progress').setAttribute('value', (completed / total) * 100)
   document.querySelector('.progress').classList.remove('hidden')
