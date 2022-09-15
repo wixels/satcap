@@ -2,7 +2,6 @@ import {
   AppShell,
   Navbar,
   Header,
-  Text,
   MediaQuery,
   Burger,
   useMantineTheme,
@@ -16,24 +15,28 @@ import {
   ColorScheme,
   ActionIcon,
   Title,
+  Menu,
+  Image,
 } from '@mantine/core';
 import {
   IconChartPie,
   IconHome2,
   IconLayoutGrid,
+  IconLogout,
   IconMessages,
   IconMoonStars,
   IconSpeakerphone,
   IconSun,
   IconUsers,
 } from '@tabler/icons';
-import { Link, Outlet, useNavigate } from '@tanstack/react-location';
-import { useEffect, useState } from 'react';
+import { Link, Outlet } from '@tanstack/react-location';
+import { useState } from 'react';
 import { UserButton } from './components/UserButton';
 import useAuthState from './hooks/useAuthState';
-import { getAuth } from 'firebase/auth';
+import { getAuth, signOut } from 'firebase/auth';
 import { useGetUser } from './context/AuthenticationContext';
 import { useColorScheme, useHotkeys, useLocalStorage } from '@mantine/hooks';
+import { auth } from './firebase';
 
 function App(): JSX.Element {
   const theme = useMantineTheme();
@@ -91,13 +94,25 @@ function App(): JSX.Element {
                 width={{ sm: 200, lg: 300 }}
               >
                 <Navbar.Section grow mt="md">
-                  {currentAccount && (
-                    <UserButton
-                      email={currentAccount?.email}
-                      image={`https://avatars.dicebear.com/api/initials/${currentAccount?.name?.[0]}.svg`}
-                      name={currentAccount?.name}
-                    />
-                  )}
+                  <Menu trigger="hover" shadow="md" width={200}>
+                    <Menu.Target>
+                      {currentAccount && (
+                        <UserButton
+                          email={currentAccount?.email}
+                          image={`https://avatars.dicebear.com/api/initials/${currentAccount?.name?.[0]}.svg`}
+                          name={currentAccount?.name}
+                        />
+                      )}
+                    </Menu.Target>
+                    <Menu.Dropdown>
+                      <Menu.Item
+                        onClick={() => signOut(auth)}
+                        icon={<IconLogout size={14} />}
+                      >
+                        Logout
+                      </Menu.Item>
+                    </Menu.Dropdown>
+                  </Menu>
                   <Box mt={'1rem'}>
                     <Link to="/" preload={1}>
                       {({ isActive }) => {
@@ -159,7 +174,7 @@ function App(): JSX.Element {
                         return (
                           <NavLink
                             active={isActive}
-                            label="Discussion Board"
+                            label="Query Submissions"
                             icon={<IconMessages size={16} stroke={1.5} />}
                           />
                         );
@@ -183,24 +198,27 @@ function App(): JSX.Element {
                         mr="xl"
                       />
                     </MediaQuery>
+                    <Image
+                      width={40}
+                      radius="md"
+                      src={
+                        'https://satcap-research.web.app/_style/images/logo.png'
+                      }
+                      alt="Random unsplash image"
+                    />
                     <Title order={4}>SATCAP Admin</Title>
                   </Group>
-                  <Group>
-                    <Anchor>News</Anchor>
-                    <Anchor>About</Anchor>
-                    <Anchor>Help</Anchor>
-                    <ActionIcon
-                      variant="default"
-                      onClick={() => toggleColorScheme()}
-                      size={30}
-                    >
-                      {colorScheme === 'dark' ? (
-                        <IconSun size={16} />
-                      ) : (
-                        <IconMoonStars size={16} />
-                      )}
-                    </ActionIcon>
-                  </Group>
+                  <ActionIcon
+                    variant="default"
+                    onClick={() => toggleColorScheme()}
+                    size={30}
+                  >
+                    {colorScheme === 'dark' ? (
+                      <IconSun size={16} />
+                    ) : (
+                      <IconMoonStars size={16} />
+                    )}
+                  </ActionIcon>
                 </Group>
               </Header>
             }

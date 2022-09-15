@@ -100,6 +100,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             {
               path: '/reports',
               element: <SurveyReports />,
+              loader: () =>
+                queryClient.getQueryData(['links']) ??
+                queryClient.fetchQuery(['links'], fetchLinks),
             },
             {
               path: '/people',

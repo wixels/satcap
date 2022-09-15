@@ -7,9 +7,9 @@ import { useGetInformation } from '../../hooks/network/useInformation';
 import { INotice, IResource } from '../../types';
 
 export const Information = (): JSX.Element => {
-  const { data } = useMatch();
-
   const { data: information } = useGetInformation();
+
+  console.log(information);
   return (
     <Stack>
       <Group mb={'1rem'} position="apart">
@@ -41,6 +41,7 @@ export const Information = (): JSX.Element => {
                 imageUrl={item.featureImageUrl}
                 publisher={item?.publishedBy?.name}
                 docId={item.docId}
+                visibility={item?.visibility}
               />
             );
           } else if (item.type === 'notice') {
@@ -52,6 +53,7 @@ export const Information = (): JSX.Element => {
                 imageUrl={item.featureImageUrl}
                 publisher={item?.publishedBy?.name}
                 docId={item.docId}
+                visibility={item?.visibility}
               />
             );
           }

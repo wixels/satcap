@@ -2,6 +2,7 @@ import {
   Avatar,
   Button,
   Center,
+  Checkbox,
   Grid,
   Group,
   InputBase,
@@ -36,6 +37,7 @@ export const CreatePerson = (): JSX.Element => {
       locationAdmin: [],
       isAdmin: true,
       mineId: window.localStorage.getItem('mineId'),
+      superAdmin: false,
     },
     validate: {},
   });
@@ -44,16 +46,8 @@ export const CreatePerson = (): JSX.Element => {
   const createPerson = async (values: IUser) => {
     setLoading(true);
     try {
-      let tempPass = nanoid(8);
-
-      const authRes = await createUserWithEmailAndPassword(
-        auth,
-        values.email,
-        tempPass
-      );
       await addDoc(collection(db, `mines/${values?.mineId}/users`), {
         ...values,
-        authUid: authRes.user.uid,
         mobile: values.mobile
           ? values.mobile
               .replaceAll(' ', '')
@@ -61,15 +55,6 @@ export const CreatePerson = (): JSX.Element => {
               .replaceAll(')', '')
               .replaceAll('-', '')
           : '',
-      });
-
-      await addDoc(collection(db, 'mail'), {
-        to: [values.email],
-        message: {
-          subject: 'SATCAP',
-          text: `Hi there! Please sign in at SATCAP Admin useing the following password: ${tempPass}`,
-          html: `<p>Hi there! Please sign in at SATCAP Admin useing the following password: ${tempPass}</p>`,
-        },
       });
       naviagte({ to: '/people' });
     } catch (error: any) {
@@ -183,10 +168,22 @@ export const CreatePerson = (): JSX.Element => {
               size="md"
               label={
                 <Text size="sm" color="dimmed">
-                  Location(s)
+                  Operations this user manages
                 </Text>
               }
               {...form.getInputProps('locationAdmin')}
+            />
+          </Grid.Col>
+          <Grid.Col span={12}>
+            <Checkbox
+              radius={'md'}
+              size="md"
+              label={
+                <Text size="sm" color="dimmed">
+                  Super Admin
+                </Text>
+              }
+              {...form.getInputProps('superAdmin')}
             />
           </Grid.Col>
         </Grid>

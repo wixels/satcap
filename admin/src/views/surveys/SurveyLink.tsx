@@ -1,32 +1,28 @@
 import {
+  ActionIcon,
   Avatar,
   Button,
   Center,
-  Divider,
   Grid,
   Group,
-  MultiSelect,
   Select,
+  Stack,
   Text,
   Textarea,
+  TextInput,
   UnstyledButton,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
-import {
-  IconCheck,
-  IconChevronsLeft,
-  IconGrillFork,
-  IconX,
-} from '@tabler/icons';
+import { IconCheck, IconChevronsLeft, IconTrash, IconX } from '@tabler/icons';
 import { Link, useMatch, useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
-import React, { useMemo, useState } from 'react';
+import { addDoc, collection } from 'firebase/firestore';
+import { nanoid } from 'nanoid';
+import { useMemo, useState } from 'react';
 import { userGetMine } from '../../context/AuthenticationContext';
 import db from '../../firebase';
 import { useGetLocations } from '../../hooks/network/useLocations';
-import { ILocation } from '../../types';
 
 export const SurveyLink = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
@@ -42,6 +38,7 @@ export const SurveyLink = (): JSX.Element => {
       description: '',
       acceptResponses: true,
       linkId: link,
+      customAnswers: [],
     },
     validate: {
       package: (value) => (!value ? 'Package is required' : null),
@@ -51,36 +48,130 @@ export const SurveyLink = (): JSX.Element => {
     },
   });
 
+  type CustomAnswer = {
+    description: string;
+    key: string;
+    label: string;
+    title: string;
+  };
   const parsedPackage = useMemo(() => {
     if (form.values?.package) {
-      // form.setFieldValue('customAnswers', );
       const parsedPackage = JSON.parse(form.values?.package);
       if (
         !parsedPackage?.survey?.customAnswers ||
         !parsedPackage?.survey?.customAnswers?.length
       ) {
-        return null;
+        return false;
       }
-      const mapCustomAnswers = parsedPackage?.survey?.customAnswers?.map(
-        (ans: {
-          description: string;
-          key: string;
-          label: string;
-          title: string;
-        }) => ({
+      let payload: any = {};
+
+      parsedPackage?.survey?.customAnswers?.forEach((ans: CustomAnswer) => {
+        payload[`${ans?.key}`] = {
           description: ans?.description,
           key: ans?.key,
           label: ans?.label,
           title: ans?.title,
-        })
-      );
-      form.setFieldValue('customAnswers', mapCustomAnswers);
+        };
+      });
 
-      return 'Hello World';
+      Object.keys(payload).forEach((key) => {
+        form.setFieldValue(`${key}-customAnswers`, [
+          { answer: '', key: nanoid() },
+        ]);
+      });
+      return payload;
     }
   }, [form.values?.package]);
 
-  console.log(form.values);
+  // const fields = Object.keys(form.values)
+  //   ?.filter((key) => key.includes('-customAnswers'))
+  //   ?.map((key: any) => {
+  //     return (
+  //       <Stack key={nanoid()} mt="xs">
+  //         <Text size="sm" color="dimmed">
+  //           {parsedPackage[key]?.label}: {parsedPackage[key]?.description}
+  //         </Text>
+  //         {form.values?.[key]?.map((item, i) => {
+  //           console.log(form.getInputProps(`${key}.${i}.answer`));
+  //           return (
+  //             <Group key={item.key} mt="xs">
+  //               <TextInput
+  //                 placeholder="Answer..."
+  //                 sx={{ flex: 1 }}
+  //                 {...form.getInputProps(`${key}.${i}.answer`)}
+  //               />
+
+  //               <ActionIcon
+  //                 color="red"
+  //                 onClick={() => form.removeListItem(`${key}`, i)}
+  //               >
+  //                 <IconTrash size={16} />
+  //               </ActionIcon>
+  //             </Group>
+  //           );
+  //         })}
+  //         <Button
+  //           variant="light"
+  //           onClick={() =>
+  //             form.insertListItem(`${key}`, {
+  //               answer: '',
+  //               key: nanoid(),
+  //             })
+  //           }
+  //         >
+  //           Add Email
+  //         </Button>
+  //       </Stack>
+  //     );
+  //   });
+
+  const fields = (
+    <>
+      <Text size="sm" color="dimmed">
+        {parsedPackage?.['area']?.label}: {parsedPackage?.['area']?.description}
+      </Text>
+      {/* @ts-ignore */}
+      {form?.values?.['area-customAnswers']?.map((item, index) => (
+        <Stack key={item.key} mt="xs">
+          <Group>
+            <TextInput
+              placeholder="Answer..."
+              sx={{ flex: 1 }}
+              {...form.getInputProps(`area-customAnswers.${index}.answer`)}
+            />
+
+            <ActionIcon
+              color="red"
+              onClick={() => form.removeListItem('area-customAnswers', index)}
+            >
+              <IconTrash size={16} />
+            </ActionIcon>
+          </Group>
+        </Stack>
+      ))}
+      <Center
+        style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+        mt={'xl'}
+      >
+        {parsedPackage && (
+          <Button
+            style={{ maxWidth: '576px' }}
+            fullWidth
+            radius={'md'}
+            variant="light"
+            onClick={() =>
+              form.insertListItem('area-customAnswers', {
+                answer: '',
+                key: nanoid(),
+              })
+            }
+          >
+            Add Answer
+          </Button>
+        )}
+      </Center>
+    </>
+  );
 
   const naviagte = useNavigate();
   const queryClient = useQueryClient();
@@ -89,10 +180,20 @@ export const SurveyLink = (): JSX.Element => {
   const createLink = async (values: any) => {
     setLoading(true);
     try {
-      await addDoc(collection(db, `mines/${mine?.mineId}/links`), {
+      const parsedPackage = JSON.parse(values.package);
+      let payload = {
         ...values,
-        package: JSON.parse(values.package),
-      });
+        package: {
+          ...parsedPackage,
+          customAnswers: {
+            area: values['area-customAnswers']?.map(
+              (ans: { answer: string; key: string }) => ans.answer
+            ),
+          },
+        },
+      };
+      delete payload['area-customAnswers'];
+      await addDoc(collection(db, `mines/${mine?.mineId}/links`), payload);
       queryClient.invalidateQueries(['links']);
       setLoading(false);
       showNotification({
@@ -150,12 +251,12 @@ export const SurveyLink = (): JSX.Element => {
                   label: location.name,
                 })) ?? []
               }
-              placeholder="Select Locations"
+              placeholder="Select Operation"
               radius={'md'}
               size="md"
               label={
                 <Text size="sm" color="dimmed">
-                  Location
+                  Operation
                 </Text>
               }
               {...form.getInputProps('locationDocId')}
@@ -176,7 +277,7 @@ export const SurveyLink = (): JSX.Element => {
               size="md"
               label={
                 <Text size="sm" color="dimmed">
-                  Package(s)
+                  Work Package
                 </Text>
               }
               {...form.getInputProps('package')}
@@ -196,8 +297,28 @@ export const SurveyLink = (): JSX.Element => {
               {...form.getInputProps('description')}
             />
           </Grid.Col>
+          {parsedPackage && <Grid.Col span={12}>{fields}</Grid.Col>}
         </Grid>
-        <Center mt={'xl'}>
+        <Center
+          style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+          mt={'xl'}
+        >
+          {/* {parsedPackage && (
+            <Button
+              style={{ maxWidth: '576px' }}
+              fullWidth
+              radius={'md'}
+              variant="light"
+              onClick={() =>
+                form.insertListItem('customAnswers', {
+                  answer: '',
+                  key: nanoid(),
+                })
+              }
+            >
+              Add Answer
+            </Button>
+          )} */}
           <Button
             disabled={loading || fetching}
             loading={loading || fetching}

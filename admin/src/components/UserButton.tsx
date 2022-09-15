@@ -25,9 +25,9 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface UserButtonProps extends UnstyledButtonProps {
-  image: string;
-  name: string;
-  email: string;
+  image?: string;
+  name?: string;
+  email?: string;
   icon?: React.ReactNode;
 }
 

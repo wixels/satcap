@@ -18,6 +18,7 @@ import {
   IconChevronRight,
   IconChevronsLeft,
   IconChevronsRight,
+  IconEdit,
   IconTrash,
 } from '@tabler/icons';
 import { useNavigate } from '@tanstack/react-location';
@@ -64,6 +65,13 @@ export const PeopleTable = ({ data }) => {
       {
         Header: 'Locations',
         accessor: 'locationAdmin',
+        Cell: ({ row }) => {
+          const locations = row?.values?.locationAdmin;
+          if (!locations) return null;
+          return `Manages ${locations.length} Operation${
+            locations.length === 1 ? '' : 's'
+          }`;
+        },
       },
     ],
     []
@@ -140,56 +148,48 @@ export const PeopleTable = ({ data }) => {
     useRowSelect,
     (hooks) => {
       hooks.visibleColumns.push((columns) => [
-        {
-          id: 'selection',
-          Header: ({ getToggleAllPageRowsSelectedProps }) => (
-            <div>
-              <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
-            </div>
-          ),
-          Cell: ({ row }) => (
-            <div>
-              <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-            </div>
-          ),
-        },
         ...columns,
         {
           id: 'delete',
           Cell: (cell) => (
-            <Popover
-              width={300}
-              trapFocus
-              position="bottom"
-              withArrow
-              shadow="md"
-            >
-              <Popover.Target>
-                <ActionIcon color="red" variant="light">
-                  <IconTrash size={16} />
-                </ActionIcon>
-              </Popover.Target>
-              <Popover.Dropdown
-                sx={(theme) => ({
-                  background:
-                    theme.colorScheme === 'dark'
-                      ? theme.colors.dark[7]
-                      : theme.white,
-                })}
+            <Group>
+              <ActionIcon color="blue" variant="light">
+                <IconEdit size={16} />
+              </ActionIcon>
+              <Popover
+                width={300}
+                trapFocus
+                position="bottom"
+                withArrow
+                shadow="md"
               >
-                <Title order={5}>Are you sure you want to delete?</Title>
-                <Text color="dimmed" mb={'xl'}>
-                  This action cannot be undone
-                </Text>
-                <Button
-                  fullWidth
-                  color={'red'}
-                  onClick={() => handleDelete(cell)}
+                <Popover.Target>
+                  <ActionIcon color="red" variant="light">
+                    <IconTrash size={16} />
+                  </ActionIcon>
+                </Popover.Target>
+                <Popover.Dropdown
+                  sx={(theme) => ({
+                    background:
+                      theme.colorScheme === 'dark'
+                        ? theme.colors.dark[7]
+                        : theme.white,
+                  })}
                 >
-                  Delete
-                </Button>
-              </Popover.Dropdown>
-            </Popover>
+                  <Title order={5}>Are you sure you want to delete?</Title>
+                  <Text color="dimmed" mb={'xl'}>
+                    This action cannot be undone
+                  </Text>
+                  <Button
+                    fullWidth
+                    color={'red'}
+                    onClick={() => handleDelete(cell)}
+                  >
+                    Delete
+                  </Button>
+                </Popover.Dropdown>
+              </Popover>
+            </Group>
           ),
         },
       ]);
@@ -233,73 +233,75 @@ export const PeopleTable = ({ data }) => {
           })}
         </tbody>
       </Table>
-      <Card
-        sx={(theme) => ({
-          position: 'absolute',
-          zIndex: 100,
-          bottom: 0,
-          left: 0,
-          right: 0,
-          boxShadow: theme.shadows.xl,
-          display: 'flex',
-          justifyContent: 'space-between',
-          overflow: 'initial',
-        })}
-      >
-        <Group>
-          <Button.Group>
-            <Button
-              variant="default"
-              onClick={() => gotoPage(0)}
-              disabled={!canPreviousPage}
-            >
-              <IconChevronsLeft size={14} />
-            </Button>
-            <Button
-              variant="default"
-              onClick={() => previousPage()}
-              disabled={!canPreviousPage}
-            >
-              <IconChevronLeft size={14} />
-            </Button>
-            <Button
-              variant="default"
-              onClick={() => nextPage()}
-              disabled={!canNextPage}
-            >
-              <IconChevronRight size={14} />
-            </Button>
-            <Button
-              variant="default"
-              onClick={() => gotoPage(pageCount - 1)}
-              disabled={!canNextPage}
-            >
-              <IconChevronsRight size={14} />
-            </Button>
-          </Button.Group>
-          <span>
-            Page
-            <strong>
-              {pageIndex + 1} of {pageOptions.length}
-            </strong>
-          </span>
-        </Group>
+      {data?.length > 10 && (
+        <Card
+          sx={(theme) => ({
+            position: 'absolute',
+            zIndex: 100,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            boxShadow: theme.shadows.xl,
+            display: 'flex',
+            justifyContent: 'space-between',
+            overflow: 'initial',
+          })}
+        >
+          <Group>
+            <Button.Group>
+              <Button
+                variant="default"
+                onClick={() => gotoPage(0)}
+                disabled={!canPreviousPage}
+              >
+                <IconChevronsLeft size={14} />
+              </Button>
+              <Button
+                variant="default"
+                onClick={() => previousPage()}
+                disabled={!canPreviousPage}
+              >
+                <IconChevronLeft size={14} />
+              </Button>
+              <Button
+                variant="default"
+                onClick={() => nextPage()}
+                disabled={!canNextPage}
+              >
+                <IconChevronRight size={14} />
+              </Button>
+              <Button
+                variant="default"
+                onClick={() => gotoPage(pageCount - 1)}
+                disabled={!canNextPage}
+              >
+                <IconChevronsRight size={14} />
+              </Button>
+            </Button.Group>
+            <span>
+              Page
+              <strong>
+                {pageIndex + 1} of {pageOptions.length}
+              </strong>
+            </span>
+          </Group>
 
-        <Select
-          value={pageSize.toString()}
-          onChange={(e) => {
-            setPageSize(Number(e));
-          }}
-          dropdownPosition="top"
-          data={[
-            { value: '10', label: '10' },
-            { value: '20', label: '20' },
-            { value: '30', label: '30' },
-            { value: '40', label: '40' },
-            { value: '50', label: '50' },
-          ]}
-        />
-      </Card>
+          <Select
+            value={pageSize.toString()}
+            onChange={(e) => {
+              setPageSize(Number(e));
+            }}
+            dropdownPosition="top"
+            data={[
+              { value: '10', label: '10' },
+              { value: '20', label: '20' },
+              { value: '30', label: '30' },
+              { value: '40', label: '40' },
+              { value: '50', label: '50' },
+            ]}
+          />
+        </Card>
+      )}
     </>
   );
 };

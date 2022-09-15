@@ -100,19 +100,19 @@ export const CreateResource = (): JSX.Element => {
       <Grid gutter={'xl'}>
         <Grid.Col span={12}>
           <FileInput
-            placeholder="Image"
+            placeholder="Your File"
             radius={'md'}
             size="md"
             label={
               <Text size="sm" color="dimmed">
-                Your File
+                Resource
               </Text>
             }
             {...form.getInputProps('url')}
           />
           <FileInput
             mt={'lg'}
-            placeholder="Image"
+            placeholder="Feature Image"
             radius={'md'}
             size="md"
             accept="image/*"

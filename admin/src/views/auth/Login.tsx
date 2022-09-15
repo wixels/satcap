@@ -29,11 +29,13 @@ interface FormValues {
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
+    display: 'flex',
+    justifyContent: 'flex-end',
     minHeight: 900,
     height: '100vh',
     backgroundSize: 'cover',
     backgroundImage:
-      'url(https://images.unsplash.com/photo-1484242857719-4b9144542727?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1280&q=80)',
+      'url(https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2Fauth-bg.png?alt=media&token=d5488eea-b5eb-443d-b188-a650c719db0e)',
   },
 
   form: {
@@ -45,25 +47,12 @@ const useStyles = createStyles((theme) => ({
     }`,
     minHeight: 900,
     height: '100vh',
-    maxWidth: 450,
+    width: '45vw',
     paddingTop: 80,
 
     [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
-      maxWidth: '100%',
+      width: '100%',
     },
-  },
-
-  title: {
-    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-  },
-
-  logo: {
-    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-    width: 120,
-    display: 'block',
-    marginLeft: 'auto',
-    marginRight: 'auto',
   },
 }));
 
@@ -109,16 +98,17 @@ export const Login = (): JSX.Element => {
           radius={0}
           p={30}
         >
-          <Title
-            order={2}
-            className={classes.title}
-            align="center"
-            mt="md"
-            mb={50}
-          >
-            Welcome back to SATCAP!
-          </Title>
-
+          <Image
+            style={{
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              marginBottom: '2rem',
+            }}
+            width={180}
+            radius="md"
+            src={'https://satcap-research.web.app/_style/images/logo.png'}
+            alt="Random unsplash image"
+          />
           <TextInput
             radius={'md'}
             size="md"
@@ -154,40 +144,6 @@ export const Login = (): JSX.Element => {
           </Button>
         </Paper>
       </div>
-      {/* <form onSubmit={form.onSubmit(handleSubmit)}>
-        <Text size={'xl'} weight={700}>
-          Sign in to your account
-        </Text>
-        <TextInput
-          pt={'lg'}
-          radius={'md'}
-          size="md"
-          label={
-            <Text size="sm" color="dimmed">
-              Email
-            </Text>
-          }
-          {...form.getInputProps('email')}
-        />
-        <PasswordInput
-          pt={'lg'}
-          radius={'md'}
-          size="md"
-          label={
-            <Text size="sm" color="dimmed">
-              Password
-            </Text>
-          }
-          {...form.getInputProps('password')}
-        />
-        <Group pt={'xl'} position="apart">
-          <Checkbox label="Remember me" />
-          <Button variant="white">Forgot Password?</Button>
-        </Group>
-        <Button loading={loading} type="submit" mt="xl" radius={'md'} fullWidth>
-          Sign In
-        </Button>
-      </form> */}
     </>
   );
 };

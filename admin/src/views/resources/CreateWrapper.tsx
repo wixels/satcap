@@ -2,12 +2,14 @@ import { Avatar, Group, Tabs, Text, UnstyledButton } from '@mantine/core';
 import { IconChevronLeft } from '@tabler/icons';
 import { Link } from '@tanstack/react-location';
 import { collection, query } from 'firebase/firestore';
-import React from 'react';
+import React, { useState } from 'react';
 import db from '../../firebase';
 import { CreateNotice } from './CreateNotice';
 import { CreateResource } from './CreateResource';
 
 export const CreateWrapper = (): JSX.Element => {
+  const [activeTab, setActiveTab] = useState<string | null>('Resource');
+
   return (
     <>
       <Link to="/information">
@@ -29,7 +31,7 @@ export const CreateWrapper = (): JSX.Element => {
               <IconChevronLeft />
             </Avatar>
             <div>
-              <Text weight={700}>Create New Survey </Text>
+              <Text weight={700}>Create New {activeTab} </Text>
               <Text size="xs" color="dimmed">
                 Click here to go back
               </Text>
@@ -37,16 +39,21 @@ export const CreateWrapper = (): JSX.Element => {
           </Group>
         </UnstyledButton>
       </Link>
-      <Tabs defaultValue="resource" mb={'xl'}>
+      <Tabs
+        value={activeTab}
+        onTabChange={setActiveTab}
+        defaultValue="resource"
+        mb={'xl'}
+      >
         <Tabs.List>
-          <Tabs.Tab value="resource">Resource</Tabs.Tab>
-          <Tabs.Tab value="notice">Notice</Tabs.Tab>
+          <Tabs.Tab value="Resource">Resource</Tabs.Tab>
+          <Tabs.Tab value="Notice">Notice</Tabs.Tab>
         </Tabs.List>
-        <Tabs.Panel value="resource" pt="lg">
+        <Tabs.Panel value="Resource" pt="lg">
           <CreateResource />
         </Tabs.Panel>
 
-        <Tabs.Panel value="notice" pt="lg">
+        <Tabs.Panel value="Notice" pt="lg">
           <CreateNotice />
         </Tabs.Panel>
       </Tabs>

@@ -72,6 +72,7 @@ export const CreateNotice = (): JSX.Element => {
 
       await addDoc(collection(db, `mines/${mine?.mineId}/notices`), {
         ...values,
+        date: dayjs(values?.date).format('YYYY-MM-DDTHH:mm:ssZ'),
         url,
         featureImageUrl,
         publishedBy: {
@@ -103,12 +104,12 @@ export const CreateNotice = (): JSX.Element => {
       <Grid gutter={'xl'}>
         <Grid.Col span={12}>
           <FileInput
-            placeholder="Image"
+            placeholder="Your Attachment"
             radius={'md'}
             size="md"
             label={
               <Text size="sm" color="dimmed">
-                Resource
+                Attachment (optional)
               </Text>
             }
             {...form.getInputProps('url')}
@@ -118,6 +119,7 @@ export const CreateNotice = (): JSX.Element => {
             placeholder="Image"
             radius={'md'}
             size="md"
+            accept="image/*"
             label={
               <Text size="sm" color="dimmed">
                 Feature Image
