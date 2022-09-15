@@ -63,6 +63,7 @@ const Discussions = () => {
                 key={stat?.title}
                 {...stat}
                 active={active === stat?.title}
+                // @ts-ignore
                 onClick={setActve}
               />
             ))}

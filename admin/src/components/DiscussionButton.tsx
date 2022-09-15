@@ -14,6 +14,7 @@ type Props = {
 export const DiscussionButton = (props: Props) => {
   return (
     <UnstyledButton
+      // @ts-ignore
       onClick={() => props.onClick(props.title)}
       className={props.active ? 'active' : ''}
       p={'lg'}
