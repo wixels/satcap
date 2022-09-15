@@ -722,19 +722,17 @@
       </label>
     </template>
   </main>
-  <footer class="hidden">
-    <div class="progress">
+  <footer>
+    <div class="progress hidden">
       <label for="progress"></label>
       <progress id="progress" max="100" value=""></progress>
     </div>
   </footer>
   <script defer src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"></script>
   <script defer type="module">
-    import { logEvent } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js'
-    import { analytics, getLink, initMenu } from '../_scripts/init.js'
+    import { link, initMenu } from '../_scripts/init.js'
     import { initialise } from '../_scripts/survey.js'
 
-    const link = await getLink()
     const suveryKey = 'wp-three-one'
     const localSubmissions= JSON.parse(window.localStorage.getItem('submissions')) || []
     
