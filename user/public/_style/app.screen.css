@@ -176,6 +176,7 @@ section h2 {
   z-index: 9;
   display: grid;
   place-content: center;
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
 }
 .modal embed {
