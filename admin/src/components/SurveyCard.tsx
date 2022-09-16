@@ -91,11 +91,8 @@ export const SurveyCard = ({
           </Menu>
         </Group>
       </Card.Section>
-      <Group position="apart" mt="md" mb="xs">
-        <Text weight={500}>{title}</Text>
-      </Group>
 
-      <Text size="sm" color="dimmed">
+      <Text mt="md" size="sm" color="dimmed">
         {description}
       </Text>
 

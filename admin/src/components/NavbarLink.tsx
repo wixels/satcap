@@ -16,9 +16,7 @@ export const NavbarLink = (props: Props) => {
         return (
           <NavLink
             sx={(theme) => ({
-              borderRight: isActive
-                ? `6px solid ${theme.colors.indigo[4]}`
-                : '',
+              borderRight: isActive ? `6px solid ${theme.colors.blue[4]}` : '',
             })}
             active={isActive}
             label={props.label}

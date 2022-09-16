@@ -77,7 +77,20 @@ function App(): JSX.Element {
       <MantineProvider
         theme={{
           colorScheme,
-          primaryColor: 'indigo',
+          colors: {
+            blue: [
+              '#eaefff',
+              '#c9ceed',
+              '#a6aedb',
+              '#838ec9',
+              '#606db9',
+              '#46549f',
+              '#435098',
+              '#262f5a',
+              '#151c39',
+              '#06081a',
+            ],
+          },
         }}
         withNormalizeCSS
         withGlobalStyles
