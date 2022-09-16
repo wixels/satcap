@@ -49,9 +49,20 @@ export const SurveySendEmail = (): JSX.Element => {
           (email: { email: string; key: string }) => email.email
         ),
         message: {
-          subject: 'SATCAP | Complete our survey',
-          text: `Hi there! Please complete our survey at https://satcap-research.web.app/?linkId=${link}`,
-          html: `<p>Hi there!</p><p>Please complete our survey at <a href='https://satcap-research.web.app/?linkId=${link}'>https://satcap-research.web.app/?linkId=${link}</a></p>`,
+          subject: 'No Reply - SATCAP Survey/Checklist Link',
+          text: `Good day, The following link will provide you with the necessary Survey/Checklist access: https://satcap-research.web.app/?linkId=${link}`,
+          html: `
+          <div style="padding:20px;">
+            <p>Good day</p>
+            <p>The following link will provide you with the necessary Survey/Checklist access:<br><br>
+            <strong><a href='https://satcap-research.web.app/?linkId=${link}'>https://satcap-research.web.app/?linkId=${link}</a></strong>
+            </p>
+            <p>Should you have any questions or concerns, please do not hesitate to contact your RIIS contact person/Mine Administrator for this tool.</p>
+            <br><br><br>
+            <p>Regards<br>Research Institute for Innovation and Sustainability on behalf of MMP</p><br><br>
+            <p style="font-size:.9rem;text-align:center;">This is an automated system email. Please do not reply to this email.</p>
+          </div>
+          `,
         },
       });
       setLoading(false);
