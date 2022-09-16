@@ -2,18 +2,52 @@ import {
   ActionIcon,
   Avatar,
   Card,
+  Divider,
   Group,
+  Indicator,
   Menu,
   SimpleGrid,
   Stack,
   Text,
 } from '@mantine/core';
 import { IconDots, IconFileZip, IconTable, IconTrash } from '@tabler/icons';
+import { Link, MatchRoute } from '@tanstack/react-location';
 import { useGetLinks } from '../../hooks/network/useLinks';
+import { ILink } from '../../types';
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
+import dayjs from 'dayjs';
 
 export const SurveyReports = (): JSX.Element => {
-  const { data: links } = useGetLinks();
+  const { data: links } = useGetLinks(true);
+
+  const toSentenceCase = (string: string) => {
+    const result = string.replace(/([A-Z])/g, ' $1');
+    return result.charAt(0).toUpperCase() + result.slice(1);
+  };
+  const titleCaseKeys = (object: any) => {
+    return Object.entries(object).reduce((carry, [key, value]) => {
+      //@ts-ignore
+      carry[toSentenceCase(key)] = value;
+
+      return carry;
+    }, {});
+  };
+
+  const downloadResponses = (link: ILink) => {
+    const payload = link.responses?.map((res) => {
+      return titleCaseKeys(res);
+    });
+    const ws = XLSX.utils.json_to_sheet(payload || []);
+    const wb = { Sheets: { data: ws }, SheetNames: ['data'] };
+    const excelBuffer = XLSX.write(wb, { bookType: 'csv', type: 'array' });
+    const data = new window.Blob([excelBuffer], { type: '.csv' });
+    //@ts-ignore
+    FileSaver.saveAs(data, `${link?.package?.name || 'Survey report'}.csv`);
+  };
+
   console.log(links);
+
   return (
     <Stack>
       <Text weight={700} size={'lg'}>
@@ -32,19 +66,19 @@ export const SurveyReports = (): JSX.Element => {
           <Card key={link.docId} shadow="sm" p="lg" radius="lg" withBorder>
             <Card.Section withBorder inheritPadding py="xs">
               <Group position="apart">
-                <Group>
+                <div style={{ width: '85%', display: 'flex', gap: '1rem' }}>
                   <Avatar color={'green'} radius={'xl'}></Avatar>
                   <div style={{ flex: 1 }}>
-                    <Text size="sm" weight={500}>
+                    <Text lineClamp={1} size="sm" weight={500}>
                       {/* @ts-ignore */}
                       {link.package.name}
                     </Text>
 
-                    <Text color="dimmed" size="xs">
-                      0 Responses
+                    <Text lineClamp={1} color="dimmed" size="xs">
+                      {dayjs(link.createdAt).format('DD/MM/YYYY')}
                     </Text>
                   </div>
-                </Group>
+                </div>
 
                 <Menu withinPortal position="bottom-end" shadow="sm">
                   <Menu.Target>
@@ -54,28 +88,30 @@ export const SurveyReports = (): JSX.Element => {
                   </Menu.Target>
 
                   <Menu.Dropdown>
-                    <Menu.Item icon={<IconFileZip size={14} />}>
+                    <Menu.Item
+                      onClick={() => downloadResponses(link)}
+                      icon={<IconFileZip size={14} />}
+                    >
                       Download
-                    </Menu.Item>
-                    <Menu.Item icon={<IconTrash size={14} />} color="red">
-                      Delete
                     </Menu.Item>
                   </Menu.Dropdown>
                 </Menu>
               </Group>
             </Card.Section>
-            <Card.Section
-              color="green"
-              sx={(theme) => ({
-                height: '25vh',
-                background: theme.colors.green[0],
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              })}
-            >
-              <IconTable color="green" size={52} />
-              {/* <Image src="https://images.unsplash.com/photo-1636811714614-b2738deac0eb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=940&q=80" /> */}
+            <Card.Section p="xl">
+              <Text color="dimmed" size="xs">
+                {/* @ts-ignore */}
+                {link?.package?.name}
+              </Text>
+              <Divider my={'sm'} />
+              <Text color="dimmed" size="xs">
+                {link?.responses?.length} Response
+                {link?.responses?.length === 1 ? '' : 's'}
+              </Text>
+              <Divider my={'sm'} />
+              <Text color="dimmed" size="xs">
+                {link?.description}
+              </Text>
             </Card.Section>
           </Card>
         ))}

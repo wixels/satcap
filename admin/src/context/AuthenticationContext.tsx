@@ -147,10 +147,20 @@ function userGetMine() {
           const mine = await fetchMine();
           // @ts-ignore
           const packs = await fetchPackages(mine?.packages);
+
+          const scopes = new Set();
+          packs.forEach((pack) => {
+            pack.scopes?.forEach((scope) => {
+              scopes.add(scope);
+            });
+          });
+
           // @ts-ignore
           setMine({
             ...mine,
             packages: packs,
+            // @ts-ignore
+            scopes: Array.from(scopes),
           });
           setFetching(false);
         } catch {

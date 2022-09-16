@@ -57,10 +57,13 @@ export interface ILink {
   acceptResponses: boolean;
   linkId: string;
   locationDocId: string;
-  package: IPackage[] | IPackage;
+  package: IPackage | IPackage[];
   survey: ISurveys;
   docId: string;
   description?: string;
+  responses?: any[];
+  createdAt?: string;
+  deletedAt?: string;
 }
 
 export interface IError {
@@ -70,10 +73,14 @@ export interface IError {
 }
 
 export interface IMine {
-  imageUrl: string;
-  name: string;
-  packages: IPackage[];
+  imageUrl?: string;
+  name?: string;
+  packages?: IPackage[];
   mineId?: string;
+  scopes: string[];
+  featureImageUrl?: string;
+  description?: string;
+  address?: string;
 }
 
 export interface IUser {

@@ -19,11 +19,12 @@ import { Surveys } from './views/surveys/Surveys';
 import { SurveySend } from './views/surveys/SurveySend';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { fetchLocations } from './hooks/network/useLocations';
-import { fetchLinks } from './hooks/network/useLinks';
+import { fetchLinkResponses, fetchLinks } from './hooks/network/useLinks';
 import { fetchInformation } from './hooks/network/useInformation';
 import { fetchPeople } from './hooks/network/usePeople';
 import { Discussions } from './views/discussions/Discussions';
 import { fetchDiscussions } from './hooks/network/useDiscussions';
+import { SurveyReport } from './views/reports/SurveyReport';
 
 const location = new ReactLocation();
 const queryClient = new QueryClient();
@@ -48,6 +49,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             },
             {
               path: '/',
+              loader: () =>
+                queryClient.getQueryData(['locations']) ??
+                queryClient.fetchQuery(['locations'], fetchLocations),
               element: <Home />,
             },
             {
@@ -73,14 +77,14 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
               path: '/surveys',
               loader: () =>
                 queryClient.getQueryData(['links']) ??
-                queryClient.fetchQuery(['links'], fetchLinks),
+                queryClient.fetchQuery(['links'], () => fetchLinks(false)),
               children: [
                 {
                   path: '/',
                   element: <Surveys />,
                 },
                 {
-                  path: '/:link',
+                  path: ':link',
                   loader: () =>
                     queryClient.getQueryData(['locations']) ??
                     queryClient.fetchQuery(['locations'], fetchLocations),
@@ -99,10 +103,25 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             },
             {
               path: '/reports',
-              element: <SurveyReports />,
-              loader: () =>
-                queryClient.getQueryData(['links']) ??
-                queryClient.fetchQuery(['links'], fetchLinks),
+
+              children: [
+                {
+                  path: '/',
+                  element: <SurveyReports />,
+                  loader: () =>
+                    queryClient.getQueryData(['links']) ??
+                    queryClient.fetchQuery(['links'], () => fetchLinks(true)),
+                },
+                {
+                  path: ':link',
+                  element: <SurveyReport />,
+                  loader: ({ params: { link } }) =>
+                    queryClient.getQueryData(['links', link]) ??
+                    queryClient.fetchQuery(['links', link], () =>
+                      fetchLinkResponses(link)
+                    ),
+                },
+              ],
             },
             {
               path: '/people',

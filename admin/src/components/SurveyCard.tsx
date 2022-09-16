@@ -15,7 +15,8 @@ import { showNotification } from '@mantine/notifications';
 import { IconClipboardCheck, IconDots, IconTrash, IconX } from '@tabler/icons';
 import { Link, useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
-import { deleteDoc, doc } from 'firebase/firestore';
+import dayjs from 'dayjs';
+import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import db from '../firebase';
 import { IError } from '../types';
@@ -44,8 +45,11 @@ export const SurveyCard = ({
   const handleDelete = async () => {
     setLoading(true);
     try {
-      await deleteDoc(
-        doc(db, `mines/${window.localStorage.getItem('mineId')}/links`, docId)
+      await updateDoc(
+        doc(db, `mines/${window.localStorage.getItem('mineId')}/links`, docId),
+        {
+          deletedAt: dayjs().format('YYYY-MM-DDTHH:mm:ssZ'),
+        }
       );
       queryClient.invalidateQueries(['links']);
       navigate({ to: '/surveys' });
@@ -102,7 +106,7 @@ export const SurveyCard = ({
               fullWidth
               variant="light"
               radius="md"
-              color={copied ? 'teal' : 'blue'}
+              color={copied ? 'teal' : 'primary'}
               leftIcon={copied ? <CheckIcon /> : <IconClipboardCheck />}
               onClick={copy}
             >
@@ -111,7 +115,7 @@ export const SurveyCard = ({
           )}
         </CopyButton>
         <Link to={`./${linkId}/send`}>
-          <Button fullWidth color="blue" radius="md">
+          <Button fullWidth radius="md">
             Send Survey
           </Button>
         </Link>

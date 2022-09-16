@@ -19,13 +19,16 @@ import { Link, useNavigate } from '@tanstack/react-location';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { addDoc, collection } from 'firebase/firestore';
 import { nanoid } from 'nanoid';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactInputMask from 'react-input-mask';
+import { useGetUser } from '../../context/AuthenticationContext';
 import db, { auth } from '../../firebase';
 import { useGetLocations } from '../../hooks/network/useLocations';
 import { IUser } from '../../types';
 
 export const CreatePerson = (): JSX.Element => {
+  const { user: currentAccount, fetching } = useGetUser();
+
   const [loading, setLoading] = useState(false);
   const { data: locations, isLoading } = useGetLocations();
   const form = useForm({
@@ -35,13 +38,15 @@ export const CreatePerson = (): JSX.Element => {
       mobile: '',
       jobTitle: '',
       locationAdmin: [],
-      isAdmin: true,
+      isAdmin: false,
       mineId: window.localStorage.getItem('mineId'),
-      superAdmin: false,
     },
     validate: {},
   });
-  const naviagte = useNavigate();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!fetching && !currentAccount?.isAdmin) navigate({ to: '/' });
+  }, [currentAccount?.isAdmin, fetching]);
 
   const createPerson = async (values: IUser) => {
     setLoading(true);
@@ -56,7 +61,7 @@ export const CreatePerson = (): JSX.Element => {
               .replaceAll('-', '')
           : '',
       });
-      naviagte({ to: '/people' });
+      navigate({ to: '/people' });
     } catch (error: any) {
       showNotification({
         icon: <IconX size={18} />,
@@ -183,7 +188,7 @@ export const CreatePerson = (): JSX.Element => {
                   Super Admin
                 </Text>
               }
-              {...form.getInputProps('superAdmin')}
+              {...form.getInputProps('isAdmin')}
             />
           </Grid.Col>
         </Grid>

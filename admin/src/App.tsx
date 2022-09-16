@@ -7,7 +7,6 @@ import {
   useMantineTheme,
   Group,
   NavLink,
-  Anchor,
   Box,
   LoadingOverlay,
   MantineProvider,
@@ -34,16 +33,19 @@ import { useState } from 'react';
 import { UserButton } from './components/UserButton';
 import useAuthState from './hooks/useAuthState';
 import { getAuth, signOut } from 'firebase/auth';
-import { useGetUser } from './context/AuthenticationContext';
-import { useColorScheme, useHotkeys, useLocalStorage } from '@mantine/hooks';
+import { useGetUser, userGetMine } from './context/AuthenticationContext';
+import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { auth } from './firebase';
+import { NavbarLink } from './components/NavbarLink';
 
 function App(): JSX.Element {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const { user: currentAccount, fetching } = useGetUser();
+  const { mine, fetching: fetchingMine } = userGetMine();
   const [user, loading, error] = useAuthState(getAuth());
-  const preferredColorScheme = useColorScheme();
+
+  console.log(mine);
 
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: 'mantine-color-scheme',
@@ -58,22 +60,32 @@ function App(): JSX.Element {
 
   useHotkeys([['mod+J', () => toggleColorScheme()]]);
 
+  // @ts-ignore
+  String.prototype.toSentenceCase = function () {
+    const str = this.toLowerCase().split(' ');
+    for (let i = 0; i < str.length; i++) {
+      str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+    }
+    return str.join(' ');
+  };
+
   return (
     <ColorSchemeProvider
       colorScheme={colorScheme}
       toggleColorScheme={toggleColorScheme}
     >
       <MantineProvider
-        theme={{ colorScheme }}
+        theme={{
+          colorScheme,
+          primaryColor: 'indigo',
+        }}
         withNormalizeCSS
         withGlobalStyles
       >
         <LoadingOverlay
           visible={!currentAccount && loading}
           about="This is a test"
-        >
-          x
-        </LoadingOverlay>
+        />
         {user != null && !loading && !fetching && !error ? (
           <AppShell
             styles={(theme) => ({
@@ -88,7 +100,7 @@ function App(): JSX.Element {
             asideOffsetBreakpoint="sm"
             navbar={
               <Navbar
-                p="md"
+                // p="md"
                 hiddenBreakpoint="sm"
                 hidden={!opened}
                 width={{ sm: 200, lg: 300 }}
@@ -96,90 +108,65 @@ function App(): JSX.Element {
                 <Navbar.Section grow mt="md">
                   <Menu trigger="hover" shadow="md" width={200}>
                     <Menu.Target>
-                      {currentAccount && (
-                        <UserButton
-                          email={currentAccount?.email}
-                          image={`https://avatars.dicebear.com/api/initials/${currentAccount?.name?.[0]}.svg`}
-                          name={currentAccount?.name}
-                        />
-                      )}
+                      <UserButton
+                        m={'xl'}
+                        email={currentAccount?.email}
+                        image={`https://avatars.dicebear.com/api/initials/${currentAccount?.name?.[0]}.svg`}
+                        name={currentAccount?.name}
+                      />
                     </Menu.Target>
                     <Menu.Dropdown>
                       <Menu.Item
                         onClick={() => signOut(auth)}
-                        icon={<IconLogout size={14} />}
+                        icon={<IconLogout size={22} />}
                       >
                         Logout
                       </Menu.Item>
                     </Menu.Dropdown>
                   </Menu>
                   <Box mt={'1rem'}>
-                    <Link to="/" preload={1}>
-                      {({ isActive }) => {
-                        return (
-                          <NavLink
-                            active={isActive}
-                            label="Home"
-                            icon={<IconHome2 size={16} stroke={1.5} />}
-                          />
-                        );
-                      }}
-                    </Link>
-                    <Link to="./people" preload={1}>
-                      {({ isActive }) => {
-                        return (
-                          <NavLink
-                            active={isActive}
-                            label="People"
-                            icon={<IconUsers size={16} stroke={1.5} />}
-                          />
-                        );
-                      }}
-                    </Link>
-                    <Link to="/reports" preload={1}>
-                      {({ isActive }) => {
-                        return (
-                          <NavLink
-                            active={isActive}
-                            label="Survey Reports"
-                            icon={<IconChartPie size={16} stroke={1.5} />}
-                          />
-                        );
-                      }}
-                    </Link>
-                    <Link to="/information" preload={1}>
-                      {({ isActive }) => {
-                        return (
-                          <NavLink
-                            active={isActive}
-                            label="Information"
-                            icon={<IconSpeakerphone size={16} stroke={1.5} />}
-                          />
-                        );
-                      }}
-                    </Link>
-                    <Link to="/surveys" preload={1}>
-                      {({ isActive }) => {
-                        return (
-                          <NavLink
-                            active={isActive}
-                            label="Surveys"
-                            icon={<IconLayoutGrid size={16} stroke={1.5} />}
-                          />
-                        );
-                      }}
-                    </Link>
-                    <Link to="/discussions" preload={1}>
-                      {({ isActive }) => {
-                        return (
-                          <NavLink
-                            active={isActive}
-                            label="Query Submissions"
-                            icon={<IconMessages size={16} stroke={1.5} />}
-                          />
-                        );
-                      }}
-                    </Link>
+                    <NavbarLink
+                      path="/"
+                      icon={<IconHome2 size={22} stroke={1.5} />}
+                      label="Home"
+                    />
+                    {currentAccount?.isAdmin && (
+                      <NavbarLink
+                        path="/people"
+                        label="People"
+                        icon={<IconUsers size={22} stroke={1.5} />}
+                      />
+                    )}
+                    {mine?.scopes.includes('survey') && (
+                      <NavbarLink
+                        path="/reports"
+                        label="Survey Reports"
+                        icon={<IconChartPie size={22} stroke={1.5} />}
+                      />
+                    )}
+                    {mine?.scopes.includes('information') && (
+                      <NavbarLink
+                        path="/information"
+                        label="Information"
+                        icon={<IconSpeakerphone size={22} stroke={1.5} />}
+                      />
+                    )}
+
+                    {mine?.scopes.includes('survey') && (
+                      <NavbarLink
+                        path="/surveys"
+                        label="Surveys"
+                        icon={<IconLayoutGrid size={22} stroke={1.5} />}
+                      />
+                    )}
+
+                    {mine?.scopes.includes('queries') && (
+                      <NavbarLink
+                        path="/discussions"
+                        label="Query Submissions"
+                        icon={<IconMessages size={22} stroke={1.5} />}
+                      />
+                    )}
                   </Box>
                 </Navbar.Section>
                 {/* <Navbar.Section>x</Navbar.Section> */}

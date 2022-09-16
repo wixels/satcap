@@ -17,28 +17,35 @@ import { showNotification } from '@mantine/notifications';
 import { IconCheck, IconChevronsLeft, IconTrash, IconX } from '@tabler/icons';
 import { Link, useMatch, useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 import { addDoc, collection } from 'firebase/firestore';
 import { nanoid } from 'nanoid';
 import { useMemo, useState } from 'react';
-import { userGetMine } from '../../context/AuthenticationContext';
+import { useGetUser, userGetMine } from '../../context/AuthenticationContext';
 import db from '../../firebase';
 import { useGetLocations } from '../../hooks/network/useLocations';
 
 export const SurveyLink = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
+  const naviagte = useNavigate();
+  const queryClient = useQueryClient();
+  const { mine, fetching } = userGetMine();
   const {
     params: { link },
   } = useMatch();
   const { data: locations, isLoading } = useGetLocations();
+  const { user, fetching: loadingUser } = useGetUser();
 
   const form = useForm({
     initialValues: {
       package: null,
+      createdAt: dayjs().format('YYYY-MM-DDTHH:mm:ssZ'),
       locationDocId: null,
       description: '',
       acceptResponses: true,
       linkId: link,
       customAnswers: [],
+      deletedAt: null,
     },
     validate: {
       package: (value) => (!value ? 'Package is required' : null),
@@ -176,10 +183,6 @@ export const SurveyLink = (): JSX.Element => {
     </>
   );
 
-  const naviagte = useNavigate();
-  const queryClient = useQueryClient();
-  const { mine, fetching } = userGetMine();
-
   const createLink = async (values: any) => {
     setLoading(true);
     try {
@@ -188,10 +191,13 @@ export const SurveyLink = (): JSX.Element => {
         ...values,
         package: {
           ...parsedPackage,
-          customAnswers: {
-            area: values['area-customAnswers']?.map(
-              (ans: { answer: string; key: string }) => ans.answer
-            ),
+          survey: {
+            ...parsedPackage?.survey,
+            customAnswers: {
+              area: values['area-customAnswers']?.map(
+                (ans: { answer: string; key: string }) => ans.answer
+              ),
+            },
           },
         },
       };
@@ -249,10 +255,14 @@ export const SurveyLink = (): JSX.Element => {
             <Select
               disabled={isLoading}
               data={
-                locations?.map((location: { id: any; name: any }) => ({
-                  value: location.id,
-                  label: location.name,
-                })) ?? []
+                locations
+                  ?.filter((x) =>
+                    !user?.isAdmin ? user?.locationAdmin?.includes(x?.id) : true
+                  )
+                  ?.map((location: { id: any; name: any }) => ({
+                    value: location.id,
+                    label: location.name,
+                  })) ?? []
               }
               placeholder="Select Operation"
               radius={'md'}
@@ -306,22 +316,6 @@ export const SurveyLink = (): JSX.Element => {
           style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
           mt={'xl'}
         >
-          {/* {parsedPackage && (
-            <Button
-              style={{ maxWidth: '576px' }}
-              fullWidth
-              radius={'md'}
-              variant="light"
-              onClick={() =>
-                form.insertListItem('customAnswers', {
-                  answer: '',
-                  key: nanoid(),
-                })
-              }
-            >
-              Add Answer
-            </Button>
-          )} */}
           <Button
             disabled={loading || fetching}
             loading={loading || fetching}
