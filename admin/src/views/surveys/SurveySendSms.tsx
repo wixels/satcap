@@ -91,7 +91,7 @@ export const SurveySendSms = (): JSX.Element => {
     <form onSubmit={form.onSubmit(sendSmsLink)}>
       {fields}
       <Group position="center" mt="md">
-        <Button variant="subtle">Upload CSV</Button>
+        {/* <Button variant="subtle">Upload CSV</Button> */}
         <Button
           variant="light"
           onClick={() =>

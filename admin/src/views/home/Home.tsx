@@ -25,7 +25,7 @@ export const Home = (): JSX.Element => {
   const { data: locations, isLoading } = useGetLocations();
   console.log(locations);
   return (
-    <Skeleton visible={fetching}>
+    <Skeleton visible={fetching} p="xl">
       <Box
         sx={(theme) => ({
           marginBottom: '4rem',
