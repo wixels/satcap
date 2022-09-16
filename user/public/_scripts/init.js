@@ -24,14 +24,14 @@ const getLink = async function () {
       throw new Error('no-link')
     }
 
-    const localLink = JSON.parse(window.localStorage.getItem('link'))
-    if (localLink && params.get('linkId') === localLink.linkId) {
-      return localLink
-    }
+    // const localLink = JSON.parse(window.localStorage.getItem('link'))
+    // if (localLink && params.get('linkId') === localLink.linkId) {
+    //   return localLink
+    // }
 
-    const linksSnapshot = await getDocs(query(collectionGroup(db, 'links'), where('linkId', '==', params.get('linkId'))))
+    const linksSnapshot = await getDocs(query(collectionGroup(db, 'links'), where('linkId', '==', params.get('linkId')), where('deletedAt', '==', null)))
     if (!linksSnapshot.size) {
-      throw new Error('no-link')
+      throw new Error('linkDeletedOrNonExistant')
     }
     const userRef = nanoid()
     const dbLink = { mineDocId: linksSnapshot.docs[0].ref.parent.parent.id, docId: linksSnapshot.docs[0].id, ...linksSnapshot.docs[0].data() }
@@ -46,7 +46,7 @@ const getLink = async function () {
     
     return dbLink
   } catch (error) {
-    console.error(error)
+    location.href = `/error?code=${error.message}`
     return
   }
 }
