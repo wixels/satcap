@@ -140,7 +140,7 @@ const setCustomAnswers = function () {
   questions.forEach((el) => {
     const answers = link.package.survey?.customAnswers?.[el.dataset.answers]
     if (Array.isArray(answers) && answers.length) {
-      const optionsHtml = []
+      const optionsHtml = ['<option value="">Select an option</option>']
       answers.forEach((option) => {
         optionsHtml.push(`
           <option value="${option}">${option}</option>
@@ -191,12 +191,13 @@ const setOnChange = function (containerElement) {
         const itemAsArray = item.split('-')
         if (el.value.toLowerCase() === itemAsArray[1].toLowerCase()) {
           const template = document.querySelector(`[data-choice="${itemAsArray[0]}-${el.value.toLowerCase()}"]`)
+          const questionContainer = template.parentNode
           const content = template.content.cloneNode(true)
           for (let i = 0; i < content.children.length; i++) {
             content.children[i].classList.add(itemAsArray[0]+'-'+itemAsArray[1].toLowerCase())
           }
           if (itemAsArray.length > 2) {
-            const existing = container.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[3]?.toLowerCase()}`)
+            const existing = questionContainer.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[3]?.toLowerCase()}`)
             if (existing.length) {
               existing.forEach((node) => {
                 node.remove()
@@ -204,29 +205,38 @@ const setOnChange = function (containerElement) {
             }
           }
           
-          container.appendChild(content)
-          setOnChange(container.lastElementChild)
+          questionContainer.insertBefore(content, questionContainer.querySelector('button[type="submit"]'))
+          setOnChange(questionContainer.querySelector(`.${itemAsArray[0]}-${itemAsArray[1].toLowerCase()}`))
         } else if (itemAsArray.length > 2 && el.value.toLowerCase() === itemAsArray[3]?.toLowerCase()) {
           const template = document.querySelector(`[data-choice="${itemAsArray[0]}-${el.value.toLowerCase()}"]`)
+          const questionContainer = template.parentNode
           const content = template.content.cloneNode(true)
           for (let i = 0; i < content.children.length; i++) {
             content.children[i].classList.add(itemAsArray[0]+'-'+itemAsArray[3].toLowerCase())
           }
 
-          const existing = container.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[1]?.toLowerCase()}`)
+          const existing = questionContainer.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[1]?.toLowerCase()}`)
           if (existing.length) {
             existing.forEach((node) => {
               node.remove()
             })
           }
-          container.appendChild(content)
-          setOnChange(container.lastElementChild)
+          questionContainer.insertBefore(content, questionContainer.querySelector('button[type="submit"]'))
+          setOnChange(questionContainer.querySelector(`.${itemAsArray[0]}-${itemAsArray[3].toLowerCase()}`))
         } else {
-          const existing = container.querySelectorAll(`.${item}`)
+          const existing = document.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[1].toLowerCase()}`)
           if (existing.length) {
             existing.forEach((node) => {
               node.remove()
             })
+          }
+          if (itemAsArray.length > 2) {
+            const existingTwo = document.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[3].toLowerCase()}`)
+            if (existingTwo.length) {
+              existingTwo.forEach((node) => {
+                node.remove()
+              })
+            }
           }
         }  
       }
