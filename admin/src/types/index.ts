@@ -77,7 +77,7 @@ export interface IMine {
   name?: string;
   packages?: IPackage[];
   mineId?: string;
-  scopes: string[];
+  scopes?: string[];
   featureImageUrl?: string;
   description?: string;
   address?: string;

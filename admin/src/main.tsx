@@ -25,6 +25,7 @@ import { fetchPeople } from './hooks/network/usePeople';
 import { Discussions } from './views/discussions/Discussions';
 import { fetchDiscussions } from './hooks/network/useDiscussions';
 import { SurveyReport } from './views/reports/SurveyReport';
+import { fetchMineWithPacks } from './hooks/network/useMine';
 
 const location = new ReactLocation();
 const queryClient = new QueryClient();
@@ -50,8 +51,10 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             {
               path: '/',
               loader: () =>
-                queryClient.getQueryData(['locations']) ??
-                queryClient.fetchQuery(['locations'], fetchLocations),
+                (queryClient.getQueryData(['locations']) &&
+                  queryClient.getQueryData(['mine'])) ??
+                (queryClient.fetchQuery(['locations'], fetchLocations),
+                queryClient.fetchQuery(['mine'], fetchMineWithPacks)),
               element: <Home />,
             },
             {

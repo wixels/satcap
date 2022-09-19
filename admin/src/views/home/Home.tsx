@@ -19,13 +19,14 @@ import { IconLocation, IconMapPin } from '@tabler/icons';
 import React from 'react';
 import { userGetMine } from '../../context/AuthenticationContext';
 import { useGetLocations } from '../../hooks/network/useLocations';
+import { useGetMine } from '../../hooks/network/useMine';
 
 export const Home = (): JSX.Element => {
-  const { mine, fetching } = userGetMine();
-  const { data: locations, isLoading } = useGetLocations();
-  console.log(locations);
+  const { data: locations } = useGetLocations();
+  const { data: mine, isLoading } = useGetMine();
+
   return (
-    <Skeleton visible={fetching} p="xl">
+    <Skeleton visible={isLoading} p="xl">
       <Box
         sx={(theme) => ({
           marginBottom: '4rem',

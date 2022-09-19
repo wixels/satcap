@@ -18,6 +18,7 @@ import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { IconX } from '@tabler/icons';
 import { useNavigate } from '@tanstack/react-location';
+import { useQueryClient } from '@tanstack/react-query';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import { auth } from '../../firebase';
@@ -69,13 +70,16 @@ export const Login = (): JSX.Element => {
     },
   });
 
+  const queryClient = useQueryClient();
   const naviagte = useNavigate();
 
   const handleSubmit = async (values: FormValues): Promise<void> => {
     setLoading(true);
     await signInWithEmailAndPassword(auth, values.email, values.password)
       .then(() => {
-        naviagte({ to: '/people', replace: true });
+        queryClient.prefetchQuery(['mine']);
+        queryClient.prefetchQuery(['links', true]);
+        naviagte({ to: '/', replace: true });
         setLoading(false);
       })
       .catch((error: any) => {

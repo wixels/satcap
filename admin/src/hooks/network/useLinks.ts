@@ -60,5 +60,7 @@ export const useGetLinks = (force: boolean = false) => {
 };
 
 export const useGetLinkResponses = (id: string) => {
-  return useQuery(['links', id], () => fetchLinkResponses(id));
+  return useQuery(['links', id], () => fetchLinkResponses(id), {
+    staleTime: 1000 * 60 * 10,
+  });
 };
