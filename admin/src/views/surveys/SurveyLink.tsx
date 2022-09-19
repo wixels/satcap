@@ -191,17 +191,19 @@ export const SurveyLink = (): JSX.Element => {
         ...values,
         package: {
           ...parsedPackage,
-          survey: {
-            ...parsedPackage?.survey,
-            customAnswers: {
-              area: values['area-customAnswers']?.map(
-                (ans: { answer: string; key: string }) => ans.answer
-              ),
-            },
-          },
         },
       };
+
+      if (payload['area-customAnswers']) {
+        payload.package.survey.customAnswers = {
+          area: payload['area-customAnswers']?.map(
+            (ans: { answer: string; key: string }) => ans.answer
+          ),
+        };
+      }
       delete payload['area-customAnswers'];
+      delete payload?.customAnswers;
+
       await addDoc(collection(db, `mines/${mine?.mineId}/links`), payload);
       queryClient.invalidateQueries(['links']);
       setLoading(false);

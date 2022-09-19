@@ -44,9 +44,6 @@ function App(): JSX.Element {
   const { user: currentAccount, fetching } = useGetUser();
   const { mine, fetching: fetchingMine } = userGetMine();
   const [user, loading, error] = useAuthState(getAuth());
-
-  console.log(mine);
-
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: 'mantine-color-scheme',
     defaultValue: window.matchMedia('(prefers-color-scheme: dark)').matches
