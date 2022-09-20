@@ -13,12 +13,16 @@ exports.createAuthentication = functions.firestore
     const user = snap.data()
     const password = generator.generate()
 
-    const userRecord = await admin.auth().createUser({
+    const newUser = {
       email: user.email,
       phoneNumber: (user.mobile?.length) ? user.mobile : null,
       displayName: user.name,
       password
-    })
+    }
+
+    if (!newUser.phoneNumber) delete newUser.phoneNumber
+
+    const userRecord = await admin.auth().createUser(newUser)
 
     await admin.firestore().collection(`mines/${context.params.mineId}/users`).doc(context.params.userId).update({
       authUid: userRecord.uid
