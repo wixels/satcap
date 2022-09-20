@@ -143,6 +143,7 @@ header img {
 }
 
 section {
+  position: relative;
   margin-bottom: calc(var(--spacer) * 1.5);
   padding-left: var(--spacer);
   padding-right: var(--spacer);
@@ -166,6 +167,14 @@ section.survey .line {
 
 section h2 {
   margin: var(--spacer) auto;
+}
+
+section .viewAll {
+  position: absolute;
+  top: 0.25rem;
+  right: var(--spacer);
+  text-decoration: none;
+  color: hsl(var(--color-tertiary));
 }
 
 .modal {

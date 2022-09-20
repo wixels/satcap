@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="./_style/images/logo.png" />
-    <link rel="stylesheet" media="screen" href="./_style/app.screen.css">
+    <link rel="stylesheet" media="screen" href="./_style/app.screen.css?v=1">
     <title>Home</title>
   </head>
   <body>
@@ -25,12 +25,12 @@
       <a id="querySubmission" class="link hidden" href="/queries">Submit a Query</a>
       <section class="resources hidden">
         <h2>Resource Library</h2>
-        <a href="/information?type=resources&linkId=">View all</a>
+        <a class="viewAll" href="/information?type=resources&linkId=">View all</a>
         <div class="list inline"></div>
       </section>
       <section class="notice-board hidden">
         <h2>Notice Board</h2>
-        <a href="/information?type=notices&linkId=">View all</a>
+        <a class="viewAll" href="/information?type=notices&linkId=">View all</a>
         <div class="list inline"></div>
       </section>
     </main>
