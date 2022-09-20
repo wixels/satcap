@@ -107,6 +107,7 @@ function userGetMine() {
       };
     } else {
       signOut(auth);
+      window.localStorage.clear();
       showNotification({
         icon: <IconX size={18} />,
         color: 'red',

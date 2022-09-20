@@ -78,7 +78,11 @@ export const Login = (): JSX.Element => {
     await signInWithEmailAndPassword(auth, values.email, values.password)
       .then(() => {
         queryClient.prefetchQuery(['mine']);
-        queryClient.prefetchQuery(['links', true]);
+        queryClient.prefetchQuery(['links']);
+        queryClient.prefetchQuery(['linksResponses']);
+        queryClient.prefetchQuery(['people']);
+        queryClient.prefetchQuery(['discussions']);
+        queryClient.prefetchQuery(['locations']);
         naviagte({ to: '/', replace: true });
         setLoading(false);
       })

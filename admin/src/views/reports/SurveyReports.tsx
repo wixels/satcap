@@ -4,22 +4,20 @@ import {
   Card,
   Divider,
   Group,
-  Indicator,
   Menu,
   SimpleGrid,
   Stack,
   Text,
 } from '@mantine/core';
-import { IconDots, IconFileZip, IconTable, IconTrash } from '@tabler/icons';
-import { Link, MatchRoute } from '@tanstack/react-location';
-import { useGetLinks } from '../../hooks/network/useLinks';
+import { IconDots, IconFileZip } from '@tabler/icons';
+import { useGetLinkResponses } from '../../hooks/network/useLinks';
 import { ILink } from '../../types';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import dayjs from 'dayjs';
 
 export const SurveyReports = (): JSX.Element => {
-  const { data: links } = useGetLinks(true);
+  const { data: links } = useGetLinkResponses();
 
   const toSentenceCase = (string: string) => {
     const result = string.replace(/([A-Z])/g, ' $1');
@@ -45,8 +43,6 @@ export const SurveyReports = (): JSX.Element => {
     //@ts-ignore
     FileSaver.saveAs(data, `${link?.package?.name || 'Survey report'}.csv`);
   };
-
-  console.log(links);
 
   return (
     <Stack>

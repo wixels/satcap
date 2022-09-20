@@ -6,7 +6,6 @@ import {
   query,
   where,
 } from 'firebase/firestore';
-import { useEffect } from 'react';
 import db from '../../firebase';
 import { ILink } from '../../types';
 
@@ -55,12 +54,12 @@ export async function fetchLinks(force: boolean) {
   return links;
 }
 
-export const useGetLinks = (force: boolean = false) => {
-  return useQuery<ILink[], any>(['links', force], () => fetchLinks(force));
+export const useGetLinks = () => {
+  return useQuery<ILink[]>(['links'], () => fetchLinks(false));
 };
 
-export const useGetLinkResponses = (id: string) => {
-  return useQuery(['links', id], () => fetchLinkResponses(id), {
+export const useGetLinkResponses = () => {
+  return useQuery<ILink[]>(['linksResponses'], () => fetchLinks(true), {
     staleTime: 1000 * 60 * 10,
   });
 };

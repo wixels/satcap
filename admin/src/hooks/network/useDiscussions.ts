@@ -23,5 +23,7 @@ export async function fetchDiscussions() {
 }
 
 export const useGetDiscussions = () => {
-  return useQuery<IDiscussion[], any>(['discussions'], fetchDiscussions);
+  return useQuery<IDiscussion[], any>(['discussions'], fetchDiscussions, {
+    staleTime: 1000 * 60 * 10,
+  });
 };

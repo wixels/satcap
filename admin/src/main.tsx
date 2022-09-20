@@ -24,7 +24,6 @@ import { fetchInformation } from './hooks/network/useInformation';
 import { fetchPeople } from './hooks/network/usePeople';
 import { Discussions } from './views/discussions/Discussions';
 import { fetchDiscussions } from './hooks/network/useDiscussions';
-import { SurveyReport } from './views/reports/SurveyReport';
 import { fetchMineWithPacks } from './hooks/network/useMine';
 
 const location = new ReactLocation();
@@ -112,16 +111,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                   path: '/',
                   element: <SurveyReports />,
                   loader: () =>
-                    queryClient.getQueryData(['links']) ??
-                    queryClient.fetchQuery(['links'], () => fetchLinks(true)),
-                },
-                {
-                  path: ':link',
-                  element: <SurveyReport />,
-                  loader: ({ params: { link } }) =>
-                    queryClient.getQueryData(['links', link]) ??
-                    queryClient.fetchQuery(['links', link], () =>
-                      fetchLinkResponses(link)
+                    queryClient.getQueryData(['linksResponses']) ??
+                    queryClient.fetchQuery(['linksResponses'], () =>
+                      fetchLinks(true)
                     ),
                 },
               ],

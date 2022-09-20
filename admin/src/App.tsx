@@ -127,7 +127,10 @@ function App(): JSX.Element {
                     </Menu.Target>
                     <Menu.Dropdown>
                       <Menu.Item
-                        onClick={() => signOut(auth)}
+                        onClick={() => {
+                          signOut(auth);
+                          window.localStorage.clear();
+                        }}
                         icon={<IconLogout size={22} />}
                       >
                         Logout
@@ -147,14 +150,14 @@ function App(): JSX.Element {
                         icon={<IconUsers size={22} stroke={1.5} />}
                       />
                     )}
-                    {mine?.scopes.includes('survey') && (
+                    {mine?.scopes?.includes('survey') && (
                       <NavbarLink
                         path="/reports"
                         label="Survey Reports"
                         icon={<IconChartPie size={22} stroke={1.5} />}
                       />
                     )}
-                    {mine?.scopes.includes('information') && (
+                    {mine?.scopes?.includes('information') && (
                       <NavbarLink
                         path="/information"
                         label="Information"
@@ -162,7 +165,7 @@ function App(): JSX.Element {
                       />
                     )}
 
-                    {mine?.scopes.includes('survey') && (
+                    {mine?.scopes?.includes('survey') && (
                       <NavbarLink
                         path="/surveys"
                         label="Surveys"
@@ -170,7 +173,7 @@ function App(): JSX.Element {
                       />
                     )}
 
-                    {mine?.scopes.includes('queries') && (
+                    {mine?.scopes?.includes('queries') && (
                       <NavbarLink
                         path="/discussions"
                         label="Query Submissions"

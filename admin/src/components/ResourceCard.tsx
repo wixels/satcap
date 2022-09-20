@@ -16,9 +16,7 @@ import { IconDots, IconLink, IconTrash, IconX } from '@tabler/icons';
 import { useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
 import { deleteDoc, doc } from 'firebase/firestore';
-import { useState } from 'react';
 import db from '../firebase';
-
 interface Props {
   title: string;
   content?: string;

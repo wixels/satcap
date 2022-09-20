@@ -18,5 +18,7 @@ export async function fetchPeople() {
 }
 
 export const useGetPeople = () => {
-  return useQuery<IUser[], any>(['people'], fetchPeople);
+  return useQuery<IUser[], any>(['people'], fetchPeople, {
+    staleTime: 1000 * 60 * 10,
+  });
 };

@@ -32,6 +32,9 @@ export async function fetchInformation() {
 export const useGetInformation = () => {
   return useQuery<Array<IResource | INotice>>(
     ['information'],
-    fetchInformation
+    fetchInformation,
+    {
+      staleTime: 1000 * 60 * 10,
+    }
   );
 };

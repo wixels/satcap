@@ -19,5 +19,7 @@ export async function fetchLocations() {
 }
 
 export const useGetLocations = () => {
-  return useQuery<ILocation[], any>(['locations'], fetchLocations);
+  return useQuery<ILocation[], any>(['locations'], fetchLocations, {
+    staleTime: 1000 * 60 * 10,
+  });
 };

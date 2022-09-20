@@ -25,6 +25,7 @@ const fetchMine = async (): Promise<IMine | void> => {
     };
   } else {
     signOut(auth);
+    window.localStorage.clear();
     showNotification({
       color: 'red',
       message: 'Unable to find the mine your associated to',
@@ -76,5 +77,7 @@ export const fetchMineWithPacks = async () => {
 
 export const useGetMine = () => {
   // @ts-ignore
-  return useQuery<IMine>(['mine'], fetchMineWithPacks);
+  return useQuery<IMine>(['mine'], fetchMineWithPacks, {
+    staleTime: 1000 * 60 * 10,
+  });
 };
