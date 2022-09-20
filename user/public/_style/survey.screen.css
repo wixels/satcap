@@ -3,6 +3,7 @@ header {
   top: 0;
   background-color: white;
   z-index: 9;
+  margin-bottom: var(--spacer);
 }
 main {
   padding-bottom: 6rem;
@@ -308,6 +309,12 @@ progress {
 
 .listItem p {
   font-size: .9rem;
+}
+.listItem a {
+  margin: var(--spacer) 0;
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+  float: right;
 }
 .listItem button {
   border: 1px solid;

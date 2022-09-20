@@ -8,6 +8,7 @@ const submit = async function (e) {
     let body = new window.FormData(form)
     for (const pair of body.entries()) {
       if (typeof pair[1] !== 'string' && pair[1].type.includes('image')) {
+        console.log('Im here')
         body.set('imageUrl', await uploadFile(pair[1], `mines/${body.get('mineDocId')}/queries/`))
         body.delete(pair[0])
       }

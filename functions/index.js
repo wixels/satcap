@@ -69,7 +69,7 @@ exports.submitQuery = functions.https.onRequest(async (req, res) => {
         contact: (req.body.isAnonymous === 'on') ? 'Private' : req.body.contact,
         title: req.body.title,
         description: req.body.description,
-        image: req.body.imageUrl,
+        image: req.body.imageUrl || '',
         userRef: req.body.userRef,
         mineDocId: req.body.mineDocId,
         linkDocId: req.body.linkDocId,

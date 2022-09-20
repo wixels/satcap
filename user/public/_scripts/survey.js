@@ -19,6 +19,7 @@ const initialise = async function (suveryKey, localSubmissions) {
           const title = content.querySelector('h3')
           const description = content.querySelector('p')
           const btn = content.querySelector('button')
+          const faqLink = content.querySelector('a')
 
           content.querySelector('.listItem .line').style.backgroundColor = survey.color
           title.textContent = survey.title
@@ -30,6 +31,10 @@ const initialise = async function (suveryKey, localSubmissions) {
             e.preventDefault()
             startSurvey(e.currentTarget.dataset.surveyKey, e.currentTarget.dataset.key, e.currentTarget.dataset.title)
           })
+          if (survey.faqUrl && faqLink) {
+            faqLink.classList.remove('hidden')
+            faqLink.setAttribute('href', survey.faqUrl)
+          }
           document.querySelector('#surveyList').appendChild(content)
         }
         if (link.package.scopes?.length) {

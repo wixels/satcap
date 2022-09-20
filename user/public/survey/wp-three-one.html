@@ -3,8 +3,9 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="../_style/images/logo.png" />
     <link rel="stylesheet" media="screen" href="../_style/app.screen.css?v=1.1">
-    <link rel="stylesheet" media="screen" href="../_style/survey.screen.css?v=1.1">
+    <link rel="stylesheet" media="screen" href="../_style/survey.screen.css?v=1.2">
     <title>Checklists</title>
   </head>
   <body>
@@ -21,6 +22,7 @@
         <div class="content">
           <h3></h3>
           <p></p>
+          <a class="link hidden">FAQ's</a>
           <button type="button">Start Checklist</button>
         </div>
       </div>
@@ -471,30 +473,36 @@
         <div class="question">
           <p>Question 2</p>
           <fieldset class="radioGroup">
-            <legend>Are you aware of the pre-application readiness survey that assists by guiding you through the application process?</legend>
+            <legend>Are you aware of the pre-application readiness checklist that assists by guiding you through the application process?</legend>
             <label>
-              <input type="radio" value="Yes" name="questionTwo"/>
+              <input type="radio" value="Yes" name="questionTwo" data-on-change="conditionalPath" data-conditional-path="two-no"/>
               <span>Yes</span>
             </label>
             <label>
-              <input type="radio" value="No" name="questionTwo"/>
+              <input type="radio" value="No" name="questionTwo" data-on-change="conditionalPath" data-conditional-path="two-no"/>
               <span>No</span>
             </label>
           </fieldset>
+          <template data-choice="two-no">
+            <p>Please note: You can complete the pre-application checklist on this tool by visiting the home page</p>
+          </template>
         </div>
         <div class="question">
           <p>Question 3</p>
           <fieldset class="radioGroup">
-            <legend>Have you taken our pre-application readiness survey?</legend>
+            <legend>Have you taken our pre-application readiness checklist?</legend>
             <label>
-              <input type="radio" value="Yes" name="questionThree"/>
+              <input type="radio" value="Yes" name="questionThree" data-on-change="conditionalPath" data-conditional-path="three-no" />
               <span>Yes</span>
             </label>
             <label>
-              <input type="radio" value="No" name="questionThree"/>
+              <input type="radio" value="No" name="questionThree" data-on-change="conditionalPath" data-conditional-path="three-no"/>
               <span>No</span>
             </label>
           </fieldset>
+          <template data-choice="three-no">
+            <p>Please note: You can complete the pre-application checklist on this tool by visiting the home page</p>
+          </template>
         </div>
         <div class="question">
           <p>Question 4</p>
@@ -571,7 +579,7 @@
       <div class="consent hidden">
         <div class="content">
           <p class="hidden" id="surveyDescription"></p>
-          <p>Welcome to the Post-Application Response Checklist</p>
+          <p>Welcome to the Post-Response Checklist</p>
           <h2>Consent to take part in research pilot</h2>
           <details>
             <summary>Click here to see what you're consenting to</summary>
