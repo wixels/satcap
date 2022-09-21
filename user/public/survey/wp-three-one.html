@@ -54,7 +54,7 @@
       </div>
       <form class="survey hidden" name="survey" action="https://satcap-research.web.app/api/survey" method="POST">
         <input type="hidden" name="consent" value="true" />
-        <input type="hidden" name="survey" value="wp-three-two-pre" />
+        <input type="hidden" name="survey" value="wp-three-one-pre" />
         <input type="hidden" name="mineDocId" />
         <input type="hidden" name="linkDocId" />
         <input type="hidden" name="linkId" />
@@ -101,7 +101,7 @@
               <span>Yes</span>
             </label>
             <label>
-              <input type="radio" value="No" name="questionThree" data-on-change="conditionalPath" data-conditional-path="two-no"/>
+              <input type="radio" value="No" name="questionThree" data-on-change="conditionalPath" data-conditional-path="three-no"/>
               <span>No</span>
             </label>
           </fieldset>
@@ -257,9 +257,10 @@
             <span>What is your BBBEE level?</span>
             <select name="questionTwelve">
               <option value="">Select an option</option>
-              <option value="One">Level One > 100 points</option>
-              <option value="Three">Level Three > 90 but < 95 points</option>
-              <option value="Four">Level Four > 80 but < 90 points</option>
+              <option value="Level One">Level One &gt; 100 points</option>
+              <option value="Level Two">Level Two &gt; 95 but &lt; 100 points</option>
+              <option value="Level Three">Level Three &gt; 90 but &lt; 95 points</option>
+              <option value="Level Four">Level Four &gt; 80 but &lt; 90 points</option>
             </select>
           </label>
         </div>
@@ -449,7 +450,7 @@
       </div>
       <form class="survey hidden" name="survey" action="https://satcap-research.web.app/api/survey" method="POST">
         <input type="hidden" name="consent" value="true" />
-        <input type="hidden" name="survey" value="wp-three-two-post" />
+        <input type="hidden" name="survey" value="wp-three-one-post" />
         <input type="hidden" name="mineDocId" />
         <input type="hidden" name="linkDocId" />
         <input type="hidden" name="linkId" />
@@ -602,7 +603,7 @@
       </div>
       <form class="survey hidden" name="survey" action="https://satcap-research.web.app/api/survey" method="POST">
         <input type="hidden" name="consent" value="true" />
-        <input type="hidden" name="survey" value="wp-three-two-post-response" />
+        <input type="hidden" name="survey" value="wp-three-one-post-response" />
         <input type="hidden" name="mineDocId" />
         <input type="hidden" name="linkDocId" />
         <input type="hidden" name="linkId" />
@@ -685,14 +686,17 @@
           <fieldset class="radioGroup">
             <legend>If your application was not successful, do you know the reason why?</legend>
             <label>
-              <input type="radio" value="Yes" name="questionSix"/>
+              <input type="radio" value="Yes" name="questionSix" data-on-change="conditionalPath" data-conditional-path="six-no"/>
               <span>Yes</span>
             </label>
             <label>
-              <input type="radio" value="No" name="questionSix"/>
+              <input type="radio" value="No" name="questionSix" data-on-change="conditionalPath" data-conditional-path="six-no"/>
               <span>No</span>
             </label>
           </fieldset>
+          <template data-choice="six-no">
+            <a href="../information?linkId=6L9xNG159B&type=resources&docId=nXrcmBqgxBI9sVkP2g06" target="_blank">FAQ's Post-Response</a>
+          </template>
         </div>
         <div class="question">
           <p>Question 7</p>

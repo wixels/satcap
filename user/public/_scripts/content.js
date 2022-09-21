@@ -147,6 +147,12 @@ const getSingleContent = async function (collection, docId, type) {
   }
 }
 
+const canBeIFramed = function (fileName) {
+  const validFile = ['.pdf', '.mp4']
+   
+  return fileName.includes('https://') && validFile.some(item => fileName.includes(item))
+}
+
 const viewItem = function (item) {
   const template = document.getElementById('templateItem')
   const content = template.content.cloneNode(true)
@@ -170,13 +176,20 @@ const viewItem = function (item) {
     const date = subContent.querySelector('.date')
     date.textContent = dayjs(item.createdAt).format('DD MMMM YYYY')
   }
+  const description = subContent.querySelector('p.description')
+  description.textContent = item.description
+
   const link = subContent.querySelector('a')
   if (link && item.url) {
     link.setAttribute('href', item.url)
     link.classList.remove('hidden')
   }
-  const description = subContent.querySelector('p.description')
-  description.textContent = item.description
+  const preview = subContent.querySelector('iframe')
+  if (preview && item.url && canBeIFramed(item.url)) {
+    preview.setAttribute('title', item.title)
+    preview.setAttribute('src', item.url)
+    preview.classList.remove('hidden')
+  }
 
   content.querySelector('.item').appendChild(subContent)
   const existing = document.getElementById('view-information')
