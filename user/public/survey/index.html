@@ -14,8 +14,9 @@
     <footer></footer>
     <script defer src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"></script>
     <script defer type="module">
-      import { link } from './_scripts/init.js'
+      import { getLink } from './_scripts/init.js'
 
+      const link = await getLink()
       if (link.package.scopes.includes('survey') && link.package.survey?.key) {
         location.href = `survey/${link.package.survey?.key}?linkId=${link.linkId}`
       } else {

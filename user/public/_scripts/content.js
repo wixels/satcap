@@ -1,5 +1,5 @@
 import { collection, query, where, limit, orderBy, getDocs, getDoc, doc } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js'
-import { db } from './init.js'
+import { db } from './init.js?v=1'
 import { requestHandler } from './helpers.js'
 
 const setCard = function (item) {
@@ -85,6 +85,7 @@ const insertListContent = function (parent, data) {
 const insertQueryContent = function (parent, data) {
   const list = document.querySelector(`.${parent} .list`)
   if (list) {
+    list.innerHTML = ''
     if (data.length) {
       data.forEach(item => {
         list.appendChild(setQuery(item))

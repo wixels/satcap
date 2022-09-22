@@ -116,9 +116,11 @@
     </script>
     <script defer src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"></script>
     <script defer type="module">
-      import { app, db, link, initMenu } from './_scripts/init.js'
+      import { app, db, getLink, initMenu } from './_scripts/init.js?v=1'
       import { getAllContent, getSingleContent, insertListContent, viewItem } from './_scripts/content.js'
 
+      const link = await getLink()
+      
       if (!link) {
         location.href = '/error?code=link'
       }

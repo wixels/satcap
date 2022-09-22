@@ -1,9 +1,10 @@
 import { collection, query, where, getDocs } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js'
 import { logEvent } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js'
 import { requestHandler } from './helpers.js'
-import { analytics, db, initMenu, link } from './init.js'
+import { analytics, db, initMenu } from './init.js?v=1'
 
 const initialise = async function (suveryKey, localSubmissions) {
+  const link = JSON.parse(window.localStorage.getItem('link'))
   if (link && link.package.survey.key === suveryKey) {
     const linkOpenSnapShot = await getDocs(query(collection(db, `mines/${link.mineDocId}/links/`), where('acceptResponses', '==', true), where('linkId', '==', link.linkId)))
     if (linkOpenSnapShot.size && (!localSubmissions.includes(link.linkId) || link.package.survey.allowMultipleResponses)) {
@@ -58,7 +59,8 @@ const initialise = async function (suveryKey, localSubmissions) {
   }
 }
 
-const startSurvey = function (surveyKey, subKey, title) {
+const startSurvey = async function (surveyKey, subKey, title) {
+  const link = JSON.parse(window.localStorage.getItem('link'))
   const template = document.getElementById(subKey)
   const content = template.content.cloneNode(true)
 
@@ -83,6 +85,7 @@ const startSurvey = function (surveyKey, subKey, title) {
 
 const giveConsent = function (e) {
   e.preventDefault()
+  const link = JSON.parse(window.localStorage.getItem('link'))
   const checked = document.querySelector('[name="giveConsent"]:checked')
   if (checked) {
     const consent = document.querySelector('.consent')
@@ -141,6 +144,7 @@ const submitSurvey = async function (e) {
 }
 
 const setCustomAnswers = function () {
+  const link = JSON.parse(window.localStorage.getItem('link'))
   const questions = document.querySelectorAll('[data-answers]')
   questions.forEach((el) => {
     const answers = link.package.survey?.customAnswers?.[el.dataset.answers]

@@ -48,9 +48,9 @@
   <footer></footer>
   <script defer src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"></script>
   <script type="module">
-    import { link, initMenu } from '../_scripts/init.js'
+    import { getLink, initMenu } from '../_scripts/init.js?v=1'
     
-    console.log(link)
+    const link = await getLink()
     if (link.package.survey?.allowMultipleResponses) {
       const el = document.querySelector('a[href="/survey"].hidden')
       el.setAttribute('href', `${el.getAttribute('href')}?linkId=${link.linkId}`)

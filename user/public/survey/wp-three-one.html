@@ -742,9 +742,10 @@
   </footer>
   <script defer src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"></script>
   <script defer type="module">
-    import { link, initMenu } from '../_scripts/init.js'
+    import { getLink, initMenu } from '../_scripts/init.js?v=1'
     import { initialise } from '../_scripts/survey.js'
 
+    const link =  await getLink()
     const suveryKey = 'wp-three-one'
     const localSubmissions= JSON.parse(window.localStorage.getItem('submissions')) || []
     

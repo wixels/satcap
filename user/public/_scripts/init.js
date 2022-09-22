@@ -33,16 +33,23 @@ const getLink = async function () {
     if (!linksSnapshot.size) {
       throw new Error('linkDeletedOrNonExistant')
     }
-    const userRef = nanoid()
+
+    let userRef = window.localStorage.getItem('userRef')
+    
     const dbLink = { mineDocId: linksSnapshot.docs[0].ref.parent.parent.id, docId: linksSnapshot.docs[0].id, ...linksSnapshot.docs[0].data() }
-    window.localStorage.setItem('userRef', userRef)
+    
+    if (!userRef) {
+      userRef = nanoid()
+      window.localStorage.setItem('userRef', userRef)
+      logEvent(analytics, 'device_first_visit', { 
+        user_ref: userRef,
+        link_id: dbLink.linkId,
+        package_id: dbLink.package.docId,
+        time_stamp: dayjs().format('YYYY-MM-DD HH:mm:ssZ')
+      })
+    }
+
     window.localStorage.setItem('link', JSON.stringify(dbLink))
-    logEvent(analytics, 'device_first_visit', { 
-      user_ref: userRef,
-      link_id: dbLink.linkId,
-      package_id: dbLink.package.docId,
-      time_stamp: dayjs().format('YYYY-MM-DD HH:mm:ssZ')
-    })
     
     return dbLink
   } catch (error) {
@@ -50,8 +57,6 @@ const getLink = async function () {
     return
   }
 }
-
-const link = await getLink()
 
 const initMenu = function (linkId, items) {
   if (items.length === 1 && items[0] === 'survey') {
@@ -76,4 +81,4 @@ const initMenu = function (linkId, items) {
   document.querySelector('footer').appendChild(ul)
 }
 
-export { app, analytics, db, link, getLink, initMenu }
+export { app, analytics, db, getLink, initMenu }

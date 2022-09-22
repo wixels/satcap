@@ -1,4 +1,5 @@
 import { uploadFile, requestHandler } from './helpers.js'
+import { getAllQueries, insertQueryContent } from './content.js'
 
 const submit = async function (e) {
   e.preventDefault()
@@ -18,7 +19,9 @@ const submit = async function (e) {
     form.querySelector('button[type="submit"]').textContent = 'Submit query'
     if (res.ok) {
       form.reset()
+      const queries = await getAllQueries(body.get('mineDocId'))
       document.querySelector('.modal').remove()
+      insertQueryContent('queries', queries)
     } else {
       console.error(res)
     }

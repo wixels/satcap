@@ -1,5 +1,5 @@
 import { collection, query, where, limit, orderBy, getDocs } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js'
-import { db } from './init.js'
+import { db } from './init.js?v=1'
 
 const getRecentNotices = async function (mineId, locationId, packageId) {
   if (!mineId) return []

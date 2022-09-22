@@ -26,7 +26,7 @@
     }
   </script>
   <script type="module">
-    import { getLink, initMenu } from '../_scripts/init.js'
+    import { getLink, initMenu } from '../_scripts/init.js?v=1'
     const link = await getLink()
     if (link.package.scopes?.length) {
       initMenu(link.linkId, link.package.scopes)
