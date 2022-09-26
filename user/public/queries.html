@@ -15,6 +15,8 @@
     </header>
     <main>
       <button type="button" class="primary" id="newQuery">Create new</button>
+      <p>Click the Create New button and complete the form to submit a query</p>
+      <p>You can also provide feedback on anything else that you would like to see on this platform which may help you in your supplier journey</p>
       <section class="queries">
         <h2>My queries</h2>
         <p class="init">Loading...</p>
@@ -41,7 +43,6 @@
           <input type="hidden" name="locationDocId" value="" />
           <input type="hidden" name="linkDocId" value="" />
           <h2>Create a new query</h2>
-          <p>Please type your procurement related query in the box below. You can also provide feedback on anything else that you would like to see on this platform which may help you in your supplier journey</p>
           <label>
             Subject / Title
             <input type="text" name="title" />
@@ -62,6 +63,20 @@
             Contact information (Email or mobile)
             <input type="text" name="contact" />
           </label>
+          <details>
+            <summary>Click here to see what you're consenting to</summary>
+            <ul>
+              <li>I voluntarily agree to participate in this pilot study for a community needs assessment digital application.</li>
+              <li>I understand that I am participating in an assessment of this digital application in this pilot test of my own free will.</li>
+              <li>I understand that I should not expect any financial gain, remuneration or benefit directly for participation in this pilot test.</li>
+              <li>I understand that all information I provide in this study will be treated confidentially and no personal information will be shared.</li>
+              <li>I understand that my participation in this pilot will in no way advantage or disadvantage me in future engagements with the host organisation.</li>
+              <li>I understand that as the information will be stored anonymously, I may not be able to access my specific queries.</li>
+              <li>I understand that participating in this pilot does not mean that I will expect any action to be taken from the host organisation based on my responses and feedback.</li>
+            </ul>
+          </details>
+          <form>
+            <label><input type="checkbox" name="giveConsent" required/>I understand and consent to the above</label>
           <button type="submit">Submit query</button>
           <button type="button" class="close secondary">Cancel</button>
         </form>
