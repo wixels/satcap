@@ -299,6 +299,13 @@ const setProgressTracker = function () {
   const form = document.forms.survey
   const answers = new window.FormData(form)
   const total = questions.length
+  const validShortAnswer = [
+    'n/a',
+    'na',
+    'no',
+    'yes',
+    '-'
+  ]
   let completed = 0
   let keysChecked = []
 
@@ -313,7 +320,7 @@ const setProgressTracker = function () {
               case 'text':
               case 'select-one':
               case 'date':
-                if (answers.get(key).length > 3) {
+                if (validShortAnswer.includes(answers.get(key).toLowerCase()) || answers.get(key).length > 3) {
                   isComplete = true
                 }
                 break
