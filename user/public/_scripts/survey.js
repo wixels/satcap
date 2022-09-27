@@ -196,6 +196,17 @@ const setOnChange = function (containerElement) {
         if (checked.length > Number(item)) {
           e.currentTarget.checked = false
         }
+      } else if (e.currentTarget.dataset.onChange === 'free-text') {
+        const elAllowedToShow = container.querySelector(`[data-${e.currentTarget.dataset.onChange}="true"]`)
+        if (elAllowedToShow.value === el.value) {
+          const template = document.getElementById('selectFreeText')
+          const content = template.content.cloneNode(true)
+          content.querySelector('input[type="text"]').setAttribute('name', `${el.name}Description`)
+          elAllowedToShow.parentNode.parentNode.parentNode.appendChild(content)
+        } else {
+          const label = container.querySelector('label.free-text')
+          if (label) label.remove()
+        }
       } else {
         const itemAsArray = item.split('-')
         if (el.value.toLowerCase() === itemAsArray[1].toLowerCase()) {
