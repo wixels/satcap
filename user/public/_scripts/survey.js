@@ -299,13 +299,7 @@ const setProgressTracker = function () {
   const form = document.forms.survey
   const answers = new window.FormData(form)
   const total = questions.length
-  const validShortAnswer = [
-    'n/a',
-    'na',
-    'no',
-    'yes',
-    '-'
-  ]
+  const validShortAnswer = ['n/a','na','no','yes','-']
   let completed = 0
   let keysChecked = []
 
