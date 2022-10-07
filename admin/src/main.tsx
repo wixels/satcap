@@ -36,6 +36,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
     <NotificationsProvider>
       <ModalsProvider>
+        {/* @ts-ignore */}
         <Router location={location} routes={routerFactory(queryClient)}>
           <AuthenticationProvider>
             <App />
