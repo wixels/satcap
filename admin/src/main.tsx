@@ -25,6 +25,7 @@ import { fetchPeople } from './hooks/network/usePeople';
 import { Discussions } from './views/discussions/Discussions';
 import { fetchDiscussions } from './hooks/network/useDiscussions';
 import { fetchMineWithPacks } from './hooks/network/useMine';
+import { routerFactory } from './router';
 
 const location = new ReactLocation();
 const queryClient = new QueryClient();
@@ -35,117 +36,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
     <NotificationsProvider>
       <ModalsProvider>
-        <Router
-          location={location}
-          routes={[
-            {
-              path: '/auth',
-              children: [
-                {
-                  path: '/login',
-                  element: <Login />,
-                },
-              ],
-            },
-            {
-              path: '/',
-              loader: () =>
-                (queryClient.getQueryData(['locations']) &&
-                  queryClient.getQueryData(['mine'])) ??
-                (queryClient.fetchQuery(['locations'], fetchLocations),
-                queryClient.fetchQuery(['mine'], fetchMineWithPacks)),
-              element: <Home />,
-            },
-            {
-              path: '/information',
-              loader: () =>
-                queryClient.getQueryData(['information']) ??
-                queryClient.fetchQuery(['information'], fetchInformation),
-              children: [
-                {
-                  path: '/',
-                  element: <Information />,
-                },
-                {
-                  path: '/create',
-                  loader: () =>
-                    queryClient.getQueryData(['locations']) ??
-                    queryClient.fetchQuery(['locations'], fetchLocations),
-                  element: <CreateWrapper />,
-                },
-              ],
-            },
-            {
-              path: '/surveys',
-              loader: () =>
-                queryClient.getQueryData(['links']) ??
-                queryClient.fetchQuery(['links'], () => fetchLinks(false)),
-              children: [
-                {
-                  path: '/',
-                  element: <Surveys />,
-                },
-                {
-                  path: ':link',
-                  loader: () =>
-                    queryClient.getQueryData(['locations']) ??
-                    queryClient.fetchQuery(['locations'], fetchLocations),
-                  children: [
-                    {
-                      path: '/',
-                      element: <SurveyLink />,
-                    },
-                    {
-                      path: '/send',
-                      element: <SurveySend />,
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              path: '/reports',
-
-              children: [
-                {
-                  path: '/',
-                  element: <SurveyReports />,
-                  loader: () =>
-                    queryClient.getQueryData(['linksResponses']) ??
-                    queryClient.fetchQuery(['linksResponses'], () =>
-                      fetchLinks(true)
-                    ),
-                },
-              ],
-            },
-            {
-              path: '/people',
-              loader: () =>
-                queryClient.getQueryData(['people']) ??
-                queryClient.fetchQuery(['people'], fetchPeople),
-              children: [
-                {
-                  path: '/',
-                  element: <People />,
-                },
-                {
-                  path: '/create',
-                  loader: () =>
-                    queryClient.getQueryData(['locations']) ??
-                    queryClient.fetchQuery(['locations'], fetchLocations),
-                  element: <CreatePerson />,
-                },
-              ],
-            },
-            {
-              path: '/discussions',
-              loader: () =>
-                queryClient.getQueryData(['discussions']) ??
-                queryClient.fetchQuery(['discussions'], fetchDiscussions),
-              element: <Discussions />,
-            },
-          ]}
-        >
+        <Router location={location} routes={routerFactory(queryClient)}>
           <AuthenticationProvider>
             <App />
           </AuthenticationProvider>

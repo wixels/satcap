@@ -88,12 +88,10 @@ const Discussions = () => {
                   image={item?.image}
                   status={item.status}
                   title={item.title}
-                  author={{
-                    name: item?.publishedBy?.name,
-                    description:
-                      item.createdAt ??
-                      dayjs(item.createdAt).format('DD/MM/YYYY'),
-                  }}
+                  name={item?.name}
+                  description={
+                    item.createdAt ?? dayjs(item.createdAt).format('DD/MM/YYYY')
+                  }
                 />
               ))}
           </SimpleGrid>

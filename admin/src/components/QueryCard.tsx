@@ -9,13 +9,16 @@ import {
   Badge,
   Tooltip,
   Loader,
+  Space,
 } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconTrash, IconCheck, IconX } from '@tabler/icons';
+import { Link } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import db from '../firebase';
+import { fetchSingleDiscussion } from '../hooks/network/useDiscussions';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -42,10 +45,8 @@ interface QueryCardProps {
   status: string;
   title: string;
   footer?: string;
-  author?: {
-    name?: string;
-    description: string;
-  };
+  name?: string;
+  description?: string;
 }
 
 export function QueryCard({
@@ -53,8 +54,9 @@ export function QueryCard({
   status,
   title,
   footer,
-  author,
+  name,
   docId,
+  description,
 }: QueryCardProps) {
   const [loading, setLoading] = useState(false);
   const { classes, theme } = useStyles();
@@ -89,26 +91,46 @@ export function QueryCard({
   };
 
   return (
-    <Card withBorder p="lg" radius="md" className={classes.card}>
-      <Card.Section mb="sm">
-        <Image src={image} alt={title} height={180} />
-      </Card.Section>
-
-      <Badge color={status === 'open' ? 'blue' : 'green'}>{status}</Badge>
-
-      <Text weight={700} className={classes.title} mt="xs">
-        {title}
-      </Text>
-
-      <Group mt="lg">
-        <Avatar radius="xl">{author?.name}</Avatar>
-        <div>
-          <Text weight={500}>{author?.name}</Text>
-          <Text size="xs" color="dimmed">
-            {author?.description}
+    <Card
+      withBorder
+      radius="md"
+      className={classes.card}
+      onMouseEnter={() => {
+        queryClient.prefetchQuery(['discussions', docId], () =>
+          fetchSingleDiscussion(docId)
+        );
+      }}
+    >
+      <Card.Section component={Link} px="lg" pt="lg" to={`./${docId}`}>
+        <Badge color={status === 'open' ? 'blue' : 'green'}>{status}</Badge>
+        {title ? (
+          <Text weight={700} className={classes.title} mt="xs">
+            {title}
           </Text>
-        </div>
-      </Group>
+        ) : (
+          <>
+            <Space h="xl" />
+            <Space h="sm" />
+          </>
+        )}
+
+        <Group mt="lg">
+          <Avatar radius="xl">
+            {name && (
+              <>
+                {name?.split(' ')?.[0]?.[0]}
+                {name?.split(' ')?.[1]?.[0]}
+              </>
+            )}
+          </Avatar>
+          <div>
+            <Text weight={500}>{name}</Text>
+            <Text size="xs" color="dimmed">
+              {description}
+            </Text>
+          </div>
+        </Group>
+      </Card.Section>
       {status !== 'resolved' && (
         <Card.Section className={classes.footer}>
           <Group position="apart">

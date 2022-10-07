@@ -76,7 +76,6 @@ export const fetchMineWithPacks = async () => {
 };
 
 export const useGetMine = () => {
-  // @ts-ignore
   return useQuery<IMine>(['mine'], fetchMineWithPacks, {
     staleTime: 1000 * 60 * 10,
   });
