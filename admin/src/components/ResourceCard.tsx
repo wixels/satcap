@@ -12,8 +12,8 @@ import {
   Tooltip,
 } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
-import { IconDots, IconLink, IconTrash, IconX } from '@tabler/icons';
-import { useNavigate } from '@tanstack/react-location';
+import { IconDots, IconEdit, IconLink, IconTrash, IconX } from '@tabler/icons';
+import { Link, useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
 import { deleteDoc, doc } from 'firebase/firestore';
 import db from '../firebase';
@@ -94,6 +94,13 @@ export const ResourceCard = ({
             </Menu.Target>
 
             <Menu.Dropdown>
+              <Menu.Item
+                component={Link}
+                to={`./edit/resources/${docId}`}
+                icon={<IconEdit size={14} />}
+              >
+                Edit Resource
+              </Menu.Item>
               <Menu.Item
                 onClick={handleDelete}
                 icon={<IconTrash size={14} />}

@@ -51,7 +51,7 @@ export const Information = (): JSX.Element => {
       default:
         return information;
     }
-  }, [filter]);
+  }, [filter, information]);
 
   useEffect(() => {
     if (!filter) {

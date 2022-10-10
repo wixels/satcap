@@ -11,8 +11,15 @@ import {
   Tooltip,
 } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
-import { IconDots, IconLink, IconTable, IconTrash, IconX } from '@tabler/icons';
-import { useNavigate } from '@tanstack/react-location';
+import {
+  IconDots,
+  IconEdit,
+  IconLink,
+  IconTable,
+  IconTrash,
+  IconX,
+} from '@tabler/icons';
+import { Link, useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
 import { deleteDoc, doc } from 'firebase/firestore';
 import db from '../firebase';
@@ -90,6 +97,13 @@ export const NoticeCard = ({
             </Menu.Target>
 
             <Menu.Dropdown>
+              <Menu.Item
+                component={Link}
+                to={`./edit/notices/${docId}`}
+                icon={<IconEdit size={14} />}
+              >
+                Edit Notice
+              </Menu.Item>
               <Menu.Item
                 onClick={handleDelete}
                 icon={<IconTrash size={14} />}

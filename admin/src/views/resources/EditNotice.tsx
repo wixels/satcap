@@ -1,4 +1,5 @@
 import {
+  Anchor,
   Button,
   Center,
   FileInput,
@@ -9,25 +10,25 @@ import {
   Textarea,
   TextInput,
 } from '@mantine/core';
-import { DatePicker, DateRangePicker } from '@mantine/dates';
+import { DatePicker } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck, IconX } from '@tabler/icons';
-import { useMatch, useNavigate } from '@tanstack/react-location';
+import { useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
-import { addDoc, collection } from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useGetUser, userGetMine } from '../../context/AuthenticationContext';
 import db, { storage } from '../../firebase';
 import { useGetLocations } from '../../hooks/network/useLocations';
 import { useNanoId } from '../../hooks/useNanoId';
 import useUploadFile from '../../hooks/useUploadFile';
+import { INotice } from '../../types';
 
-export const CreateNotice = (): JSX.Element => {
+export const EditNotice = (notice: INotice) => {
   const { data: locations, isLoading } = useGetLocations();
-
   const { mine, fetching } = userGetMine();
   const { user } = useGetUser();
   const fileId = useNanoId();
@@ -38,42 +39,47 @@ export const CreateNotice = (): JSX.Element => {
   const form = useForm({
     initialValues: {
       createdAt: dayjs().format('YYYY-MM-DDTHH:mm:ssZ'),
-      date: '',
-      description: '',
-      packageDocId: '',
-      title: '',
-      visibility: null,
+      date: dayjs(notice.date).toDate(),
+      description: notice.description,
+      packageDocId: notice?.packageDocId,
+      title: notice.title,
+      visibility: notice.visibility,
       url: null,
       featureImageUrl: null,
     },
   });
 
-  const createNotice = async (values: any) => {
-    console.log(values);
+  const updateNotice = async (values: any) => {
     setLoading(true);
     try {
-      const featureRef = ref(
-        storage,
-        `mines/${mine?.mineId}/resources/${fileId}-${values.featureImageUrl.name}`
-      );
-      const urlRef = ref(
-        storage,
-        `mines/${mine?.mineId}/resources/${fileId}-${values.url.name}`
-      );
-      await uploadFile(urlRef, values.url, {
-        contentType: values.url?.type,
-      });
-      await uploadFile(featureRef, values.featureImageUrl, {
-        contentType: values.featureImageUrl?.type,
-      });
-      const url = await getDownloadURL(urlRef);
-      const featureImageUrl = await getDownloadURL(featureRef);
-
-      await addDoc(collection(db, `mines/${mine?.mineId}/notices`), {
+      let url, featureImageUrl;
+      if (values?.url) {
+        const urlRef = ref(
+          storage,
+          `mines/${mine?.mineId}/resources/${fileId}-${values.url.name}`
+        );
+        await uploadFile(urlRef, values.url, {
+          contentType: values.url?.type,
+        });
+        url = await getDownloadURL(urlRef);
+      }
+      if (values?.featureImageUrl) {
+        const featureRef = ref(
+          storage,
+          `mines/${mine?.mineId}/resources/${fileId}-${values.featureImageUrl.name}`
+        );
+        await uploadFile(featureRef, values.featureImageUrl, {
+          contentType: values.featureImageUrl?.type,
+        });
+        featureImageUrl = await getDownloadURL(featureRef);
+      }
+      await updateDoc(doc(db, `mines/${mine?.mineId}/notices`, notice.docId), {
         ...values,
         date: dayjs(values?.date).format('YYYY-MM-DDTHH:mm:ssZ'),
-        url,
-        featureImageUrl,
+        url: values?.url ? url : notice?.url,
+        featureImageUrl: values?.featureImageUrl
+          ? featureImageUrl
+          : notice?.featureImageUrl,
         publishedBy: {
           name: user?.name,
           authUid: user?.authUid,
@@ -82,24 +88,22 @@ export const CreateNotice = (): JSX.Element => {
       });
       setLoading(false);
       showNotification({
-        message: 'Successfully created notice',
+        message: 'Successfully update notice',
         icon: <IconCheck size={18} />,
       });
       queryClient.invalidateQueries(['information']);
-
       naviagte({ to: `/information` });
     } catch (error: any) {
       showNotification({
         icon: <IconX size={18} />,
         color: 'red',
-        message: error?.message || 'Unable to create notice',
+        message: error?.message || 'Unable to update notice',
       });
       setLoading(false);
     }
   };
-
   return (
-    <form onSubmit={form.onSubmit(createNotice)}>
+    <form onSubmit={form.onSubmit(updateNotice)}>
       <Grid gutter={'xl'}>
         <Grid.Col span={12}>
           <FileInput
@@ -108,7 +112,10 @@ export const CreateNotice = (): JSX.Element => {
             size="md"
             label={
               <Text size="sm" color="dimmed">
-                Attachment (optional)
+                Attachment (optional) •{' '}
+                <Anchor href={notice?.url} target="_blank">
+                  Preview
+                </Anchor>
               </Text>
             }
             {...form.getInputProps('url')}
@@ -121,7 +128,10 @@ export const CreateNotice = (): JSX.Element => {
             accept="image/*"
             label={
               <Text size="sm" color="dimmed">
-                Feature Image
+                Feature Image •{' '}
+                <Anchor href={notice?.url} target="_blank">
+                  Preview
+                </Anchor>
               </Text>
             }
             {...form.getInputProps('featureImageUrl')}
@@ -174,7 +184,7 @@ export const CreateNotice = (): JSX.Element => {
           />
           <Select
             mt={'xl'}
-            disabled={fetching}
+            disabled={true}
             data={
               fetching
                 ? []
@@ -218,7 +228,7 @@ export const CreateNotice = (): JSX.Element => {
           loading={loading}
           disabled={loading}
         >
-          Create Notice
+          Update Notice
         </Button>
       </Center>
     </form>

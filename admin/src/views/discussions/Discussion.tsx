@@ -33,7 +33,6 @@ export const Discussion = (props: Props) => {
     params: { discussionId },
   } = useMatch();
   const { data: discussion } = useGetSingleDiscussion(discussionId);
-  console.log(discussion);
 
   const downloadMedia = () => {
     // @ts-ignore

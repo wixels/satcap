@@ -2,7 +2,10 @@ import {
   fetchDiscussions,
   fetchSingleDiscussion,
 } from './hooks/network/useDiscussions';
-import { fetchInformation } from './hooks/network/useInformation';
+import {
+  fetchInformation,
+  fetchSingleInfo,
+} from './hooks/network/useInformation';
 import { fetchLinks } from './hooks/network/useLinks';
 import { fetchLocations } from './hooks/network/useLocations';
 import { fetchMineWithPacks } from './hooks/network/useMine';
@@ -16,6 +19,7 @@ import { People } from './views/people/People';
 import { SurveyReports } from './views/reports/SurveyReports';
 import { CreateWrapper } from './views/resources/CreateWrapper';
 import { Information } from './views/resources/Information';
+import { EditWrapper } from './views/resources/EditWrapper';
 import { SurveyLink } from './views/surveys/SurveyLink';
 import { Surveys } from './views/surveys/Surveys';
 import { SurveySend } from './views/surveys/SurveySend';
@@ -49,6 +53,19 @@ export const routerFactory = (queryClient: any) => {
         {
           path: '/',
           element: <Information />,
+        },
+        {
+          path: '/edit/:type/:typeUid',
+          loader: ({
+            params: { type, typeUid },
+          }: {
+            params: { type: 'resources' | 'notices'; typeUid: string };
+          }) =>
+            queryClient.getQueryData(['information', type, typeUid]) ??
+            queryClient.fetchQuery(['information', type, typeUid], () =>
+              fetchSingleInfo(type, typeUid)
+            ),
+          element: <EditWrapper />,
         },
         {
           path: '/create',

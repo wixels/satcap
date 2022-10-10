@@ -27,6 +27,7 @@ export interface INotice {
   type: string;
   publishedBy?: publisher;
   docId: string;
+  date: string;
 }
 
 export interface ILocation {
