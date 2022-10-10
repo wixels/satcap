@@ -9,7 +9,7 @@ import {
   Stack,
   Text,
 } from '@mantine/core';
-import { IconDots, IconFileZip } from '@tabler/icons';
+import { IconDots, IconFileZip, IconTable } from '@tabler/icons';
 import { useGetLinkResponses } from '../../hooks/network/useLinks';
 import { ILink } from '../../types';
 import * as XLSX from 'xlsx';
@@ -67,7 +67,9 @@ export const SurveyReports = (): JSX.Element => {
             <Card.Section withBorder inheritPadding py="xs">
               <Group position="apart">
                 <div style={{ width: '85%', display: 'flex', gap: '1rem' }}>
-                  <Avatar color={'green'} radius={'xl'}></Avatar>
+                  <Avatar color={'green'} radius={'xl'}>
+                    <IconTable />
+                  </Avatar>
                   <div style={{ flex: 1 }}>
                     <Text lineClamp={1} size="sm" weight={500}>
                       {/* @ts-ignore */}
@@ -99,11 +101,6 @@ export const SurveyReports = (): JSX.Element => {
               </Group>
             </Card.Section>
             <Card.Section p="xl">
-              <Text color="dimmed" size="xs">
-                {/* @ts-ignore */}
-                {link?.package?.name}
-              </Text>
-              <Divider my={'sm'} />
               <Text color="dimmed" size="xs">
                 {link?.responses?.length} Response
                 {link?.responses?.length === 1 ? '' : 's'}
