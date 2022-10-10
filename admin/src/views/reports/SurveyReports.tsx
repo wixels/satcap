@@ -15,6 +15,8 @@ import { ILink } from '../../types';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import dayjs from 'dayjs';
+import { useLocalStorage } from '@mantine/hooks';
+import { useEffect } from 'react';
 
 export const SurveyReports = (): JSX.Element => {
   const { data: links } = useGetLinkResponses();
@@ -43,13 +45,15 @@ export const SurveyReports = (): JSX.Element => {
     //@ts-ignore
     FileSaver.saveAs(data, `${link?.package?.name || 'Survey report'}.csv`);
   };
-
+  const PAGE_TITLE = 'Survey Reports';
+  const [_, setTitle] = useLocalStorage({
+    key: 'title',
+  });
+  useEffect(() => {
+    setTitle(PAGE_TITLE);
+  }, []);
   return (
     <Stack>
-      <Text weight={700} size={'lg'}>
-        Survey Reports
-      </Text>
-
       <SimpleGrid
         cols={3}
         spacing="lg"

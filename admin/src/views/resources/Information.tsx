@@ -1,6 +1,8 @@
 import { Button, Group, SimpleGrid, Stack, Text } from '@mantine/core';
+import { useLocalStorage } from '@mantine/hooks';
 import { IconCirclePlus, IconDots, IconTrash } from '@tabler/icons';
 import { Link, useMatch } from '@tanstack/react-location';
+import { useEffect } from 'react';
 import { NoticeCard } from '../../components/NoticeCard';
 import { ResourceCard } from '../../components/ResourceCard';
 import { useGetInformation } from '../../hooks/network/useInformation';
@@ -8,20 +10,20 @@ import { INotice, IResource } from '../../types';
 
 export const Information = (): JSX.Element => {
   const { data: information } = useGetInformation();
-
-  console.log(information);
+  const PAGE_TITLE = 'Resources & Notices';
+  const [_, setTitle] = useLocalStorage({
+    key: 'title',
+  });
+  useEffect(() => {
+    setTitle(PAGE_TITLE);
+  }, []);
   return (
     <Stack>
-      <Group mb={'1rem'} position="apart">
-        <Text weight={700} size={'lg'}>
-          Resources & Notices
-        </Text>
-        <Link to={'/information/create/resource'}>
-          <Button variant="light" leftIcon={<IconCirclePlus />}>
-            Create New
-          </Button>
-        </Link>
-      </Group>
+      <Link to={'/information/create/resource'}>
+        <Button variant="light" leftIcon={<IconCirclePlus />}>
+          Create New
+        </Button>
+      </Link>
 
       <SimpleGrid
         cols={3}

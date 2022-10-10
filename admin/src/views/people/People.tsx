@@ -6,6 +6,7 @@ import { useGetPeople } from '../../hooks/network/usePeople';
 import { PeopleTable } from '../../components/PeopleTable';
 import { useGetUser } from '../../context/AuthenticationContext';
 import { useEffect } from 'react';
+import { useLocalStorage } from '@mantine/hooks';
 
 export const People = (): JSX.Element => {
   const { user: currentAccount, fetching } = useGetUser();
@@ -17,18 +18,20 @@ export const People = (): JSX.Element => {
   }, [currentAccount?.isAdmin, fetching]);
 
   const { data } = useGetPeople();
+  const PAGE_TITLE = 'Manage People';
+  const [_, setTitle] = useLocalStorage({
+    key: 'title',
+  });
+  useEffect(() => {
+    setTitle(PAGE_TITLE);
+  }, []);
   return (
     <Stack>
-      <Group mb={'1rem'} position="apart">
-        <Text weight={700} size={'lg'}>
-          Manage People
-        </Text>
-        <Link to={'/people/create'}>
-          <Button variant="light" leftIcon={<IconCirclePlus />}>
-            Add new admin user
-          </Button>
-        </Link>
-      </Group>
+      <Link to={'/people/create'}>
+        <Button variant="light" leftIcon={<IconCirclePlus />}>
+          Add new admin user
+        </Button>
+      </Link>
       <ScrollArea style={{ height: 'calc(100vh - 172px)' }}>
         <PeopleTable data={data} />
       </ScrollArea>

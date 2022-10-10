@@ -15,15 +15,24 @@ import {
   Text,
   Title,
 } from '@mantine/core';
+import { useLocalStorage } from '@mantine/hooks';
 import { IconLocation, IconMapPin } from '@tabler/icons';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { userGetMine } from '../../context/AuthenticationContext';
 import { useGetLocations } from '../../hooks/network/useLocations';
 import { useGetMine } from '../../hooks/network/useMine';
 
 export const Home = (): JSX.Element => {
+  const PAGE_TITLE = 'Home';
+
   const { data: locations } = useGetLocations();
   const { data: mine, isLoading } = useGetMine();
+  const [_, setTitle] = useLocalStorage({
+    key: 'title',
+  });
+  useEffect(() => {
+    setTitle(PAGE_TITLE);
+  }, []);
 
   return (
     <Skeleton visible={isLoading} p="xl">

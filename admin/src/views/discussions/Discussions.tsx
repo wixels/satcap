@@ -9,9 +9,10 @@ import {
   Title,
   UnstyledButton,
 } from '@mantine/core';
+import { useLocalStorage } from '@mantine/hooks';
 import { IconAssembly } from '@tabler/icons';
 import dayjs from 'dayjs';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { DiscussionButton } from '../../components/DiscussionButton';
 import { QueryCard } from '../../components/QueryCard';
 import { StatsGroup } from '../../components/StatsGroup';
@@ -49,12 +50,16 @@ const Discussions = () => {
       ];
     }
   }, [discussions, isLoading, isError]);
+  const PAGE_TITLE = 'Query Submissions';
+  const [_, setTitle] = useLocalStorage({
+    key: 'title',
+  });
+  useEffect(() => {
+    setTitle(PAGE_TITLE);
+  }, []);
   return (
     <>
       {/* <StatsGroup data={stats} /> */}
-      <Title mt={'xl'} order={2}>
-        Query Submissions
-      </Title>
       <Grid>
         <Grid.Col mt={'xl'} span={2}>
           <Stack>

@@ -16,6 +16,9 @@ import {
   Title,
   Menu,
   Image,
+  Text,
+  Divider,
+  Space,
 } from '@mantine/core';
 import {
   IconChartPie,
@@ -50,6 +53,10 @@ function App(): JSX.Element {
       ? 'dark'
       : 'light',
     getInitialValueInEffect: true,
+  });
+  const [title] = useLocalStorage({
+    key: 'title',
+    defaultValue: '',
   });
 
   const toggleColorScheme = (value?: ColorScheme) =>
@@ -111,9 +118,9 @@ function App(): JSX.Element {
             navbar={
               <Navbar
                 // p="md"
-                hiddenBreakpoint="sm"
+                hiddenBreakpoint="md"
                 hidden={!opened}
-                width={{ sm: 200, lg: 300 }}
+                width={{ md: 300 }}
               >
                 <Navbar.Section grow mt="md">
                   <Menu trigger="hover" shadow="md" width={200}>
@@ -189,7 +196,7 @@ function App(): JSX.Element {
               <Header height={70} p="md">
                 <Group sx={{ height: '1%' }} px={20} position="apart">
                   <Group>
-                    <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+                    <MediaQuery largerThan="md" styles={{ display: 'none' }}>
                       <Burger
                         opened={opened}
                         onClick={() => setOpened((o) => !o)}
@@ -206,7 +213,19 @@ function App(): JSX.Element {
                       }
                       alt="Random unsplash image"
                     />
-                    <Title order={4}>SATCAP Admin</Title>
+                    <Title order={4} mr="lg">
+                      SATCAP Admin
+                    </Title>
+                    <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
+                      <Space />
+                    </MediaQuery>
+                    <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
+                      <Divider ml="xl" orientation="vertical" />
+                    </MediaQuery>
+
+                    <Text weight={700} size={'lg'}>
+                      {title}
+                    </Text>
                   </Group>
                   <ActionIcon
                     variant="default"
