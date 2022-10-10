@@ -24,6 +24,7 @@ interface Props {
   publisher?: string;
   docId: string;
   visibility?: any;
+  packageName?: string;
 }
 
 export const NoticeCard = ({
@@ -33,7 +34,9 @@ export const NoticeCard = ({
   publisher,
   docId,
   visibility,
+  packageName,
 }: Props) => {
+  console.log(packageName);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const handleDelete = async (): Promise<void> => {
@@ -126,6 +129,9 @@ export const NoticeCard = ({
           ) : null}
           <Badge color="blue" variant="light">
             Notice
+          </Badge>
+          <Badge color="teal" variant="light">
+            {packageName}
           </Badge>
         </Group>
       </Card.Section>

@@ -24,6 +24,7 @@ interface Props {
   publisher?: string;
   docId: string;
   visibility?: any;
+  packageName?: string;
 }
 
 export const ResourceCard = ({
@@ -33,6 +34,7 @@ export const ResourceCard = ({
   publisher,
   docId,
   visibility,
+  packageName,
 }: Props) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -131,6 +133,9 @@ export const ResourceCard = ({
           ) : null}
           <Badge color="green" variant="light">
             Resource
+          </Badge>
+          <Badge color="teal" variant="light">
+            {packageName}
           </Badge>
         </Group>
       </Card.Section>
