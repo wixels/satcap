@@ -41,15 +41,15 @@ export const SurveySend = (): JSX.Element => {
       <Tabs defaultValue="email" mb={'xl'}>
         <Tabs.List>
           <Tabs.Tab value="email">Email Link</Tabs.Tab>
-          <Tabs.Tab value="sms">SMS Link</Tabs.Tab>
+          {/* <Tabs.Tab value="sms">SMS Link</Tabs.Tab> */}
         </Tabs.List>
         <Tabs.Panel value="email" pt="lg">
           <SurveySendEmail />
         </Tabs.Panel>
 
-        <Tabs.Panel value="sms" pt="lg">
+        {/* <Tabs.Panel value="sms" pt="lg">
           <SurveySendSms />
-        </Tabs.Panel>
+        </Tabs.Panel> */}
       </Tabs>
     </>
   );
