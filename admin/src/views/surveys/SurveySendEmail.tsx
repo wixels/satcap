@@ -23,6 +23,7 @@ export const SurveySendEmail = (): JSX.Element => {
       },
     },
   });
+
   const naviagte = useNavigate();
   const fields = form.values.emails.map((item, index) => (
     <Group key={item.key} mt="xs">
@@ -96,7 +97,11 @@ export const SurveySendEmail = (): JSX.Element => {
         >
           Add Email
         </Button>
-        <Button type="submit" disabled={loading} loading={loading}>
+        <Button
+          type="submit"
+          disabled={loading || form.values.emails?.length === 0}
+          loading={loading}
+        >
           Send Links
         </Button>
       </Group>
