@@ -160,6 +160,17 @@ const setCustomAnswers = function () {
   })
 }
 
+const setAppendableLinks = function () {
+  const link = JSON.parse(window.localStorage.getItem('link'))
+  const appendableLinks = document.querySelectorAll('[data-append-link="true"]')
+  if (appendableLinks.length) {
+    for (const anchor of appendableLinks) {
+      const currentHref = anchor.getAttribute('href')
+      anchor.setAttribute('href', currentHref + `&linkId=${link.linkId}`)
+    }
+  }
+}
+
 const setEmbeddables = function () {
   const urls = document.querySelectorAll('[data-embed-src]')
   urls.forEach((urlEl) => {
@@ -292,6 +303,8 @@ const setOnChange = function (containerElement) {
       setProgressTracker()
     })
   })
+
+  setAppendableLinks()
 }
 
 const setProgressTracker = function () {
