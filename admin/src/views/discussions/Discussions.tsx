@@ -17,6 +17,8 @@ import { DiscussionButton } from '../../components/DiscussionButton';
 import { QueryCard } from '../../components/QueryCard';
 import { StatsGroup } from '../../components/StatsGroup';
 import { useGetDiscussions } from '../../hooks/network/useDiscussions';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+dayjs.extend(localizedFormat);
 
 const Discussions = () => {
   const { data: discussions, isLoading, isError } = useGetDiscussions();
@@ -59,7 +61,6 @@ const Discussions = () => {
   }, []);
   return (
     <>
-      {/* <StatsGroup data={stats} /> */}
       <Grid>
         <Grid.Col mt={'xl'} span={2}>
           <Stack>
@@ -94,9 +95,10 @@ const Discussions = () => {
                   status={item.status}
                   title={item.title}
                   name={item?.name}
-                  description={
-                    item.createdAt ?? dayjs(item.createdAt).format('DD/MM/YYYY')
+                  date={
+                    item.createdAt ? dayjs(item.createdAt).format('LL') : ''
                   }
+                  description={item.description}
                 />
               ))}
           </SimpleGrid>

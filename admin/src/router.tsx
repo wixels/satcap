@@ -32,6 +32,7 @@ export type LocationGenerics = MakeGenerics<{
     typeUid: string;
     link: string;
     personId: string;
+    discussionId: string;
   };
 }>;
 
