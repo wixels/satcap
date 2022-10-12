@@ -7,49 +7,54 @@ import {
   Group,
   InputBase,
   MultiSelect,
-  NumberInput,
   Text,
   TextInput,
+  Tooltip,
   UnstyledButton,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { IconChevronLeft, IconPhone, IconX } from '@tabler/icons';
-import { Link, useNavigate } from '@tanstack/react-location';
-import { addDoc, collection } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
+import { Link, useMatch, useNavigate } from '@tanstack/react-location';
+import { useQueryClient } from '@tanstack/react-query';
+import { doc, updateDoc } from 'firebase/firestore';
+import React, { useState } from 'react';
 import ReactInputMask from 'react-input-mask';
-import { useGetUser } from '../../context/AuthenticationContext';
 import db from '../../firebase';
 import { useGetLocations } from '../../hooks/network/useLocations';
+import { useGetPerson } from '../../hooks/network/usePeople';
+import { LocationGenerics } from '../../router';
 import { IUser } from '../../types';
 
-export const CreatePerson = (): JSX.Element => {
-  const { user: currentAccount, fetching } = useGetUser();
+export const EditPerson = () => {
+  const {
+    params: { personId },
+  } = useMatch<LocationGenerics>();
+  const { data: person } = useGetPerson(personId);
+  const { data: locations } = useGetLocations();
 
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const { data: locations, isLoading } = useGetLocations();
+
   const form = useForm({
     initialValues: {
-      name: '',
-      email: '',
-      mobile: '',
-      jobTitle: '',
-      locationAdmin: [],
-      isAdmin: false,
+      name: person?.name,
+      email: person?.email,
+      mobile: person?.mobile,
+      jobTitle: person?.jobTitle,
+      locationAdmin: person?.locationAdmin,
+      isAdmin: person?.isAdmin,
       mineId: window.localStorage.getItem('mineId'),
     },
     validate: {},
   });
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!fetching && !currentAccount?.isAdmin) navigate({ to: '/' });
-  }, [currentAccount?.isAdmin, fetching]);
 
   const createPerson = async (values: IUser) => {
     setLoading(true);
     try {
-      await addDoc(collection(db, `mines/${values?.mineId}/users`), {
+      console.log(values);
+      await updateDoc(doc(db, `mines/${values?.mineId}/users`, personId), {
         ...values,
         mobile: values.mobile
           ? values.mobile
@@ -59,6 +64,7 @@ export const CreatePerson = (): JSX.Element => {
               .replaceAll('-', '')
           : '',
       });
+      queryClient.invalidateQueries(['people']);
       navigate({ to: '/people' });
     } catch (error: any) {
       showNotification({
@@ -69,6 +75,7 @@ export const CreatePerson = (): JSX.Element => {
       setLoading(false);
     }
   };
+
   return (
     <>
       <Link to="/people">
@@ -98,6 +105,7 @@ export const CreatePerson = (): JSX.Element => {
           </Group>
         </UnstyledButton>
       </Link>
+      {/* @ts-ignore */}
       <form onSubmit={form.onSubmit(createPerson)}>
         <Grid>
           <Grid.Col span={12}>
@@ -132,12 +140,13 @@ export const CreatePerson = (): JSX.Element => {
           </Grid.Col>
           <Grid.Col span={6}>
             <TextInput
+              disabled
               placeholder="Email..."
               radius={'md'}
               size="md"
               label={
                 <Text size="sm" color="dimmed">
-                  Email
+                  Email • Not Editable
                 </Text>
               }
               type={'email'}
@@ -159,7 +168,6 @@ export const CreatePerson = (): JSX.Element => {
           </Grid.Col>
           <Grid.Col span={6}>
             <MultiSelect
-              disabled={isLoading}
               data={
                 locations?.map((location: { id: any; name: any }) => ({
                   value: location.id,
@@ -183,7 +191,7 @@ export const CreatePerson = (): JSX.Element => {
               size="md"
               label={
                 <Text size="sm" color="dimmed">
-                  Super Admin
+                  Admin
                 </Text>
               }
               {...form.getInputProps('isAdmin')}
@@ -199,7 +207,7 @@ export const CreatePerson = (): JSX.Element => {
             loading={loading}
             disabled={loading}
           >
-            Create Admin
+            Update Admin
           </Button>
         </Center>
       </form>

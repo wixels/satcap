@@ -9,7 +9,7 @@ import {
 import { fetchLinks } from './hooks/network/useLinks';
 import { fetchLocations } from './hooks/network/useLocations';
 import { fetchMineWithPacks } from './hooks/network/useMine';
-import { fetchPeople } from './hooks/network/usePeople';
+import { fetchPeople, fetchPerson } from './hooks/network/usePeople';
 import { Login } from './views/auth/Login';
 import { Discussion } from './views/discussions/Discussion';
 import { Discussions } from './views/discussions/Discussions';
@@ -23,9 +23,20 @@ import { EditWrapper } from './views/resources/EditWrapper';
 import { SurveyLink } from './views/surveys/SurveyLink';
 import { Surveys } from './views/surveys/Surveys';
 import { SurveySend } from './views/surveys/SurveySend';
+import { MakeGenerics, Route } from '@tanstack/react-location';
+import { EditPerson } from './views/people/EditPerson';
+
+export type LocationGenerics = MakeGenerics<{
+  Params: {
+    type: 'resources' | 'notices';
+    typeUid: string;
+    link: string;
+    personId: string;
+  };
+}>;
 
 export const routerFactory = (queryClient: any) => {
-  return [
+  const routes: Route<LocationGenerics>[] = [
     {
       path: '/auth',
       children: [
@@ -56,11 +67,7 @@ export const routerFactory = (queryClient: any) => {
         },
         {
           path: '/edit/:type/:typeUid',
-          loader: ({
-            params: { type, typeUid },
-          }: {
-            params: { type: 'resources' | 'notices'; typeUid: string };
-          }) =>
+          loader: ({ params: { type, typeUid } }) =>
             queryClient.getQueryData(['information', type, typeUid]) ??
             queryClient.fetchQuery(['information', type, typeUid], () =>
               fetchSingleInfo(type, typeUid)
@@ -134,6 +141,17 @@ export const routerFactory = (queryClient: any) => {
             queryClient.fetchQuery(['locations'], fetchLocations),
           element: <CreatePerson />,
         },
+        {
+          path: ':personId/edit',
+          loader: ({ params: { personId } }) =>
+            (queryClient.getQueryData(['locations']) &&
+              queryClient.getQueryData(['people', personId])) ??
+            (queryClient.fetchQuery(['locations'], fetchLocations),
+            queryClient.fetchQuery(['people', personId], () =>
+              fetchPerson(personId)
+            )),
+          element: <EditPerson />,
+        },
       ],
     },
     {
@@ -156,4 +174,5 @@ export const routerFactory = (queryClient: any) => {
       ],
     },
   ];
+  return routes;
 };
