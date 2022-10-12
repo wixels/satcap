@@ -36,7 +36,7 @@ export const useGetDiscussions = () => {
   });
 };
 
-export async function fetchSingleDiscussion(id: string) {
+export async function fetchSingleDiscussion(id: string): Promise<IDiscussion> {
   const docRef = doc(
     db,
     `mines/${window.localStorage.getItem('mineId')}/queries`,
@@ -44,19 +44,17 @@ export async function fetchSingleDiscussion(id: string) {
   );
   const docSnap = await getDoc(docRef);
 
-  return docSnap.exists()
-    ? docSnap.data()
-    : showNotification({
-        color: 'red',
-        message: 'Query Submission not found!',
-      });
+  if (!docSnap.exists()) {
+    showNotification({
+      color: 'red',
+      message: 'Person not found!',
+    });
+  }
+  return docSnap.data() as IDiscussion;
 }
 
 export const useGetSingleDiscussion = (id: string) => {
-  return useQuery<IDiscussion>(
-    ['discussions', id],
-    // @ts-ignore
-    () => fetchSingleDiscussion(id),
-    { staleTime: 1000 * 60 * 10 }
-  );
+  return useQuery(['discussions', id], () => fetchSingleDiscussion(id), {
+    staleTime: 1000 * 60 * 10,
+  });
 };

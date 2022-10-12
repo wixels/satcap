@@ -1,5 +1,6 @@
+import { showNotification } from '@mantine/notifications';
 import { useQuery } from '@tanstack/react-query';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { useEffect } from 'react';
 import db from '../../firebase';
 import { ILink, INotice, IResource } from '../../types';
@@ -36,5 +37,36 @@ export const useGetInformation = () => {
     {
       staleTime: 1000 * 60 * 10,
     }
+  );
+};
+
+export async function fetchSingleInfo(
+  type: 'resources' | 'notices',
+  id: string
+) {
+  const docRef = doc(
+    db,
+    `mines/${window.localStorage.getItem('mineId')}/${type}`,
+    id
+  );
+  const docSnap = await getDoc(docRef);
+  return docSnap.exists()
+    ? { ...docSnap.data(), type, docId: docSnap.id }
+    : showNotification({
+        color: 'red',
+        message: `${type}not found!`,
+      });
+}
+
+export const useGetSingleInformation = (
+  type: 'resources' | 'notices',
+  id: string
+) => {
+  return useQuery<INotice | IResource>(
+    ['information', type, id],
+    () =>
+      // @ts-ignore
+      fetchSingleInfo(type, id),
+    { staleTime: 1000 * 60 * 10 }
   );
 };

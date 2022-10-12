@@ -11,13 +11,15 @@ import {
   Stack,
   Text,
 } from '@mantine/core';
+import { useLocalStorage } from '@mantine/hooks';
 import {
   IconCirclePlus,
   IconClipboardCheck,
   IconDots,
   IconTrash,
 } from '@tabler/icons';
-import { Link, useMatch } from '@tanstack/react-location';
+import { Link } from '@tanstack/react-location';
+import { useEffect } from 'react';
 import { SurveyCard } from '../../components/SurveyCard';
 import { useGetLinks } from '../../hooks/network/useLinks';
 import { useNanoId } from '../../hooks/useNanoId';
@@ -25,23 +27,24 @@ import { ILink, IPackage } from '../../types';
 
 export const Surveys = (): JSX.Element => {
   const linkId = useNanoId();
-  const { data } = useMatch();
 
   // @ts-ignore
   // const links: ILink[] = data.links;
   const { data: links } = useGetLinks();
+  const PAGE_TITLE = 'Surveys';
+  const [_, setTitle] = useLocalStorage({
+    key: 'title',
+  });
+  useEffect(() => {
+    setTitle(PAGE_TITLE);
+  }, []);
   return (
     <Stack>
-      <Group mb={'1rem'} position="apart">
-        <Text weight={700} size={'lg'}>
-          Surveys
-        </Text>
-        <Link to={`/surveys/${linkId}`}>
-          <Button variant="light" leftIcon={<IconCirclePlus />}>
-            Create New
-          </Button>
-        </Link>
-      </Group>
+      <Link to={`/surveys/${linkId}`}>
+        <Button variant="light" leftIcon={<IconCirclePlus />}>
+          Create New
+        </Button>
+      </Link>
 
       <SimpleGrid
         cols={3}

@@ -1,21 +1,97 @@
-import { Button, Group, SimpleGrid, Stack, Text } from '@mantine/core';
-import { IconCirclePlus, IconDots, IconTrash } from '@tabler/icons';
-import { Link, useMatch } from '@tanstack/react-location';
+import { Button, Chip, Group, SimpleGrid, Stack, Text } from '@mantine/core';
+import { useLocalStorage } from '@mantine/hooks';
+import { IconCirclePlus } from '@tabler/icons';
+import {
+  Link,
+  MakeGenerics,
+  useMatch,
+  useNavigate,
+  useSearch,
+} from '@tanstack/react-location';
+import { useCallback, useEffect } from 'react';
 import { NoticeCard } from '../../components/NoticeCard';
 import { ResourceCard } from '../../components/ResourceCard';
+import { userGetMine } from '../../context/AuthenticationContext';
 import { useGetInformation } from '../../hooks/network/useInformation';
 import { INotice, IResource } from '../../types';
 
+type LocationGenerics = MakeGenerics<{
+  Search: {
+    filter?: string;
+  };
+}>;
+
 export const Information = (): JSX.Element => {
   const { data: information } = useGetInformation();
+  const { mine, fetching } = userGetMine();
 
-  console.log(information);
+  const { filter } = useSearch<LocationGenerics>();
+  const navigate = useNavigate<LocationGenerics>();
+
+  const PAGE_TITLE = 'Resources & Notices';
+  const [_, setTitle] = useLocalStorage({
+    key: 'title',
+  });
+  useEffect(() => {
+    setTitle(PAGE_TITLE);
+  }, []);
+
+  const items = useCallback(() => {
+    if (filter?.includes('pack-')) {
+      const packId = filter?.split('pack-')[1];
+      return information?.filter((item) => item?.packageDocId === packId);
+    }
+
+    switch (filter) {
+      case 'all':
+        return information;
+      case 'notice':
+      case 'resource':
+        return information?.filter((item) => item?.type === filter);
+      default:
+        return information;
+    }
+  }, [filter, information]);
+
+  useEffect(() => {
+    if (!filter) {
+      navigate({
+        // @ts-ignore
+        search: (old) => ({
+          ...old,
+          filter: 'all',
+        }),
+      });
+    }
+  }, []);
+
   return (
     <Stack>
-      <Group mb={'1rem'} position="apart">
-        <Text weight={700} size={'lg'}>
-          Resources & Notices
-        </Text>
+      <Group position="apart">
+        <Chip.Group
+          value={filter}
+          onChange={(val) =>
+            navigate({
+              // @ts-ignore
+              search: (old) => ({
+                ...old,
+                filter: val,
+              }),
+            })
+          }
+          position="center"
+        >
+          <Chip value="all">All</Chip>
+          <Chip value="notice">Notice</Chip>
+          <Chip value="resource">Resource</Chip>
+          {!fetching &&
+            mine &&
+            mine?.packages?.map((pack) => (
+              <Chip key={pack?.packageId} value={`pack-${pack?.packageId}`}>
+                {pack?.name}
+              </Chip>
+            ))}
+        </Chip.Group>
         <Link to={'/information/create/resource'}>
           <Button variant="light" leftIcon={<IconCirclePlus />}>
             Create New
@@ -31,7 +107,7 @@ export const Information = (): JSX.Element => {
           { maxWidth: 'lg', cols: 2, spacing: 'lg' },
         ]}
       >
-        {information?.map((item: INotice | IResource) => {
+        {items()?.map((item: INotice | IResource) => {
           if (item.type === 'resource') {
             return (
               <ResourceCard
@@ -42,6 +118,11 @@ export const Information = (): JSX.Element => {
                 publisher={item?.publishedBy?.name}
                 docId={item.docId}
                 visibility={item?.visibility}
+                packageName={
+                  mine?.packages?.find(
+                    (x) => x?.packageId === item?.packageDocId
+                  )?.name
+                }
               />
             );
           } else if (item.type === 'notice') {
@@ -54,6 +135,11 @@ export const Information = (): JSX.Element => {
                 publisher={item?.publishedBy?.name}
                 docId={item.docId}
                 visibility={item?.visibility}
+                packageName={
+                  mine?.packages?.find(
+                    (x) => x?.packageId === item?.packageDocId
+                  )?.name
+                }
               />
             );
           }

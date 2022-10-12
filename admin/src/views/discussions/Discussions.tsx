@@ -9,13 +9,16 @@ import {
   Title,
   UnstyledButton,
 } from '@mantine/core';
+import { useLocalStorage } from '@mantine/hooks';
 import { IconAssembly } from '@tabler/icons';
 import dayjs from 'dayjs';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { DiscussionButton } from '../../components/DiscussionButton';
 import { QueryCard } from '../../components/QueryCard';
 import { StatsGroup } from '../../components/StatsGroup';
 import { useGetDiscussions } from '../../hooks/network/useDiscussions';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+dayjs.extend(localizedFormat);
 
 const Discussions = () => {
   const { data: discussions, isLoading, isError } = useGetDiscussions();
@@ -49,12 +52,15 @@ const Discussions = () => {
       ];
     }
   }, [discussions, isLoading, isError]);
+  const PAGE_TITLE = 'Query Submissions';
+  const [_, setTitle] = useLocalStorage({
+    key: 'title',
+  });
+  useEffect(() => {
+    setTitle(PAGE_TITLE);
+  }, []);
   return (
     <>
-      {/* <StatsGroup data={stats} /> */}
-      <Title mt={'xl'} order={2}>
-        Query Submissions
-      </Title>
       <Grid>
         <Grid.Col mt={'xl'} span={2}>
           <Stack>
@@ -89,9 +95,10 @@ const Discussions = () => {
                   status={item.status}
                   title={item.title}
                   name={item?.name}
-                  description={
-                    item.createdAt ?? dayjs(item.createdAt).format('DD/MM/YYYY')
+                  date={
+                    item.createdAt ? dayjs(item.createdAt).format('LL') : ''
                   }
+                  description={item.description}
                 />
               ))}
           </SimpleGrid>

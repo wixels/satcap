@@ -12,8 +12,8 @@ import {
   Tooltip,
 } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
-import { IconDots, IconLink, IconTrash, IconX } from '@tabler/icons';
-import { useNavigate } from '@tanstack/react-location';
+import { IconDots, IconEdit, IconLink, IconTrash, IconX } from '@tabler/icons';
+import { Link, useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
 import { deleteDoc, doc } from 'firebase/firestore';
 import db from '../firebase';
@@ -24,6 +24,7 @@ interface Props {
   publisher?: string;
   docId: string;
   visibility?: any;
+  packageName?: string;
 }
 
 export const ResourceCard = ({
@@ -33,6 +34,7 @@ export const ResourceCard = ({
   publisher,
   docId,
   visibility,
+  packageName,
 }: Props) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -93,6 +95,13 @@ export const ResourceCard = ({
 
             <Menu.Dropdown>
               <Menu.Item
+                component={Link}
+                to={`./edit/resources/${docId}`}
+                icon={<IconEdit size={14} />}
+              >
+                Edit Resource
+              </Menu.Item>
+              <Menu.Item
                 onClick={handleDelete}
                 icon={<IconTrash size={14} />}
                 color="red"
@@ -131,6 +140,9 @@ export const ResourceCard = ({
           ) : null}
           <Badge color="green" variant="light">
             Resource
+          </Badge>
+          <Badge color="teal" variant="light">
+            {packageName}
           </Badge>
         </Group>
       </Card.Section>

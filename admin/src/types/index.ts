@@ -27,6 +27,7 @@ export interface INotice {
   type: string;
   publishedBy?: publisher;
   docId: string;
+  date: string;
 }
 
 export interface ILocation {
@@ -92,6 +93,7 @@ export interface IUser {
   name: string;
   docId?: string;
   mobile?: string;
+  jobTitle?: string;
 }
 
 type status = 'open' | 'resolved' | 'archived';

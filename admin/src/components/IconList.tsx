@@ -66,10 +66,12 @@ export const IconList = ({
       )}
 
       <div>
-        <Text size="xs" className={classes.title}>
+        <Text transform="capitalize" size="xs" className={classes.title}>
           {title}
         </Text>
-        <Text className={classes.description}>{description}</Text>
+        <Text transform="capitalize" className={classes.description}>
+          {description}
+        </Text>
       </div>
     </div>
   );

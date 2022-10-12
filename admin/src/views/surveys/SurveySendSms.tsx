@@ -103,7 +103,11 @@ export const SurveySendSms = (): JSX.Element => {
         >
           Add Mobile Number
         </Button>
-        <Button type="submit" disabled={loading} loading={loading}>
+        <Button
+          type="submit"
+          disabled={loading || form.values.mobiles?.length === 0}
+          loading={loading}
+        >
           Send Links
         </Button>
       </Group>

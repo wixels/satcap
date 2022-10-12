@@ -10,6 +10,7 @@ import {
   Tooltip,
   Loader,
   Space,
+  Button,
 } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconTrash, IconCheck, IconX } from '@tabler/icons';
@@ -32,7 +33,6 @@ const useStyles = createStyles((theme) => ({
 
   footer: {
     padding: `${theme.spacing.xs}px ${theme.spacing.lg}px`,
-    marginTop: theme.spacing.md,
     borderTop: `1px solid ${
       theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]
     }`,
@@ -47,16 +47,17 @@ interface QueryCardProps {
   footer?: string;
   name?: string;
   description?: string;
+  date: string;
 }
 
 export function QueryCard({
-  image,
   status,
   title,
   footer,
   name,
   docId,
   description,
+  date,
 }: QueryCardProps) {
   const [loading, setLoading] = useState(false);
   const { classes, theme } = useStyles();
@@ -101,18 +102,26 @@ export function QueryCard({
         );
       }}
     >
-      <Card.Section component={Link} px="lg" pt="lg" to={`./${docId}`}>
+      <Card.Section
+        component={Link}
+        px="lg"
+        pt="lg"
+        pb={'lg'}
+        to={`./${docId}`}
+      >
         <Badge color={status === 'open' ? 'blue' : 'green'}>{status}</Badge>
-        {title ? (
-          <Text weight={700} className={classes.title} mt="xs">
-            {title}
-          </Text>
-        ) : (
-          <>
-            <Space h="xl" />
-            <Space h="sm" />
-          </>
-        )}
+        <Text lineClamp={1} weight={700} className={classes.title} mt="xs">
+          {title}
+        </Text>
+        <Text
+          lineClamp={1}
+          size={'sm'}
+          color="dimmed"
+          className={classes.title}
+          mt="xs"
+        >
+          {description}
+        </Text>
 
         <Group mt="lg">
           <Avatar radius="xl">
@@ -124,20 +133,36 @@ export function QueryCard({
             )}
           </Avatar>
           <div>
-            <Text weight={500}>{name}</Text>
+            <Text weight={500} size="sm">
+              {name}
+            </Text>
             <Text size="xs" color="dimmed">
-              {description}
+              {date}
             </Text>
           </div>
         </Group>
       </Card.Section>
-      {status !== 'resolved' && (
+      {status === 'archived' && (
         <Card.Section className={classes.footer}>
           <Group position="apart">
             <Text size="xs" color="dimmed">
               {footer}
             </Text>
 
+            <Button
+              size="xs"
+              disabled={loading}
+              onClick={() => handleActions('open')}
+            >
+              Unarchive
+            </Button>
+          </Group>
+        </Card.Section>
+      )}
+      {status === 'open' && (
+        <Card.Section className={classes.footer}>
+          <Group position="apart">
+            <Text size="xs" color="dimmed" />
             <Group spacing={0}>
               {loading && <Loader size={16} mr={'xl'} />}
               <Tooltip label="Archive Discussion">

@@ -1,17 +1,22 @@
-import { Avatar, Group, Tabs, Text, UnstyledButton } from '@mantine/core';
+import { Avatar, Group, Text, UnstyledButton } from '@mantine/core';
 import { IconChevronLeft } from '@tabler/icons';
 import { Link, useMatch } from '@tanstack/react-location';
 import React from 'react';
-import { SurveySendEmail } from './SurveySendEmail';
-import { SurveySendSms } from './SurveySendSms';
+import { useGetSingleInformation } from '../../hooks/network/useInformation';
+import { INotice, IResource } from '../../types';
+import { EditNotice } from './EditNotice';
+import { EditResource } from './EditResource';
 
-export const SurveySend = (): JSX.Element => {
+export const EditWrapper = () => {
   const {
-    params: { link },
+    params: { type, typeUid },
   } = useMatch();
+  // @ts-ignore
+  const { data: information } = useGetSingleInformation(type, typeUid);
+  console.log(information);
   return (
     <>
-      <Link to={`/surveys/${link}`}>
+      <Link to="/information">
         <UnstyledButton
           mb={'xl'}
           p="lg"
@@ -30,7 +35,10 @@ export const SurveySend = (): JSX.Element => {
               <IconChevronLeft />
             </Avatar>
             <div>
-              <Text weight={700}>Send Links</Text>
+              <Text transform="capitalize" weight={700}>
+                {/* @ts-ignore */}
+                Edit {type.slice(0, -1)}: {information?.title}
+              </Text>
               <Text size="xs" color="dimmed">
                 Click here to go back
               </Text>
@@ -38,19 +46,11 @@ export const SurveySend = (): JSX.Element => {
           </Group>
         </UnstyledButton>
       </Link>
-      <Tabs defaultValue="email" mb={'xl'}>
-        <Tabs.List>
-          <Tabs.Tab value="email">Email Link</Tabs.Tab>
-          {/* <Tabs.Tab value="sms">SMS Link</Tabs.Tab> */}
-        </Tabs.List>
-        <Tabs.Panel value="email" pt="lg">
-          <SurveySendEmail />
-        </Tabs.Panel>
-
-        {/* <Tabs.Panel value="sms" pt="lg">
-          <SurveySendSms />
-        </Tabs.Panel> */}
-      </Tabs>
+      {type === 'notices' ? (
+        <EditNotice {...(information as INotice)} />
+      ) : (
+        <EditResource {...(information as IResource)} />
+      )}
     </>
   );
 };

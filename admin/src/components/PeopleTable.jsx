@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   ActionIcon,
+  Anchor,
   Button,
   Card,
   createStyles,
@@ -21,7 +22,7 @@ import {
   IconEdit,
   IconTrash,
 } from '@tabler/icons';
-import { useNavigate } from '@tanstack/react-location';
+import { Link, useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
 import React, { useMemo, useState } from 'react';
 import { useTable, usePagination, useRowSelect } from 'react-table';
@@ -153,7 +154,12 @@ export const PeopleTable = ({ data }) => {
           id: 'delete',
           Cell: (cell) => (
             <Group>
-              <ActionIcon color="blue" variant="light">
+              <ActionIcon
+                component={Link}
+                to={`./${cell.data?.[cell?.cell?.row?.index]?.docId}/edit`}
+                color="blue"
+                variant="light"
+              >
                 <IconEdit size={16} />
               </ActionIcon>
               <Popover
