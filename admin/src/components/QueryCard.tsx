@@ -32,6 +32,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   footer: {
+    maxHeight: '48px',
     padding: `${theme.spacing.xs}px ${theme.spacing.lg}px`,
     borderTop: `1px solid ${
       theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]

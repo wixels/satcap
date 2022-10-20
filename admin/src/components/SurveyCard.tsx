@@ -8,9 +8,12 @@ import {
   Group,
   Loader,
   Menu,
+  Modal,
   Stack,
   Text,
+  Title,
 } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
 import { IconClipboardCheck, IconDots, IconTrash, IconX } from '@tabler/icons';
 import { Link, useNavigate } from '@tanstack/react-location';
@@ -37,6 +40,7 @@ export const SurveyCard = ({
   linkId,
 }: Props): JSX.Element => {
   const [loading, setLoading] = useState(false);
+  const [opened, { close, open }] = useDisclosure(false);
 
   const CORE_URL = 'https://satcap-research.web.app/?linkId=';
   const queryClient = useQueryClient();
@@ -65,58 +69,73 @@ export const SurveyCard = ({
   };
 
   return (
-    <Card shadow="sm" p="lg" radius="md" withBorder>
-      <Card.Section withBorder inheritPadding py="xs">
-        <Group position="apart">
-          <Text weight={500}>{name}</Text>
-          <Menu withinPortal position="bottom-end" shadow="sm">
-            <Menu.Target>
-              <ActionIcon>
-                <IconDots size={16} />
-              </ActionIcon>
-            </Menu.Target>
+    <>
+      <Modal opened={opened} onClose={close} size="auto">
+        <Title order={5}>Are you sure you want to delete?</Title>
+        <Text color="dimmed" mb={'xl'}>
+          This action cannot be undone
+        </Text>
+        <Button
+          loading={loading}
+          fullWidth
+          color={'red'}
+          onClick={handleDelete}
+        >
+          Delete
+        </Button>
+      </Modal>
+      <Card shadow="sm" p="lg" radius="md" withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Group position="apart">
+            <Text weight={500}>{name}</Text>
+            <Menu withinPortal position="bottom-end" shadow="sm">
+              <Menu.Target>
+                <ActionIcon>
+                  <IconDots size={16} />
+                </ActionIcon>
+              </Menu.Target>
 
-            <Menu.Dropdown>
-              <Menu.Item
-                onClick={handleDelete}
-                // icon={}
-                icon={
-                  loading ? <Loader size={'sm'} /> : <IconTrash size={14} />
-                }
-                color="red"
+              <Menu.Dropdown>
+                <Menu.Item
+                  icon={
+                    loading ? <Loader size={'sm'} /> : <IconTrash size={14} />
+                  }
+                  onClick={open}
+                  color="red"
+                >
+                  {loading ? 'Deleting Link' : 'Delete Link'}
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+          </Group>
+        </Card.Section>
+
+        <Text mt="md" size="sm" color="dimmed">
+          {description}
+        </Text>
+
+        <Stack mt="lg">
+          <CopyButton value={`${CORE_URL}${linkId}`}>
+            {({ copied, copy }) => (
+              <Button
+                fullWidth
+                variant="light"
+                radius="md"
+                color={copied ? 'teal' : 'primary'}
+                leftIcon={copied ? <CheckIcon /> : <IconClipboardCheck />}
+                onClick={copy}
               >
-                {loading ? 'Deleting Link' : 'Delete Link'}
-              </Menu.Item>
-            </Menu.Dropdown>
-          </Menu>
-        </Group>
-      </Card.Section>
-
-      <Text mt="md" size="sm" color="dimmed">
-        {description}
-      </Text>
-
-      <Stack mt="lg">
-        <CopyButton value={`${CORE_URL}${linkId}`}>
-          {({ copied, copy }) => (
-            <Button
-              fullWidth
-              variant="light"
-              radius="md"
-              color={copied ? 'teal' : 'primary'}
-              leftIcon={copied ? <CheckIcon /> : <IconClipboardCheck />}
-              onClick={copy}
-            >
-              {copied ? 'Copied' : 'Copy Url'}
+                {copied ? 'Copied' : 'Copy Url'}
+              </Button>
+            )}
+          </CopyButton>
+          <Link to={`./${linkId}/send`}>
+            <Button fullWidth radius="md">
+              Send Survey
             </Button>
-          )}
-        </CopyButton>
-        <Link to={`./${linkId}/send`}>
-          <Button fullWidth radius="md">
-            Send Survey
-          </Button>
-        </Link>
-      </Stack>
-    </Card>
+          </Link>
+        </Stack>
+      </Card>
+    </>
   );
 };
