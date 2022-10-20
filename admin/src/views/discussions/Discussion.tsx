@@ -144,6 +144,15 @@ export const Discussion = (props: Props) => {
         />
       </SimpleGrid>
       <Group position="center" mt="md">
+        <Button
+          onClick={downloadMedia}
+          variant="light"
+          leftIcon={<IconDownload size={16} />}
+          fullWidth
+          style={{ maxWidth: '300px' }}
+        >
+          Download Attachment
+        </Button>
         <Tooltip
           label={
             discussion?.status !== 'open'
@@ -164,15 +173,6 @@ export const Discussion = (props: Props) => {
             Archive
           </Button>
         </Tooltip>
-        <Button
-          onClick={downloadMedia}
-          variant="light"
-          leftIcon={<IconDownload size={16} />}
-          fullWidth
-          style={{ maxWidth: '300px' }}
-        >
-          Download Attachment
-        </Button>
         <Tooltip
           label={
             discussion?.status !== 'open'
