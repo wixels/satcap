@@ -39,13 +39,16 @@ export const Surveys = (): JSX.Element => {
     setTitle(PAGE_TITLE);
   }, []);
   return (
-    <Stack>
-      <Link to={`/surveys/${linkId}`}>
-        <Button variant="light" leftIcon={<IconCirclePlus />}>
-          Create New
-        </Button>
-      </Link>
-
+    <>
+      <Button
+        to={`/surveys/${linkId}`}
+        component={Link}
+        variant="light"
+        leftIcon={<IconCirclePlus />}
+        mb={'md'}
+      >
+        Create New
+      </Button>
       <SimpleGrid
         cols={3}
         spacing="lg"
@@ -75,6 +78,6 @@ export const Surveys = (): JSX.Element => {
           />
         )) ?? []}
       </SimpleGrid>
-    </Stack>
+    </>
   );
 };
