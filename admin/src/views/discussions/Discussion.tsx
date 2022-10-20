@@ -121,11 +121,7 @@ export const Discussion = (props: Props) => {
           title="Title"
           description={discussion?.title}
         />
-        <IconList
-          icon={IconCircuitBattery}
-          title="Description"
-          description={discussion?.description}
-        />
+
         <IconList
           icon={IconCircleDotted}
           title="Status"
@@ -140,6 +136,11 @@ export const Discussion = (props: Props) => {
           icon={IconClock}
           title="Created At"
           description={dayjs(discussion?.createdAt).format('LL')}
+        />
+        <IconList
+          icon={IconCircuitBattery}
+          title="Description"
+          description={discussion?.description}
         />
       </SimpleGrid>
       <Group position="center" mt="md">
