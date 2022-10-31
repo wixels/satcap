@@ -112,12 +112,29 @@ const giveConsent = function (e) {
   }
 }
 
+const parseData = function (form) {
+  const formData = new window.FormData(form)
+  let body = {}
+  for (const pair of formData.entries()) {
+    if (pair[1].length) {
+      if (!body[pair[0]]) {
+        body[pair[0]] = pair[1]
+      } else if (Array.isArray(body[pair[0]])) {
+        body[pair[0]].push(pair[1])
+      } else {
+        body[pair[0]] = [body[pair[0]], pair[1]]
+      }
+    }
+  }
+  return body
+}
+
 const submitSurvey = async function (e) {
   e.preventDefault()
   const form = e.currentTarget
   try {
     form.querySelector('button[type="submit"]').textContent = 'Submitting your responses...'
-    let body = new window.FormData(form)
+    let body = parseData(form)
               
     const res = await requestHandler(form.action, form.method, body)
     form.querySelector('button[type="submit"]').textContent = 'Submit'
@@ -132,8 +149,8 @@ const submitSurvey = async function (e) {
       })
       // const resBody = await res.json()
       const localSubmissions = JSON.parse(window.localStorage.getItem('submissions')) || []
-      localSubmissions.push(body.get('linkId'))
-      window.location.href = `./complete?linkId=${link.linkId}&key=${body.get('survey')}`
+      localSubmissions.push(body.linkId)
+      window.location.href = `./complete?linkId=${link.linkId}&key=${body.survey}`
     } else {
       throw new Error('An error occured whilst processing your request, please try again')
     }
