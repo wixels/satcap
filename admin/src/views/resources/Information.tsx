@@ -87,7 +87,7 @@ export const Information = (): JSX.Element => {
           {!fetching &&
             mine &&
             mine?.packages?.map((pack) => (
-              <Chip key={pack?.packageId} value={`pack-${pack?.packageId}`}>
+              <Chip key={pack?.docId} value={`pack-${pack?.docId}`}>
                 {pack?.name}
               </Chip>
             ))}
@@ -119,9 +119,8 @@ export const Information = (): JSX.Element => {
                 docId={item.docId}
                 visibility={item?.visibility}
                 packageName={
-                  mine?.packages?.find(
-                    (x) => x?.packageId === item?.packageDocId
-                  )?.name
+                  mine?.packages?.find((x) => x?.docId === item?.packageDocId)
+                    ?.name
                 }
               />
             );
@@ -136,9 +135,8 @@ export const Information = (): JSX.Element => {
                 docId={item.docId}
                 visibility={item?.visibility}
                 packageName={
-                  mine?.packages?.find(
-                    (x) => x?.packageId === item?.packageDocId
-                  )?.name
+                  mine?.packages?.find((x) => x?.docId === item?.packageDocId)
+                    ?.name
                 }
               />
             );

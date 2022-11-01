@@ -17,6 +17,7 @@ import * as FileSaver from 'file-saver';
 import dayjs from 'dayjs';
 import { useLocalStorage } from '@mantine/hooks';
 import { useEffect } from 'react';
+import { Link } from '@tanstack/react-location';
 
 export const SurveyReports = (): JSX.Element => {
   const { data: links } = useGetLinkResponses();
@@ -63,7 +64,15 @@ export const SurveyReports = (): JSX.Element => {
         ]}
       >
         {links?.map((link) => (
-          <Card key={link.docId} shadow="sm" p="lg" radius="lg" withBorder>
+          <Card
+            key={link.docId}
+            component={Link}
+            to={`./${link.docId}`}
+            shadow="sm"
+            p="lg"
+            radius="lg"
+            withBorder
+          >
             <Card.Section withBorder inheritPadding py="xs">
               <Group position="apart">
                 <div style={{ width: '85%', display: 'flex', gap: '1rem' }}>

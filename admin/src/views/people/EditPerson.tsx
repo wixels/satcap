@@ -53,7 +53,6 @@ export const EditPerson = () => {
   const createPerson = async (values: IUser) => {
     setLoading(true);
     try {
-      console.log(values);
       await updateDoc(doc(db, `mines/${values?.mineId}/users`, personId), {
         ...values,
         mobile: values.mobile

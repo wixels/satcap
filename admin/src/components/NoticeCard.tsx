@@ -43,12 +43,10 @@ export const NoticeCard = ({
   visibility,
   packageName,
 }: Props) => {
-  console.log(packageName);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const handleDelete = async (): Promise<void> => {
     try {
-      console.log('DOC ID::: ', docId);
       await deleteDoc(
         doc(db, `mines/${window.localStorage.getItem('mineId')}/notices`, docId)
       );

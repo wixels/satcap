@@ -30,7 +30,6 @@ export const SurveySendSms = (): JSX.Element => {
     validate: {
       mobiles: {
         mobile: (value) => {
-          console.log(value.length);
           return value && value.length === 17 && value !== ''
             ? null
             : 'Invalid Phone Number';

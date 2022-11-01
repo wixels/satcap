@@ -36,7 +36,7 @@ const fetchPackages = async (packUids: Array<string>): Promise<IPackage[]> => {
   const data: IPackage[] = [];
   try {
     const querySnapshot = await getDocs(
-      query(collection(db, 'packages'), where('packageId', 'in', packUids))
+      query(collection(db, 'packages'), where('docId', 'in', packUids))
     );
     querySnapshot.forEach((doc) => {
       data.push({
