@@ -1,4 +1,12 @@
-import { Avatar, Group, SimpleGrid, Text, UnstyledButton } from '@mantine/core';
+import {
+  Avatar,
+  Box,
+  Group,
+  SimpleGrid,
+  Text,
+  Title,
+  UnstyledButton,
+} from '@mantine/core';
 import { IconChevronLeft } from '@tabler/icons';
 import { Link, useMatch } from '@tanstack/react-location';
 import { useMemo } from 'react';
@@ -9,7 +17,7 @@ import {
   CategoryScale,
   LinearScale,
   BarElement,
-  Title,
+  Title as ChartTitle,
   Tooltip,
   Legend,
   ArcElement,
@@ -22,7 +30,7 @@ ChartJS.register(
   LinearScale,
   BarElement,
   ArcElement,
-  Title,
+  ChartTitle,
   Tooltip,
   Legend
 );
@@ -81,12 +89,7 @@ const viz = {
             key={`${key}-${survey}`}
             options={{
               indexAxis: 'y',
-              plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
-              },
+              plugins: {},
               responsive: true,
               scales: {
                 x: {
@@ -145,12 +148,7 @@ const viz = {
             key={`${key}-${survey}`}
             options={{
               indexAxis: 'y',
-              plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
-              },
+              plugins: {},
               responsive: true,
               scales: {
                 x: {
@@ -209,12 +207,7 @@ const viz = {
             key={`${key}-${survey}`}
             options={{
               indexAxis: 'y',
-              plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
-              },
+              plugins: {},
               responsive: true,
               scales: {
                 x: {
@@ -276,10 +269,6 @@ const viz = {
                 legend: {
                   display: false,
                 },
-                title: {
-                  display: true,
-                  text: key,
-                },
               },
               responsive: true,
               scales: {
@@ -334,12 +323,7 @@ const viz = {
             key={`${key}-${survey}`}
             options={{
               responsive: true,
-              plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
-              },
+              plugins: {},
             }}
             data={{
               labels,
@@ -389,10 +373,6 @@ const viz = {
             key={`${key}`}
             options={{
               plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
                 legend: {
                   display: false,
                 },
@@ -454,12 +434,7 @@ const viz = {
             key={`${key}`}
             options={{
               responsive: true,
-              plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
-              },
+              plugins: {},
             }}
             data={{
               labels,
@@ -485,12 +460,7 @@ const viz = {
             key={`${key}`}
             options={{
               responsive: true,
-              plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
-              },
+              plugins: {},
             }}
             data={{
               labels: ['Yes', 'No'],
@@ -522,12 +492,7 @@ const viz = {
             key={`${key}`}
             options={{
               responsive: true,
-              plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
-              },
+              plugins: {},
             }}
             data={{
               labels: ['Yes', 'No'],
@@ -576,10 +541,6 @@ const viz = {
             key={`${key}`}
             options={{
               plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
                 legend: {
                   display: false,
                 },
@@ -635,12 +596,7 @@ const viz = {
             key={`${key}`}
             options={{
               responsive: true,
-              plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
-              },
+              plugins: {},
             }}
             data={{
               labels,
@@ -683,12 +639,7 @@ const viz = {
             key={`${key}`}
             options={{
               responsive: true,
-              plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
-              },
+              plugins: {},
             }}
             data={{
               labels,
@@ -778,10 +729,6 @@ const viz = {
             key={`${key}`}
             options={{
               plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
                 legend: {
                   display: false,
                 },
@@ -839,10 +786,6 @@ const viz = {
             key={`${key}`}
             options={{
               plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
                 legend: {
                   display: false,
                 },
@@ -880,12 +823,7 @@ const viz = {
           <Pie
             key={`${key}`}
             options={{
-              plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
-              },
+              plugins: {},
             }}
             data={{
               labels: ['Yes', 'No'],
@@ -934,12 +872,7 @@ const viz = {
           <Pie
             key={`${key}`}
             options={{
-              plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
-              },
+              plugins: {},
             }}
             data={{
               labels,
@@ -965,12 +898,7 @@ const viz = {
           <Pie
             key={`${key}`}
             options={{
-              plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
-              },
+              plugins: {},
             }}
             data={{
               labels: ['Yes', 'No'],
@@ -1023,10 +951,6 @@ const viz = {
             key={`${key}`}
             options={{
               plugins: {
-                title: {
-                  display: true,
-                  text: key,
-                },
                 legend: {
                   display: false,
                 },
@@ -1064,12 +988,18 @@ export const SurveyReport = () => {
     if (!features) return '';
 
     return (
-      <SimpleGrid cols={2}>
-        {features?.map((vis: any) => (
-          <div>
-            {vis?.mutatorFn(link?.responses, vis.qKeys, vis.key, vis?.survey)}
-          </div>
-        ))}
+      <SimpleGrid cols={2} spacing="xl">
+        {features?.map((vis: any) => {
+          console.log(vis);
+          return (
+            <Box mb={'xl'}>
+              <Title mb="md" order={5}>
+                {vis?.key}
+              </Title>
+              {vis?.mutatorFn(link?.responses, vis.qKeys, vis.key, vis?.survey)}
+            </Box>
+          );
+        })}
       </SimpleGrid>
     );
   }, []);

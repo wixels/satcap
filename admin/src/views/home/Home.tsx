@@ -1,7 +1,6 @@
 import {
   BackgroundImage,
   Box,
-  Button,
   Center,
   Divider,
   Grid,
@@ -11,14 +10,12 @@ import {
   Paper,
   Skeleton,
   Stack,
-  Table,
   Text,
   Title,
 } from '@mantine/core';
 import { useLocalStorage } from '@mantine/hooks';
-import { IconLocation, IconMapPin } from '@tabler/icons';
-import React, { useEffect } from 'react';
-import { userGetMine } from '../../context/AuthenticationContext';
+import { IconMapPin } from '@tabler/icons';
+import { useEffect } from 'react';
 import { useGetLocations } from '../../hooks/network/useLocations';
 import { useGetMine } from '../../hooks/network/useMine';
 
