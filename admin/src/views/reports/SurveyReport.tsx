@@ -21,9 +21,13 @@ import {
   Tooltip,
   Legend,
   ArcElement,
+  Filler,
+  LineElement,
+  PointElement,
+  RadialLinearScale,
 } from 'chart.js';
-import { Bar, Pie } from 'react-chartjs-2';
-import { randomColor } from '../../utils/randomColor';
+import { Bar, Pie, Radar } from 'react-chartjs-2';
+import { randomColor, transparentize } from '../../utils/randomColor';
 
 ChartJS.register(
   CategoryScale,
@@ -32,13 +36,215 @@ ChartJS.register(
   ArcElement,
   ChartTitle,
   Tooltip,
-  Legend
+  Legend,
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler
 );
 
 const viz = {
-  // 'wp-two-one': [
-  // ],
-  // 'wp-three-two': [],
+  'wp-two-one': [
+    {
+      key: 'Types of skills training received in the community',
+      qKeys: ['questionSevenOne'],
+      mutatorFn: (responses: any[], qKeys: string[], key: string) => {
+        const filtered = responses.filter((x) => x[qKeys[0]]);
+
+        const set = new Set();
+        filtered.forEach((res) => {
+          const item = res[qKeys[0]];
+          if (item) {
+            set.add(item);
+          }
+        });
+        const labels = Array.from(set);
+        let datasets: any[] = [
+          {
+            data: [],
+            backgroundColor: labels.map((_) => randomColor()),
+          },
+        ];
+        labels.forEach((label) => {
+          let count = 0;
+          filtered.forEach((res) => {
+            if (res && Array.isArray(res)) {
+              // @ts-ignore
+              res[qKeys[0]].includes(label) && count++;
+            } else {
+              res[qKeys[0]] === label && count++;
+            }
+          });
+          datasets[0].data.push(count);
+        });
+
+        return (
+          <Bar
+            key={`${key}`}
+            options={{
+              plugins: {
+                legend: {
+                  display: false,
+                },
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                },
+                y: {
+                  stacked: true,
+                },
+              },
+            }}
+            data={{
+              labels,
+              datasets,
+            }}
+          />
+        );
+      },
+    },
+    {
+      key: 'Business-related training that SMMEs participated in',
+      qKeys: ['questionSeventeenFive'],
+      mutatorFn: (responses: any[], qKeys: string[], key: string) => {
+        const filtered = responses.filter((x) => x[qKeys[0]]);
+
+        let yes = 0;
+        let no = 0;
+        filtered.forEach((res) => {
+          res[qKeys[0]] === 'Yes' ? yes++ : no++;
+        });
+        return (
+          <Pie
+            key={`${key}`}
+            options={{
+              plugins: {},
+            }}
+            data={{
+              labels: ['Yes', 'No'],
+              datasets: [
+                {
+                  data: [yes, no],
+                  backgroundColor: ['#FDB51B', '#DD382F'],
+                },
+              ],
+            }}
+          />
+        );
+      },
+    },
+    {
+      key: 'Types of training SMMEs received',
+      qKeys: ['questionSeventeenFiveTwo'],
+      mutatorFn: (responses: any[], qKeys: string[], key: string) => {
+        const filtered = responses.filter((x) => x[qKeys[0]]);
+
+        const set = new Set();
+        filtered.forEach((res) => {
+          const item = res[qKeys[0]];
+          if (item) {
+            set.add(item);
+          }
+        });
+        const labels = Array.from(set);
+        let datasets: any[] = [
+          {
+            data: [],
+            backgroundColor: labels.map((_) => randomColor()),
+          },
+        ];
+        labels.forEach((label) => {
+          let count = 0;
+          filtered.forEach((res) => {
+            if (res && Array.isArray(res)) {
+              // @ts-ignore
+              res[qKeys[0]].includes(label) && count++;
+            } else {
+              res[qKeys[0]] === label && count++;
+            }
+          });
+          datasets[0].data.push(count);
+        });
+
+        return (
+          <Bar
+            key={`${key}`}
+            options={{
+              plugins: {
+                legend: {
+                  display: false,
+                },
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                },
+                y: {
+                  stacked: true,
+                },
+              },
+            }}
+            data={{
+              labels,
+              datasets,
+            }}
+          />
+        );
+      },
+    },
+    {
+      key: 'Industries that communities are interested in',
+      qKeys: ['questionFifteen'],
+      mutatorFn: (responses: any[], qKeys: string[], key: string) => {
+        const filtered = responses.filter((x) => x[qKeys[0]]);
+
+        const set = new Set();
+        filtered.forEach((res) => {
+          const item = res[qKeys[0]];
+          if (item) {
+            set.add(item);
+          }
+        });
+        const labels = Array.from(set);
+
+        let datasets: any[] = [
+          {
+            data: [],
+            backgroundColor: labels.map((_) => randomColor()),
+          },
+        ];
+        labels.forEach((label, i) => {
+          let count = 0;
+          filtered.forEach((res) => {
+            if (res && Array.isArray(res)) {
+              // @ts-ignore
+              res[qKeys[0]].includes(label) && count++;
+            } else {
+              res[qKeys[0]] === label && count++;
+            }
+          });
+          datasets[0].data.push(count);
+        });
+
+        return (
+          <Pie
+            key={`${key}`}
+            options={{
+              responsive: true,
+              plugins: {},
+            }}
+            data={{
+              labels,
+              datasets,
+            }}
+          />
+        );
+      },
+    },
+  ],
   'wp-three-one': [
     {
       key: 'Pre-Application Survey Responses',
@@ -974,6 +1180,323 @@ const viz = {
       },
     },
   ],
+  'wp-two-two': [
+    {
+      key: 'Operator Benchmark Comparison',
+      qKeys: {
+        literacy: [
+          'questionSix',
+          'questionSeven',
+          'questionEight',
+          'questionNine',
+          'questionTen',
+          'questionEleven',
+        ],
+        fluency: [
+          'questionTwelve',
+          'questionThirteen',
+          'questionFourteen',
+          'questionFifteen',
+          'questionSixteen',
+          'questionSeventeen',
+          'questionEighteen',
+          'questionNineeen',
+          'questionTwenty',
+          'questionTwentyOne',
+          'questionTwentyTwo',
+          'questionTwentyThree',
+        ],
+        proficiency: [
+          'questionTwentyFour',
+          'questionTwentyFive',
+          'questionTwentySix',
+          'questionTwentySeven',
+          'questionTwentyEight',
+          'questionTwentyNine',
+          'questionThirty',
+        ],
+      },
+      survey: 'Operator',
+      mutatorFn: (
+        responses: any[],
+        qKeys: { literacy: string[]; fluency: string[]; proficiency: string[] },
+        key: string,
+        survey: string
+      ) => {
+        const filtered = responses.filter((x) => x.questionTwo === survey);
+
+        let litScore = 0;
+        let fluScore = 0;
+        let profScore = 0;
+
+        filtered.forEach((item) => {
+          qKeys.literacy.forEach((key: string) => {
+            if (item[key]) litScore += Number(item[key].split('-')[0]);
+          });
+          qKeys.fluency.forEach((key: string) => {
+            if (item[key]) fluScore += Number(item[key].split('-')[0]);
+          });
+          qKeys.proficiency.forEach((key: string) => {
+            if (item[key]) profScore += Number(item[key].split('-')[0]);
+          });
+        });
+        const color = randomColor();
+        return (
+          <Radar
+            data={{
+              labels: [
+                'Digital Literacy',
+                'Digital Fluency',
+                'Digital Proficiency',
+              ],
+              datasets: [
+                {
+                  label: key,
+                  data: [litScore, fluScore, profScore],
+                  borderColor: color,
+                  backgroundColor: transparentize(color, 0.5),
+                },
+              ],
+            }}
+          />
+        );
+      },
+    },
+    {
+      key: 'Supervisor Benchmark Comparison',
+      qKeys: {
+        literacy: [
+          'questionSix',
+          'questionSeven',
+          'questionEight',
+          'questionNine',
+          'questionTen',
+          'questionEleven',
+        ],
+        fluency: [
+          'questionTwelve',
+          'questionThirteen',
+          'questionFourteen',
+          'questionFifteen',
+          'questionSixteen',
+          'questionSeventeen',
+          'questionEighteen',
+          'questionNineeen',
+          'questionTwenty',
+          'questionTwentyOne',
+          'questionTwentyTwo',
+          'questionTwentyThree',
+        ],
+        proficiency: [
+          'questionTwentyFour',
+          'questionTwentyFive',
+          'questionTwentySix',
+          'questionTwentySeven',
+          'questionTwentyEight',
+          'questionTwentyNine',
+          'questionThirty',
+        ],
+        confidence: [
+          'questionThirtyOne',
+          'questionThirtyTwo',
+          'questionThirtyThree',
+          'questionThirtyFour',
+          'questionThirtyFive',
+          'questionThirtySix',
+          'questionThirtySeven',
+          'questionThirtyEight',
+          'questionThirtyNine',
+        ],
+      },
+      survey: 'Supervisor',
+      mutatorFn: (
+        responses: any[],
+        qKeys: {
+          literacy: string[];
+          fluency: string[];
+          proficiency: string[];
+          confidence: string[];
+        },
+        key: string,
+        survey: string
+      ) => {
+        const filtered = responses.filter((x) => x.questionTwo === survey);
+
+        let litScore = 0;
+        let fluScore = 0;
+        let profScore = 0;
+        let confScore = 0;
+
+        filtered.forEach((item) => {
+          qKeys.literacy.forEach((key: string) => {
+            if (item[key]) litScore += Number(item[key].split('-')[0]);
+          });
+          qKeys.fluency.forEach((key: string) => {
+            if (item[key]) fluScore += Number(item[key].split('-')[0]);
+          });
+          qKeys.proficiency.forEach((key: string) => {
+            if (item[key]) profScore += Number(item[key].split('-')[0]);
+          });
+          qKeys.confidence.forEach((key: string) => {
+            if (item[key]) confScore += Number(item[key].split('-')[0]);
+          });
+        });
+        const color = randomColor();
+        return (
+          <Radar
+            data={{
+              labels: [
+                'Digital Literacy',
+                'Digital Fluency',
+                'Digital Proficiency',
+                'Digital Confidence',
+              ],
+              datasets: [
+                {
+                  label: key,
+                  data: [litScore, fluScore, profScore, confScore],
+                  borderColor: color,
+                  backgroundColor: transparentize(color, 0.2),
+                },
+              ],
+            }}
+          />
+        );
+      },
+    },
+    {
+      key: 'Manager Benchmark Comparison',
+      qKeys: {
+        literacy: [
+          'questionSix',
+          'questionSeven',
+          'questionEight',
+          'questionNine',
+          'questionTen',
+          'questionEleven',
+        ],
+        fluency: [
+          'questionTwelve',
+          'questionThirteen',
+          'questionFourteen',
+          'questionFifteen',
+          'questionSixteen',
+          'questionSeventeen',
+          'questionEighteen',
+          'questionNineeen',
+          'questionTwenty',
+          'questionTwentyOne',
+          'questionTwentyTwo',
+          'questionTwentyThree',
+        ],
+        proficiency: [
+          'questionTwentyFour',
+          'questionTwentyFive',
+          'questionTwentySix',
+          'questionTwentySeven',
+          'questionTwentyEight',
+          'questionTwentyNine',
+          'questionThirty',
+        ],
+        confidence: [
+          'questionThirtyOne',
+          'questionThirtyTwo',
+          'questionThirtyThree',
+          'questionThirtyFour',
+          'questionThirtyFive',
+          'questionThirtySix',
+          'questionThirtySeven',
+          'questionThirtyEight',
+          'questionThirtyNine',
+        ],
+        leadership: [
+          'questionFourty',
+          'questionFourtyOne',
+          'questionFourtyTwo',
+          'questionFourtyThree',
+          'questionFourtyFour',
+          'questionFourtyFive',
+          'questionFourtySix',
+          'questionFourtySeven',
+          'questionFourtyEight',
+          'questionFourtyNine',
+          'questionFifty',
+          'questionFiftyOne',
+          'questionFiftyTwo',
+          'questionFiftyThree',
+          'questionFiftyFour',
+          'questionFiftyFive',
+          'questionFiftySix',
+          'questionFiftySeven',
+          'questionFiftyEight',
+          'questionFiftyNine',
+        ],
+      },
+      survey: 'Manager',
+      mutatorFn: (
+        responses: any[],
+        qKeys: {
+          literacy: string[];
+          fluency: string[];
+          proficiency: string[];
+          confidence: string[];
+          leadership: string[];
+        },
+        key: string,
+        survey: string
+      ) => {
+        const filtered = responses.filter((x) => x.questionTwo === survey);
+
+        console.log('FILTERED::: ', filtered);
+
+        let litScore = 0;
+        let fluScore = 0;
+        let profScore = 0;
+        let confScore = 0;
+        let leadScore = 0;
+
+        filtered.forEach((item) => {
+          qKeys.literacy.forEach((key: string) => {
+            if (item[key]) litScore += Number(item[key].split('-')[0]);
+          });
+          qKeys.fluency.forEach((key: string) => {
+            if (item[key]) fluScore += Number(item[key].split('-')[0]);
+          });
+          qKeys.proficiency.forEach((key: string) => {
+            if (item[key]) profScore += Number(item[key].split('-')[0]);
+          });
+          qKeys.confidence.forEach((key: string) => {
+            if (item[key]) confScore += Number(item[key].split('-')[0]);
+          });
+          qKeys.leadership.forEach((key: string) => {
+            if (item[key]) leadScore += Number(item[key].split('-')[0]);
+          });
+        });
+        const color = randomColor();
+        return (
+          <Radar
+            data={{
+              labels: [
+                'Digital Literacy',
+                'Digital Fluency',
+                'Digital Proficiency',
+                'Digital Confidence',
+                'Digital Leadership',
+              ],
+              datasets: [
+                {
+                  label: key,
+                  data: [litScore, fluScore, profScore, confScore, leadScore],
+                  borderColor: color,
+                  backgroundColor: transparentize(color, 0.2),
+                },
+              ],
+            }}
+          />
+        );
+      },
+    },
+  ],
 };
 
 export const SurveyReport = () => {
@@ -990,7 +1513,6 @@ export const SurveyReport = () => {
     return (
       <SimpleGrid cols={2} spacing="xl">
         {features?.map((vis: any) => {
-          console.log(vis);
           return (
             <Box mb={'xl'}>
               <Title mb="md" order={5}>
