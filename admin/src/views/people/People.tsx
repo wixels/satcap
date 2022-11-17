@@ -26,15 +26,19 @@ export const People = (): JSX.Element => {
     setTitle(PAGE_TITLE);
   }, []);
   return (
-    <Stack>
-      <Link to={'/people/create'}>
-        <Button variant="light" leftIcon={<IconCirclePlus />}>
-          Add new admin user
-        </Button>
-      </Link>
+    <>
+      <Button
+        to={'/people/create'}
+        component={Link}
+        variant="light"
+        leftIcon={<IconCirclePlus />}
+        mb={'md'}
+      >
+        Add new admin user
+      </Button>
       <ScrollArea style={{ height: 'calc(100vh - 172px)' }}>
         <PeopleTable data={data} />
       </ScrollArea>
-    </Stack>
+    </>
   );
 };

@@ -89,7 +89,7 @@ export const EditResource = (resource: IResource) => {
       );
       setLoading(false);
       showNotification({
-        message: 'Successfully created resource',
+        message: 'Successfully edited resource',
         icon: <IconCheck size={18} />,
       });
       queryClient.invalidateQueries(['information']);

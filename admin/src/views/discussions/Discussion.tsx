@@ -121,11 +121,7 @@ export const Discussion = (props: Props) => {
           title="Title"
           description={discussion?.title}
         />
-        <IconList
-          icon={IconCircuitBattery}
-          title="Description"
-          description={discussion?.description}
-        />
+
         <IconList
           icon={IconCircleDotted}
           title="Status"
@@ -141,8 +137,22 @@ export const Discussion = (props: Props) => {
           title="Created At"
           description={dayjs(discussion?.createdAt).format('LL')}
         />
+        <IconList
+          icon={IconCircuitBattery}
+          title="Description"
+          description={discussion?.description}
+        />
       </SimpleGrid>
       <Group position="center" mt="md">
+        <Button
+          onClick={downloadMedia}
+          variant="light"
+          leftIcon={<IconDownload size={16} />}
+          fullWidth
+          style={{ maxWidth: '300px' }}
+        >
+          Download Attachment
+        </Button>
         <Tooltip
           label={
             discussion?.status !== 'open'
@@ -163,15 +173,6 @@ export const Discussion = (props: Props) => {
             Archive
           </Button>
         </Tooltip>
-        <Button
-          onClick={downloadMedia}
-          variant="light"
-          leftIcon={<IconDownload size={16} />}
-          fullWidth
-          style={{ maxWidth: '300px' }}
-        >
-          Download Attachment
-        </Button>
         <Tooltip
           label={
             discussion?.status !== 'open'

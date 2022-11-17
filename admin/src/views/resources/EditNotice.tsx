@@ -88,7 +88,7 @@ export const EditNotice = (notice: INotice) => {
       });
       setLoading(false);
       showNotification({
-        message: 'Successfully update notice',
+        message: 'Successfully edited notice',
         icon: <IconCheck size={18} />,
       });
       queryClient.invalidateQueries(['information']);
