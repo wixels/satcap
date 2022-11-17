@@ -103,7 +103,7 @@ export const PeopleTable = ({ data }) => {
   const handleDelete = async (cell) => {
     setLoading(true);
     try {
-      // console.log('DOC ID::: ', cell);
+      //
       const itemToDelete = cell.data?.[cell?.cell?.row?.index];
       await deleteDoc(
         doc(

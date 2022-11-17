@@ -49,7 +49,6 @@ export const CreateNotice = (): JSX.Element => {
   });
 
   const createNotice = async (values: any) => {
-    console.log(values);
     setLoading(true);
     try {
       const featureRef = ref(

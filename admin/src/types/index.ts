@@ -48,10 +48,10 @@ export interface ISurveys {
 }
 export interface IPackage {
   name: string;
-  packageId: string;
+  docId: string;
   scopes: string[];
   packageDocId?: string;
-  survey: ISurveys;
+  survey: ISurvey;
 }
 
 export interface ILink {

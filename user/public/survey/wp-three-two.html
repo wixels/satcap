@@ -68,24 +68,24 @@
         <span class="label">What type of mine is in your community?</span>
         <div class="multiple">
           <label class="selector">
-            <input type="radio" value="Gold" name="questionThree" data-on-change="free-text"/>
+            <input type="radio" value="Gold" name="questionThree" />
             <span>Gold</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Platinum Group Metals (PGM)" name="questionThree" data-on-change="free-text"/>
+            <input type="radio" value="Platinum Group Metals (PGM)" name="questionThree" />
             <span>Platinum Group Metals (PGM)</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Coal" name="questionThree" data-on-change="free-text"/>
+            <input type="radio" value="Coal" name="questionThree" />
             <span>Coal</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Iron" name="questionThree" data-on-change="free-text"/>
+            <input type="radio" value="Iron" name="questionThree" />
             <span>Iron</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Other" name="questionThree" data-on-change="free-text" data-free-text="true" />
-            <span>Other</span>
+            <input type="radio" value="None" name="questionThree" />
+            <span>None of the above</span>
           </label>
         </div>
       </div>
@@ -239,11 +239,11 @@
                   <input type="checkbox" value="Retail" name="SMMEQuestionEight" />
                   <span>Retail</span>
                 </label>
+                <label class="selector">
+                  <input type="checkbox" value="None" name="SMMEQuestionEight" />
+                  <span>None of the above</span>
+                </label>
               </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="SMMEQuestionEight" />
-              </label>
             </div>
             <div class="question">
               <p>Question 9</p>
@@ -264,19 +264,19 @@
                   <span>How long have you been supplying the mine?</span>
                   <div class="multiple">
                     <label class="selector">
-                      <input type="radio" value="A few months" name="SMMEQuestionNineOne" />
+                      <input type="radio" value="A few months" name="SMMEQuestionNine-One" />
                       <span>A few months</span>
                     </label>
                     <label class="selector">
-                      <input type="radio" value="6 months - 1 year" name="SMMEQuestionNineOne" />
+                      <input type="radio" value="6 months - 1 year" name="SMMEQuestionNine-One" />
                       <span>6 months - 1 year</span>
                     </label>
                     <label class="selector">
-                      <input type="radio" value="More than 1 year" name="SMMEQuestionNineOne" />
+                      <input type="radio" value="More than 1 year" name="SMMEQuestionNine-One" />
                       <span>More than 1 year</span>
                     </label>
                     <label class="selector">
-                      <input type="radio" value="Over 5 years" name="SMMEQuestionNineOne" />
+                      <input type="radio" value="Over 5 years" name="SMMEQuestionNine-One" />
                       <span>Over 5 years</span>
                     </label>
                   </div>
@@ -288,11 +288,11 @@
                   <fieldset class="radioGroup">
                     <legend>Would you like to supply the mine?</legend>
                     <label>
-                      <input type="radio" value="Yes" name="SMMEQuestionNineOne"/>
+                      <input type="radio" value="Yes" name="SMMEQuestionNine-One"/>
                       <span>Yes</span>
                     </label>
                     <label>
-                      <input type="radio" value="No" name="SMMEQuestionNineOne"/>
+                      <input type="radio" value="No" name="SMMEQuestionNine-One"/>
                       <span>No</span>
                     </label>
                   </fieldset>
@@ -362,11 +362,11 @@
                   <fieldset class="radioGroup">
                     <legend>Were you successful in obtaining the loan or grant?</legend>
                     <label>
-                      <input type="radio" value="Yes" name="SMMEQuestionThirteenOne" data-on-change="conditionalPath" data-conditional-path="SMMEThirteenOne-yes"/>
+                      <input type="radio" value="Yes" name="SMMEQuestionThirteen-One" data-on-change="conditionalPath" data-conditional-path="SMMEThirteenOne-yes"/>
                       <span>Yes</span>
                     </label>
                     <label>
-                      <input type="radio" value="No" name="SMMEQuestionThirteenOne" data-on-change="conditionalPath" data-conditional-path="SMMEThirteenOne-yes"/>
+                      <input type="radio" value="No" name="SMMEQuestionThirteen-One" data-on-change="conditionalPath" data-conditional-path="SMMEThirteenOne-yes"/>
                       <span>No</span>
                     </label>
                   </fieldset>
@@ -375,7 +375,7 @@
                       <p>Question 13.1.1</p>
                       <label>
                         <span>What were you able to do with the funding support?</span>
-                        <select name="SMMEQuestionThirteenOneOne" data-on-change="free-text">
+                        <select name="SMMEQuestionThirteen-One-One" >
                           <option value="">Select an option</option>
                           <option value="Hire more people">Hire more people</option>
                           <option value="Expand the business">Expand the business</option>
@@ -383,7 +383,7 @@
                           <option value="Purchase new equipment or hire additional equipment">Purchase new equipment or hire additional equipment</option>
                           <option value="Hire new business premises">Hire new business premises</option>
                           <option value="Purchase new business premises">Purchase new business premises</option>
-                          <option value="Other" data-free-text="true">Other</option>
+                          <option value="Other" >Other</option>
                         </select>
                       </label>
                     </div>
@@ -395,7 +395,7 @@
               <p>Question 14</p>
               <label>
                 <span>Have you participated in any initiatives for assistance from the following organisation to grow your business?</span>
-                <select name="SMMEQuestionFourteen" data-on-change="free-text">
+                <select name="SMMEQuestionFourteen" >
                   <option value="">Select an option</option>
                   <option value="National Government">National Government</option>
                   <option value="Local Government">Local Government</option>
@@ -406,7 +406,7 @@
                   <option value="Forums">Forums</option>
                   <option value="Unions">Unions</option>
                   <option value="Local Businesses/SMMEs/Industrialists">Local Businesses/SMMEs/Industrialists</option>
-                  <option value="Other" data-free-text="true">Other</option>
+                  <option value="Other" >Other</option>
                 </select>
               </label>
             </div>
@@ -471,31 +471,31 @@
                   <input type="checkbox" value="Communication Skills" name="SMMEQuestionFifteen"/>
                   <span>Communication Skills</span>
                 </label>
+                <label class="selector">
+                  <input type="checkbox" value="None" name="SMMEQuestionFifteen"/>
+                  <span>None of the above</span>
+                </label>
               </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="SMMEQuestionFifteen" />
-              </label>
             </div>
             <div class="question">
               <p>Question 16</p>
               <span class="label">Does your business offer the following opportunities to the community?</span>
               <div class="multiple">
                 <label class="selector">
-                  <input type="radio" value="Learnerships" name="SMMEQuestionSixteen" data-on-change="free-text"/>
+                  <input type="radio" value="Learnerships" name="SMMEQuestionSixteen" />
                   <span>Learnerships</span>
                 </label>
                 <label class="selector">
-                  <input type="radio" value="Internships" name="SMMEQuestionSixteen" data-on-change="free-text"/>
+                  <input type="radio" value="Internships" name="SMMEQuestionSixteen" />
                   <span>Internships</span>
                 </label>
                 <label class="selector">
-                  <input type="radio" value="Bursaries" name="SMMEQuestionSixteen" data-on-change="free-text"/>
+                  <input type="radio" value="Bursaries" name="SMMEQuestionSixteen" />
                   <span>Bursaries</span>
                 </label>
                 <label class="selector">
-                  <input type="radio" value="Other" name="SMMEQuestionSixteen" data-on-change="free-text" data-free-text="true" />
-                  <span>Other</span>
+                  <input type="radio" value="None" name="SMMEQuestionSixteen"   />
+                  <span>None of the above</span>
                 </label>
               </div>
             </div>
@@ -536,11 +536,11 @@
                   <input type="checkbox" value="Mine rehabilitation" name="SMMEQuestionSeventeen"/>
                   <span>Mine rehabilitation</span>
                 </label>
+                <label class="selector">
+                  <input type="checkbox" value="None" name="SMMEQuestionSeventeen"/>
+                  <span>None of the above</span>
+                </label>
               </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="SMMEQuestionSeventeen" />
-              </label>
             </div>
             <div class="question">
               <p>Question 18</p>
@@ -607,20 +607,20 @@
                   <span>Which of the following natural assets assist you in operating your business?</span>
                   <div class="multiple">
                     <label class="selector">
-                      <input type="radio" value="Rivers/Streams/Ground water" name="SMMEQuestionNineteenOne" data-on-change="free-text"/>
+                      <input type="radio" value="Rivers/Streams/Ground water" name="SMMEQuestionNineteen-One" />
                       <span>Rivers/Streams/Ground water</span>
                     </label>
                     <label class="selector">
-                      <input type="radio" value="Land" name="SMMEQuestionNineteenOne" data-on-change="free-text"/>
+                      <input type="radio" value="Land" name="SMMEQuestionNineteen-One" />
                       <span>Land</span>
                     </label>
                     <label class="selector">
-                      <input type="radio" value="Mine Waste Dump" name="SMMEQuestionNineteenOne" data-on-change="free-text"/>
+                      <input type="radio" value="Mine Waste Dump" name="SMMEQuestionNineteen-One" />
                       <span>Mine Waste Dump</span>
                     </label>
                     <label class="selector">
-                      <input type="radio" value="Other" name="SMMEQuestionNineteenOne" data-on-change="free-text" data-free-text="true" />
-                      <span>Other</span>
+                      <input type="radio" value="None" name="SMMEQuestionNineteen-One"   />
+                      <span>None of the above</span>
                     </label>
                   </div>
                 </div>
@@ -673,24 +673,24 @@
                   <span>Which of the following natural assets assist you in operating your business?</span>
                   <div class="multiple">
                     <label class="selector">
-                      <input type="radio" value="Business Network" name="SMMEQuestionTwentyTwoOne" data-on-change="free-text"/>
+                      <input type="radio" value="Business Network" name="SMMEQuestionTwentyTwo-One" />
                       <span>Business Network</span>
                     </label>
                     <label class="selector">
-                      <input type="radio" value="Local Business Forum" name="SMMEQuestionTwentyTwoOne" data-on-change="free-text"/>
+                      <input type="radio" value="Local Business Forum" name="SMMEQuestionTwentyTwo-One" />
                       <span>Local Business Forum</span>
                     </label>
                     <label class="selector">
-                      <input type="radio" value="Local Business Cooperatives" name="SMMEQuestionTwentyTwoOne" data-on-change="free-text"/>
+                      <input type="radio" value="Local Business Cooperatives" name="SMMEQuestionTwentyTwo-One" />
                       <span>Local Business Cooperatives</span>
                     </label>
                     <label class="selector">
-                      <input type="radio" value="Not sure" name="SMMEQuestionTwentyTwoOne" data-on-change="free-text"/>
+                      <input type="radio" value="Not sure" name="SMMEQuestionTwentyTwo-One" />
                       <span>Not sure</span>
                     </label>
                     <label class="selector">
-                      <input type="radio" value="Other" name="SMMEQuestionTwentyTwoOne" data-on-change="free-text" data-free-text="true" />
-                      <span>Other</span>
+                      <input type="radio" value="None" name="SMMEQuestionTwentyTwo-One"   />
+                      <span>None of the above</span>
                     </label>
                   </div>
                 </div>
@@ -741,11 +741,11 @@
                   <input type="checkbox" value="Industrial Engineering" name="SMMEQuestionTwentyThree" />
                   <span>Industrial Engineering</span>
                 </label>
+                <label class="selector">
+                  <input type="checkbox" value="None" name="SMMEQuestionTwentyThree" />
+                  <span>None of the above</span>
+                </label>
               </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="SMMEQuestionTwentyThree" />
-              </label>
             </div>
             <div class="question">
               <p>Question 24</p>
@@ -822,7 +822,7 @@
                   <p>Question 28.1</p>
                   <label>
                     <span>What are these initiatives?</span> 
-                    <input type="text" name="SMMEQuestionTwentyEightOne" />
+                    <input type="text" name="SMMEQuestionTwentyEight-One" />
                   </label>
                 </div>
               </template>
@@ -849,7 +849,7 @@
                   <p>Question 29.1</p>
                   <label>
                     <span>What is this information?</span>
-                    <input type="text" name="SMMEQuestionTwentyNineOne" />
+                    <input type="text" name="SMMEQuestionTwentyNine-One" />
                   </label>
                 </div>
               </template>
@@ -877,14 +877,14 @@
                     <p>Question 30.1</p>
                     <label>
                       <span>What are these initiatives, businesses or groups?</span> 
-                      <input type="text" name="SMMEQuestionThirtyOne" />
+                      <input type="text" name="SMMEQuestionThirty-One" />
                     </label>
                   </div>
                   <div class="question">
                     <p>Question 30.2</p>
                     <label>
                       <span>What needs are they meeting and how?</span> 
-                      <input type="text" name="SMMEQuestionThirtyTwo" />
+                      <input type="text" name="SMMEQuestionThirty-Two" />
                     </label>
                   </div>
                 </div>
@@ -909,11 +909,11 @@
                   <fieldset class="radioGroup">
                     <legend>Did you apply for the scheme?</legend>
                     <label>
-                      <input type="radio" value="Yes" name="SMMEQuestionThirtyOneOne" data-on-change="conditionalPath" data-conditional-path="SMMEThirtyOneOne-yes"/>
+                      <input type="radio" value="Yes" name="SMMEQuestionThirtyOne-One" data-on-change="conditionalPath" data-conditional-path="SMMEThirtyOneOne-yes"/>
                       <span>Yes</span>
                     </label>
                     <label>
-                      <input type="radio" value="No" name="SMMEQuestionThirtyOneOne" data-on-change="conditionalPath" data-conditional-path="SMMEThirtyOneOne-yes"/>
+                      <input type="radio" value="No" name="SMMEQuestionThirtyOne-One" data-on-change="conditionalPath" data-conditional-path="SMMEThirtyOneOne-yes"/>
                       <span>No</span>
                     </label>
                   </fieldset>
@@ -923,11 +923,11 @@
                       <fieldset class="radioGroup">
                         <legend>Were you successful?</legend>
                         <label>
-                          <input type="radio" value="Yes" name="SMMEQuestionThirtyOneTwo"/>
+                          <input type="radio" value="Yes" name="SMMEQuestionThirtyOne-One-One"/>
                           <span>Yes</span>
                         </label>
                         <label>
-                          <input type="radio" value="No" name="SMMEQuestionThirtyOneTwo"/>
+                          <input type="radio" value="No" name="SMMEQuestionThirtyOne-One-One"/>
                           <span>No</span>
                         </label>
                       </fieldset>
@@ -940,7 +940,7 @@
               <p>Question 32</p>
               <label>
                 <span>Would assistance or partnerships with any of the following organisations assist your business to grow to support the local economy post mining?</span>
-                <select name="SMMEQuestionThirtyTwo" data-on-change="free-text">
+                <select name="SMMEQuestionThirtyTwo" >
                   <option value="">Select an option</option>
                   <option value="National Government">National Government</option>
                   <option value="Local Government">Local Government</option>
@@ -951,7 +951,7 @@
                   <option value="Forums">Forums</option>
                   <option value="Unions">Unions</option>
                   <option value="Local Businesses/SMMEs/Industrialists">Local Businesses/SMMEs/Industrialists</option>
-                  <option value="Other" data-free-text="true">Other</option>
+                  <option value="Other" >Other</option>
                 </select>
               </label>
             </div>
@@ -976,7 +976,7 @@
             <div class="question">
               <p>Question 34</p>
               <span>Do any of these assets exist within your community?</span>
-              <span class="sub">Choose as many as applicable</span>
+              <span class="sub">Please choose the top 5 that have the potential for scale-up and further economic benefit</span>
               <div class="multiple">
                 <label class="selector">
                   <input type="checkbox" value="Health facilities" name="SMMEQuestionThirtyFour" />
@@ -1018,11 +1018,11 @@
                   <input type="checkbox" value="Agriculture/farming/gardening" name="SMMEQuestionThirtyFour" />
                   <span>Agriculture/farming/gardening</span>
                 </label>
+                <label class="selector">
+                  <input type="checkbox" value="None" name="SMMEQuestionThirtyFour" />
+                  <span>None of the above</span>
+                </label>
               </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="SMMEQuestionThirtyFour" />
-              </label>
             </div>
           </div>
         </template>
@@ -1047,7 +1047,7 @@
                     <p>Question 8.1</p>
                     <label>
                       <span>What is your employment status?</span>
-                      <select name="communityQuestionEightOne">
+                      <select name="communityQuestionEight-One">
                         <option value="">Select an option</option>
                         <option value="Formal sector-Fulltime">Formal sector - Full-time</option>
                         <option value="Formal sector-Part-time">Formal sector - Part-time</option>
@@ -1063,11 +1063,11 @@
                     <fieldset class="radioGroup">
                       <legend>Do you work for the mine?</legend>
                       <label>
-                        <input type="radio" value="Yes" name="communityQuestionEightTwo"/>
+                        <input type="radio" value="Yes" name="communityQuestionEight-Two"/>
                         <span>Yes</span>
                       </label>
                       <label>
-                        <input type="radio" value="No" name="communityQuestionEightTwo"/>
+                        <input type="radio" value="No" name="communityQuestionEight-Two"/>
                         <span>No</span>
                       </label>
                     </fieldset>
@@ -1080,7 +1080,7 @@
                     <p>Question 8.1</p>
                     <label>
                       <span>What is your source of income?</span>
-                      <select name="communityQuestionEightOne" data-on-change="free-text">
+                      <select name="communityQuestionEight-One" >
                         <option value="">Select an option</option>
                         <option value="Family">Family</option>
                         <option value="Friends">Friends</option>
@@ -1088,7 +1088,7 @@
                         <option value="Local Business/Initiative">Local Business/Initiative</option>
                         <option value="Social grants">Social grants</option>
                         <option value="Own my own business">Own my own business</option>
-                        <option value="Other" data-free-text="true">Other</option>
+                        <option value="Other" >Other</option>
                       </select>
                     </label>
                   </div>
@@ -1097,11 +1097,11 @@
                     <fieldset class="radioGroup">
                       <legend>Are you looking for a job?</legend>
                       <label>
-                        <input type="radio" value="Yes" name="communityQuestionEightTwo" data-on-change="conditionalPath" data-conditional-path="communityEightTwo-yes-communityEightTwo-no"/>
+                        <input type="radio" value="Yes" name="communityQuestionEight-Two" data-on-change="conditionalPath" data-conditional-path="communityEightTwo-yes-communityEightTwo-no"/>
                         <span>Yes</span>
                       </label>
                       <label>
-                        <input type="radio" value="No" name="communityQuestionEightTwo" data-on-change="conditionalPath" data-conditional-path="communityEightTwo-yes-communityEightTwo-no"/>
+                        <input type="radio" value="No" name="communityQuestionEight-Two" data-on-change="conditionalPath" data-conditional-path="communityEightTwo-yes-communityEightTwo-no"/>
                         <span>No</span>
                       </label>
                     </fieldset>
@@ -1110,7 +1110,7 @@
                         <p>Question 8.2.1</p>
                         <label>
                           <span>Select which organisations have assisted you in gaining access to a job</span>
-                          <select name="communityQuestionEightTwoOne">
+                          <select name="communityQuestionEight-Two-One">
                             <option value="">Select an option</option>
                             <option value="National Government">National Government</option>
                             <option value="Local Government">Local Government</option>
@@ -1131,7 +1131,7 @@
                         <p>Question 8.2.1</p>
                         <label>
                           <span>Please provide a reason</span>
-                          <input type="text" name="communityQuestionEightTwoOne" />
+                          <input type="text" name="communityQuestionEight-Two-One" />
                         </label>
                       </div>
                     </template>
@@ -1176,23 +1176,23 @@
                   <span class="sub">Choose as many as applicable</span>
                   <div class="multiple">
                     <label class="selector">
-                      <input type="checkbox" value="Creche" name="communityQuestionTenOne" />
+                      <input type="checkbox" value="Creche" name="communityQuestionTen-One" />
                       <span>Creche</span>
                     </label>
                     <label class="selector">
-                      <input type="checkbox" value="Primary school" name="communityQuestionTenOne" />
+                      <input type="checkbox" value="Primary school" name="communityQuestionTen-One" />
                       <span>Primary school</span>
                     </label>
                     <label class="selector">
-                      <input type="checkbox" value="Secondary school" name="communityQuestionTenOne" />
+                      <input type="checkbox" value="Secondary school" name="communityQuestionTen-One" />
                       <span>Secondary school</span>
                     </label>
                     <label class="selector">
-                      <input type="checkbox" value="Tertiary - TVET Colleges, Colleges, etc." name="communityQuestionTenOne" />
+                      <input type="checkbox" value="Tertiary - TVET Colleges, Colleges, etc." name="communityQuestionTen-One" />
                       <span>Tertiary - TVET Colleges, Colleges, etc.</span>
                     </label>
                     <label class="selector">
-                      <input type="checkbox" value="Community Training Centre" name="communityQuestionTenOne" />
+                      <input type="checkbox" value="Community Training Centre" name="communityQuestionTen-One" />
                       <span>Community Training Centre</span>
                     </label>
                   </div>
@@ -1276,11 +1276,11 @@
                   <input type="checkbox" value="Lack of infrastructure" name="communityQuestionThirteen" />
                   <span>Lack of infrastructure</span>
                 </label>
+                <label class="selector">
+                  <input type="checkbox" value="None" name="communityQuestionThirteen" />
+                  <span>None of the above</span>
+                </label>
               </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="communityQuestionThirteen" />
-              </label>
             </div>
             <div class="question">
               <p>Question 14</p>
@@ -1324,13 +1324,9 @@
                 </label>
                 <label class="selector">
                   <input type="checkbox" value="None" name="communityQuestionFourteen" />
-                  <span>None</span>
+                  <span>None of the above</span>
                 </label>
               </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="communityQuestionFourteen" />
-              </label>
             </div>
             <div class="question">
               <p>Question 15</p>
@@ -1353,24 +1349,24 @@
                     <span class="sub">i.e. Water Source</span>
                     <div class="multiple">
                       <label class="selector">
-                        <input type="radio" value="River/Stream" name="communityQuestionFifteenOne" data-on-change="free-text"/>
+                        <input type="radio" value="River/Stream" name="communityQuestionFifteen-One" />
                         <span>River/Stream</span>
                       </label>
                       <label class="selector">
-                        <input type="radio" value="Dam" name="communityQuestionFifteenOne" data-on-change="free-text" />
+                        <input type="radio" value="Dam" name="communityQuestionFifteen-One"  />
                         <span>Dam</span>
                       </label>
                       <label class="selector">
-                        <input type="radio" value="Tap water in household" name="communityQuestionFifteenOne" data-on-change="free-text" />
+                        <input type="radio" value="Tap water in household" name="communityQuestionFifteen-One"  />
                         <span>Tap water in household</span>
                       </label>
                       <label class="selector">
-                        <input type="radio" value="Piped water at community stand" name="communityQuestionFifteenOne" data-on-change="free-text" />
+                        <input type="radio" value="Piped water at community stand" name="communityQuestionFifteen-One"  />
                         <span>Piped water at community stand</span>
                       </label>
                       <label class="selector">
-                        <input type="radio" value="Other" name="communityQuestionFifteenOne" data-on-change="free-text" data-free-text="true" />
-                        <span>Other</span>
+                        <input type="radio" value="None" name="communityQuestionFifteen-One"   />
+                        <span>None of the above</span>
                       </label>
                     </div>
                   </div>
@@ -1380,23 +1376,23 @@
                     <span class="sub">i.e. Water Quality</span>
                     <div class="multiple">
                       <label class="selector">
-                        <input type="radio" value="Inadequate" name="communityQuestionFifteenTwo"/>
+                        <input type="radio" value="Inadequate" name="communityQuestionFifteen-Two"/>
                         <span>Inadequate (unsafe and irregular water supply, access is communal piped water or from water tankers)</span>
                       </label>
                       <label class="selector">
-                        <input type="radio" value="Adequate" name="communityQuestionFifteenTwo"/>
+                        <input type="radio" value="Adequate" name="communityQuestionFifteen-Two"/>
                         <span>Adequate (clean enough water for domestic use, access from communal piped water source or water tankers)</span>
                       </label>
                       <label class="selector">
-                        <input type="radio" value="Satisfactory" name="communityQuestionFifteenTwo"/>
+                        <input type="radio" value="Satisfactory" name="communityQuestionFifteen-Two"/>
                         <span>Satisfactory (safe potable water access but could be improved, access is from municipal source with piped water into dwelling, erratic supply)</span>
                       </label>
                       <label class="selector">
-                        <input type="radio" value="Good" name="communityQuestionFifteenTwo"/>
+                        <input type="radio" value="Good" name="communityQuestionFifteen-Two"/>
                         <span>Good (adequate water access for household needs, access is from municipal source with piped water into dwelling, regular supply)</span>
                       </label>
                       <label class="selector">
-                        <input type="radio" value="Excellent" name="communityQuestionFifteenTwo"/>
+                        <input type="radio" value="Excellent" name="communityQuestionFifteen-Two"/>
                         <span>Excellent (contributes to my well-being)</span>
                       </label>
                     </div>
@@ -1423,19 +1419,19 @@
                   <span class="label">How would you describe your access to food?</span>
                   <div class="multiple">
                     <label class="selector">
-                      <input type="radio" value="Inadequate" name="communityQuestionSixteenOne"/>
+                      <input type="radio" value="Inadequate" name="communityQuestionSixteen-One"/>
                       <span>Inadequate (I sometimes have to go days without food)</span>
                     </label>
                     <label class="selector">
-                      <input type="radio" value="Adequate" name="communityQuestionSixteenOne"/>
+                      <input type="radio" value="Adequate" name="communityQuestionSixteen-One"/>
                       <span>Adequate (I am able to eat at least once a day)</span>
                     </label>
                     <label class="selector">
-                      <input type="radio" value="Good" name="communityQuestionSixteenOne"/>
+                      <input type="radio" value="Good" name="communityQuestionSixteen-One"/>
                       <span>Good (I have regular meals as I require)</span>
                     </label>
                     <label class="selector">
-                      <input type="radio" value="Excellent" name="communityQuestionSixteenOne"/>
+                      <input type="radio" value="Excellent" name="communityQuestionSixteen-One"/>
                       <span>Excellent (I always have food to eat)</span>
                     </label>
                   </div>
@@ -1500,54 +1496,54 @@
               <span class="sub">Choose as many as applicable</span>
               <div class="multiple">
                 <label class="selector">
-                  <input type="checkbox" value="Health facilities" name="SMMEQuestionNineteen" />
+                  <input type="checkbox" value="Health facilities" name="communityQuestionNineteen" />
                   <span>Health facilities</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Community Hall" name="SMMEQuestionNineteen" />
+                  <input type="checkbox" value="Community Hall" name="communityQuestionNineteen" />
                   <span>Community Hall</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Primary and Secondary Schools" name="SMMEQuestionNineteen" />
+                  <input type="checkbox" value="Primary and Secondary Schools" name="communityQuestionNineteen" />
                   <span>Primary and Secondary Schools</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Police Station" name="SMMEQuestionNineteen" />
+                  <input type="checkbox" value="Police Station" name="communityQuestionNineteen" />
                   <span>Police Station</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Tuckshops/Spaza Shops" name="SMMEQuestionNineteen" />
+                  <input type="checkbox" value="Tuckshops/Spaza Shops" name="communityQuestionNineteen" />
                   <span>Tuckshops/Spaza Shops</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Retail shopping centre" name="SMMEQuestionNineteen" />
+                  <input type="checkbox" value="Retail shopping centre" name="communityQuestionNineteen" />
                   <span>Retail shopping centre</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Transport stations" name="SMMEQuestionNineteen" />
+                  <input type="checkbox" value="Transport stations" name="communityQuestionNineteen" />
                   <span>Transport stations</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Sports and recreational facilities" name="SMMEQuestionNineteen" />
+                  <input type="checkbox" value="Sports and recreational facilities" name="communityQuestionNineteen" />
                   <span>Sports and recreational facilities</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Solid waste disposal and recycling depot" name="SMMEQuestionNineteen" />
+                  <input type="checkbox" value="Solid waste disposal and recycling depot" name="communityQuestionNineteen" />
                   <span>Solid waste disposal and recycling depot</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Post office" name="SMMEQuestionNineteen" />
+                  <input type="checkbox" value="Post office" name="communityQuestionNineteen" />
                   <span>Post office</span>
                 </label>
                 <label class="selector">
-                  <input type="checkbox" value="Agriculture/farming/gardening" name="SMMEQuestionNineteen" />
+                  <input type="checkbox" value="Agriculture/farming/gardening" name="communityQuestionNineteen" />
                   <span>Community agriculture/farming/gardening areas</span>
                 </label>
+                <label class="selector">
+                  <input type="checkbox" value="None" name="communityQuestionNineteen" />
+                  <span>None of the above</span>
+                </label>
               </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="SMMEQuestionNineteen" />
-              </label>
             </div>
             <div class="question">
               <p>Question 20</p>
@@ -1589,7 +1585,7 @@
                   <p>Question 21.1</p>
                   <label>
                     <span>What are these activities/initiatives?</span> 
-                    <input type="text" name="communityQuestionTwentyOneOne" />
+                    <input type="text" name="communityQuestionTwentyOne-One" />
                   </label>
                 </div>
               </template>
@@ -1623,11 +1619,11 @@
                   <input type="checkbox" value="Engineering" name="communityQuestionTwentyTwo" />
                   <span>Engineering</span>
                 </label>
+                <label class="selector">
+                  <input type="checkbox" value="None" name="communityQuestionTwentyTwo" />
+                  <span>None of the above</span>
+                </label>
               </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="communityQuestionTwentyTwo" />
-              </label>
             </div>
             <div class="question">
               <p>Question 23</p>
@@ -1651,7 +1647,7 @@
                   <p>Question 23.1</p>
                   <label>
                     <span>What would it be?</span> 
-                    <input type="text" name="communityQuestionTwentyThreeOne" />
+                    <input type="text" name="communityQuestionTwentyThree-One" />
                   </label>
                 </div>
               </template>
@@ -1717,31 +1713,31 @@
                   <input type="checkbox" value="Communication Skills" name="communityQuestionTwentyFour"/>
                   <span>Communication Skills</span>
                 </label>
+                <label class="selector">
+                  <input type="checkbox" value="None" name="communityQuestionTwentyFour"/>
+                  <span>None of the above</span>
+                </label>
               </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="communityQuestionTwentyFour" />
-              </label>
             </div>
             <div class="question">
               <p>Question 25</p>
               <span class="label">Which of following opportunities would benefit the community?</span>
               <div class="multiple">
                 <label class="selector">
-                  <input type="radio" value="Learnerships" name="communityQuestionTwentyFive" data-on-change="free-text"/>
+                  <input type="radio" value="Learnerships" name="communityQuestionTwentyFive" />
                   <span>Learnerships</span>
                 </label>
                 <label class="selector">
-                  <input type="radio" value="Internships" name="communityQuestionTwentyFive" data-on-change="free-text"/>
+                  <input type="radio" value="Internships" name="communityQuestionTwentyFive" />
                   <span>Internships</span>
                 </label>
                 <label class="selector">
-                  <input type="radio" value="Bursaries" name="communityQuestionTwentyFive" data-on-change="free-text"/>
+                  <input type="radio" value="Bursaries" name="communityQuestionTwentyFive" />
                   <span>Bursaries</span>
                 </label>
                 <label class="selector">
-                  <input type="radio" value="Other" name="communityQuestionTwentyFive" data-on-change="free-text" data-free-text="true" />
-                  <span>Other</span>
+                  <input type="radio" value="None" name="communityQuestionTwentyFive" />
+                  <span>None of the above</span>
                 </label>
               </div>
             </div>
@@ -1774,11 +1770,11 @@
                   <input type="checkbox" value="Water and sanitation" name="communityQuestionTwentySix"/>
                   <span>Water and sanitation</span>
                 </label>
+                <label class="selector">
+                  <input type="checkbox" value="None" name="communityQuestionTwentySix"/>
+                  <span>None of the above</span>
+                </label>
               </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="communityQuestionTwentySix" />
-              </label>
             </div>
             <div class="question">
               <p>Question 27</p>
@@ -1824,11 +1820,11 @@
                   <input type="checkbox" value="Mine rehabilitation" name="communityQuestionTwentyEight"/>
                   <span>Mine rehabilitation</span>
                 </label>
+                <label class="selector">
+                  <input type="checkbox" value="None" name="communityQuestionTwentyEight"/>
+                  <span>None of the above</span>
+                </label>
               </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="communityQuestionTwentyEight" />
-              </label>
             </div>
           </div>
         </template>

@@ -25,6 +25,8 @@ import { Surveys } from './views/surveys/Surveys';
 import { SurveySend } from './views/surveys/SurveySend';
 import { MakeGenerics, Route } from '@tanstack/react-location';
 import { EditPerson } from './views/people/EditPerson';
+import { SurveyReport } from './views/reports/SurveyReport';
+import { fetchSingleLink } from './hooks/network/useLink';
 
 export type LocationGenerics = MakeGenerics<{
   Params: {
@@ -33,6 +35,7 @@ export type LocationGenerics = MakeGenerics<{
     link: string;
     personId: string;
     discussionId: string;
+    docId: string;
   };
 }>;
 
@@ -114,7 +117,6 @@ export const routerFactory = (queryClient: any) => {
     },
     {
       path: '/reports',
-
       children: [
         {
           path: '/',
@@ -122,6 +124,15 @@ export const routerFactory = (queryClient: any) => {
           loader: () =>
             queryClient.getQueryData(['linksResponses']) ??
             queryClient.fetchQuery(['linksResponses'], () => fetchLinks(true)),
+        },
+        {
+          path: ':docId',
+          element: <SurveyReport />,
+          loader: ({ params: { docId } }) =>
+            queryClient.getQueryData(['link', docId]) ??
+            queryClient.fetchQuery(['link', docId], () =>
+              fetchSingleLink(docId)
+            ),
         },
       ],
     },

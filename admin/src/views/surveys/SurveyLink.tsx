@@ -99,7 +99,7 @@ export const SurveyLink = (): JSX.Element => {
   //           {parsedPackage[key]?.label}: {parsedPackage[key]?.description}
   //         </Text>
   //         {form.values?.[key]?.map((item, i) => {
-  //           console.log(form.getInputProps(`${key}.${i}.answer`));
+  //
   //           return (
   //             <Group key={item.key} mt="xs">
   //               <TextInput

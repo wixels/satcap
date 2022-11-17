@@ -13,7 +13,7 @@ export const EditWrapper = () => {
   } = useMatch();
   // @ts-ignore
   const { data: information } = useGetSingleInformation(type, typeUid);
-  console.log(information);
+
   return (
     <>
       <Link to="/information">

@@ -19,7 +19,6 @@ export async function fetchLinkResponses(id: string) {
   );
   resSnap.forEach((doc) => {
     const items = doc.data();
-    items.created = items;
     delete items?.consent;
     delete items?.linkDocId;
     delete items?.linkId;
