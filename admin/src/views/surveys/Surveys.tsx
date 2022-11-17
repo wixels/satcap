@@ -19,6 +19,7 @@ import {
   IconTrash,
 } from '@tabler/icons';
 import { Link } from '@tanstack/react-location';
+import { nanoid } from 'nanoid';
 import { useEffect } from 'react';
 import { SurveyCard } from '../../components/SurveyCard';
 import { useGetLinks } from '../../hooks/network/useLinks';
@@ -27,10 +28,10 @@ import { ILink, IPackage } from '../../types';
 
 export const Surveys = (): JSX.Element => {
   const linkId = useNanoId();
-
-  // @ts-ignore
-  // const links: ILink[] = data.links;
   const { data: links } = useGetLinks();
+
+  console.log(links);
+
   const PAGE_TITLE = 'Surveys';
   const [_, setTitle] = useLocalStorage({
     key: 'title',
@@ -74,7 +75,8 @@ export const Surveys = (): JSX.Element => {
             }
             docId={link?.docId}
             description={link?.description}
-            key={link.linkId}
+            acceptResponses={link.acceptResponses}
+            key={nanoid()}
           />
         )) ?? []}
       </SimpleGrid>

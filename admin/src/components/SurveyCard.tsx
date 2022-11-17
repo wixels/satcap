@@ -5,24 +5,32 @@ import {
   Card,
   CheckIcon,
   CopyButton,
+  Divider,
   Group,
   Loader,
   Menu,
   Modal,
   Stack,
+  Switch,
   Text,
   Title,
+  useMantineTheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
-import { IconClipboardCheck, IconDots, IconTrash, IconX } from '@tabler/icons';
+import {
+  IconCheck,
+  IconClipboardCheck,
+  IconDots,
+  IconTrash,
+  IconX,
+} from '@tabler/icons';
 import { Link, useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
-import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
-import React, { useState } from 'react';
+import { doc, updateDoc } from 'firebase/firestore';
+import { useState } from 'react';
 import db from '../firebase';
-import { IError } from '../types';
 
 interface Props {
   name: string;
@@ -30,6 +38,7 @@ interface Props {
   docId: string;
   linkId: string;
   description?: string;
+  acceptResponses: boolean;
 }
 
 export const SurveyCard = ({
@@ -38,25 +47,28 @@ export const SurveyCard = ({
   docId,
   description,
   linkId,
+  acceptResponses,
 }: Props): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const [opened, { close, open }] = useDisclosure(false);
+  const [resLoading, setResLoading] = useState(false);
 
   const CORE_URL = 'https://satcap-research.web.app/?linkId=';
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const handleDelete = async () => {
+  async function handleUpdate(
+    payload: { deletedAt?: string; acceptResponses?: boolean },
+    redirect?: boolean
+  ) {
     setLoading(true);
     try {
       await updateDoc(
         doc(db, `mines/${window.localStorage.getItem('mineId')}/links`, docId),
-        {
-          deletedAt: dayjs().format('YYYY-MM-DDTHH:mm:ssZ'),
-        }
+        payload
       );
       queryClient.invalidateQueries(['links']);
-      navigate({ to: '/surveys' });
+      redirect && navigate({ to: '/surveys' });
     } catch (error: any) {
       showNotification({
         icon: <IconX size={18} />,
@@ -66,7 +78,7 @@ export const SurveyCard = ({
       });
       setLoading(false);
     }
-  };
+  }
 
   return (
     <>
@@ -79,7 +91,12 @@ export const SurveyCard = ({
           loading={loading}
           fullWidth
           color={'red'}
-          onClick={handleDelete}
+          onClick={() =>
+            handleUpdate(
+              { deletedAt: dayjs().format('YYYY-MM-DDTHH:mm:ssZ') },
+              true
+            )
+          }
         >
           Delete
         </Button>
@@ -113,7 +130,25 @@ export const SurveyCard = ({
         <Text mt="md" size="sm" color="dimmed">
           {description}
         </Text>
-
+        <Divider my="lg" />
+        <Switch
+          checked={acceptResponses}
+          disabled={resLoading}
+          onChange={async (event) => {
+            setResLoading(true);
+            await handleUpdate(
+              { acceptResponses: event.currentTarget.checked },
+              true
+            );
+            setResLoading(false);
+          }}
+          // onChange={(event) => setChecked()}
+          color="teal"
+          size="sm"
+          label="Accepting Responses"
+          onLabel="ON"
+          offLabel="OFF"
+        />
         <Stack mt="lg">
           <CopyButton value={`${CORE_URL}${linkId}`}>
             {({ copied, copy }) => (
