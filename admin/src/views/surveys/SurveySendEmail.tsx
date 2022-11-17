@@ -1,15 +1,22 @@
-import { ActionIcon, Button, Group, TextInput } from '@mantine/core';
+import {
+  ActionIcon,
+  Button,
+  FileButton,
+  Group,
+  TextInput,
+} from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck, IconTrash, IconX } from '@tabler/icons';
 import { useMatch, useNavigate } from '@tanstack/react-location';
 import { addDoc, collection } from 'firebase/firestore';
 import { nanoid } from 'nanoid';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import db from '../../firebase';
 
 export const SurveySendEmail = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
+
   const {
     params: { link },
   } = useMatch();
@@ -81,11 +88,45 @@ export const SurveySendEmail = (): JSX.Element => {
       setLoading(false);
     }
   };
+
+  const addCsvEmails = (file: File) => {
+    console.log(file);
+    try {
+      if (file) {
+        const fileReader = new window.FileReader();
+        fileReader.onload = async function (event) {
+          const text = event?.target?.result;
+          // @ts-ignore
+          const arr: string[] = text.split('\r\n');
+          arr.pop();
+          arr
+            .map((string) => ({ email: string, key: nanoid() }))
+            .forEach((item) => {
+              form.insertListItem('emails', item);
+            });
+        };
+        fileReader.readAsText(file);
+      }
+    } catch (error) {
+      showNotification({
+        icon: <IconX size={18} />,
+        color: 'red',
+        message: 'Unable to process CSV',
+      });
+    }
+  };
   return (
     <form onSubmit={form.onSubmit(sendEmailLink)}>
       {fields}
       <Group position="center" mt="md">
-        {/* <Button variant="subtle">Upload CSV</Button> */}
+        <FileButton onChange={addCsvEmails} accept=".csv">
+          {(props) => (
+            <Button {...props} variant="subtle">
+              Upload CSV
+            </Button>
+          )}
+        </FileButton>
+
         <Button
           variant="light"
           onClick={() =>
