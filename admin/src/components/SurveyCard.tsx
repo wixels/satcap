@@ -1,6 +1,5 @@
 import {
   ActionIcon,
-  Badge,
   Button,
   Card,
   CheckIcon,
@@ -14,17 +13,10 @@ import {
   Switch,
   Text,
   Title,
-  useMantineTheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
-import {
-  IconCheck,
-  IconClipboardCheck,
-  IconDots,
-  IconTrash,
-  IconX,
-} from '@tabler/icons';
+import { IconClipboardCheck, IconDots, IconTrash, IconX } from '@tabler/icons';
 import { Link, useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
