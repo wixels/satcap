@@ -11,6 +11,7 @@
 - Have access to a unix based terminal on your workstation
 - Have [NPM and NodeJS (nvm recommended)](https://github.com/nvm-sh/nvm#installing-and-updating) installed on your workstation
 
+
 ### Project setup
 [Firebase Project docs](https://firebase.google.com/docs/cli#project_aliases)
 
@@ -27,12 +28,14 @@ firebase use ALIAS
 ```
 *Please note, if you're on a project that your Google account does not have access to, you won't be able to deploy.*
 
+
 ### Firestore setup
 1. Login to [Firebase console](https://console.firebase.google.com/)
 2. Open your project
 3. Click on Build -> Firestore Database
 5. Click "Create Database"
 6. Follow the prompts
+
 
 ### Authentication setup
 1. Login to [Firebase console](https://console.firebase.google.com/)
@@ -41,6 +44,7 @@ firebase use ALIAS
 4. Go to the "Sign-in method" tab
 5. Click "Add new provider"
 6. Turn on "Email/Password"
+
 
 ### Hosting setup
 [Hosting docs](https://firebase.google.com/docs/hosting)
@@ -55,6 +59,7 @@ Error: HTTP Error: 400, Invalid name: `admin-satcap-research` is reserved by ano
 2. `firebase hosting:sites:create USER_SITE_ID`
 3. `firebase target:apply hosting admin ADMIN_SITE_ID`
 4. `firebase target:apply hosting user USER_SITE_ID`
+
 
 ### Functions setup
 [Functions docs](https://firebase.google.com/docs/functions)
@@ -72,16 +77,19 @@ firebase deploy --only firestore:indexes
 firebase deploy --only firestore:rules
 firebase deploy --only storage
 ```
+
 ### Functions
 ```
 firebase deploy --only functions
 ```
 You can [read here](https://firebase.google.com/docs/functions/manage-functions#deploy_functions) for more details about Firebase Functions and deployments
+
 ### Admin
 1. `cd admin/`
 2. `npm i && npm run build`
 3. `cd ../`
 4. `firebase deploy --only hosting:admin`
+
 
 ### User (survey links)
 ```
@@ -117,6 +125,7 @@ You will need to enable the following extensions within Firebase:
 - Setup with your own SMTP account
 - Use **mail** as the collection name
 
+
 ### Send Messages with Twilio (optional)
 - [Link to extension](https://extensions.dev/extensions/twilio/send-message)
 - Setup with your own Twilio account
@@ -127,8 +136,7 @@ You will need to enable the following extensions within Firebase:
 The current version of this application does not support the creation of **mines** or **packages** within the application itself, so these will have to be manually added before accessing the application.
 
 ### Packages
-#### Collection Id
-**packages**
+Collection Id: **packages**
 
 #### Structure
 | Field                              | Type          | Value                                                              |
@@ -151,6 +159,7 @@ The current version of this application does not support the creation of **mines
 | survey.surveys[0].title            | string        | Title of survey                                                    |
 | scopes                             | array[string] | List of all menu items this package has access to on the user side |
 
+
 | Scope       |
 |-------------|
 | home        |
@@ -158,9 +167,9 @@ The current version of this application does not support the creation of **mines
 | information |
 | queries     |
 
+
 ### Mines
-#### Collection Id
-**mines**
+Collection Id: **mines**
 
 #### Structure
 | Field           | Type          | Value                                                               |
@@ -174,9 +183,8 @@ The current version of this application does not support the creation of **mines
 
 ### Users
 Sub-collection of [mines](#mines)
-#### Collection Id
-**users**
 
+Collection Id: **users**
 #### Structure
 
 | Field         | Type          | Value                                                                                                       |
@@ -193,9 +201,7 @@ Sub-collection of [mines](#mines)
 ### Locations
 Sub-collection of [mines](#mines)
 
-#### Collection Id
-**locations**
-
+Collection Id: **locations**
 #### Structure
 
 | Field         | Type          | Value                                                                                                       |
