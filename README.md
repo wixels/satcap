@@ -104,7 +104,7 @@ Please see [Data Architecture](#data-architecture) for more information before p
 7. Click on Build -> Firestore Database
 8. Click on "mines" collection
 9. Click on the mine you're wanting to add the person to
-10. Click on the subcollection "users"
+10. Click on the Sub-collection "users"
 11. Click "Add document"
 11. Click "Auto-Id" and add the [following fields](#users) 
 
@@ -173,7 +173,7 @@ The current version of this application does not support the creation of **mines
 | packages        | array[string] | Document ID's of all [packages](#packages) this admin has access to |
 
 ### Users
-Subcollection of [mines](#mines)
+Sub-collection of [mines](#mines)
 #### Collection Id
 **users**
 
@@ -191,7 +191,7 @@ Subcollection of [mines](#mines)
 | locationAdmin | array[string] | Document ID's of all locations (operations) this user can manage (is allowed to be null if isAdmin is true) |
 
 ### Locations
-Subcollection of [mines](#mines)
+Sub-collection of [mines](#mines)
 
 #### Collection Id
 **locations**
