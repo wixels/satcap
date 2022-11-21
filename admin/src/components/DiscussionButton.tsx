@@ -33,7 +33,11 @@ export const DiscussionButton = (props: Props) => {
         },
         '&.active': {
           border: `1px solid ${theme.colors.blue[3]}`,
-          backgroundColor: theme?.colors?.blue[0],
+          // backgroundColor: theme?.colors?.blue[0],
+          backgroundColor:
+            theme.colorScheme === 'dark'
+              ? theme?.colors?.blue[5]
+              : theme?.colors?.blue[0],
         },
       })}
     >
