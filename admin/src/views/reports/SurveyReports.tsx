@@ -1,6 +1,7 @@
 import {
   ActionIcon,
   Avatar,
+  Box,
   Card,
   Divider,
   Group,
@@ -64,18 +65,14 @@ export const SurveyReports = (): JSX.Element => {
         ]}
       >
         {links?.map((link) => (
-          <Card
-            key={link.docId}
-            component={Link}
-            to={`./${link.docId}`}
-            shadow="sm"
-            p="lg"
-            radius="lg"
-            withBorder
-          >
+          <Card key={link.docId} shadow="sm" p="lg" radius="lg" withBorder>
             <Card.Section withBorder inheritPadding py="xs">
               <Group position="apart">
-                <div style={{ width: '85%', display: 'flex', gap: '1rem' }}>
+                <Box
+                  component={Link}
+                  to={`./${link.docId}`}
+                  sx={{ width: '85%', display: 'flex', gap: '1rem' }}
+                >
                   <Avatar color={'green'} radius={'xl'}>
                     <IconTable />
                   </Avatar>
@@ -89,7 +86,7 @@ export const SurveyReports = (): JSX.Element => {
                       {dayjs(link.createdAt).format('DD/MM/YYYY')}
                     </Text>
                   </div>
-                </div>
+                </Box>
 
                 <Menu withinPortal position="bottom-end" shadow="sm">
                   <Menu.Target>
@@ -109,7 +106,7 @@ export const SurveyReports = (): JSX.Element => {
                 </Menu>
               </Group>
             </Card.Section>
-            <Card.Section p="xl">
+            <Card.Section p="xl" component={Link} to={`./${link.docId}`}>
               <Text color="dimmed" size="xs">
                 {link?.responses?.length} Response
                 {link?.responses?.length === 1 ? '' : 's'}
