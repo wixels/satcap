@@ -3,6 +3,7 @@ import {
   collection,
   DocumentData,
   getDocs,
+  orderBy,
   query,
   where,
 } from 'firebase/firestore';
@@ -36,7 +37,8 @@ export async function fetchLinks(force: boolean) {
   const linksSnap = await getDocs(
     query(
       collection(db, `mines/${window.localStorage.getItem('mineId')}/links`),
-      where('deletedAt', '==', null)
+      where('deletedAt', '==', null),
+      orderBy('createdAt', 'desc')
     )
   );
   for (const doc of linksSnap.docs) {
