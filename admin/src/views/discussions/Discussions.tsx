@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Button,
   Divider,
   Grid,
   Group,
@@ -10,7 +11,7 @@ import {
   UnstyledButton,
 } from '@mantine/core';
 import { useLocalStorage } from '@mantine/hooks';
-import { IconAssembly } from '@tabler/icons';
+import { IconAssembly, IconDownload } from '@tabler/icons';
 import dayjs from 'dayjs';
 import React, { useEffect, useMemo, useState } from 'react';
 import { DiscussionButton } from '../../components/DiscussionButton';
@@ -18,6 +19,9 @@ import { QueryCard } from '../../components/QueryCard';
 import { StatsGroup } from '../../components/StatsGroup';
 import { useGetDiscussions } from '../../hooks/network/useDiscussions';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
+import { IDiscussion } from '../../types';
 dayjs.extend(localizedFormat);
 
 const Discussions = () => {
@@ -59,6 +63,27 @@ const Discussions = () => {
   useEffect(() => {
     setTitle(PAGE_TITLE);
   }, []);
+
+  const toSentenceCase = (string: string) => {
+    const result = string.replace(/([A-Z])/g, ' $1');
+    return result.charAt(0).toUpperCase() + result.slice(1);
+  };
+  const titleCaseKeys = (object: any) => {
+    return Object.entries(object).reduce((carry, [key, value]) => {
+      //@ts-ignore
+      carry[toSentenceCase(key)] = value;
+
+      return carry;
+    }, {});
+  };
+  const downloadReport = (queries: IDiscussion[]) => {
+    const ws = XLSX.utils.json_to_sheet(queries || []);
+    const wb = { Sheets: { data: ws }, SheetNames: ['data'] };
+    const excelBuffer = XLSX.write(wb, { bookType: 'csv', type: 'array' });
+    const data = new window.Blob([excelBuffer], { type: '.csv' });
+    // @ts-ignore
+    FileSaver.saveAs(data, 'Queries.csv');
+  };
   return (
     <>
       <Grid>
@@ -73,6 +98,12 @@ const Discussions = () => {
                 onClick={setActve}
               />
             ))}
+            <Button
+              onClick={() => downloadReport(discussions ?? [])}
+              leftIcon={<IconDownload />}
+            >
+              Download Report
+            </Button>
           </Stack>
         </Grid.Col>
         <Grid.Col span={10}>
