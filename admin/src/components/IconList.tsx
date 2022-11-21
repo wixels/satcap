@@ -69,9 +69,7 @@ export const IconList = ({
         <Text transform="capitalize" size="xs" className={classes.title}>
           {title}
         </Text>
-        <Text transform="capitalize" className={classes.description}>
-          {description}
-        </Text>
+        <Text className={classes.description}>{description}</Text>
       </div>
     </div>
   );

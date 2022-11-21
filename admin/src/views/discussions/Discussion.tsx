@@ -10,6 +10,7 @@ import {
 } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import {
+  IconAddressBook,
   IconAlignLeft,
   IconChevronLeft,
   IconCircleDotted,
@@ -136,6 +137,11 @@ export const Discussion = (props: Props) => {
           icon={IconClock}
           title="Created At"
           description={dayjs(discussion?.createdAt).format('LL')}
+        />
+        <IconList
+          icon={IconAddressBook}
+          title="Contact Details"
+          description={discussion?.contact}
         />
         <IconList
           icon={IconCircuitBattery}
