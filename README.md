@@ -99,7 +99,7 @@ firebase deploy --only hosting:user
 ## Create Admin User
 Initially, you will have to manually add a person to the "backend" to get started.
 
-All subsuquent users can be added the traditional way on the "People" tab within the admin applciation.
+All subsequent users can be added the traditional way on the "People" tab within the admin application.
 
 Please see [Data Architecture](#data-architecture) for more information before proceeding to the below steps
 
