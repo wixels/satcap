@@ -22,14 +22,14 @@
         <details>
           <summary>Click here to see what you're consenting to</summary>
           <ul>
-            <li>I voluntarily agree to participate in this pilot study for a community needs assessment digital application.</li>
-            <li>I understand that I am participating in an assessment of this digital application in this pilot test of my own free will.</li>
-            <li>I understand that I should not expect any financial gain, remuneration or benefit directly for participation in this pilot test.</li>
-            <li>I understand that all information I provide in this study will be treated confidentially and no personal information will be shared.</li>
-            <li>I understand that in the findings and results of this study my identity will remain anonymous.</li>
-            <li>I understand that my participation in this pilot will in no way advantage or disadvantage me in future engagements with the host organisation.</li>
-            <li>I understand that as the information will be stored anonymously, I may not be able to access my specific responses.</li>
-            <li>I understand that participating in this pilot does not mean that I will expect any action to be taken from the host organisation based on my responses and feedback.</li>
+            <li>I voluntarily agree to participate in this community needs assessment survey.</li>
+            <li>I understand that I am participating in this survey of my own free will.</li>
+            <li>I also understand that I should not expect any financial gain, remuneration or benefit directly for participation in this survey.</li>
+            <li>I understand that all information I provide in this survey will be treated confidentially and no personal information will be shared.</li>
+            <li>I understand that in the findings and results of this survey  my identity will remain anonymous.</li>
+            <li>I understand that my participation in this survey will in no way advantage or disadvantage me in future engagements with the organisation.</li>
+            <li>I understand that as the information will be stored anonymously,  I may not be able to access my specific responses.</li>
+            <li>I understand that participating in this survey does not mean that I will expect any action to be taken from the organisation based on my responses and feedback.</li>
           </ul>
         </details>
         <form>
@@ -84,7 +84,7 @@
             <span>Iron</span>
           </label>
           <label class="selector">
-            <input type="radio" value="None" name="questionThree" />
+            <input type="radio" value="None of the above" name="questionThree" />
             <span>None of the above</span>
           </label>
         </div>
@@ -383,7 +383,7 @@
                           <option value="Purchase new equipment or hire additional equipment">Purchase new equipment or hire additional equipment</option>
                           <option value="Hire new business premises">Hire new business premises</option>
                           <option value="Purchase new business premises">Purchase new business premises</option>
-                          <option value="Other" >Other</option>
+                          <option value="None of the above" >None of the above</option>
                         </select>
                       </label>
                     </div>
@@ -406,7 +406,7 @@
                   <option value="Forums">Forums</option>
                   <option value="Unions">Unions</option>
                   <option value="Local Businesses/SMMEs/Industrialists">Local Businesses/SMMEs/Industrialists</option>
-                  <option value="Other" >Other</option>
+                  <option value="None of the above">None of the above</option>
                 </select>
               </label>
             </div>
@@ -893,48 +893,24 @@
             <div class="question">
               <p>Question 31</p>
               <fieldset class="radioGroup">
-                <legend>Are you aware of the Black Industrialists Scheme (BIS) by the Department of Trade and Industry (DTI)?</legend>
+                <legend>Please tick one of the following that best explains your awareness of the Black Industrialist Scheme (BIS)</legend>
                 <label>
-                  <input type="radio" value="Yes" name="SMMEQuestionThirtyOne" data-on-change="conditionalPath" data-conditional-path="SMMEThirtyOne-yes"/>
-                  <span>Yes</span>
+                  <input type="radio" value="I am not aware of the Black Industrialist Scheme (BIS)" name="SMMEQuestionThirtyOne" />
+                  <span>I am not aware of the Black Industrialist Scheme (BIS)</span>
                 </label>
                 <label>
-                  <input type="radio" value="No" name="SMMEQuestionThirtyOne" data-on-change="conditionalPath" data-conditional-path="SMMEThirtyOne-yes"/>
-                  <span>No</span>
+                  <input type="radio" value="I am aware of the Black Industrialist Scheme but have not applied for it" name="SMMEQuestionThirtyOne" />
+                  <span>I am aware of the Black Industrialist Scheme but have not applied for it</span>
+                </label>
+                <label>
+                  <input type="radio" value="I applied for the Black Industrialist Scheme (BIS) and my application was unsuccessful" name="SMMEQuestionThirtyOne" />
+                  <span>I applied for the Black Industrialist Scheme (BIS) and my application was unsuccessful</span>
+                </label>
+                <label>
+                  <input type="radio" value="I applied for the Black industrialist Scheme (BIS) and my application was successful" name="SMMEQuestionThirtyOne" />
+                  <span>I applied for the Black industrialist Scheme (BIS) and my application was successful</span>
                 </label>
               </fieldset>
-              <template data-choice="SMMEThirtyOne-yes">
-                <div class="question">
-                  <p>Question 31.1</p>
-                  <fieldset class="radioGroup">
-                    <legend>Did you apply for the scheme?</legend>
-                    <label>
-                      <input type="radio" value="Yes" name="SMMEQuestionThirtyOne-One" data-on-change="conditionalPath" data-conditional-path="SMMEThirtyOneOne-yes"/>
-                      <span>Yes</span>
-                    </label>
-                    <label>
-                      <input type="radio" value="No" name="SMMEQuestionThirtyOne-One" data-on-change="conditionalPath" data-conditional-path="SMMEThirtyOneOne-yes"/>
-                      <span>No</span>
-                    </label>
-                  </fieldset>
-                  <template data-choice="SMMEThirtyOneOne-yes">
-                    <div class="question">
-                      <p>Question 31.1.1</p>
-                      <fieldset class="radioGroup">
-                        <legend>Were you successful?</legend>
-                        <label>
-                          <input type="radio" value="Yes" name="SMMEQuestionThirtyOne-One-One"/>
-                          <span>Yes</span>
-                        </label>
-                        <label>
-                          <input type="radio" value="No" name="SMMEQuestionThirtyOne-One-One"/>
-                          <span>No</span>
-                        </label>
-                      </fieldset>
-                    </div>
-                  </template>
-                </div>
-              </template>
             </div>
             <div class="question">
               <p>Question 32</p>
@@ -951,7 +927,7 @@
                   <option value="Forums">Forums</option>
                   <option value="Unions">Unions</option>
                   <option value="Local Businesses/SMMEs/Industrialists">Local Businesses/SMMEs/Industrialists</option>
-                  <option value="Other" >Other</option>
+                  <option value="None of the above">None of the above</option>
                 </select>
               </label>
             </div>
@@ -1088,7 +1064,7 @@
                         <option value="Local Business/Initiative">Local Business/Initiative</option>
                         <option value="Social grants">Social grants</option>
                         <option value="Own my own business">Own my own business</option>
-                        <option value="Other" >Other</option>
+                        <option value="None of the above" >None of the above</option>
                       </select>
                     </label>
                   </div>

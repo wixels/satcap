@@ -22,14 +22,14 @@
         <details>
           <summary>Click here to see what you're consenting to</summary>
           <ul>
-            <li>I voluntarily agree to participate in this pilot study for the training needs assessment digital application.</li>
-            <li>I understand that I am participating in an assessment of this digital application in this pilot test of my own free will.</li>
-            <li>I understand that I should not expect any financial gain, remuneration or benefit directly for participation in this pilot test.</li>
-            <li>I understand that all information I provide in this study will be treated confidentially and no personal information will be shared.</li>
-            <li>I understand that in the findings and results of this study my identity will remain anonymous.</li>
-            <li>I understand that my participation in this pilot will in no way advantage or disadvantage me in future engagements with the host organisation.</li>
-            <li>I understand that as the information will be stored anonymously, I may not be able to access my specific responses.</li>
-            <li>I understand that participating in this pilot does not mean that I will expect any action to be taken from the host organisation based on my responses and feedback.</li> 
+            <li>I voluntarily agree to participate in this survey for the training needs assessment digital application.</li>
+            <li>I understand that I am using this digital application of my own free will.</li>
+            <li>I also understand that I should not expect any financial gain, remuneration or benefit directly for using this survey.</li>
+            <li>I understand that all information I provide in this survey will be treated confidentially and no personal information will be shared.</li>
+            <li>I understand that in the findings and results of this survey identity will remain anonymous.</li>
+            <li>I understand that my participation in this survey will in no way advantage or disadvantage me in future engagements with the organisation.</li>
+            <li>I understand that as the information will be stored anonymously,  I may not be able to access my specific responses.</li>
+            <li>I understand that participating in this survey does not mean that I will expect any action to be taken from the organisation based on my responses and feedback.</li> 
           </ul>
         </details>
         <form>
@@ -116,7 +116,7 @@
             <p>Question 5.1</p>
             <label>
               <span>Where do you have internet access?</span>
-              <select name="questionFive-One" data-on-change="free-text">
+              <select name="questionFive-One">
                 <option value="">Select an option</option>
                 <option value="Home">Home (mobile phone/data)</option>
                 <option value="Work">Work</option>
@@ -125,7 +125,7 @@
                 <option value="Library">Library</option>
                 <option value="Religious facility">Religious facility</option>
                 <option value="School">School</option>
-                <option value="Other" data-free-text="true">Other</option>
+                <option value="None of the above">None of the above</option>
               </select>
             </label>
           </div>
@@ -437,11 +437,12 @@
                   <input type="checkbox" value="Retail" name="questionSeven-Two" data-on-change="maxCount" data-max-count="5" />
                   <span>Retail</span>
                 </label>
+                <label class="selector">
+                  <input type="checkbox" value="None of the above" name="questionSeven-Two" data-on-change="maxCount" data-max-count="5" />
+                  <span>None of the above</span>
+                </label>
               </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="questionSeven-Two" />
-              </label>
+             
             </div>
             <div class="question">
               <p>Question 7.3</p>
@@ -468,39 +469,43 @@
                   <input type="checkbox" value="Mining company programme" name="questionSeven-Three" data-on-change="maxCount" data-max-count="2" />
                   <span>Mining company programme</span>
                 </label>
+                <label class="selector">
+                  <input type="checkbox" value="Mining company programme" name="questionSeven-Three" data-on-change="maxCount" data-max-count="2" />
+                  <span>Mining company programme</span>
+                </label>
+                <label class="selector">
+                  <input type="checkbox" value="None of the above" name="questionSeven-Three" data-on-change="maxCount" data-max-count="2" />
+                  <span>None of the above</span>
+                </label>
               </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="questionSeven-Three" />
-              </label>
             </div>
             <div class="question">
               <p>Question 7.4</p>
               <span>How have you used the training that you have received?</span>
               <div class="multiple">
                 <label class="selector">
-                  <input type="radio" value="Started a business" name="questionSeven-Four" data-on-change="free-text"/>
+                  <input type="radio" value="Started a business" name="questionSeven-Four" />
                   <span>Started a business</span>
                 </label>
                 <label class="selector">
-                  <input type="radio" value="Received full-time employment" name="questionSeven-Four" data-on-change="free-text"/>
+                  <input type="radio" value="Received full-time employment" name="questionSeven-Four" />
                   <span>Received full-time employment</span>
                 </label>
                 <label class="selector">
-                  <input type="radio" value="Received part time employment" name="questionSeven-Four" data-on-change="free-text"/>
+                  <input type="radio" value="Received part time employment" name="questionSeven-Four" />
                   <span>Received part time employment</span>
                 </label>
                 <label class="selector">
-                  <input type="radio" value="Provided services to the community" name="questionSeven-Four" data-on-change="free-text"/>
+                  <input type="radio" value="Provided services to the community" name="questionSeven-Four" />
                   <span>Provided services to the community</span>
                 </label>
                 <label class="selector">
-                  <input type="radio" value="Assisted/trained others" name="questionSeven-Four" data-on-change="free-text"/>
+                  <input type="radio" value="Assisted/trained others" name="questionSeven-Four" />
                   <span>Assisted/trained others</span>
                 </label>
                 <label class="selector">
-                  <input type="radio" value="Other" name="questionSeven-Four" data-on-change="free-text" data-free-text="true" />
-                  <span>Other</span>
+                  <input type="radio" value="None of the above" name="questionSeven-Four" />
+                  <span>None of the above</span>
                 </label>
               </div>
             </div>
@@ -558,17 +563,17 @@
             <input type="checkbox" value="Rhythmic Melodic learning (learn better with rhythm and beats/music)" name="questionEight" data-on-change="maxCount" data-max-count="3" />
             <span>Rhythmic Melodic learning (learn better with rhythm and beats/music)</span>
           </label>
+          <label class="selector">
+            <input type="checkbox" value="None of the above" name="questionEight" data-on-change="maxCount" data-max-count="3" />
+            <span>None of the above</span>
+          </label>
         </div>
-        <label>
-          <span>Other</span>
-          <input type="text" placeholder="Please specify" name="questionEight" />
-        </label>
       </div>
       <div class="question">
         <p>Question 9</p>
         <span class="label">What method of learning do you prefer to learn through?</span>
         <span class="sub">Choose up to three (3)</span>
-        <img style="margin:10px auto;border-radius: 10px;" src="https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2F2.1question8.jpeg?alt=media" />
+        <img style="margin:10px auto;border-radius: 10px;" src="https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2F2.1question9.png?alt=media" />
         <!-- <button type="button" data-embed-type="image/png" data-embed-src="https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2F2.1question9.png?alt=media">View image for visual description</button> -->
         <div class="multiple">
           <label class="selector">
@@ -607,11 +612,11 @@
             <input type="checkbox" value="Unsure" name="questionNine" data-on-change="maxCount" data-max-count="3" />
             <span>Unsure</span>
           </label>
+          <label class="selector">
+            <input type="checkbox" value="None of the above" name="questionNine" data-on-change="maxCount" data-max-count="3" />
+            <span>None of the above</span>
+          </label>
         </div>
-        <label>
-          <span>Other</span>
-          <input type="text" placeholder="Please specify" name="questionNine" />
-        </label>
       </div>
       <div class="question">
         <p>Question 10</p>
@@ -862,35 +867,35 @@
             <input type="checkbox" value="Administrative/Clerical" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
             <span>Administrative/Clerical</span>
           </label>
+          <label class="selector">
+            <input type="checkbox" value="None of the above" name="questionTwelve" data-on-change="maxCount" data-max-count="5" />
+            <span>None of the above</span>
+          </label>
         </div>
-        <label>
-          <span>Other</span>
-          <input type="text" placeholder="Please specify" name="questionTwelve" />
-        </label>
       </div>
       <div class="question">
         <p>Question 13</p>
         <span class="label">What type of mine operates within or close to your community?</span>
         <div class="multiple">
           <label class="selector">
-            <input type="radio" value="Gold" name="questionThirteen" data-on-change="free-text"/>
+            <input type="radio" value="Gold" name="questionThirteen" />
             <span>Gold</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Platinum" name="questionThirteen" data-on-change="free-text"/>
+            <input type="radio" value="Platinum" name="questionThirteen" />
             <span>Platinum</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Multi-commodity" name="questionThirteen" data-on-change="free-text"/>
+            <input type="radio" value="Multi-commodity" name="questionThirteen" />
             <span>Multi-commodity</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Coal" name="questionThirteen" data-on-change="free-text"/>
+            <input type="radio" value="Coal" name="questionThirteen" />
             <span>Coal</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Other" name="questionThirteen" data-on-change="free-text" data-free-text="true" />
-            <span>Other</span>
+            <input type="radio" value="None of the above" name="questionThirteen"  />
+            <span>None of the above</span>
           </label>
         </div>
       </div>
@@ -899,40 +904,40 @@
         <span class="label">Which of the following alternative economy sectors do you have the skills required to operate in?</span>
         <div class="multiple">
           <label class="selector">
-            <input type="radio" value="Mine waste beneficiation" name="questionFourteen" data-on-change="free-text"/>
+            <input type="radio" value="Mine waste beneficiation" name="questionFourteen" />
             <span>Mine waste beneficiation</span>
           </label>
           <label class="selector">
-            <input type="radio" value="e-Waste" name="questionFourteen" data-on-change="free-text"/>
+            <input type="radio" value="e-Waste" name="questionFourteen" />
             <span>e-Waste</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Recycling or Upcycling" name="questionFourteen" data-on-change="free-text"/>
+            <input type="radio" value="Recycling or Upcycling" name="questionFourteen" />
             <span>Recycling or Upcycling</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Regenerative agriculture, agro-processing and re-forestry" name="questionFourteen" data-on-change="free-text"/>
+            <input type="radio" value="Regenerative agriculture, agro-processing and re-forestry" name="questionFourteen" />
             <span>Regenerative agriculture, agro-processing and re-forestry</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Renewable energy" name="questionFourteen" data-on-change="free-text"/>
+            <input type="radio" value="Renewable energy" name="questionFourteen" />
             <span>Renewable energy</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Small/light manufacturing" name="questionFourteen" data-on-change="free-text"/>
+            <input type="radio" value="Small/light manufacturing" name="questionFourteen" />
             <span>Small/light manufacturing</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Tourism" name="questionFourteen" data-on-change="free-text"/>
+            <input type="radio" value="Tourism" name="questionFourteen" />
             <span>Tourism</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Mine rehabilitation" name="questionFourteen" data-on-change="free-text"/>
+            <input type="radio" value="Mine rehabilitation" name="questionFourteen" />
             <span>Mine rehabilitation</span>
           </label>
           <label class="selector">
-            <input type="radio" value="Other" name="questionFourteen" data-on-change="free-text" data-free-text="true" />
-            <span>Other</span>
+            <input type="radio" value="None of the above" name="questionFourteen" />
+            <span>None of the above</span>
           </label>
         </div>
       </div>
@@ -976,11 +981,11 @@
             <input type="checkbox" value="Information and Communication Technology" name="questionFifteen" data-on-change="maxCount" data-max-count="3"/>
             <span>ICT (Information and Communication Technology)</span>
           </label>
+          <label class="selector">
+            <input type="checkbox" value="None of the above" name="questionFifteen" data-on-change="maxCount" data-max-count="3"/>
+            <span>None of the above</span>
+          </label>
         </div>
-        <label>
-          <span>Other</span>
-          <input type="text" placeholder="Please specify" name="questionFifteen" />
-        </label>
       </div>
       <div class="question">
         <p>Question 16</p>
@@ -1008,28 +1013,28 @@
             <span>How have these opportunities helped you?</span>
             <div class="multiple">
               <label class="selector">
-                <input type="radio" value="Started a business" name="questionSixteen-One" data-on-change="free-text"/>
+                <input type="radio" value="Started a business" name="questionSixteen-One" />
                 <span>Started a business</span>
               </label>
               <label class="selector">
-                <input type="radio" value="Received full-time employment" name="questionSixteen-One" data-on-change="free-text"/>
+                <input type="radio" value="Received full-time employment" name="questionSixteen-One" />
                 <span>Received full-time employment</span>
               </label>
               <label class="selector">
-                <input type="radio" value="Received part time employment" name="questionSixteen-One" data-on-change="free-text"/>
+                <input type="radio" value="Received part time employment" name="questionSixteen-One" />
                 <span>Received part time employment</span>
               </label>
               <label class="selector">
-                <input type="radio" value="Provided services to the community" name="questionSixteen-One" data-on-change="free-text"/>
+                <input type="radio" value="Provided services to the community" name="questionSixteen-One" />
                 <span>Provided services to the community</span>
               </label>
               <label class="selector">
-                <input type="radio" value="Venturing into new industries" name="questionSixteen-One" data-on-change="free-text"/>
+                <input type="radio" value="Venturing into new industries" name="questionSixteen-One" />
                 <span>Venturing into new industries</span>
               </label>
               <label class="selector">
-                <input type="radio" value="Other" name="questionSixteen-One" data-on-change="free-text" data-free-text="true" />
-                <span>Other</span>
+                <input type="radio" value="None of the above" name="questionSixteen-One" />
+                <span>None of the above</span>
               </label>
             </div>
           </div>
@@ -1162,11 +1167,11 @@
                   <input type="checkbox" value="Retail" name="questionSeventeen-Two" data-on-change="maxCount" data-max-count="5" />
                   <span>Retail</span>
                 </label>
+                <label class="selector">
+                  <input type="checkbox" value="None of the above" name="questionSeventeen-Two" data-on-change="maxCount" data-max-count="5" />
+                  <span>None of the above</span>
+                </label>
               </div>
-              <label>
-                <span>Other</span>
-                <input type="text" placeholder="Please specify" name="questionSeventeen-Two" />
-              </label>
             </div>
             <div class="question">
               <p>Question 17.3</p>
@@ -1351,24 +1356,24 @@
                     <span>Who provided the training?</span>
                     <div class="multiple">
                       <label class="selector">
-                        <input type="radio" value="Business chamber" name="questionSeventeen-Five-One" data-on-change="free-text" />
+                        <input type="radio" value="Business chamber" name="questionSeventeen-Five-One" />
                         <span>Business chamber</span>
                       </label>
                       <label class="selector">
-                        <input type="radio" value="Capacity building institution" name="questionSeventeen-Five-One" data-on-change="free-text" />
+                        <input type="radio" value="Capacity building institution" name="questionSeventeen-Five-One" />
                         <span>Capacity building institution</span>
                       </label>
                       <label class="selector">
-                        <input type="radio" value="NGO/NPO" name="questionSeventeen-Five-One" data-on-change="free-text" />
+                        <input type="radio" value="NGO/NPO" name="questionSeventeen-Five-One" />
                         <span>NGO/NPO</span>
                       </label>
                       <label class="selector">
-                        <input type="radio" value="Mining company programme" name="questionSeventeen-Five-One" data-on-change="free-text" />
+                        <input type="radio" value="Mining company programme" name="questionSeventeen-Five-One" />
                         <span>Mining company programme</span>
                       </label>
                       <label class="selector">
-                        <input type="radio" value="Other" name="questionSeventeen-Five-One" data-on-change="free-text" data-free-text="true" />
-                        <span>Other</span>
+                        <input type="radio" value="None of the above" name="questionSeventeen-Five-One" />
+                        <span>None of the above</span>
                       </label>
                     </div>
                   </div>
@@ -1513,11 +1518,11 @@
                         <input type="checkbox" value="Administrative/Clerical" name="questionSeventeen-Five-Two" data-on-change="maxCount" data-max-count="5" />
                         <span>Administrative/Clerical</span>
                       </label>
+                      <label class="selector">
+                        <input type="checkbox" value="None of the above" name="questionSeventeen-Five-Two" data-on-change="maxCount" data-max-count="5" />
+                        <span>None of the above</span>
+                      </label>
                     </div>
-                    <label>
-                      <span>Other</span>
-                      <input type="text" placeholder="Please specify" name="questionSeventeen-Five-Two" />
-                    </label>
                   </div>
                   <div class="question">
                     <p>Question 17.5.3</p>
@@ -1574,11 +1579,11 @@
                         <input type="checkbox" value="I was able to expand my business" name="questionSeventeen-Five-Four" data-on-change="maxCount" data-max-count="3" />
                         <span>I was able to expand my business</span>
                       </label>
+                      <label class="selector">
+                        <input type="checkbox" value="None of the above" name="questionSeventeen-Five-Four" data-on-change="maxCount" data-max-count="3" />
+                        <span>None of the above</span>
+                      </label>
                     </div>
-                    <label>
-                      <span>Other</span>
-                      <input type="text" placeholder="Please specify" name="questionSeventeen-Five-Four" />
-                    </label>
                   </div>
                 </div>
               </template>
@@ -1650,11 +1655,11 @@
                       <input type="checkbox" value="Health and safety" name="questionSeventeen-Six-One" data-on-change="maxCount" data-max-count="5" />
                       <span>Health and safety</span>
                     </label>
+                    <label class="selector">
+                      <input type="checkbox" value="None of the above" name="questionSeventeen-Six-One" data-on-change="maxCount" data-max-count="5" />
+                      <span>None of the above</span>
+                    </label>
                   </div>
-                  <label>
-                    <span>Other</span>
-                    <input type="text" placeholder="Please specify" name="questionSeventeen-Six-One" />
-                  </label>
                 </div>
               </template>
             </div>
@@ -1771,11 +1776,11 @@
                 <input type="checkbox" value="AR and VR (Augmented Reality and Virtual Reality)" name="questionEighteen-One" />
                 <span>AR and VR (Augmented Reality and Virtual Reality)</span>
               </label>
+              <label class="selector">
+                <input type="checkbox" value="None of the above" name="questionEighteen-One" />
+                <span>None of the above</span>
+              </label>
             </div>
-            <label>
-              <span>Other</span>
-              <input type="text" placeholder="Please specify" name="questionEighteen-One" />
-            </label>
           </div>
         </template>
       </div>
@@ -2072,11 +2077,11 @@
             <input type="checkbox" value="Waste management" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
             <span>Waste management</span>
           </label>
+          <label class="selector">
+            <input type="checkbox" value="None of the above" name="questionTwentyOne" data-on-change="maxCount" data-max-count="5" />
+            <span>None of the above</span>
+          </label>
         </div>
-        <label>
-          <span>Other</span>
-          <input type="text" placeholder="Please specify" name="questionTwentyOne" />
-        </label>
       </div>
       <div class="question">
         <p>Question 22</p>
@@ -2111,11 +2116,11 @@
             <input type="checkbox" value="Digital literacy skills" name="questionTwentyTwo" data-on-change="maxCount" data-max-count="5" />
             <span>Digital literacy skills</span>
           </label>
+          <label class="selector">
+            <input type="checkbox" value="None of the above" name="questionTwentyTwo" data-on-change="maxCount" data-max-count="5" />
+            <span>None of the above</span>
+          </label>
         </div>
-        <label>
-          <span>Other</span>
-          <input type="text" placeholder="Please specify" name="questionTwentyTwo" />
-        </label>
       </div>
       <button type="submit">Submit</button>
     </form>

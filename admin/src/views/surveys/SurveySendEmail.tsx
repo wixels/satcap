@@ -65,9 +65,7 @@ export const SurveySendEmail = (): JSX.Element => {
             <p>The following link will provide you with the necessary Survey/Checklist access:<br><br>
             <strong><a href='https://satcap-research.web.app/?linkId=${link}'>https://satcap-research.web.app/?linkId=${link}</a></strong>
             </p>
-            <p>Should you have any questions or concerns, please do not hesitate to contact your RIIS contact person/Mine Administrator for this tool.</p>
-            <br><br><br>
-            <p>Regards<br>Research Institute for Innovation and Sustainability on behalf of MMP</p><br><br>
+            <br><br><br><br><br>
             <p style="font-size:.9rem;text-align:center;">This is an automated system email. Please do not reply to this email.</p>
           </div>
           `,
