@@ -57,13 +57,13 @@ export const SurveySendEmail = (): JSX.Element => {
           (email: { email: string; key: string }) => email.email
         ),
         message: {
-          subject: 'No Reply - SATCAP Survey/Checklist Link',
+          subject: 'No Reply - Survey/Checklist Link',
           text: `Good day, The following link will provide you with the necessary Survey/Checklist access: https://satcap-research.web.app/?linkId=${link}`,
           html: `
           <div style="padding:20px;">
             <p>Good day</p>
             <p>The following link will provide you with the necessary Survey/Checklist access:<br><br>
-            <strong><a href='https://satcap-research.web.app/?linkId=${link}'>https://satcap-research.web.app/?linkId=${link}</a></strong>
+            <strong><a href='https://satcap-research.web.app/?linkId=${link}'>Survey/Checklist link</a></strong>
             </p>
             <br><br><br><br><br>
             <p style="font-size:.9rem;text-align:center;">This is an automated system email. Please do not reply to this email.</p>
