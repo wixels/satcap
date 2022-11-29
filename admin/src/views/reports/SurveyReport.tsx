@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Card,
   Group,
   SimpleGrid,
   Text,
@@ -80,6 +81,9 @@ const viz = {
 
         return (
           <Bar
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               plugins: {
@@ -118,9 +122,13 @@ const viz = {
         });
         return (
           <Pie
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               plugins: {},
+              responsive: true,
             }}
             data={{
               labels: ['Yes', 'No'],
@@ -170,6 +178,9 @@ const viz = {
 
         return (
           <Bar
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               plugins: {
@@ -231,6 +242,9 @@ const viz = {
 
         return (
           <Pie
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               responsive: true,
@@ -292,6 +306,9 @@ const viz = {
         });
         return (
           <Bar
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}-${survey}`}
             options={{
               indexAxis: 'y',
@@ -351,6 +368,9 @@ const viz = {
         });
         return (
           <Bar
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}-${survey}`}
             options={{
               indexAxis: 'y',
@@ -410,6 +430,9 @@ const viz = {
         });
         return (
           <Bar
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}-${survey}`}
             options={{
               indexAxis: 'y',
@@ -469,6 +492,9 @@ const viz = {
         });
         return (
           <Bar
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}-${survey}`}
             options={{
               plugins: {
@@ -526,6 +552,9 @@ const viz = {
 
         return (
           <Pie
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}-${survey}`}
             options={{
               responsive: true,
@@ -576,6 +605,9 @@ const viz = {
 
         return (
           <Bar
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               plugins: {
@@ -637,6 +669,9 @@ const viz = {
 
         return (
           <Pie
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               responsive: true,
@@ -663,6 +698,9 @@ const viz = {
         });
         return (
           <Pie
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               responsive: true,
@@ -695,6 +733,9 @@ const viz = {
         });
         return (
           <Pie
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               responsive: true,
@@ -744,6 +785,9 @@ const viz = {
 
         return (
           <Bar
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               plugins: {
@@ -799,6 +843,9 @@ const viz = {
 
         return (
           <Pie
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               responsive: true,
@@ -842,6 +889,9 @@ const viz = {
 
         return (
           <Pie
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               responsive: true,
@@ -932,6 +982,9 @@ const viz = {
 
         return (
           <Bar
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               plugins: {
@@ -989,6 +1042,9 @@ const viz = {
 
         return (
           <Bar
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               plugins: {
@@ -1027,6 +1083,9 @@ const viz = {
         });
         return (
           <Pie
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               plugins: {},
@@ -1076,6 +1135,9 @@ const viz = {
 
         return (
           <Pie
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               plugins: {},
@@ -1102,6 +1164,9 @@ const viz = {
         });
         return (
           <Pie
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               plugins: {},
@@ -1154,6 +1219,9 @@ const viz = {
 
         return (
           <Bar
+            style={{
+              maxHeight: '40vh',
+            }}
             key={`${key}`}
             options={{
               plugins: {
@@ -1243,6 +1311,9 @@ const viz = {
         const color = randomColor();
         return (
           <Radar
+            style={{
+              maxHeight: '40vh',
+            }}
             data={{
               labels: [
                 'Digital Literacy',
@@ -1344,6 +1415,9 @@ const viz = {
         const color = randomColor();
         return (
           <Radar
+            style={{
+              maxHeight: '40vh',
+            }}
             data={{
               labels: [
                 'Digital Literacy',
@@ -1475,6 +1549,9 @@ const viz = {
         const color = randomColor();
         return (
           <Radar
+            style={{
+              maxHeight: '40vh',
+            }}
             data={{
               labels: [
                 'Digital Literacy',
@@ -1514,12 +1591,12 @@ export const SurveyReport = () => {
       <SimpleGrid cols={2} spacing="xl">
         {features?.map((vis: any) => {
           return (
-            <Box mb={'xl'}>
+            <Card p="xl" mb={'xl'}>
               <Title mb="md" order={5}>
                 {vis?.key}
               </Title>
               {vis?.mutatorFn(link?.responses, vis.qKeys, vis.key, vis?.survey)}
-            </Box>
+            </Card>
           );
         })}
       </SimpleGrid>
