@@ -1634,6 +1634,9 @@ export const SurveyReport = () => {
           </UnstyledButton>
         </Link>
       </Group>
+      <Text mb="lg" color="dimmed">
+        Responses: {link?.responses?.length ?? 0}
+      </Text>
       {visualization}
     </>
   );
