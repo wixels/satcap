@@ -143,6 +143,15 @@ export const SurveyReports = (): JSX.Element => {
                     <Text color="dimmed" size="xs">
                       {link?.description}
                     </Text>
+                    {import.meta.env.DEV && (
+                      <>
+                        <Divider my={'sm'} />
+                        <Text color="dimmed" size="xs">
+                          {/* @ts-ignore */}
+                          {link?.package?.survey?.key}
+                        </Text>
+                      </>
+                    )}
                   </Card.Section>
                 </Card>
               ))}

@@ -48,7 +48,7 @@ const viz = {
   'wp-two-one': [
     {
       key: 'Types of skills training received in the community',
-      qKeys: ['questionSevenOne'],
+      qKeys: ['questionSeven-One'],
       mutatorFn: (responses: any[], qKeys: string[], key: string) => {
         const filtered = responses.filter((x) => x[qKeys[0]]);
 
@@ -69,7 +69,7 @@ const viz = {
         labels.forEach((label) => {
           let count = 0;
           filtered.forEach((res) => {
-            if (res && Array.isArray(res)) {
+            if (res && Array.isArray(res[qKeys[0]])) {
               // @ts-ignore
               res[qKeys[0]].includes(label) && count++;
             } else {
@@ -111,7 +111,7 @@ const viz = {
     },
     {
       key: 'Business-related training that SMMEs participated in',
-      qKeys: ['questionSeventeenFive'],
+      qKeys: ['questionSeventeen-Five'],
       mutatorFn: (responses: any[], qKeys: string[], key: string) => {
         const filtered = responses.filter((x) => x[qKeys[0]]);
 
@@ -145,7 +145,7 @@ const viz = {
     },
     {
       key: 'Types of training SMMEs received',
-      qKeys: ['questionSeventeenFiveTwo'],
+      qKeys: ['questionSeventeen-Five-Two'],
       mutatorFn: (responses: any[], qKeys: string[], key: string) => {
         const filtered = responses.filter((x) => x[qKeys[0]]);
 
@@ -166,7 +166,7 @@ const viz = {
         labels.forEach((label) => {
           let count = 0;
           filtered.forEach((res) => {
-            if (res && Array.isArray(res)) {
+            if (res && Array.isArray(res[qKeys[0]])) {
               // @ts-ignore
               res[qKeys[0]].includes(label) && count++;
             } else {
@@ -216,7 +216,9 @@ const viz = {
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
           if (item) {
-            set.add(item);
+            item.forEach((key: string) => {
+              set.add(key);
+            });
           }
         });
         const labels = Array.from(set);
@@ -230,7 +232,7 @@ const viz = {
         labels.forEach((label, i) => {
           let count = 0;
           filtered.forEach((res) => {
-            if (res && Array.isArray(res)) {
+            if (res && Array.isArray(res[qKeys[0]])) {
               // @ts-ignore
               res[qKeys[0]].includes(label) && count++;
             } else {
@@ -279,17 +281,27 @@ const viz = {
         key: string,
         survey?: string
       ) => {
+        const qTitles = [
+          'Are you aware of health and safety requirements you need to comply with as an employer?',
+          'Do you understand the tender requirements?',
+          ' Do you have a bank account for your business?',
+          'Do you have a VAT registration number?',
+          'Do you have a company tax number?',
+          'Is your company registered with the Workmans Compensation Fund?',
+          'Do you have a company registration number?',
+          'Is your company registered with the Companies and Intellectual Properties Commission (CIPC)?',
+        ];
         // resCopy.
         const filteredBySurvey = responses?.filter((x) => x?.survey === survey);
         const labels: any[] = qKeys;
         let datasets: any[] = [
           {
-            label: 'Yes',
+            label: 'Yes %',
             data: [],
             backgroundColor: '#FDB51B',
           },
           {
-            label: 'No',
+            label: 'No %',
             data: [],
             backgroundColor: '#DD382F',
           },
@@ -301,9 +313,13 @@ const viz = {
           filteredBySurvey.forEach((res) => {
             res[label] === 'Yes' ? yes++ : no++;
           });
-          datasets[0].data.push(yes);
-          datasets[1].data.push(no);
+          const noPercent = Math.floor((no / filteredBySurvey.length) * 100);
+          const yesPercent = 100 - noPercent;
+
+          datasets[0].data.push(yesPercent);
+          datasets[1].data.push(noPercent);
         });
+
         return (
           <Bar
             style={{
@@ -324,7 +340,7 @@ const viz = {
               },
             }}
             data={{
-              labels,
+              labels: qTitles,
               datasets,
             }}
           />
@@ -344,14 +360,20 @@ const viz = {
         const filteredBySurvey = responses?.filter((x) => x?.survey === survey);
         const labels: string[] = qKeys;
 
+        const qTitles = [
+          'Are you actively monitoring the status of your application?',
+          'Do you know where to check the status of your application?',
+          'Have you taken our pre-application readiness checklist?',
+        ];
+
         let datasets: any[] = [
           {
-            label: 'Yes',
+            label: 'Yes %',
             data: [],
             backgroundColor: '#FDB51B',
           },
           {
-            label: 'No',
+            label: 'No %',
             data: [],
             backgroundColor: '#DD382F',
           },
@@ -363,9 +385,13 @@ const viz = {
           filteredBySurvey.forEach((res) => {
             res[label] === 'Yes' ? yes++ : no++;
           });
-          datasets[0].data.push(yes);
-          datasets[1].data.push(no);
+          const noPercent = Math.floor((no / filteredBySurvey.length) * 100);
+          const yesPercent = 100 - noPercent;
+
+          datasets[0].data.push(yesPercent);
+          datasets[1].data.push(noPercent);
         });
+
         return (
           <Bar
             style={{
@@ -386,7 +412,7 @@ const viz = {
               },
             }}
             data={{
-              labels,
+              labels: qTitles,
               datasets,
             }}
           />
@@ -406,14 +432,20 @@ const viz = {
         const filteredBySurvey = responses?.filter((x) => x?.survey === survey);
         const labels: string[] = qKeys;
 
+        const qTitles = [
+          'Was it easy to upload your documents on the vendor/procurement portal?',
+          'Were the instructions on the vendor/procurement portal easy to follow?',
+          'Did you know how to navigate the vendor portal in order to submit your application?',
+        ];
+
         let datasets: any[] = [
           {
-            label: 'Yes',
+            label: 'Yes %',
             data: [],
             backgroundColor: '#FDB51B',
           },
           {
-            label: 'No',
+            label: 'No %',
             data: [],
             backgroundColor: '#DD382F',
           },
@@ -425,9 +457,13 @@ const viz = {
           filteredBySurvey.forEach((res) => {
             res[label] === 'Yes' ? yes++ : no++;
           });
-          datasets[0].data.push(yes);
-          datasets[1].data.push(no);
+          const noPercent = Math.floor((no / filteredBySurvey.length) * 100);
+          const yesPercent = 100 - noPercent;
+
+          datasets[0].data.push(yesPercent);
+          datasets[1].data.push(noPercent);
         });
+
         return (
           <Bar
             style={{
@@ -448,7 +484,7 @@ const viz = {
               },
             }}
             data={{
-              labels,
+              labels: qTitles,
               datasets,
             }}
           />
@@ -467,6 +503,8 @@ const viz = {
       ) => {
         const filteredBySurvey = responses?.filter((x) => x?.survey === survey);
         const labels: string[] = qKeys;
+
+        console.log(filteredBySurvey);
 
         let datasets: any[] = [
           {
@@ -593,7 +631,7 @@ const viz = {
         labels.forEach((label) => {
           let count = 0;
           filtered.forEach((res) => {
-            if (res && Array.isArray(res)) {
+            if (res && Array.isArray(res[qKeys[0]])) {
               // @ts-ignore
               res[qKeys[0]].includes(label) && count++;
             } else {
@@ -657,7 +695,7 @@ const viz = {
         labels.forEach((label, i) => {
           let count = 0;
           filtered.forEach((res) => {
-            if (res && Array.isArray(res)) {
+            if (res && Array.isArray(res[qKeys[0]])) {
               // @ts-ignore
               res[qKeys[0]].includes(label) && count++;
             } else {
@@ -721,7 +759,7 @@ const viz = {
     },
     {
       key: 'Success in obtaining loan/grant  ',
-      qKeys: ['SMMEQuestionThirteenOne'],
+      qKeys: ['SMMEQuestionThirteen-One'],
       mutatorFn: (responses: any[], qKeys: string[], key: string) => {
         const filtered = responses.filter((x) => x[qKeys[0]]);
 
@@ -756,7 +794,7 @@ const viz = {
     },
     {
       key: 'Utilisation of funding support by SMME ',
-      qKeys: ['SMMEQuestionThirteenOneOne'],
+      qKeys: ['SMMEQuestionThirteen-One-One'],
       mutatorFn: (responses: any[], qKeys: string[], key: string) => {
         const filtered = responses.filter((x) => x[qKeys[0]]);
 
@@ -861,7 +899,7 @@ const viz = {
     },
     {
       key: 'SMMEs that applied for BIS ',
-      qKeys: ['SMMEQuestionThirtyOneOne'],
+      qKeys: ['SMMEQuestionThirtyOne-One'],
       mutatorFn: (responses: any[], qKeys: string[], key: string) => {
         const filtered = responses.filter((x) => x[qKeys[0]]);
         const set = new Set();
@@ -1105,7 +1143,7 @@ const viz = {
     },
     {
       key: 'Natural assets that assists SMME business operations ',
-      qKeys: ['SMMEQuestionNineteenOne'],
+      qKeys: ['SMMEQuestionNineteen-One'],
       mutatorFn: (responses: any[], qKeys: string[], key: string) => {
         const filtered = responses.filter((x) => x[qKeys[0]]);
 
@@ -1207,7 +1245,7 @@ const viz = {
         labels.forEach((label) => {
           let count = 0;
           filtered.forEach((res) => {
-            if (res && Array.isArray(res)) {
+            if (res && Array.isArray(res[qKeys[0]])) {
               // @ts-ignore
               res[qKeys[0]].includes(label) && count++;
             } else {
