@@ -52,6 +52,8 @@ const viz = {
       mutatorFn: (responses: any[], qKeys: string[], key: string) => {
         const filtered = responses.filter((x) => x[qKeys[0]]);
 
+        console.log('FILTERED::: ', filtered);
+        console.log('RESPONSES::: ', responses);
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
@@ -215,10 +217,15 @@ const viz = {
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
-          if (item) {
-            item.forEach((key: string) => {
-              set.add(key);
+
+          if (Array.isArray(item)) {
+            item?.forEach((key: string) => {
+              if (key) {
+                set.add(key);
+              }
             });
+          } else {
+            set.add(item);
           }
         });
         const labels = Array.from(set);
