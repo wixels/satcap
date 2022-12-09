@@ -109,6 +109,7 @@
 
       for (const clicker of clickables) {
         clicker.addEventListener('click', (e) => {
+          console.log("Hello World")
           params.set('type', e.currentTarget.getAttribute('for').split('-')[1])
           window.history.replaceState({}, null, location.pathname+'?'+params.toString())
         })

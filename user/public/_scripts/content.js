@@ -163,9 +163,9 @@ const viewItem = function (item) {
   const feature = content.querySelector('.feature')
   feature.style.backgroundImage = `url('${item.featureImageUrl}')`
   const btn = content.querySelector('button')
-  btn.addEventListener('click', (e) => {
-    window.history.back()
-  })
+  const params = new URLSearchParams(window.location.search)
+  btn.addEventListener('click', (e) => window.location = `/information?linkId=${params.get('linkId')}&type=${params.get('type')}`)
+  
   const title = subContent.querySelector('h3')
   title.textContent = item.title
   if (item.type === 'notices') {
