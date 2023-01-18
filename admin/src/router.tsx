@@ -27,10 +27,14 @@ import { MakeGenerics, Route } from '@tanstack/react-location';
 import { EditPerson } from './views/people/EditPerson';
 import { SurveyReport } from './views/reports/SurveyReport';
 import { fetchSingleLink } from './hooks/network/useLink';
+import { Dashboard } from './views/dashboard/Dashboard';
+import { Summary } from './views/dashboard/Summary';
+import { useGetResponses } from './hooks/network/useResponses';
 
 export type LocationGenerics = MakeGenerics<{
   Params: {
     type: 'resources' | 'notices';
+    key: string;
     typeUid: string;
     link: string;
     personId: string;
@@ -58,6 +62,27 @@ export const routerFactory = (queryClient: any) => {
         (queryClient.fetchQuery(['locations'], fetchLocations),
         queryClient.fetchQuery(['mine'], fetchMineWithPacks)),
       element: <Home />,
+    },
+    {
+      path: '/dashboard',
+      children: [
+        {
+          path: '/',
+          loader: () =>
+            queryClient.getQueryData(['mine']) ??
+            queryClient.fetchQuery(['mine'], fetchMineWithPacks),
+          element: <Dashboard />,
+        },
+        {
+          path: '/:key',
+          loader: ({ params: { key } }) =>
+            queryClient.getQueryData(['responses', key]) ??
+            queryClient.fetchQuery(['responses', key], () =>
+              useGetResponses(key)
+            ),
+          element: <Summary />,
+        },
+      ],
     },
     {
       path: '/information',

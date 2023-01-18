@@ -4,14 +4,19 @@ import { Link } from '@tanstack/react-location';
 import React from 'react';
 
 type Props = {
-  path: string;
+  path?: string;
   label: string;
   icon: JSX.Element;
+  onClick?: () => void;
 };
 
 export const NavbarLink = (props: Props) => {
   return (
-    <Link to={props.path} preload={1}>
+    <Link
+      onClick={() => props?.onClick && props?.onClick()}
+      to={props.path}
+      preload={1}
+    >
       {({ isActive }) => {
         return (
           <NavLink

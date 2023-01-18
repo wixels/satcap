@@ -23,6 +23,7 @@ import {
 import {
   IconChartPie,
   IconHome2,
+  IconLayoutDashboard,
   IconLayoutGrid,
   IconLogout,
   IconMessages,
@@ -150,6 +151,11 @@ function App(): JSX.Element {
                       icon={<IconHome2 size={22} stroke={1.5} />}
                       label="Home"
                     />
+                    {/* <NavbarLink
+                      path="/dashboard"
+                      icon={<IconLayoutDashboard size={22} stroke={1.5} />}
+                      label="Dashboard"
+                    /> */}
                     {currentAccount?.isAdmin && (
                       <NavbarLink
                         path="/people"
@@ -187,6 +193,19 @@ function App(): JSX.Element {
                         icon={<IconMessages size={22} stroke={1.5} />}
                       />
                     )}
+
+                    {/* icon={<IconLogout size={22} />}
+                      >
+                        Logout */}
+                    <NavbarLink
+                      path="/auth/login"
+                      onClick={() => {
+                        signOut(auth);
+                        window.localStorage.clear();
+                      }}
+                      label="Logout"
+                      icon={<IconLogout size={22} stroke={1.5} />}
+                    />
                   </Box>
                 </Navbar.Section>
                 {/* <Navbar.Section>x</Navbar.Section> */}

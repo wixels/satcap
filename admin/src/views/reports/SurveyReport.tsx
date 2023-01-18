@@ -57,7 +57,9 @@ const viz = {
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
-          if (item) {
+          if (Array.isArray(item)) {
+            item.forEach((item) => item && set.add(item));
+          } else if (item) {
             set.add(item);
           }
         });
@@ -154,7 +156,9 @@ const viz = {
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
-          if (item) {
+          if (Array.isArray(item)) {
+            item.forEach((item) => item && set.add(item));
+          } else if (item) {
             set.add(item);
           }
         });
@@ -217,14 +221,9 @@ const viz = {
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
-
           if (Array.isArray(item)) {
-            item?.forEach((key: string) => {
-              if (key) {
-                set.add(key);
-              }
-            });
-          } else {
+            item.forEach((item) => item && set.add(item));
+          } else if (item) {
             set.add(item);
           }
         });
@@ -272,6 +271,7 @@ const viz = {
     {
       key: 'Pre-Application Survey Responses',
       survey: 'wp-three-one-pre',
+      full: true,
       qKeys: [
         'questionTwentyTwo',
         'questionTwenty',
@@ -358,6 +358,7 @@ const viz = {
       key: 'Post-Application Checklist',
       survey: 'wp-three-one-post',
       qKeys: ['questionSeven', 'questionSix', 'questionThree'],
+      full: true,
       mutatorFn: (
         responses: any[],
         qKeys: string[],
@@ -430,6 +431,7 @@ const viz = {
       key: 'Post-response Checklist Responses',
       survey: 'wp-three-one-post-response',
       qKeys: ['questionThree', 'questionTwo', 'questionOne'],
+      full: true,
       mutatorFn: (
         responses: any[],
         qKeys: string[],
@@ -509,31 +511,34 @@ const viz = {
         survey?: string
       ) => {
         const filteredBySurvey = responses?.filter((x) => x?.survey === survey);
-        const labels: string[] = qKeys;
-
-        console.log(filteredBySurvey);
-
+        const set = new Set();
+        filteredBySurvey.forEach((res) => {
+          const item = res[qKeys[0]];
+          if (Array.isArray(item)) {
+            item.forEach((item) => item && set.add(item));
+          } else if (item) {
+            set.add(item);
+          }
+        });
+        const labels = Array.from(set);
         let datasets: any[] = [
           {
             data: [],
-            backgroundColor: '#FDB51B',
+            backgroundColor: labels.map((_) => randomColor()),
           },
         ];
-
+        console.log('labels::: ', labels);
         labels.forEach((label) => {
-          let Cellphone = 0;
-          let Email = 0;
-          let Other = 0;
+          let count = 0;
           filteredBySurvey.forEach((res) => {
-            res[label] === 'Cellphone'
-              ? Cellphone++
-              : res[label] === 'Email'
-              ? Email++
-              : Other++;
+            if (res && Array.isArray(res[qKeys[0]])) {
+              // @ts-ignore
+              res[qKeys[0]].includes(label) && count++;
+            } else {
+              res[qKeys[0]] === label && count++;
+            }
           });
-          datasets[0].data.push(Cellphone);
-          datasets[0].data.push(Email);
-          datasets[0].data.push(Other);
+          datasets[0].data.push(count);
         });
         return (
           <Bar
@@ -558,7 +563,7 @@ const viz = {
               },
             }}
             data={{
-              labels: ['Cell', 'Email', 'Other'],
+              labels,
               datasets,
             }}
           />
@@ -578,7 +583,12 @@ const viz = {
         const filteredBySurvey = responses?.filter((x) => x?.survey === survey);
         const set = new Set();
         filteredBySurvey.forEach((res) => {
-          set.add(res[qKeys[0]]);
+          const item = res[qKeys[0]];
+          if (Array.isArray(item)) {
+            item.forEach((item) => item && set.add(item));
+          } else if (item) {
+            set.add(item);
+          }
         });
         const labels = Array.from(set);
         let datasets: any[] = [
@@ -621,10 +631,19 @@ const viz = {
       mutatorFn: (responses: any[], qKeys: string[], key: string) => {
         const filtered = responses.filter((x) => x[qKeys[0]]);
 
+        console.log(
+          'filtered::: ',
+          filtered.forEach((item) => {
+            console.log('13::: ', item?.['communityQuestionThirteen']);
+          })
+        );
+
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
-          if (item) {
+          if (Array.isArray(item)) {
+            item.forEach((item) => item && set.add(item));
+          } else if (item) {
             set.add(item);
           }
         });
@@ -687,7 +706,9 @@ const viz = {
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
-          if (item) {
+          if (Array.isArray(item)) {
+            item.forEach((item) => item && set.add(item));
+          } else if (item) {
             set.add(item);
           }
         });
@@ -808,7 +829,9 @@ const viz = {
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
-          if (item) {
+          if (Array.isArray(item)) {
+            item.forEach((item) => item && set.add(item));
+          } else if (item) {
             set.add(item);
           }
         });
@@ -866,7 +889,9 @@ const viz = {
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
-          if (item) {
+          if (Array.isArray(item)) {
+            item.forEach((item) => item && set.add(item));
+          } else if (item) {
             set.add(item);
           }
         });
@@ -912,7 +937,9 @@ const viz = {
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
-          if (item) {
+          if (Array.isArray(item)) {
+            item.forEach((item) => item && set.add(item));
+          } else if (item) {
             set.add(item);
           }
         });
@@ -1006,7 +1033,9 @@ const viz = {
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
-          if (item) {
+          if (Array.isArray(item)) {
+            item.forEach((item) => item && set.add(item));
+          } else if (item) {
             set.add(item);
           }
         });
@@ -1066,7 +1095,9 @@ const viz = {
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
-          if (item) {
+          if (Array.isArray(item)) {
+            item.forEach((item) => item && set.add(item));
+          } else if (item) {
             set.add(item);
           }
         });
@@ -1157,7 +1188,9 @@ const viz = {
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
-          if (item) {
+          if (Array.isArray(item)) {
+            item.forEach((item) => item && set.add(item));
+          } else if (item) {
             set.add(item);
           }
         });
@@ -1238,7 +1271,9 @@ const viz = {
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
-          if (item) {
+          if (Array.isArray(item)) {
+            item.forEach((item) => item && set.add(item));
+          } else if (item) {
             set.add(item);
           }
         });
@@ -1636,7 +1671,11 @@ export const SurveyReport = () => {
       <SimpleGrid cols={2} spacing="xl">
         {features?.map((vis: any) => {
           return (
-            <Card p="xl" mb={'xl'}>
+            <Card
+              p="xl"
+              mb={'xl'}
+              style={vis?.full && { gridColumn: '1 / -1' }}
+            >
               <Title mb="md" order={5}>
                 {vis?.key}
               </Title>
