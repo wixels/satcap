@@ -159,6 +159,7 @@ export const CreateResource = (): JSX.Element => {
           <Select
             mt={'xl'}
             disabled={fetching}
+            // @ts-ignore
             data={
               fetching
                 ? []

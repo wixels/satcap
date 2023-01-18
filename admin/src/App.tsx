@@ -151,11 +151,11 @@ function App(): JSX.Element {
                       icon={<IconHome2 size={22} stroke={1.5} />}
                       label="Home"
                     />
-                    {/* <NavbarLink
+                    <NavbarLink
                       path="/dashboard"
                       icon={<IconLayoutDashboard size={22} stroke={1.5} />}
                       label="Dashboard"
-                    /> */}
+                    />
                     {currentAccount?.isAdmin && (
                       <NavbarLink
                         path="/people"

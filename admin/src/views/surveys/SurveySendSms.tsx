@@ -72,7 +72,7 @@ export const SurveySendSms = (): JSX.Element => {
     <Group key={item.key} mt="xs">
       <InputBase
         withAsterisk
-        hidecontols="true"
+        // hidecontols="true"
         sx={{ flex: 1 }}
         {...form.getInputProps(`mobiles.${index}.mobile`)}
         component={InputMask}

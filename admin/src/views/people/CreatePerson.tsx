@@ -118,7 +118,7 @@ export const CreatePerson = (): JSX.Element => {
               icon={<IconPhone size={16} />}
               radius={'md'}
               size="md"
-              hidecontols="true"
+              // hidecontols="true"
               placeholder="Mobile..."
               label={
                 <Text size="sm" color="dimmed">

@@ -185,6 +185,7 @@ export const EditNotice = (notice: INotice) => {
           <Select
             mt={'xl'}
             disabled={true}
+            // @ts-ignore
             data={
               fetching
                 ? []

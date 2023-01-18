@@ -15,6 +15,69 @@ import { useMemo } from 'react';
 import { useGetResponses } from '../../hooks/network/useResponses';
 import { LocationGenerics } from '../../router';
 
+type levels = {
+  operator: number;
+  supervisor: number;
+  manager: number;
+};
+
+function getScore(arr: any[], qKey: string[]) {
+  const maxScore = qKey?.length * 5 * arr?.length;
+  console.log('qKey::: ', qKey);
+  console.log('arr::: ', arr);
+  console.log('maxScore::: ', maxScore);
+  let score = 0;
+  arr.forEach((res) => {
+    qKey.forEach((key: string) => {
+      if (res[key]) score += Number(res[key].split('-')[0]);
+    });
+  });
+  return Math.round((score / maxScore) * 100);
+}
+
+const interpretation = {
+  a1: [
+    'This grade relates to the workforce’s ability to use digital assets to communicate and learn. A low score would imply that the workforce does not confidently type on digital devices and/or does not use utilise digital assets to learn.',
+    'Recommended that the workforce increase the amount of time typing on a digital device. An online, free-to-use learning platform is TypingClub (https://www.typingclub.com/) or TypingTrainer (https://www.typingtest.com/trainer/). Utilising these resources can increase the workforce’s ability to type and improve their active learning scores.',
+  ],
+  a2: [
+    'These questions are evaluation-type questions that are based on the workforce’s general knowledge of digital security. A low score would relate to a lack of awareness of the discipline. In addition, this section aims to understand how the workforce responds to change.',
+    'Living in a more digitised economy would require a better understanding of cyber security and the risks thereof. SkillUp hosts a free Introduction to Cyber Security course for anyone who registers to use it on their platform (https://www.simplilearn.com/learn-cyber-security-basics-skillup#how-do-beginners-learn-cyber-security-fundamentals)',
+  ],
+  b1: [
+    'This selection of questions relates directly to how often the workforce uses specific software or applications to perform a function. Note that some of these may not be required of the workforce to perform their job. Therefore, it is important to consider the actual job activities of that workforce and whether the software tested is critical for them to perform their job.',
+    'Encourage the workforce to spend more time using a digital asset that they have access to. There are various upskilling interventions available on ICDL Global (www.icdl.org.za).',
+  ],
+  b2: [
+    'These questions relate to the workforce’s awareness of how and when to use technology to perform day-to-day activities and their willingness to use technology for their job.',
+    'Engage with the workforce level to understand the hesitation behind using technology in their day-to-day activities. Bespoke interventions may be required as per the workforce’s needs and reservations.',
+  ],
+  c1: [
+    'This grade relates to the workforce’s ability to integrate their personal or professional activities with technology for optimal results. A low score would imply the workforce still lives a &quot;low-tech&quot; life.',
+    'Encourage the workforce to spend more time using a digital asset that they have access to. There are various upskilling interventions available on ICDL Global (www.icdl.org.za).',
+  ],
+  c2: [
+    'This section aims to understand if and how the workforce uses the internet to obtain information. Once that information is obtained, how do they then make sense of it in relation to their specific job function within the organisation. Furthermore, the section aims to understand the psychological nature of the workforce and how they perceive themselves in relation to the digital transformation and perceived leadership ability from close colleagues.',
+    'Development intervention may require a refresher course on specific procedures required to perform the day-to-day activities across the workforce levels.',
+  ],
+  d1: [
+    'The digital confidence section tries to understand how capable the workforce believes they are when utilising digital assets to perform specific job activities. A low score would imply that the workforce does not feel confident using the specific applications to perform their job.',
+    'Refer to the job description of the employee to understand their specific job activities. If the various digital applications are not necessary then the employee should not be judged unfavourably. However, there are free online training courses if additional training is required on the specific applications. For example, free video tutorials can be found on GCF Global (https://edu.gcfglobal.org/en/topics/office/). Skilling and upskilling in these applications can occur in the employee&#39;s personal time. More advanced courses can be found on Alison (https://alison.com/tag/microsoft-office), which are free to use once an account has been created.',
+  ],
+  d2: [
+    'This section aims to understand how the workforce proactively uses digital assets to learn, and subsequently apply those learnings to their job. In addition, the section attempts to understand how the workforce responds to change within their job function. A low score would imply that the workforce does not actively learn and apply new ways of doing things to their job activities nor are they willing to.',
+    'Refer to the job description of the employee to understand their specific job activities. If the various digital applications are not necessary, then the employee should not be judged unfavourably. Microsoft 365 offers a wide range of training services that are free to use if the organisation possesses a Microsoft subscription. There are many factsheets, infographics, and training courses that any employee can use to increase their knowledge on how to use the various software applications more confidently and productively. These can be found here https://support.microsoft.com/en-us/training',
+  ],
+  e1: [
+    'These questions aim to understand the level of critical thinking with digital assets that the workforce utilises to understand and interpret information. Relate that information to the organisation&#39;s objectives. Plan a course to achieve those objectives using the information and human capital at their disposal. Lastly, setting clear goals to measure, monitor, and evaluate the outcomes of their decisions. A low score would imply limited utilisation of digital assets to perform the steps above.',
+    'It is recommended that the employee read over the resources listed on the SATCAP dashboard. For ease of reference: 1. PwC Workforce Of The Future 2030 2. PwC Global Trends Challenged By African Realities Report 3.Harvard Business Review Digital Transformation Refocused 4. SABPP Leadership Standard 5. WEF Future Skills Article',
+  ],
+  e2: [
+    'The aim of this section is to understand how the workforce leads and influences across digital channels. Furthermore, whether they are willing to adapt to the digital transformation occurring around them.',
+    'It is recommended that the employee read over the resources listed on the SATCAP dashboard. For ease of reference: 1. PwC Workforce Of The Future 2030 2. PwC Global Trends Challenged By African Realities Report 3. Harvard Business Review Digital Transformation Refocused 4. SABPP Leadership Standard 5. WEF Future Skills Article',
+  ],
+};
+
 const tableData = {
   'wp-two-one': [
     {
@@ -958,35 +1021,50 @@ const tableData = {
   ],
   'wp-two-two': [
     {
-      title: 'Current Community and SMME Skills and Training',
-      description:
-        'Green – 66% or more responders picked the following skill Yellow – Between 33% and 65% responders picked the following skill Red – Less than 33% picked the following skill',
+      title: 'Digital Literacy',
+      description: '',
       levels: {
-        above: 66,
-        below: 33,
+        a1: {
+          operator: 59,
+          supervisor: 60,
+          manager: 71,
+        },
+        a2: {
+          operator: 54,
+          supervisor: 57,
+          manager: 90,
+        },
       },
-      qKeys: ['questionSeven-One'],
+      qKeys: {
+        a1: ['questionSix', 'questionSeven', 'questionEight'],
+        a2: ['questionNine', 'questionTen', 'questionEleven'],
+      },
       mutatorFn: (
         responses: any[],
-        qKeys: string[],
-        levels: { above: number; below: number }
+        qKeys: { a1: string[]; a2: string[] },
+        levels: {
+          a1: levels;
+          a2: levels;
+        }
       ) => {
-        const filtered = responses.filter((x) => x[qKeys[0]]);
+        const operators = responses.filter(
+          (x) => x?.questionTwo === 'Operator'
+        );
+        const supervisors = responses.filter(
+          (x) => x?.questionTwo === 'Supervisor'
+        );
+        const managers = responses.filter((x) => x?.questionTwo === 'Manager');
 
-        const set = new Set();
-        filtered.forEach((res) => {
-          const items: string[] | string = res[qKeys[0]];
-          if (Array.isArray(items)) items.forEach((item) => set.add(item));
-          else set.add(items);
-        });
-        const rows = Array.from(set).map((item) => {
+        type keyType = keyof typeof qKeys;
+        const rows = Object.keys(qKeys).map((key: string) => {
           return {
-            skill: item,
-            percent: Math.round(
-              (filtered.filter((x) => x?.[qKeys[0]].includes(item)).length /
-                filtered.length) *
-                100
-            ),
+            grade: key,
+            interpretation:
+              interpretation[key as keyof typeof interpretation][0],
+            operator: getScore(operators, qKeys[key as keyType]),
+            supervisor: getScore(supervisors, qKeys[key as keyType]),
+            manager: getScore(managers, qKeys[key as keyType]),
+            intervention: interpretation[key as keyof typeof interpretation][1],
           };
         });
 
@@ -994,31 +1072,578 @@ const tableData = {
           <Table>
             <thead>
               <tr>
-                <th>Skills & Training</th>
-                <th>Status</th>
+                <th>Grade</th>
+                <th>Construct interpretation</th>
+                <th>Operators</th>
+                <th>Supervisors</th>
+                <th>Managers</th>
+                <th>Development intervention</th>
               </tr>
             </thead>
             <tbody>
-              {/* {rows.map(
-                // @ts-ignore
-                ({ percent, skill }: { percent: number; skill: number }) => (
-                  <tr key={skill}>
-                    <td>{skill}</td>
+              {rows.map(
+                ({
+                  grade,
+                  interpretation,
+                  operator,
+                  supervisor,
+                  manager,
+                  intervention,
+                }) => (
+                  <tr key={grade}>
+                    <td style={{ textTransform: 'uppercase' }}>{grade}</td>
+                    <td style={{ width: '30%' }}>{interpretation}</td>
                     <td
                       style={{
                         backgroundColor:
-                          percent >= levels.above
+                          operator >=
+                          levels[grade as keyof typeof levels].operator
                             ? 'green'
-                            : percent <= levels.below
+                            : operator <=
+                              levels[grade as keyof typeof levels].operator - 25
                             ? 'red'
                             : 'yellow',
                       }}
                     >
-                      {percent}%
+                      {operator}
                     </td>
+                    <td
+                      style={{
+                        backgroundColor:
+                          supervisor >=
+                          levels[grade as keyof typeof levels].supervisor
+                            ? 'green'
+                            : supervisor <=
+                              levels[grade as keyof typeof levels].supervisor -
+                                25
+                            ? 'red'
+                            : 'yellow',
+                      }}
+                    >
+                      {supervisor}
+                    </td>
+                    <td
+                      style={{
+                        backgroundColor:
+                          manager >=
+                          levels[grade as keyof typeof levels].manager
+                            ? 'green'
+                            : manager <=
+                              levels[grade as keyof typeof levels].manager - 25
+                            ? 'red'
+                            : 'yellow',
+                      }}
+                    >
+                      {manager}
+                    </td>
+                    <td style={{ width: '30%' }}>{intervention}</td>
                   </tr>
                 )
-              )} */}
+              )}
+            </tbody>
+          </Table>
+        );
+      },
+    },
+    {
+      title: 'Digital Fluency',
+      description: '',
+      levels: {
+        b1: {
+          operator: 41,
+          supervisor: 50,
+          manager: 75,
+        },
+        b2: {
+          operator: 61,
+          supervisor: 66,
+          manager: 78,
+        },
+      },
+      qKeys: {
+        b1: [
+          'questionTwelve',
+          'questionThirteen',
+          'questionFourteen',
+          'questionFifteen',
+          'questionSixteen',
+          'questionSeventeen',
+          'questionEighteen',
+          'questionNineeen',
+        ],
+        b2: ['questionTwenty', 'questionTwentyOne'],
+      },
+      mutatorFn: (
+        responses: any[],
+        qKeys: { b1: string[]; b2: string[] },
+        levels: {
+          b1: levels;
+          b2: levels;
+        }
+      ) => {
+        const operators = responses.filter(
+          (x) => x?.questionTwo === 'Operator'
+        );
+        const supervisors = responses.filter(
+          (x) => x?.questionTwo === 'Supervisor'
+        );
+        const managers = responses.filter((x) => x?.questionTwo === 'Manager');
+
+        type keyType = keyof typeof qKeys;
+        const rows = Object.keys(qKeys).map((key: string) => {
+          return {
+            grade: key,
+            interpretation:
+              interpretation[key as keyof typeof interpretation][0],
+            operator: getScore(operators, qKeys[key as keyType]),
+            supervisor: getScore(supervisors, qKeys[key as keyType]),
+            manager: getScore(managers, qKeys[key as keyType]),
+            intervention: interpretation[key as keyof typeof interpretation][1],
+          };
+        });
+
+        return (
+          <Table>
+            <thead>
+              <tr>
+                <th>Grade</th>
+                <th>Construct interpretation</th>
+                <th>Operators</th>
+                <th>Supervisors</th>
+                <th>Managers</th>
+                <th>Development intervention</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map(
+                ({
+                  grade,
+                  interpretation,
+                  operator,
+                  supervisor,
+                  manager,
+                  intervention,
+                }) => (
+                  <tr key={grade}>
+                    <td style={{ textTransform: 'uppercase' }}>{grade}</td>
+                    <td style={{ width: '30%' }}>{interpretation}</td>
+                    <td
+                      style={{
+                        backgroundColor:
+                          operator >=
+                          levels[grade as keyof typeof levels].operator
+                            ? 'green'
+                            : operator <=
+                              levels[grade as keyof typeof levels].operator - 25
+                            ? 'red'
+                            : 'yellow',
+                      }}
+                    >
+                      {operator}
+                    </td>
+                    <td
+                      style={{
+                        backgroundColor:
+                          supervisor >=
+                          levels[grade as keyof typeof levels].supervisor
+                            ? 'green'
+                            : supervisor <=
+                              levels[grade as keyof typeof levels].supervisor -
+                                25
+                            ? 'red'
+                            : 'yellow',
+                      }}
+                    >
+                      {supervisor}
+                    </td>
+                    <td
+                      style={{
+                        backgroundColor:
+                          manager >=
+                          levels[grade as keyof typeof levels].manager
+                            ? 'green'
+                            : manager <=
+                              levels[grade as keyof typeof levels].manager - 25
+                            ? 'red'
+                            : 'yellow',
+                      }}
+                    >
+                      {manager}
+                    </td>
+                    <td style={{ width: '30%' }}>{intervention}</td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </Table>
+        );
+      },
+    },
+    {
+      title: 'Digital Proficiency',
+      description: '',
+      levels: {
+        c1: {
+          operator: 65,
+          supervisor: 75,
+          manager: 88,
+        },
+        c2: {
+          operator: 68,
+          supervisor: 74,
+          manager: 89,
+        },
+      },
+      qKeys: {
+        c1: [
+          'questionTwentyTwo',
+          'questionTwentyThree',
+          'questionTwentyFour',
+          'questionTwentyFive',
+        ],
+        c2: ['questionTwentySix', 'questionTwentySeven', 'questionTwentyEight'],
+      },
+      mutatorFn: (
+        responses: any[],
+        qKeys: { c1: string[]; c2: string[] },
+        levels: {
+          c1: levels;
+          c2: levels;
+        }
+      ) => {
+        const operators = responses.filter(
+          (x) => x?.questionTwo === 'Operator'
+        );
+        const supervisors = responses.filter(
+          (x) => x?.questionTwo === 'Supervisor'
+        );
+        const managers = responses.filter((x) => x?.questionTwo === 'Manager');
+
+        type keyType = keyof typeof qKeys;
+        const rows = Object.keys(qKeys).map((key: string) => {
+          return {
+            grade: key,
+            interpretation:
+              interpretation[key as keyof typeof interpretation][0],
+            operator: getScore(operators, qKeys[key as keyType]),
+            supervisor: getScore(supervisors, qKeys[key as keyType]),
+            manager: getScore(managers, qKeys[key as keyType]),
+            intervention: interpretation[key as keyof typeof interpretation][1],
+          };
+        });
+
+        return (
+          <Table>
+            <thead>
+              <tr>
+                <th>Grade</th>
+                <th>Construct interpretation</th>
+                <th>Operators</th>
+                <th>Supervisors</th>
+                <th>Managers</th>
+                <th>Development intervention</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map(
+                ({
+                  grade,
+                  interpretation,
+                  operator,
+                  supervisor,
+                  manager,
+                  intervention,
+                }) => (
+                  <tr key={grade}>
+                    <td style={{ textTransform: 'uppercase' }}>{grade}</td>
+                    <td style={{ width: '30%' }}>{interpretation}</td>
+                    <td
+                      style={{
+                        backgroundColor:
+                          operator >=
+                          levels[grade as keyof typeof levels].operator
+                            ? 'green'
+                            : operator <=
+                              levels[grade as keyof typeof levels].operator - 25
+                            ? 'red'
+                            : 'yellow',
+                      }}
+                    >
+                      {operator}
+                    </td>
+                    <td
+                      style={{
+                        backgroundColor:
+                          supervisor >=
+                          levels[grade as keyof typeof levels].supervisor
+                            ? 'green'
+                            : supervisor <=
+                              levels[grade as keyof typeof levels].supervisor -
+                                25
+                            ? 'red'
+                            : 'yellow',
+                      }}
+                    >
+                      {supervisor}
+                    </td>
+                    <td
+                      style={{
+                        backgroundColor:
+                          manager >=
+                          levels[grade as keyof typeof levels].manager
+                            ? 'green'
+                            : manager <=
+                              levels[grade as keyof typeof levels].manager - 25
+                            ? 'red'
+                            : 'yellow',
+                      }}
+                    >
+                      {manager}
+                    </td>
+                    <td style={{ width: '30%' }}>{intervention}</td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </Table>
+        );
+      },
+    },
+    {
+      title: 'Digital Confidence',
+      description: '',
+      levels: {
+        d1: {
+          operator: 0,
+          supervisor: 73,
+          manager: 90,
+        },
+        d2: {
+          operator: 0,
+          supervisor: 74,
+          manager: 90,
+        },
+      },
+      qKeys: {
+        d1: [
+          'questionTwentyNine',
+          'questionThirty',
+          'questionThirtyOne',
+          'questionThirtyTwo',
+          'questionThirtyThree',
+          'questionThirtyFour',
+        ],
+        d2: ['questionThirtyFive', 'questionThirtySix', 'questionThirtySeven'],
+      },
+      mutatorFn: (
+        responses: any[],
+        qKeys: { d1: string[]; d2: string[] },
+        levels: {
+          d1: levels;
+          d2: levels;
+        }
+      ) => {
+        const operators = responses.filter(
+          (x) => x?.questionTwo === 'Operator'
+        );
+        const supervisors = responses.filter(
+          (x) => x?.questionTwo === 'Supervisor'
+        );
+        const managers = responses.filter((x) => x?.questionTwo === 'Manager');
+
+        type keyType = keyof typeof qKeys;
+        const rows = Object.keys(qKeys).map((key: string) => {
+          return {
+            grade: key,
+            interpretation:
+              interpretation[key as keyof typeof interpretation][0],
+            operator: getScore(operators, qKeys[key as keyType]),
+            supervisor: getScore(supervisors, qKeys[key as keyType]),
+            manager: getScore(managers, qKeys[key as keyType]),
+            intervention: interpretation[key as keyof typeof interpretation][1],
+          };
+        });
+
+        return (
+          <Table>
+            <thead>
+              <tr>
+                <th>Grade</th>
+                <th>Construct interpretation</th>
+                <th>Operators</th>
+                <th>Supervisors</th>
+                <th>Managers</th>
+                <th>Development intervention</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map(
+                ({
+                  grade,
+                  interpretation,
+                  supervisor,
+                  manager,
+                  intervention,
+                }) => (
+                  <tr key={grade}>
+                    <td style={{ textTransform: 'uppercase' }}>{grade}</td>
+                    <td style={{ width: '30%' }}>{interpretation}</td>
+                    <td
+                      style={{
+                        backgroundColor: 'black',
+                      }}
+                    ></td>
+                    <td
+                      style={{
+                        backgroundColor:
+                          supervisor >=
+                          levels[grade as keyof typeof levels].supervisor
+                            ? 'green'
+                            : supervisor <=
+                              levels[grade as keyof typeof levels].supervisor -
+                                25
+                            ? 'red'
+                            : 'yellow',
+                      }}
+                    >
+                      {supervisor}
+                    </td>
+                    <td
+                      style={{
+                        backgroundColor:
+                          manager >=
+                          levels[grade as keyof typeof levels].manager
+                            ? 'green'
+                            : manager <=
+                              levels[grade as keyof typeof levels].manager - 25
+                            ? 'red'
+                            : 'yellow',
+                      }}
+                    >
+                      {manager}
+                    </td>
+                    <td style={{ width: '30%' }}>{intervention}</td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </Table>
+        );
+      },
+    },
+    {
+      title: 'Digital Leadership',
+      description: '',
+      levels: {
+        e1: {
+          operator: 0,
+          supervisor: 0,
+          manager: 86,
+        },
+        e2: {
+          operator: 0,
+          supervisor: 0,
+          manager: 82,
+        },
+      },
+      qKeys: {
+        e1: [
+          'questionThirtyEight',
+          'questionThirtyNine',
+          'questionForty',
+          'questionFortyOne',
+          'questionFortyTwo',
+          'questionFortyThree',
+          'questionFortyFour',
+          'questionFortyFive',
+          'questionFortySix',
+        ],
+        e2: [
+          'questionFortySeven',
+          'questionFortyEight',
+          'questionFortyNine',
+          'questionFifty',
+          'questionFiftyOne',
+          'questionFiftyTwo',
+          'questionFiftyThree',
+          'questionFiftyFour',
+          'questionFiftyFive',
+          'questionFiftySix',
+          'questionFiftySeven',
+        ],
+      },
+      mutatorFn: (
+        responses: any[],
+        qKeys: { e1: string[]; e2: string[] },
+        levels: {
+          e1: levels;
+          e2: levels;
+        }
+      ) => {
+        const operators = responses.filter(
+          (x) => x?.questionTwo === 'Operator'
+        );
+        const supervisors = responses.filter(
+          (x) => x?.questionTwo === 'Supervisor'
+        );
+        const managers = responses.filter((x) => x?.questionTwo === 'Manager');
+
+        type keyType = keyof typeof qKeys;
+        const rows = Object.keys(qKeys).map((key: string) => {
+          return {
+            grade: key,
+            interpretation:
+              interpretation[key as keyof typeof interpretation][0],
+            operator: getScore(operators, qKeys[key as keyType]),
+            supervisor: getScore(supervisors, qKeys[key as keyType]),
+            manager: getScore(managers, qKeys[key as keyType]),
+            intervention: interpretation[key as keyof typeof interpretation][1],
+          };
+        });
+
+        return (
+          <Table>
+            <thead>
+              <tr>
+                <th>Grade</th>
+                <th>Construct interpretation</th>
+                <th>Operators</th>
+                <th>Supervisors</th>
+                <th>Managers</th>
+                <th>Development intervention</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map(({ grade, interpretation, manager, intervention }) => (
+                <tr key={grade}>
+                  <td style={{ textTransform: 'uppercase' }}>{grade}</td>
+                  <td style={{ width: '30%' }}>{interpretation}</td>
+                  <td
+                    style={{
+                      backgroundColor: 'black',
+                    }}
+                  />
+                  <td
+                    style={{
+                      backgroundColor: 'black',
+                    }}
+                  />
+                  <td
+                    style={{
+                      backgroundColor:
+                        manager >= levels[grade as keyof typeof levels].manager
+                          ? 'green'
+                          : manager <=
+                            levels[grade as keyof typeof levels].manager - 25
+                          ? 'red'
+                          : 'yellow',
+                    }}
+                  >
+                    {manager}
+                  </td>
+                  <td style={{ width: '30%' }}>{intervention}</td>
+                </tr>
+              ))}
             </tbody>
           </Table>
         );

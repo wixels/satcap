@@ -173,6 +173,7 @@ export const EditResource = (resource: IResource) => {
           <Select
             mt={'xl'}
             disabled={true}
+            // @ts-ignore
             data={
               fetching
                 ? []
