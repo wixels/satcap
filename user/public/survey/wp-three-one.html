@@ -354,25 +354,21 @@
         <div class="question">
           <p>Question 18</p>
           <fieldset class="radioGroup">
-            <legend>Do you know how long an application takes to complete when you have all the required documents on hand?</legend>
+            <legend>The average time to complete the application process is 6-8 hours - if your governance is in place. Have you set aside enough time to complete this process?</legend>
             <label>
-              <input type="radio" value="Yes" name="questionEighteen" data-on-change="conditionalPath" data-conditional-path="eighteen-no"/>
+              <input type="radio" value="Yes" name="questionEighteen" />
               <span>Yes</span>
             </label>
             <label>
-              <input type="radio" value="No" name="questionEighteen" data-on-change="conditionalPath" data-conditional-path="eighteen-no"/>
+              <input type="radio" value="No" name="questionEighteen" />
               <span>No</span>
             </label>
           </fieldset>
-          <template data-choice="eighteen-no">
-            <p>Please click on this link to access resources that can help you:</p>
-            <a href="https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2FPre-Application%20Cheat%20Sheet.pdf?alt=media&token=26bccc93-213a-4d37-ad84-072ed2e6f928" target="_blank">Pre-application cheat sheet</a>
-          </template>
         </div>
         <div class="question">
           <p>Question 19</p>
           <fieldset class="radioGroup">
-            <legend>Are you aware of the closing date for the procurement opportunity that you are applying for?</legend>
+            <legend>Do you know how long an application takes to complete when you have all the required documents on hand?</legend>
             <label>
               <input type="radio" value="Yes" name="questionNineteen" data-on-change="conditionalPath" data-conditional-path="nineteen-no"/>
               <span>Yes</span>
@@ -390,7 +386,7 @@
         <div class="question">
           <p>Question 20</p>
           <fieldset class="radioGroup">
-            <legend>Do you understand the tender requirements?</legend>
+            <legend>Are you aware of the closing date for the procurement opportunity that you are applying for?</legend>
             <label>
               <input type="radio" value="Yes" name="questionTwenty" data-on-change="conditionalPath" data-conditional-path="twenty-no"/>
               <span>Yes</span>
@@ -408,7 +404,7 @@
         <div class="question">
           <p>Question 21</p>
           <fieldset class="radioGroup">
-            <legend>Do you know how to interpret a Request for Proposal (RFP)?</legend>
+            <legend>Do you understand the tender requirements?</legend>
             <label>
               <input type="radio" value="Yes" name="questionTwentyOne" data-on-change="conditionalPath" data-conditional-path="twentyone-no"/>
               <span>Yes</span>
@@ -426,7 +422,7 @@
         <div class="question">
           <p>Question 22</p>
           <fieldset class="radioGroup">
-            <legend>Are you aware of health and safety requirements you need to comply with as an employer?</legend>
+            <legend>Do you know how to interpret a Request for Proposal (RFP)?</legend>
             <label>
               <input type="radio" value="Yes" name="questionTwentyTwo" data-on-change="conditionalPath" data-conditional-path="twentytwo-no"/>
               <span>Yes</span>
@@ -437,8 +433,68 @@
             </label>
           </fieldset>
           <template data-choice="twentytwo-no">
+            <p>Please click on this link to access resources that can help you:</p>
+            <a href="https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2FPre-Application%20Cheat%20Sheet.pdf?alt=media&token=26bccc93-213a-4d37-ad84-072ed2e6f928" target="_blank">Pre-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 23</p>
+          <fieldset class="radioGroup">
+            <legend>Are you aware of health and safety requirements you need to comply with as an employer?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionTwentyThree" data-on-change="conditionalPath" data-conditional-path="twentythree-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionTwentyThree" data-on-change="conditionalPath" data-conditional-path="twentythree-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="twentythree-no">
             <a href="https://www.labour.gov.za/DocumentCenter/Publications/Occupational%20Health%20and%20Safety/What%20every%20worker%20should%20know%20about%20health%20and%20safety%20at%20work.pdf" target="_blank">Health and Safety Requirements for an employer</a>
           </template>
+        </div>
+        <div class="question">
+          <p>Question 24</p>
+          <fieldset class="radioGroup">
+            <legend>Have you conducted business/obtained a work contract with the mines before?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionTwentyFour"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionTwentyFour"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+        </div>
+        <div class="question">
+          <p>Question 25</p>
+          <fieldset class="radioGroup">
+            <legend>Are you able to produce proof of your BBBEE Certification?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionTwentyFive"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionTwentyFive"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+        </div>
+        <div class="question">
+          <p>Question 26</p>
+          <fieldset class="radioGroup">
+            <legend>Do you meet the functionality criteria for the opportunity you are interested in?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionTwentySix"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionTwentySix"/>
+              <span>No</span>
+            </label>
+          </fieldset>
         </div>
         <button type="submit">Submit</button>
       </form>
