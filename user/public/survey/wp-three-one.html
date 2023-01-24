@@ -354,25 +354,21 @@
         <div class="question">
           <p>Question 18</p>
           <fieldset class="radioGroup">
-            <legend>Do you know how long an application takes to complete when you have all the required documents on hand?</legend>
+            <legend>The average time to complete the application process is 6-8 hours - if your governance is in place. Have you set aside enough time to complete this process?</legend>
             <label>
-              <input type="radio" value="Yes" name="questionEighteen" data-on-change="conditionalPath" data-conditional-path="eighteen-no"/>
+              <input type="radio" value="Yes" name="questionEighteen" />
               <span>Yes</span>
             </label>
             <label>
-              <input type="radio" value="No" name="questionEighteen" data-on-change="conditionalPath" data-conditional-path="eighteen-no"/>
+              <input type="radio" value="No" name="questionEighteen" />
               <span>No</span>
             </label>
           </fieldset>
-          <template data-choice="eighteen-no">
-            <p>Please click on this link to access resources that can help you:</p>
-            <a href="https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2FPre-Application%20Cheat%20Sheet.pdf?alt=media&token=26bccc93-213a-4d37-ad84-072ed2e6f928" target="_blank">Pre-application cheat sheet</a>
-          </template>
         </div>
         <div class="question">
           <p>Question 19</p>
           <fieldset class="radioGroup">
-            <legend>Are you aware of the closing date for the procurement opportunity that you are applying for?</legend>
+            <legend>Do you know how long an application takes to complete when you have all the required documents on hand?</legend>
             <label>
               <input type="radio" value="Yes" name="questionNineteen" data-on-change="conditionalPath" data-conditional-path="nineteen-no"/>
               <span>Yes</span>
@@ -390,7 +386,7 @@
         <div class="question">
           <p>Question 20</p>
           <fieldset class="radioGroup">
-            <legend>Do you understand the tender requirements?</legend>
+            <legend>Are you aware of the closing date for the procurement opportunity that you are applying for?</legend>
             <label>
               <input type="radio" value="Yes" name="questionTwenty" data-on-change="conditionalPath" data-conditional-path="twenty-no"/>
               <span>Yes</span>
@@ -408,7 +404,7 @@
         <div class="question">
           <p>Question 21</p>
           <fieldset class="radioGroup">
-            <legend>Do you know how to interpret a Request for Proposal (RFP)?</legend>
+            <legend>Do you understand the tender requirements?</legend>
             <label>
               <input type="radio" value="Yes" name="questionTwentyOne" data-on-change="conditionalPath" data-conditional-path="twentyone-no"/>
               <span>Yes</span>
@@ -426,7 +422,7 @@
         <div class="question">
           <p>Question 22</p>
           <fieldset class="radioGroup">
-            <legend>Are you aware of health and safety requirements you need to comply with as an employer?</legend>
+            <legend>Do you know how to interpret a Request for Proposal (RFP)?</legend>
             <label>
               <input type="radio" value="Yes" name="questionTwentyTwo" data-on-change="conditionalPath" data-conditional-path="twentytwo-no"/>
               <span>Yes</span>
@@ -437,8 +433,68 @@
             </label>
           </fieldset>
           <template data-choice="twentytwo-no">
+            <p>Please click on this link to access resources that can help you:</p>
+            <a href="https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2FPre-Application%20Cheat%20Sheet.pdf?alt=media&token=26bccc93-213a-4d37-ad84-072ed2e6f928" target="_blank">Pre-application cheat sheet</a>
+          </template>
+        </div>
+        <div class="question">
+          <p>Question 23</p>
+          <fieldset class="radioGroup">
+            <legend>Are you aware of health and safety requirements you need to comply with as an employer?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionTwentyThree" data-on-change="conditionalPath" data-conditional-path="twentythree-no"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionTwentyThree" data-on-change="conditionalPath" data-conditional-path="twentythree-no"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+          <template data-choice="twentythree-no">
             <a href="https://www.labour.gov.za/DocumentCenter/Publications/Occupational%20Health%20and%20Safety/What%20every%20worker%20should%20know%20about%20health%20and%20safety%20at%20work.pdf" target="_blank">Health and Safety Requirements for an employer</a>
           </template>
+        </div>
+        <div class="question">
+          <p>Question 24</p>
+          <fieldset class="radioGroup">
+            <legend>Have you conducted business/obtained a work contract with the mines before?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionTwentyFour"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionTwentyFour"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+        </div>
+        <div class="question">
+          <p>Question 25</p>
+          <fieldset class="radioGroup">
+            <legend>Are you able to produce proof of your BBBEE Certification?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionTwentyFive"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionTwentyFive"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+        </div>
+        <div class="question">
+          <p>Question 26</p>
+          <fieldset class="radioGroup">
+            <legend>Do you meet the functionality criteria for the opportunity you are interested in?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionTwentySix"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionTwentySix"/>
+              <span>No</span>
+            </label>
+          </fieldset>
         </div>
         <button type="submit">Submit</button>
       </form>
@@ -654,7 +710,7 @@
         <div class="question">
           <p>Question 2</p>
           <fieldset class="radioGroup">
-            <legend>Were the instructions on the vendor/procurement portal easy to follow?</legend>
+            <legend>When applying to the mines, were your supporting documents easy to upload?</legend>
             <label>
               <input type="radio" value="Yes" name="questionTwo"/>
               <span>Yes</span>
@@ -668,7 +724,7 @@
         <div class="question">
           <p>Question 3</p>
           <fieldset class="radioGroup">
-            <legend>When applying to the mines, were your supporting documents easy to upload?</legend>
+            <legend>Was the application process user friendly?</legend>
             <label>
               <input type="radio" value="Yes" name="questionThree"/>
               <span>Yes</span>
@@ -681,85 +737,71 @@
         </div>
         <div class="question">
           <p>Question 4</p>
-          <fieldset class="radioGroup">
-            <legend>Was the application process user friendly?</legend>
-            <label>
-              <input type="radio" value="Yes" name="questionFour"/>
-              <span>Yes</span>
-            </label>
-            <label>
-              <input type="radio" value="No" name="questionFour"/>
-              <span>No</span>
-            </label>
-          </fieldset>
-        </div>
-        <div class="question">
-          <p>Question 5</p>
           <span>What is your preferred method to receive the outcome of your application?</span>
           <div class="multiple">
             <label class="selector">
-              <input type="radio" value="Cellphone call" name="questionFive" />
+              <input type="radio" value="Cellphone call" name="questionFour" />
               <span>Cellphone call</span>
             </label>
             <label class="selector">
-              <input type="radio" value="SMS" name="questionFive" />
+              <input type="radio" value="SMS" name="questionFour" />
               <span>SMS</span>
             </label>
             <label class="selector">
-              <input type="radio" value="Email" name="questionFive" />
+              <input type="radio" value="Email" name="questionFour" />
               <span>Email</span>
             </label>
             <label class="selector">
-              <input type="radio" value="Business telephone call" name="questionFive" />
+              <input type="radio" value="Business telephone call" name="questionFour" />
               <span>Business telephone call</span>
             </label>
             <label class="selector">
-              <input type="radio" value="Through the vendor portal" name="questionFive" />
+              <input type="radio" value="Through the vendor portal" name="questionFour" />
               <span>Through the vendor portal</span>
             </label>
             <label class="selector">
-              <input type="radio" value="A letter received in the mail" name="questionFive" />
+              <input type="radio" value="A letter received in the mail" name="questionFour" />
               <span>A letter received in the mail</span>
             </label>
           </div>
         </div>
         <div class="question">
-          <p>Question 6</p>
+          <p>Question 5</p>
           <fieldset class="radioGroup">
             <legend>Do you know some of the common reasons that applications are rejected?</legend>
             <label>
-              <input type="radio" value="Yes" name="questionSix" data-on-change="conditionalPath" data-conditional-path="six-no"/>
+              <input type="radio" value="Yes" name="questionFive" data-on-change="conditionalPath" data-conditional-path="five-no"/>
               <span>Yes</span>
             </label>
             <label>
-              <input type="radio" value="No" name="questionSix" data-on-change="conditionalPath" data-conditional-path="six-no"/>
+              <input type="radio" value="No" name="questionFive" data-on-change="conditionalPath" data-conditional-path="five-no"/>
               <span>No</span>
             </label>
           </fieldset>
-          <template data-choice="six-no">
+          <template data-choice="five-no">
             <p>Please click on this link to access resources that can help you:</p>
             <a href="https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2FFAQ's%20Post-Response.pdf?alt=media&token=ca13b985-2401-4695-aae6-d1ee600e1d75" target="_blank">FAQ's Post-Response</a>
           </template>
         </div>
         <div class="question">
-          <p>Question 7</p>
+          <p>Question 6</p>
           <fieldset class="radioGroup">
             <legend>Were you able to amend your application during the application process?</legend>
             <label>
-              <input type="radio" value="Yes" name="questionSeven"/>
+              <input type="radio" value="Yes" name="questionSix"/>
               <span>Yes</span>
             </label>
             <label>
-              <input type="radio" value="No" name="questionSeven"/>
+              <input type="radio" value="No" name="questionSix"/>
               <span>No</span>
             </label>
           </fieldset>
         </div>
         <div class="question">
-          <p>Question 8</p>
+          <p>Question 7</p>
           <label>
             <span>How can the mines make the administrative processes easier?</span>
-            <input type="text" name="questionEight"/>
+            <input type="text" name="questionSeven"/>
           </label>
         </div>
         <button type="submit">Submit</button>

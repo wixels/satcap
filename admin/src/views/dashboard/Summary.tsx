@@ -229,11 +229,11 @@ const tableData = {
         'questionSix',
         'questionSeven',
         'questionNine',
-        'questionTwentyTwo',
+        'questionTwentyThree', // 'questionTwentyThree',
         'questionThirteen',
         'questionFourteen',
         'questionFifteen',
-        'questionTwenty',
+        'questionTwentyOne', // 'questionTwentyOne',
       ],
       mutatorFn: (
         responses: any[],
@@ -247,11 +247,11 @@ const tableData = {
           questionSix: 'Registration with the CIPC',
           questionSeven: 'Company registration number',
           questionNine: "Workman's compensation",
-          questionTwentyTwo: 'Health and safety',
+          questionTwentyThree: 'Health and safety',
           questionThirteen: 'Company tax number',
           questionFourteen: 'VAT number',
           questionFifteen: 'Bank account',
-          questionTwenty: 'Understanding of tender requirements',
+          questionTwentyOne: 'Understanding of tender requirements',
         };
 
         const rows = qKeys.map((item, i) => {
@@ -378,7 +378,10 @@ const tableData = {
         below: 50,
       },
       survey: 'wp-three-one-post-response',
-      qKeys: ['questionThree', 'questionTwo', 'questionOne'],
+      qKeys: [
+        'questionTwo', // 'questionThree',
+        'questionOne',
+      ],
       mutatorFn: (
         responses: any[],
         qKeys: string[],
@@ -388,7 +391,7 @@ const tableData = {
         const filtered = responses.filter((x) => x?.survey === survey);
 
         const questionStrings = {
-          questionThree: 'Ease of uploading documents',
+          //   questionThree: 'Ease of uploading documents',
           questionTwo: 'Ease of understanding vendor portal',
           questionOne: 'Knowledge of navigating a vendor portal',
         };
