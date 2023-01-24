@@ -273,8 +273,8 @@ const viz = {
       survey: 'wp-three-one-pre',
       full: true,
       qKeys: [
-        'questionTwentyTwo',
-        'questionTwenty',
+        'questionTwentyThree', // 'questionTwentyTwo'
+        'questionTwentyOne', // questionTwenty
         'questionFifteen',
         'questionFourteen',
         'questionThirteen',
@@ -430,7 +430,10 @@ const viz = {
     {
       key: 'Post-response Checklist Responses',
       survey: 'wp-three-one-post-response',
-      qKeys: ['questionThree', 'questionTwo', 'questionOne'],
+      qKeys: [
+        'questionTwo', // 'questionThree'
+        'questionOne',
+      ],
       full: true,
       mutatorFn: (
         responses: any[],
@@ -503,7 +506,9 @@ const viz = {
     {
       key: 'Preferred Medium of Communication',
       survey: 'wp-three-one-post-response',
-      qKeys: ['questionFive'],
+      qKeys: [
+        'questionFour', // 'questionFive'
+      ],
       mutatorFn: (
         responses: any[],
         qKeys: string[],
