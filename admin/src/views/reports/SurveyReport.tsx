@@ -1427,28 +1427,54 @@ const viz = {
           (proficiency.score / proficiency.max) * 100
         );
 
-        const color = randomColor();
+        const labels = [
+          'Digital Literacy',
+          'Digital Fluency',
+          'Digital Proficiency',
+        ];
         return (
-          <Radar
+          <Chart
+            type="bar"
             style={{
               maxHeight: '40vh',
             }}
+            key={`${key}`}
+            options={{
+              plugins: {
+                legend: {
+                  display: false,
+                },
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                },
+                y: {
+                  stacked: true,
+                },
+              },
+            }}
             data={{
-              labels: [
-                'Digital Literacy',
-                'Digital Fluency',
-                'Digital Proficiency',
-              ],
+              labels,
               datasets: [
                 {
+                  type: 'line' as const,
+                  label: 'Dataset 1',
+                  borderColor: 'rgb(255, 99, 132)',
+                  borderWidth: 2,
+                  fill: false,
+                  data: [57, 46, 68],
+                },
+                {
+                  type: 'bar' as const,
                   label: key,
                   data: [
                     literacy.percent,
                     fluency.percent,
                     proficiency.percent,
                   ],
-                  borderColor: color,
-                  backgroundColor: transparentize(color, 0.5),
+                  backgroundColor: '#4472C4',
                 },
               ],
             }}
@@ -1578,21 +1604,48 @@ const viz = {
         );
         confidence.percent = Math.round((fluency.score / fluency.max) * 100);
 
-        const color = randomColor();
+        const labels = [
+          'Digital Literacy',
+          'Digital Fluency',
+          'Digital Proficiency',
+          'Digital Confidence',
+        ];
         return (
-          <Radar
+          <Chart
+            type="bar"
             style={{
               maxHeight: '40vh',
             }}
+            key={`${key}`}
+            options={{
+              plugins: {
+                legend: {
+                  display: false,
+                },
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                },
+                y: {
+                  stacked: true,
+                },
+              },
+            }}
             data={{
-              labels: [
-                'Digital Literacy',
-                'Digital Fluency',
-                'Digital Proficiency',
-                'Digital Confidence',
-              ],
+              labels,
               datasets: [
                 {
+                  type: 'line' as const,
+                  label: 'Dataset 1',
+                  borderColor: 'rgb(255, 99, 132)',
+                  borderWidth: 2,
+                  fill: false,
+                  data: [59, 54, 76, 74],
+                },
+                {
+                  type: 'bar' as const,
                   label: key,
                   data: [
                     literacy.percent,
@@ -1600,8 +1653,7 @@ const viz = {
                     proficiency.percent,
                     confidence.percent,
                   ],
-                  borderColor: color,
-                  backgroundColor: transparentize(color, 0.2),
+                  backgroundColor: '#4472C4',
                 },
               ],
             }}
@@ -1804,6 +1856,14 @@ const viz = {
               labels,
               datasets: [
                 {
+                  type: 'line' as const,
+                  label: 'Dataset 1',
+                  borderColor: 'rgb(255, 99, 132)',
+                  borderWidth: 2,
+                  fill: false,
+                  data: [76, 76, 89, 90, 84],
+                },
+                {
                   type: 'bar' as const,
                   label: key,
                   data: [
@@ -1813,15 +1873,7 @@ const viz = {
                     confidence.percent,
                     leadership.percent,
                   ],
-                  backgroundColor: labels.map((_) => randomColor()),
-                },
-                {
-                  type: 'line' as const,
-                  label: 'Dataset 1',
-                  borderColor: 'rgb(255, 99, 132)',
-                  borderWidth: 2,
-                  fill: false,
-                  data: [76, 76, 89, 90, 84],
+                  backgroundColor: '#4472C4',
                 },
               ],
             }}
