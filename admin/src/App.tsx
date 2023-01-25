@@ -32,7 +32,7 @@ import {
   IconSun,
   IconUsers,
 } from '@tabler/icons';
-import { Link, Outlet } from '@tanstack/react-location';
+import { Outlet } from '@tanstack/react-location';
 import { useState } from 'react';
 import { UserButton } from './components/UserButton';
 import useAuthState from './hooks/useAuthState';
@@ -124,27 +124,11 @@ function App(): JSX.Element {
                 width={{ md: 300 }}
               >
                 <Navbar.Section grow mt="md">
-                  <Menu trigger="hover" shadow="md" width={200}>
-                    <Menu.Target>
-                      <UserButton
-                        m={'xl'}
-                        email={currentAccount?.email}
-                        image={`https://avatars.dicebear.com/api/initials/${currentAccount?.name?.[0]}.svg`}
-                        name={currentAccount?.name}
-                      />
-                    </Menu.Target>
-                    <Menu.Dropdown>
-                      <Menu.Item
-                        onClick={() => {
-                          signOut(auth);
-                          window.localStorage.clear();
-                        }}
-                        icon={<IconLogout size={22} />}
-                      >
-                        Logout
-                      </Menu.Item>
-                    </Menu.Dropdown>
-                  </Menu>
+                  <UserButton
+                    email={currentAccount?.email}
+                    image={`https://avatars.dicebear.com/api/initials/${currentAccount?.name?.[0]}.svg`}
+                    name={currentAccount?.name}
+                  />
                   <Box mt={'1rem'}>
                     <NavbarLink
                       path="/"

@@ -27,7 +27,7 @@ import {
   PointElement,
   RadialLinearScale,
 } from 'chart.js';
-import { Bar, Pie, Radar } from 'react-chartjs-2';
+import { Bar, Chart, Pie, Radar } from 'react-chartjs-2';
 import { randomColor, transparentize } from '../../utils/randomColor';
 
 ChartJS.register(
@@ -1377,22 +1377,56 @@ const viz = {
         survey: string
       ) => {
         const filtered = responses.filter((x) => x.questionTwo === survey);
-
-        let litScore = 0;
-        let fluScore = 0;
-        let profScore = 0;
+        const literacy = {
+          score: 0,
+          count: 0,
+          max: 0,
+          percent: 0,
+        };
+        const fluency = {
+          score: 0,
+          count: 0,
+          max: 0,
+          percent: 0,
+        };
+        const proficiency = {
+          score: 0,
+          count: 0,
+          max: 0,
+          percent: 0,
+        };
 
         filtered.forEach((item) => {
           qKeys.literacy.forEach((key: string) => {
-            if (item[key]) litScore += Number(item[key].split('-')[0]);
+            if (item[key]) {
+              literacy.score += Number(item[key].split('-')[0]);
+              literacy.count = literacy.count + 1;
+            }
           });
           qKeys.fluency.forEach((key: string) => {
-            if (item[key]) fluScore += Number(item[key].split('-')[0]);
+            if (item[key]) {
+              fluency.score += Number(item[key].split('-')[0]);
+              fluency.count = fluency.count + 1;
+            }
           });
           qKeys.proficiency.forEach((key: string) => {
-            if (item[key]) profScore += Number(item[key].split('-')[0]);
+            if (item[key]) {
+              proficiency.score += Number(item[key].split('-')[0]);
+              proficiency.count = proficiency.count + 1;
+            }
           });
         });
+
+        literacy.max = qKeys.literacy.length * 5 * filtered.length;
+        fluency.max = qKeys.fluency.length * 5 * filtered.length;
+        proficiency.max = qKeys.proficiency.length * 5 * filtered.length;
+
+        literacy.percent = Math.round((literacy.score / literacy.max) * 100);
+        fluency.percent = Math.round((fluency.score / fluency.max) * 100);
+        proficiency.percent = Math.round(
+          (proficiency.score / proficiency.max) * 100
+        );
+
         const color = randomColor();
         return (
           <Radar
@@ -1408,7 +1442,11 @@ const viz = {
               datasets: [
                 {
                   label: key,
-                  data: [litScore, fluScore, profScore],
+                  data: [
+                    literacy.percent,
+                    fluency.percent,
+                    proficiency.percent,
+                  ],
                   borderColor: color,
                   backgroundColor: transparentize(color, 0.5),
                 },
@@ -1477,26 +1515,69 @@ const viz = {
         survey: string
       ) => {
         const filtered = responses.filter((x) => x.questionTwo === survey);
-
-        let litScore = 0;
-        let fluScore = 0;
-        let profScore = 0;
-        let confScore = 0;
-
+        const literacy = {
+          score: 0,
+          count: 0,
+          max: 0,
+          percent: 0,
+        };
+        const fluency = {
+          score: 0,
+          count: 0,
+          max: 0,
+          percent: 0,
+        };
+        const proficiency = {
+          score: 0,
+          count: 0,
+          max: 0,
+          percent: 0,
+        };
+        const confidence = {
+          score: 0,
+          count: 0,
+          max: 0,
+          percent: 0,
+        };
         filtered.forEach((item) => {
           qKeys.literacy.forEach((key: string) => {
-            if (item[key]) litScore += Number(item[key].split('-')[0]);
+            if (item[key]) {
+              literacy.score += Number(item[key].split('-')[0]);
+              literacy.count = literacy.count + 1;
+            }
           });
           qKeys.fluency.forEach((key: string) => {
-            if (item[key]) fluScore += Number(item[key].split('-')[0]);
+            if (item[key]) {
+              fluency.score += Number(item[key].split('-')[0]);
+              fluency.count = fluency.count + 1;
+            }
           });
           qKeys.proficiency.forEach((key: string) => {
-            if (item[key]) profScore += Number(item[key].split('-')[0]);
+            if (item[key]) {
+              proficiency.score += Number(item[key].split('-')[0]);
+              proficiency.count = proficiency.count + 1;
+            }
           });
           qKeys.confidence.forEach((key: string) => {
-            if (item[key]) confScore += Number(item[key].split('-')[0]);
+            if (item[key]) {
+              confidence.score += Number(item[key].split('-')[0]);
+              confidence.count = confidence.count + 1;
+            }
           });
         });
+
+        literacy.max = qKeys.literacy.length * 5 * filtered.length;
+        fluency.max = qKeys.fluency.length * 5 * filtered.length;
+        proficiency.max = qKeys.proficiency.length * 5 * filtered.length;
+        confidence.max = qKeys.proficiency.length * 5 * filtered.length;
+
+        literacy.percent = Math.round((literacy.score / literacy.max) * 100);
+        fluency.percent = Math.round((fluency.score / fluency.max) * 100);
+        proficiency.percent = Math.round(
+          (proficiency.score / proficiency.max) * 100
+        );
+        confidence.percent = Math.round((fluency.score / fluency.max) * 100);
+
         const color = randomColor();
         return (
           <Radar
@@ -1513,7 +1594,12 @@ const viz = {
               datasets: [
                 {
                   label: key,
-                  data: [litScore, fluScore, profScore, confScore],
+                  data: [
+                    literacy.percent,
+                    fluency.percent,
+                    proficiency.percent,
+                    confidence.percent,
+                  ],
                   borderColor: color,
                   backgroundColor: transparentize(color, 0.2),
                 },
@@ -1606,51 +1692,136 @@ const viz = {
       ) => {
         const filtered = responses.filter((x) => x.questionTwo === survey);
 
-        console.log('FILTERED::: ', filtered);
-
-        let litScore = 0;
-        let fluScore = 0;
-        let profScore = 0;
-        let confScore = 0;
-        let leadScore = 0;
+        const literacy = {
+          score: 0,
+          count: 0,
+          max: 0,
+          percent: 0,
+        };
+        const fluency = {
+          score: 0,
+          count: 0,
+          max: 0,
+          percent: 0,
+        };
+        const proficiency = {
+          score: 0,
+          count: 0,
+          max: 0,
+          percent: 0,
+        };
+        const confidence = {
+          score: 0,
+          count: 0,
+          max: 0,
+          percent: 0,
+        };
+        const leadership = {
+          score: 0,
+          count: 0,
+          max: 0,
+          percent: 0,
+        };
 
         filtered.forEach((item) => {
           qKeys.literacy.forEach((key: string) => {
-            if (item[key]) litScore += Number(item[key].split('-')[0]);
+            if (item[key]) {
+              literacy.score += Number(item[key].split('-')[0]);
+              literacy.count = literacy.count + 1;
+            }
           });
           qKeys.fluency.forEach((key: string) => {
-            if (item[key]) fluScore += Number(item[key].split('-')[0]);
+            if (item[key]) {
+              fluency.score += Number(item[key].split('-')[0]);
+              fluency.count = fluency.count + 1;
+            }
           });
           qKeys.proficiency.forEach((key: string) => {
-            if (item[key]) profScore += Number(item[key].split('-')[0]);
+            if (item[key]) {
+              proficiency.score += Number(item[key].split('-')[0]);
+              proficiency.count = proficiency.count + 1;
+            }
           });
           qKeys.confidence.forEach((key: string) => {
-            if (item[key]) confScore += Number(item[key].split('-')[0]);
+            if (item[key]) {
+              confidence.score += Number(item[key].split('-')[0]);
+              confidence.count = confidence.count + 1;
+            }
           });
           qKeys.leadership.forEach((key: string) => {
-            if (item[key]) leadScore += Number(item[key].split('-')[0]);
+            if (item[key]) {
+              leadership.score += Number(item[key].split('-')[0]);
+              leadership.count = leadership.count + 1;
+            }
           });
         });
-        const color = randomColor();
+
+        literacy.max = qKeys.literacy.length * 5 * filtered.length;
+        fluency.max = qKeys.fluency.length * 5 * filtered.length;
+        proficiency.max = qKeys.proficiency.length * 5 * filtered.length;
+        confidence.max = qKeys.proficiency.length * 5 * filtered.length;
+        leadership.max = qKeys.proficiency.length * 5 * filtered.length;
+
+        literacy.percent = Math.round((literacy.score / literacy.max) * 100);
+        fluency.percent = Math.round((fluency.score / fluency.max) * 100);
+        proficiency.percent = Math.round(
+          (proficiency.score / proficiency.max) * 100
+        );
+        confidence.percent = Math.round((fluency.score / fluency.max) * 100);
+        leadership.percent = Math.round((fluency.score / fluency.max) * 100);
+
+        const labels = [
+          'Digital Literacy',
+          'Digital Fluency',
+          'Digital Proficiency',
+          'Digital Confidence',
+          'Digital Leadership',
+        ];
         return (
-          <Radar
+          <Chart
+            type="bar"
             style={{
               maxHeight: '40vh',
             }}
+            key={`${key}`}
+            options={{
+              plugins: {
+                legend: {
+                  display: false,
+                },
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                },
+                y: {
+                  stacked: true,
+                },
+              },
+            }}
             data={{
-              labels: [
-                'Digital Literacy',
-                'Digital Fluency',
-                'Digital Proficiency',
-                'Digital Confidence',
-                'Digital Leadership',
-              ],
+              labels,
               datasets: [
                 {
+                  type: 'bar' as const,
                   label: key,
-                  data: [litScore, fluScore, profScore, confScore, leadScore],
-                  borderColor: color,
-                  backgroundColor: transparentize(color, 0.2),
+                  data: [
+                    literacy.percent,
+                    fluency.percent,
+                    proficiency.percent,
+                    confidence.percent,
+                    leadership.percent,
+                  ],
+                  backgroundColor: labels.map((_) => randomColor()),
+                },
+                {
+                  type: 'line' as const,
+                  label: 'Dataset 1',
+                  borderColor: 'rgb(255, 99, 132)',
+                  borderWidth: 2,
+                  fill: false,
+                  data: [76, 76, 89, 90, 84],
                 },
               ],
             }}

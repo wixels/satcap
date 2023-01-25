@@ -22,20 +22,33 @@ import { useEffect, useMemo } from 'react';
 import { Link } from '@tanstack/react-location';
 import { userGetMine } from '../../context/AuthenticationContext';
 import { useGetLocations } from '../../hooks/network/useLocations';
+import { wordToNum } from '../../utils/wordToNumber';
 
 export const SurveyReports = (): JSX.Element => {
   const { data: links } = useGetLinkResponses();
-  const { mine, fetching } = userGetMine();
+  const { fetching } = userGetMine();
   const { data: locations, isLoading } = useGetLocations();
 
-  const toSentenceCase = (string: string) => {
-    const result = string.replace(/([A-Z])/g, ' $1');
-    return result.charAt(0).toUpperCase() + result.slice(1);
-  };
   const titleCaseKeys = (object: any) => {
     return Object.entries(object).reduce((carry, [key, value]) => {
+      let newKey = key;
+
+      if (key.includes('question')) {
+        const keyAsNumString = wordToNum(
+          key
+            .replace(/([A-Z])/g, ' $1')
+            .replace('-', ' point')
+            .split(' ')
+            .filter((x) => x !== 'question')
+            .map((x) => x.toLowerCase())
+            .join(' ')
+        );
+        keyAsNumString.includes('NaN')
+          ? (newKey = key)
+          : (newKey = keyAsNumString);
+      }
       //@ts-ignore
-      carry[toSentenceCase(key)] = value;
+      carry[newKey] = value;
 
       return carry;
     }, {});
