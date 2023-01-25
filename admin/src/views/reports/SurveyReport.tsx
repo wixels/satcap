@@ -25,6 +25,7 @@ import {
   Filler,
   LineElement,
   PointElement,
+  LineController,
   RadialLinearScale,
 } from 'chart.js';
 import { Bar, Chart, Pie, Radar } from 'react-chartjs-2';
@@ -41,6 +42,7 @@ ChartJS.register(
   RadialLinearScale,
   PointElement,
   LineElement,
+  LineController,
   Filler
 );
 
