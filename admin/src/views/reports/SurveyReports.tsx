@@ -8,12 +8,11 @@ import {
   Group,
   Menu,
   SimpleGrid,
-  Stack,
   Text,
 } from '@mantine/core';
 import { IconDots, IconFileZip, IconTable } from '@tabler/icons';
 import { useGetLinkResponses } from '../../hooks/network/useLinks';
-import { ILink, IPackage } from '../../types';
+import { ILink } from '../../types';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import dayjs from 'dayjs';
@@ -34,16 +33,35 @@ export const SurveyReports = (): JSX.Element => {
       let newKey = key;
 
       if (key.includes('question')) {
-        const keyAsNumString = wordToNum(
-          key
+        let keyAsNumString = null;
+        if (key.includes('TwentyFive')) {
+          let testKey = key
             .replace(/([A-Z])/g, ' $1')
             .replace('-', ' point')
             .split(' ')
             .filter((x) => x !== 'question')
-            .map((x) => x.toLowerCase())
-            .join(' ')
-        );
-        keyAsNumString.includes('NaN')
+            .map((x) => x.toLowerCase());
+
+          keyAsNumString = wordToNum(
+            `${testKey?.[0]} ${testKey?.[1]} point ${testKey?.[2]}`
+          );
+        } else if (key.includes('FiftyFOur')) {
+          keyAsNumString = wordToNum('fifty four');
+        } else {
+          keyAsNumString = wordToNum(
+            key
+              .replace(/([A-Z])/g, ' $1')
+              .replace('-', ' point')
+              .split(' ')
+              .filter((x) => x !== 'question')
+              .map((x) => x.toLowerCase())
+              .join(' ')
+          );
+        }
+
+        keyAsNumString.includes('NaN') ||
+        !keyAsNumString ||
+        keyAsNumString === ''
           ? (newKey = key)
           : (newKey = keyAsNumString);
       }
