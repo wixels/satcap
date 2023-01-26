@@ -7,7 +7,7 @@
 - Have an existing [Firebase/Google](https://firebase.google.com/) account
 - Have a [Firebase project](https://console.firebase.google.com/) set up
 - Have [Firebase CLI installed](https://firebase.google.com/docs/cli#install_the_firebase_cli) on your workstation
-- Have the [code](https://github.com/wixels/satcap) on your workstation (either downloaded, cloned or forked)
+- Have the code on your workstation (this is the downloaded zip)
 - Have access to a unix based terminal on your workstation
 - Have [NPM and NodeJS (nvm recommended)](https://github.com/nvm-sh/nvm#installing-and-updating) installed on your workstation
 
@@ -96,7 +96,16 @@ You can [read here](https://firebase.google.com/docs/functions/manage-functions#
 firebase deploy --only hosting:user
 ```
 
-## Create Admin User
+## Initial data import
+
+### Add Surveys
+In order for the mine to create survey links, the [packages collection](#packages) needs to have the predefined data in it. 
+To acheive this, you can run the cloud function deployed in the [previous step](#functions):
+```
+https://{LOCATION}-{PROJECT_ID}.cloudfunctions.net/importPackages
+```
+
+### Create Admin User
 Initially, you will have to manually add a person to the "backend" to get started.
 
 All subsequent users can be added the traditional way on the "People" tab within the admin application.
