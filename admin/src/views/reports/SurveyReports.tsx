@@ -13,8 +13,6 @@ import {
 import { IconDots, IconFileZip, IconTable } from '@tabler/icons';
 import { useGetLinkResponses } from '../../hooks/network/useLinks';
 import { ILink } from '../../types';
-import * as XLSX from 'xlsx';
-import * as FileSaver from 'file-saver';
 import dayjs from 'dayjs';
 import { useLocalStorage } from '@mantine/hooks';
 import { useEffect, useMemo } from 'react';
@@ -22,6 +20,7 @@ import { Link } from '@tanstack/react-location';
 import { userGetMine } from '../../context/AuthenticationContext';
 import { useGetLocations } from '../../hooks/network/useLocations';
 import { wordToNum } from '../../utils/wordToNumber';
+import { jsonToCsv } from '../../utils/jsonToCsv';
 
 export const SurveyReports = (): JSX.Element => {
   const { data: links } = useGetLinkResponses();
@@ -87,12 +86,12 @@ export const SurveyReports = (): JSX.Element => {
     const payload = link.responses?.map((res) => {
       return titleCaseKeys(res);
     });
-    const ws = XLSX.utils.json_to_sheet(payload || []);
-    const wb = { Sheets: { data: ws }, SheetNames: ['data'] };
-    const excelBuffer = XLSX.write(wb, { bookType: 'csv', type: 'array' });
-    const data = new window.Blob([excelBuffer], { type: '.csv' });
-    //@ts-ignore
-    FileSaver.saveAs(data, `${link?.package?.name || 'Survey report'}.csv`);
+    const { download } = jsonToCsv(
+      payload,
+      // @ts-ignore
+      `${link?.package?.name || 'Survey report'}.csv`
+    );
+    download();
   };
   const PAGE_TITLE = 'Survey Reports';
   const [_, setTitle] = useLocalStorage({
