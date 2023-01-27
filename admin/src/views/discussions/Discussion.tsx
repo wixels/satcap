@@ -24,7 +24,7 @@ import {
 import { Link, useMatch, useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
-import { saveAs } from 'file-saver';
+
 import { doc, updateDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { IconList } from '../../components/IconList';
@@ -32,6 +32,7 @@ import db from '../../firebase';
 import { useGetSingleDiscussion } from '../../hooks/network/useDiscussions';
 import { LocationGenerics } from '../../router';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
+import { downloadImage } from '../../utils/jsonToCsv';
 dayjs.extend(localizedFormat);
 
 type Props = {};
@@ -46,7 +47,7 @@ export const Discussion = (props: Props) => {
 
   const downloadMedia = () => {
     if (discussion?.image) {
-      saveAs(discussion?.image, `${discussion?.title}-media`);
+      downloadImage(discussion?.image, `${discussion?.title}-media`);
     } else {
       showNotification({
         icon: <IconExclamationMark size={18} />,
