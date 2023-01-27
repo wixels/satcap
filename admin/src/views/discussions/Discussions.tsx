@@ -19,9 +19,8 @@ import { QueryCard } from '../../components/QueryCard';
 import { StatsGroup } from '../../components/StatsGroup';
 import { useGetDiscussions } from '../../hooks/network/useDiscussions';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
-import * as XLSX from 'xlsx';
-import * as FileSaver from 'file-saver';
 import { IDiscussion } from '../../types';
+import { jsonToCsv } from '../../utils/jsonToCsv';
 dayjs.extend(localizedFormat);
 
 const Discussions = () => {
@@ -77,12 +76,12 @@ const Discussions = () => {
     }, {});
   };
   const downloadReport = (queries: IDiscussion[]) => {
-    const ws = XLSX.utils.json_to_sheet(queries || []);
-    const wb = { Sheets: { data: ws }, SheetNames: ['data'] };
-    const excelBuffer = XLSX.write(wb, { bookType: 'csv', type: 'array' });
-    const data = new window.Blob([excelBuffer], { type: '.csv' });
-    // @ts-ignore
-    FileSaver.saveAs(data, 'Queries.csv');
+    const { download } = jsonToCsv(
+      queries,
+      // @ts-ignore
+      'Queries.csv'
+    );
+    download();
   };
   return (
     <>

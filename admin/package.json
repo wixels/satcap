@@ -22,15 +22,13 @@
     "@tanstack/react-query-devtools": "^4.2.3",
     "chart.js": "^3.9.1",
     "dayjs": "^1.11.5",
-    "file-saver": "^2.0.5",
     "firebase": "^9.9.4",
     "nanoid": "^4.0.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^4.3.1",
     "react-dom": "^18.2.0",
     "react-input-mask": "^2.0.4",
-    "react-table": "^7.8.0",
-    "xlsx": "^0.18.5"
+    "react-table": "^7.8.0"
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.5",
