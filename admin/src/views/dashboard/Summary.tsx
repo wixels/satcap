@@ -150,7 +150,7 @@ const tableData = {
     {
       title: 'Alternative Economy Industries',
       description:
-        'Green – 66% or more responders picked the following skill Yellow – Between 33% and 65% responders picked the following skill Red – Less than 33% picked the following skill',
+        'Red – Less than 33% picked the following skill. Yellow – Between 33% and 65% responders picked the following skill. Green – 66% or more responders picked the following skill',
       levels: {
         above: 66,
         below: 33,
@@ -166,7 +166,8 @@ const tableData = {
         const set = new Set();
         filtered.forEach((res) => {
           const items: string[] | string = res[qKeys[0]];
-          if (Array.isArray(items)) items.forEach((item) => set.add(item));
+          if (Array.isArray(items))
+            items.forEach((item) => item !== '' && item && set.add(item));
           else set.add(items);
         });
         const rows = Array.from(set).map((item) => {
