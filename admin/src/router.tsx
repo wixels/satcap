@@ -30,6 +30,7 @@ import { fetchSingleLink } from './hooks/network/useLink';
 import { Dashboard } from './views/dashboard/Dashboard';
 import { Summary } from './views/dashboard/Summary';
 import { useGetResponses } from './hooks/network/useResponses';
+import { Center, Loader, Stack } from '@mantine/core';
 
 export type LocationGenerics = MakeGenerics<{
   Params: {
@@ -146,6 +147,19 @@ export const routerFactory = (queryClient: any) => {
         {
           path: '/',
           element: <SurveyReports />,
+          pendingElement: async () => (
+            <Center>
+              <Stack align={'center'}>
+                <p>
+                  Surveys are being gathered, getting responses ready for you...
+                  Hold on tight!
+                </p>
+                <Loader />
+              </Stack>
+            </Center>
+          ),
+          pendingMs: 1000 * 2,
+          pendingMinMs: 500,
           loader: () =>
             queryClient.getQueryData(['linksResponses']) ??
             queryClient.fetchQuery(['linksResponses'], () => fetchLinks(true)),

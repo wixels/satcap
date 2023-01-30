@@ -166,7 +166,7 @@ export const SurveyReports = (): JSX.Element => {
                   </Card.Section>
                   <Card.Section p="xl" component={Link} to={`./${link.docId}`}>
                     <Text color="dimmed" size="xs">
-                      {link?.responses?.length} Response
+                      {link?.responses} Response
                       {link?.responses?.length === 1 ? '' : 's'}
                     </Text>
                     <Divider my={'sm'} />
