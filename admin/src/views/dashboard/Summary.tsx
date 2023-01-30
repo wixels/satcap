@@ -83,7 +83,7 @@ const tableData = {
     {
       title: 'Current Community and SMME Skills and Training',
       description:
-        'Green – 66% or more responders picked the following skill Yellow – Between 33% and 65% responders picked the following skill Red – Less than 33% picked the following skill',
+        'Red – Less than 33% picked the following skill. Yellow – Between 33% and 65% responders picked the following skill. Green – 66% or more responders picked the following skill',
       levels: {
         above: 66,
         below: 33,
