@@ -329,6 +329,13 @@ footer ul li img {
   padding: 0.25rem 2rem;
 }
 
+#extraInfo {
+  padding: 10px 0;
+}
+#extraInfo ul {
+  padding-left: 20px;
+}
+
 @media screen and (max-width: 400px) {
   h1, header a {
     font-size: 1.3rem;

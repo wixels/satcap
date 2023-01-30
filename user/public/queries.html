@@ -14,9 +14,19 @@
       <img src="./_style/images/logo.png" alt="SATCAP logo" />
     </header>
     <main>
-      <button type="button" class="primary" id="newQuery">Create new</button>
+      <div id="queryButtonContainer">
+        <div class="queryButtonItem">
+          <div class="line"></div>
+          <div class="content">
+            <h3>Query submission</h3>
+            <p>Should you have any procurement related queries or changes that you would like to see on this tool, please click the 'Submit a query' button to fill in a form and let the mine know. The mine will then provide a response to you via the communication channel that you indicate on the query form</p>
+            <button type="button" id="newQuery">Submit a query</button>
+          </div>
+        </div>
+      </div>
+      <!-- <button type="button" class="primary" id="newQuery">Create new</button>
       <p>Click the Create New button and complete the form to submit a query</p>
-      <p>You can also provide feedback on anything else that you would like to see on this platform which may help you in your supplier journey</p>
+      <p>You can also provide feedback on anything else that you would like to see on this platform which may help you in your supplier journey</p> -->
       <section class="queries">
         <h2>My queries</h2>
         <p class="init">Loading...</p>
@@ -43,7 +53,7 @@
           <input type="hidden" name="locationDocId" value="" />
           <input type="hidden" name="linkDocId" value="" />
           <h2>Create a new query</h2>
-          <label>
+          <label>   
             Subject / Title
             <input type="text" name="title" required />
           </label>
@@ -67,6 +77,11 @@
           <button type="submit">Submit query</button>
           <button type="button" class="close secondary">Cancel</button>
         </form>
+        <div class="form-success">
+          <h2>Thank you.</h2>
+          <p>Your query has been submitted and will be responded to.</p>
+          <p>Please <span class="clickable close">return</span> to the query submission page to view a history of your queries.</p>
+        </div>
       </div>
     </template>
     <script defer src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"></script>
@@ -97,11 +112,17 @@
           const template = document.getElementById('modal')
           const content = template.content.cloneNode(true)
           const form = content.querySelector('form')
+          const success = content.querySelector('.form-success')
           const closers = content.querySelectorAll('.close')
 
           form.addEventListener('click', (e) => {
             e.stopPropagation()
           })
+          if (success) {
+            success.addEventListener('click', (e) => {
+              e.stopPropagation()
+            })
+          }
           closers.forEach((close) => {
             close.addEventListener('click', (e) => {
               e.stopPropagation()

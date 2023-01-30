@@ -69,3 +69,63 @@ form label {
 .query details {
   margin-top: calc(var(--spacer) / 2);
 }
+
+.form-success {
+  display: none;
+  background-color: white;
+  padding: 40px 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  width: 90%;
+  margin: auto;
+}
+.form-success h2 {
+  margin-bottom: 1rem;
+}
+
+.clickable {
+  color: hsl(var( --color-primary));
+  text-decoration: underline;
+}
+
+#queryButtonContainer {
+  display: grid;
+  gap: calc(var(--spacer) * 2);
+  max-width: var(--max-width);
+  width: calc(100vw - (var(--spacer) * 2));
+  margin: auto;
+}
+
+.queryButtonItem {
+  background-color: white;
+  padding: var(--spacer);
+  width: 100%;
+  margin: auto;
+  border-radius: var(--border-radius);
+  display: grid;
+  grid-template-columns: 0.5rem auto;
+  gap: var(--spacer);
+  box-shadow: var(--box-shadow);
+}
+
+.queryButtonItem .line {
+  height: 100%;
+  width: 100%;
+  background-color: hsl(var( --color-primary));
+  border-radius: var(--border-radius);
+}
+
+.queryButtonItem p {
+  font-size: .9rem;
+}
+.queryButtonItem a {
+  margin: var(--spacer) 0;
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+  float: right;
+}
+.queryButtonItem button {
+  border: 1px solid;
+  padding: 0.25rem 0.5rem;
+  margin: var(--spacer) 0;
+}

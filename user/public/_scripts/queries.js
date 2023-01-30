@@ -1,6 +1,14 @@
 import { uploadFile, requestHandler } from './helpers.js'
 import { getAllQueries, insertQueryContent } from './content.js'
 
+const showSuccess = function (form) {
+  const success = document.querySelector('.form-success')
+  if (success) {
+    form.style.display = 'none'
+    success.style.display = 'block'
+  }
+}
+
 const submit = async function (e) {
   e.preventDefault()
   const form = e.currentTarget
@@ -19,9 +27,12 @@ const submit = async function (e) {
     form.querySelector('button[type="submit"]').textContent = 'Submit query'
     if (res.ok) {
       form.reset()
+
+      showSuccess(form)
+      
       const queries = await getAllQueries(body.get('mineDocId'))
-      document.querySelector('.modal').remove()
       insertQueryContent('queries', queries)
+      
     } else {
       console.error(res)
     }

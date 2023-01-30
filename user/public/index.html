@@ -19,8 +19,9 @@
         <div class="content">
           <h3></h3>
           <p></p>
+          <div id="extraInfo" class="hidden"></div>
           <a class="link" href="/survey">Start survey</a>
-        </div>
+        </div>  
       </section>
       <a id="querySubmission" class="link hidden" href="/queries">Submit a Query</a>
       <section class="resources hidden">
@@ -61,6 +62,14 @@
       }
 
       initMenu(link.linkId, link.package.scopes)
+
+      if (link.package.extraInformation) {
+        const extraInfo = document.querySelector('#extraInfo')
+        if (extraInfo) {
+          extraInfo.innerHTML = link.package.extraInformation
+          extraInfo.classList.remove('hidden')
+        }
+      }
 
       if (link.package.scopes.includes('survey')) {
         insertSurvey(link.linkId, link.package.survey)
