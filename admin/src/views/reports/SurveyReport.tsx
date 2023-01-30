@@ -28,8 +28,8 @@ import {
   LineController,
   RadialLinearScale,
 } from 'chart.js';
-import { Bar, Chart, Pie, Radar } from 'react-chartjs-2';
-import { randomColor, transparentize } from '../../utils/randomColor';
+import { Bar, Chart, Pie } from 'react-chartjs-2';
+import { randomColor } from '../../utils/randomColor';
 
 ChartJS.register(
   CategoryScale,
@@ -534,7 +534,6 @@ const viz = {
             backgroundColor: labels.map((_) => randomColor()),
           },
         ];
-        console.log('labels::: ', labels);
         labels.forEach((label) => {
           let count = 0;
           filteredBySurvey.forEach((res) => {
@@ -613,14 +612,26 @@ const viz = {
         });
 
         return (
-          <Pie
+          <Bar
             style={{
               maxHeight: '40vh',
             }}
             key={`${key}-${survey}`}
             options={{
+              plugins: {
+                legend: {
+                  display: false,
+                },
+              },
               responsive: true,
-              plugins: {},
+              scales: {
+                x: {
+                  stacked: true,
+                },
+                y: {
+                  stacked: true,
+                },
+              },
             }}
             data={{
               labels,
