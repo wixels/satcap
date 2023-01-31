@@ -1,4 +1,4 @@
-import { Card, Divider, SimpleGrid, Text } from '@mantine/core';
+import { Card, SimpleGrid, Text } from '@mantine/core';
 import { useLocalStorage } from '@mantine/hooks';
 import { useEffect } from 'react';
 import { useGetMine } from '../../hooks/network/useMine';
@@ -15,7 +15,7 @@ export const Dashboard = () => {
 
   // DATA
   const { data: mine, isLoading } = useGetMine();
-  console.log('mine::: ', mine);
+
   return (
     <>
       <SimpleGrid

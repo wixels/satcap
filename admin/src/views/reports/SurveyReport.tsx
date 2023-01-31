@@ -54,8 +54,6 @@ const viz = {
       mutatorFn: (responses: any[], qKeys: string[], key: string) => {
         const filtered = responses.filter((x) => x[qKeys[0]]);
 
-        console.log('FILTERED::: ', filtered);
-        console.log('RESPONSES::: ', responses);
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
@@ -649,13 +647,6 @@ const viz = {
       mutatorFn: (responses: any[], qKeys: string[], key: string) => {
         const filtered = responses.filter((x) => x[qKeys[0]]);
 
-        console.log(
-          'filtered::: ',
-          filtered.forEach((item) => {
-            console.log('13::: ', item?.['communityQuestionThirteen']);
-          })
-        );
-
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
@@ -904,6 +895,7 @@ const viz = {
       qKeys: ['SMMEQuestionThirtyOne'],
       mutatorFn: (responses: any[], qKeys: string[], key: string) => {
         const filtered = responses.filter((x) => x[qKeys[0]]);
+
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
@@ -914,14 +906,13 @@ const viz = {
           }
         });
         const labels = Array.from(set);
-
         let datasets: any[] = [
           {
             data: [],
             backgroundColor: labels.map((_) => randomColor()),
           },
         ];
-        labels.forEach((label, i) => {
+        labels.forEach((label) => {
           let count = 0;
           filtered.forEach((res) => {
             res[qKeys[0]] === label && count++;
@@ -930,14 +921,26 @@ const viz = {
         });
 
         return (
-          <Pie
+          <Bar
             style={{
               maxHeight: '40vh',
             }}
             key={`${key}`}
             options={{
+              plugins: {
+                legend: {
+                  display: false,
+                },
+              },
               responsive: true,
-              plugins: {},
+              scales: {
+                x: {
+                  stacked: true,
+                },
+                y: {
+                  stacked: true,
+                },
+              },
             }}
             data={{
               labels,
@@ -947,101 +950,6 @@ const viz = {
         );
       },
     },
-    {
-      key: 'SMMEs that applied for BIS ',
-      qKeys: ['SMMEQuestionThirtyOne-One'],
-      mutatorFn: (responses: any[], qKeys: string[], key: string) => {
-        const filtered = responses.filter((x) => x[qKeys[0]]);
-        const set = new Set();
-        filtered.forEach((res) => {
-          const item = res[qKeys[0]];
-          if (Array.isArray(item)) {
-            item.forEach((item) => item && set.add(item));
-          } else if (item) {
-            set.add(item);
-          }
-        });
-        const labels = Array.from(set);
-
-        let datasets: any[] = [
-          {
-            data: [],
-            backgroundColor: labels.map((_) => randomColor()),
-          },
-        ];
-        labels.forEach((label, i) => {
-          let count = 0;
-          filtered.forEach((res) => {
-            res[qKeys[0]] === label && count++;
-          });
-          datasets[0].data.push(count);
-        });
-
-        return (
-          <Pie
-            style={{
-              maxHeight: '40vh',
-            }}
-            key={`${key}`}
-            options={{
-              responsive: true,
-              plugins: {},
-            }}
-            data={{
-              labels,
-              datasets,
-            }}
-          />
-        );
-      },
-    },
-    // {
-    //   key: 'SMMEs that were successful in retrieving BIS Scheme ',
-    //   qKeys: ['SMMEQuestionThirtyOneOneOne'],
-    //   mutatorFn: (responses: any[], qKeys: string[], key: string) => {
-    //     const filtered = responses.filter((x) => x[qKeys[0]]);
-    //     const set = new Set();
-    //     filtered.forEach((res) => {
-    //       const item = res[qKeys[0]];
-    //       if (item) {
-    //         set.add(item);
-    //       }
-    //     });
-    //     const labels = Array.from(set);
-
-    //     let datasets: any[] = [
-    //       {
-    //         data: [],
-    //         backgroundColor: labels.map((_) => randomColor()),
-    //       },
-    //     ];
-    //     labels.forEach((label, i) => {
-    //       let count = 0;
-    //       filtered.forEach((res) => {
-    //         res[qKeys[0]] === label && count++;
-    //       });
-    //       datasets[0].data.push(count);
-    //     });
-
-    //     return (
-    //       <Pie
-    //         key={`${key}`}
-    //         options={{
-    //           plugins: {
-    //             title: {
-    //               display: true,
-    //               text: key,
-    //             },
-    //           },
-    //         }}
-    //         data={{
-    //           labels,
-    //           datasets,
-    //         }}
-    //       />
-    //     );
-    //   },
-    // },
     {
       key: 'Assistance from organisations that SMMEs wish to access for their business post-mining ',
       qKeys: ['SMMEQuestionThirtyTwo'],
@@ -1251,7 +1159,6 @@ const viz = {
       qKeys: ['SMMEQuestionThirtyThree'],
       mutatorFn: (responses: any[], qKeys: string[], key: string) => {
         const filtered = responses.filter((x) => x[qKeys[0]]);
-        console.log('NEW FILTER::: ', filtered);
 
         let yes = 0;
         let no = 0;

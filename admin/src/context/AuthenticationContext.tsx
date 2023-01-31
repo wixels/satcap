@@ -19,7 +19,6 @@ import useAuthState from '../hooks/useAuthState';
 import { IMine, IPackage, IUser } from '../types';
 
 const AuthenticationContext = createContext({});
-
 function AuthenticationProvider({ children }: any) {
   const [user, loading, error] = useAuthState(getAuth());
 

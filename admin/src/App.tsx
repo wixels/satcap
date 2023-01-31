@@ -41,6 +41,7 @@ import { useGetUser, userGetMine } from './context/AuthenticationContext';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { auth } from './firebase';
 import { NavbarLink } from './components/NavbarLink';
+import { useQueryClient } from '@tanstack/react-query';
 
 function App(): JSX.Element {
   const theme = useMantineTheme();
@@ -73,6 +74,7 @@ function App(): JSX.Element {
     }
     return str.join(' ');
   };
+  const queryClient = useQueryClient();
 
   return (
     <ColorSchemeProvider
@@ -184,6 +186,7 @@ function App(): JSX.Element {
                     <NavbarLink
                       path="/auth/login"
                       onClick={() => {
+                        queryClient.removeQueries();
                         signOut(auth);
                         window.localStorage.clear();
                       }}

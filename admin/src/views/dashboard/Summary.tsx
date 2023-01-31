@@ -23,9 +23,7 @@ type levels = {
 
 function getScore(arr: any[], qKey: string[]) {
   const maxScore = qKey?.length * 5 * arr?.length;
-  console.log('qKey::: ', qKey);
-  console.log('arr::: ', arr);
-  console.log('maxScore::: ', maxScore);
+
   let score = 0;
   arr.forEach((res) => {
     qKey.forEach((key: string) => {
@@ -83,7 +81,7 @@ const tableData = {
     {
       title: 'Current Community and SMME Skills and Training',
       description:
-        'Green – 66% or more responders picked the following skill Yellow – Between 33% and 65% responders picked the following skill Red – Less than 33% picked the following skill',
+        'Red – Less than 33% picked the following skill. Yellow – Between 33% and 65% responders picked the following skill. Green – 66% or more responders picked the following skill',
       levels: {
         above: 66,
         below: 33,
@@ -150,7 +148,7 @@ const tableData = {
     {
       title: 'Alternative Economy Industries',
       description:
-        'Green – 66% or more responders picked the following skill Yellow – Between 33% and 65% responders picked the following skill Red – Less than 33% picked the following skill',
+        'Red – Less than 33% picked the following skill. Yellow – Between 33% and 65% responders picked the following skill. Green – 66% or more responders picked the following skill',
       levels: {
         above: 66,
         below: 33,
@@ -166,7 +164,8 @@ const tableData = {
         const set = new Set();
         filtered.forEach((res) => {
           const items: string[] | string = res[qKeys[0]];
-          if (Array.isArray(items)) items.forEach((item) => set.add(item));
+          if (Array.isArray(items))
+            items.forEach((item) => item !== '' && item && set.add(item));
           else set.add(items);
         });
         const rows = Array.from(set).map((item) => {
@@ -778,8 +777,6 @@ const tableData = {
             });
         });
 
-        console.log('smmeRows::: ', smmeRows);
-
         return (
           <Table>
             <thead>
@@ -884,7 +881,6 @@ const tableData = {
           (x) => x?.['questionSeven']?.toLowerCase() === 'yes'
         );
 
-        console.log('smme::: ', smme);
         type row = {
           items: string;
           status: number;
@@ -938,8 +934,6 @@ const tableData = {
               });
             });
         });
-
-        console.log('smmeRows::: ', smmeRows);
 
         return (
           <Table>
