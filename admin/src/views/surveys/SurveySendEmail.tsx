@@ -88,7 +88,6 @@ export const SurveySendEmail = (): JSX.Element => {
   };
 
   const addCsvEmails = (file: File) => {
-    console.log(file);
     try {
       if (file) {
         const fileReader = new window.FileReader();

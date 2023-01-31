@@ -39,7 +39,6 @@ export const Information = (): JSX.Element => {
   }, []);
 
   const items = useCallback(() => {
-    console.log(filter);
     if (filter?.includes('all') || !filter?.length || !filter)
       return information;
     const packs = filter?.map(
@@ -82,11 +81,8 @@ export const Information = (): JSX.Element => {
           position="center"
           multiple
           onChange={(val) => {
-            console.log(val);
             if (val.includes('all')) {
-              console.log('Has all');
               if (val?.indexOf('all') === 0 && val.length > 0) {
-                console.log('All is first and more than one');
                 setChips(val.slice(1));
                 navigate({
                   // @ts-ignore
@@ -96,7 +92,6 @@ export const Information = (): JSX.Element => {
                   }),
                 });
               } else {
-                console.log('all is not first');
                 setChips(['all']);
                 navigate({
                   // @ts-ignore
@@ -107,7 +102,6 @@ export const Information = (): JSX.Element => {
                 });
               }
             } else {
-              console.log('No all');
               setChips(val);
               navigate({
                 // @ts-ignore

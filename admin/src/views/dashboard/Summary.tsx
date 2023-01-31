@@ -23,9 +23,7 @@ type levels = {
 
 function getScore(arr: any[], qKey: string[]) {
   const maxScore = qKey?.length * 5 * arr?.length;
-  console.log('qKey::: ', qKey);
-  console.log('arr::: ', arr);
-  console.log('maxScore::: ', maxScore);
+
   let score = 0;
   arr.forEach((res) => {
     qKey.forEach((key: string) => {
@@ -779,8 +777,6 @@ const tableData = {
             });
         });
 
-        console.log('smmeRows::: ', smmeRows);
-
         return (
           <Table>
             <thead>
@@ -885,7 +881,6 @@ const tableData = {
           (x) => x?.['questionSeven']?.toLowerCase() === 'yes'
         );
 
-        console.log('smme::: ', smme);
         type row = {
           items: string;
           status: number;
@@ -939,8 +934,6 @@ const tableData = {
               });
             });
         });
-
-        console.log('smmeRows::: ', smmeRows);
 
         return (
           <Table>
