@@ -23,7 +23,16 @@
           <a class="link" href="/survey">Start survey</a>
         </div>  
       </section>
-      <a id="querySubmission" class="link hidden" href="/queries">Submit a Query</a>
+      <div id="queryButtonContainer" class="survey hidden">
+        <div class="queryButtonItem">
+          <div class="line"></div>
+          <div class="content">
+            <h3>Query submission</h3>
+            <p>Should you have any procurement related queries or changes that you would like to see on this tool, please click the 'Submit a query' button to fill in a form and let the mine know. The mine will then provide a response to you via the communication channel that you indicate on the query form</p>
+            <a class="link">Submit a query</a>
+          </div>
+        </div>
+      </div>
       <section class="resources hidden">
         <h2>Resource Library</h2>
         <a class="viewAll" href="/information?type=resources&linkId=">View all</a>
@@ -80,9 +89,9 @@
       }
 
       if (link.package.scopes.includes('queries')) {
-        const queryEl = document.getElementById('querySubmission')
+        const queryEl = document.getElementById('queryButtonContainer')
         if (queryEl) {
-          queryEl.setAttribute('href', `/queries?linkId=${link.linkId}`)
+          queryEl.querySelector('.link').setAttribute('href', `/queries?linkId=${link.linkId}`)
           queryEl.classList.remove('hidden')
         }
       }
