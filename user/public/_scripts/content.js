@@ -113,7 +113,7 @@ const insertSurvey = function (linkId, survey) {
       link.textContent = 'Retake survey'
     }
   }
-  if (survey.title === 'Checklists') {
+  if (Array.isArray(survey.surveys)) {
     link.textContent = 'Begin checklists'
   }
 }
