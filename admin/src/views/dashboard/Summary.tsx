@@ -27,7 +27,13 @@ function getScore(arr: any[], qKey: string[]) {
   let score = 0;
   arr.forEach((res) => {
     qKey.forEach((key: string) => {
-      if (res[key]) score += Number(res[key].split('-')[0]);
+      if (res[key]) {
+        if (key === 'questionNine' || key === 'questionTen') {
+          res[key].split('-')[1] === 'correct' ? (score += 5) : '';
+        } else {
+          score += Number(res[key].split('-')[0]);
+        }
+      }
     });
   });
   return Math.round((score / maxScore) * 100);
@@ -1033,7 +1039,17 @@ const tableData = {
         },
       },
       qKeys: {
-        a1: ['questionSix', 'questionSeven', 'questionEight'],
+        a1: [
+          'questionSix-One',
+          'questionSix-Two',
+          'questionSix-Three',
+          'questionSeven-One',
+          'questionSeven-Two',
+          'questionSeven-Three',
+          'questionEight-One',
+          'questionEight-Two',
+          'questionEight-Three',
+        ],
         a2: ['questionNine', 'questionTen', 'questionEleven'],
       },
       mutatorFn: (
@@ -1166,7 +1182,7 @@ const tableData = {
           'questionSixteen',
           'questionSeventeen',
           'questionEighteen',
-          'questionNineeen',
+          'questionNineteen',
         ],
         b2: ['questionTwenty', 'questionTwentyOne'],
       },

@@ -1258,9 +1258,15 @@ const viz = {
       key: 'Operator Benchmark Comparison',
       qKeys: {
         literacy: [
-          'questionSix',
-          'questionSeven',
-          'questionEight',
+          'questionSix-One',
+          'questionSix-Two',
+          'questionSix-Three',
+          'questionSeven-One',
+          'questionSeven-Two',
+          'questionSeven-Three',
+          'questionEight-One',
+          'questionEight-Two',
+          'questionEight-Three',
           'questionNine',
           'questionTen',
           'questionEleven',
@@ -1273,7 +1279,7 @@ const viz = {
           'questionSixteen',
           'questionSeventeen',
           'questionEighteen',
-          'questionNineeen',
+          'questionNineteen',
           'questionTwenty',
           'questionTwentyOne',
           'questionTwentyTwo',
@@ -1284,6 +1290,8 @@ const viz = {
           'questionTwentyFive',
           'questionTwentySix',
           'questionTwentySeven',
+          'questionTwentySeven-One',
+          'questionTwentySeven-Two',
           'questionTwentyEight',
           'questionTwentyNine',
           'questionThirty',
@@ -1319,7 +1327,13 @@ const viz = {
         filtered.forEach((item) => {
           qKeys.literacy.forEach((key: string) => {
             if (item[key]) {
-              literacy.score += Number(item[key].split('-')[0]);
+              if (key === 'questionNine' || key === 'questionTen') {
+                item[key].split('-')[1] === 'correct'
+                  ? (literacy.score += 5)
+                  : '';
+              } else {
+                literacy.score += Number(item[key].split('-')[0]);
+              }
               literacy.count = literacy.count + 1;
             }
           });
@@ -1406,9 +1420,15 @@ const viz = {
       key: 'Supervisor Benchmark Comparison',
       qKeys: {
         literacy: [
-          'questionSix',
-          'questionSeven',
-          'questionEight',
+          'questionSix-One',
+          'questionSix-Two',
+          'questionSix-Three',
+          'questionSeven-One',
+          'questionSeven-Two',
+          'questionSeven-Three',
+          'questionEight-One',
+          'questionEight-Two',
+          'questionEight-Three',
           'questionNine',
           'questionTen',
           'questionEleven',
@@ -1421,7 +1441,7 @@ const viz = {
           'questionSixteen',
           'questionSeventeen',
           'questionEighteen',
-          'questionNineeen',
+          'questionNineteen',
           'questionTwenty',
           'questionTwentyOne',
           'questionTwentyTwo',
@@ -1461,6 +1481,9 @@ const viz = {
         survey: string
       ) => {
         const filtered = responses.filter((x) => x.questionTwo === survey);
+
+        console.log('filtered::: ', filtered);
+
         const literacy = {
           score: 0,
           count: 0,
@@ -1488,7 +1511,13 @@ const viz = {
         filtered.forEach((item) => {
           qKeys.literacy.forEach((key: string) => {
             if (item[key]) {
-              literacy.score += Number(item[key].split('-')[0]);
+              if (key === 'questionNine' || key === 'questionTen') {
+                item[key].split('-')[1] === 'correct'
+                  ? (literacy.score += 5)
+                  : '';
+              } else {
+                literacy.score += Number(item[key].split('-')[0]);
+              }
               literacy.count = literacy.count + 1;
             }
           });
@@ -1585,9 +1614,15 @@ const viz = {
       key: 'Manager Benchmark Comparison',
       qKeys: {
         literacy: [
-          'questionSix',
-          'questionSeven',
-          'questionEight',
+          'questionSix-One',
+          'questionSix-Two',
+          'questionSix-Three',
+          'questionSeven-One',
+          'questionSeven-Two',
+          'questionSeven-Three',
+          'questionEight-One',
+          'questionEight-Two',
+          'questionEight-Three',
           'questionNine',
           'questionTen',
           'questionEleven',
@@ -1600,7 +1635,7 @@ const viz = {
           'questionSixteen',
           'questionSeventeen',
           'questionEighteen',
-          'questionNineeen',
+          'questionNineteen',
           'questionTwenty',
           'questionTwentyOne',
           'questionTwentyTwo',
@@ -1698,7 +1733,13 @@ const viz = {
         filtered.forEach((item) => {
           qKeys.literacy.forEach((key: string) => {
             if (item[key]) {
-              literacy.score += Number(item[key].split('-')[0]);
+              if (key === 'questionNine' || key === 'questionTen') {
+                item[key].split('-')[1] === 'correct'
+                  ? (literacy.score += 5)
+                  : '';
+              } else {
+                literacy.score += Number(item[key].split('-')[0]);
+              }
               literacy.count = literacy.count + 1;
             }
           });
