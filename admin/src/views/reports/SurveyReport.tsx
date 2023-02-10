@@ -1385,6 +1385,7 @@ const viz = {
                   stacked: true,
                 },
                 y: {
+                  max: 100,
                   stacked: true,
                 },
               },
@@ -1394,11 +1395,19 @@ const viz = {
               datasets: [
                 {
                   type: 'line' as const,
-                  label: 'Dataset 1',
+                  label: 'Dataset 2',
                   borderColor: 'rgb(255, 99, 132)',
                   borderWidth: 2,
                   fill: false,
-                  data: [57, 46, 68],
+                  data: [32, 21, 43],
+                },
+                {
+                  type: 'line' as const,
+                  label: 'Dataset 1',
+                  borderColor: 'rgb(50,130,93)',
+                  borderWidth: 2,
+                  fill: false,
+                  data: [57 - 32, 46 - 21, 68 - 43],
                 },
                 {
                   type: 'bar' as const,
@@ -1591,7 +1600,20 @@ const viz = {
                   borderColor: 'rgb(255, 99, 132)',
                   borderWidth: 2,
                   fill: false,
-                  data: [59, 54, 76, 74],
+                  data: [59 - 25, 54 - 25, 76 - 25, 74 - 25],
+                },
+                {
+                  type: 'line' as const,
+                  label: 'Dataset 1',
+                  borderColor: 'rgb(50,130,93)',
+                  borderWidth: 2,
+                  fill: false,
+                  data: [
+                    59 - (59 - 25),
+                    54 - (54 - 25),
+                    76 - (76 - 25),
+                    74 - (74 - 25),
+                  ],
                 },
                 {
                   type: 'bar' as const,
@@ -1822,7 +1844,21 @@ const viz = {
                   borderColor: 'rgb(255, 99, 132)',
                   borderWidth: 2,
                   fill: false,
-                  data: [76, 76, 89, 90, 84],
+                  data: [76 - 25, 76 - 25, 89 - 25, 90 - 25, 84 - 25],
+                },
+                {
+                  type: 'line' as const,
+                  label: 'Dataset 1',
+                  borderColor: 'rgb(50,130,93)',
+                  borderWidth: 2,
+                  fill: false,
+                  data: [
+                    76 - (76 - 25),
+                    76 - (76 - 25),
+                    89 - (89 - 25),
+                    90 - (90 - 25),
+                    84 - (84 - 25),
+                  ],
                 },
                 {
                   type: 'bar' as const,
