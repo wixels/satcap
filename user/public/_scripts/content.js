@@ -2,6 +2,177 @@ import { collection, query, where, limit, orderBy, getDocs, getDoc, doc } from '
 import { db } from './init.js?v=1'
 import { requestHandler } from './helpers.js'
 
+const resources = {
+  'Community Needs Survey': [
+    {
+      docId: 'static-cns-1',
+      type: 'resources',
+      title: 'Infographic',
+      description: 'This is how all the SATCAP tools work together.',
+      featureImageUrl: '/resources/Community Needs Survey/Infographic.png',
+      url: '/resources/Community Needs Survey/SATCAP_Infographic.pdf'
+    },
+    {
+      docId: 'static-cns-2',
+      type: 'resources',
+      title: 'Community Needs Assessment Tool',
+      description: null,
+      featureImageUrl: '/resources/Community Needs Survey/Tool.png',
+      url: '/resources/Community Needs Survey/SATCAP_Infographic.pdf'
+    }
+  ],
+  'Digital Competency Assessment': [
+    {
+      docId: 'static-dca-1',
+      type: 'resources',
+      title: 'Harvard Digital Transformation',
+      description: null,
+      featureImageUrl: '/resources/Digital Competency Assessment/tg0tmqJK6A-Screenshot 2022-09-15 at 09.38.27-2.png',
+      url: '/resources/Digital Competency Assessment/m7YoBOsj9W-Harvard Business Review_Digital Transformation Refocused.pdf'
+    },
+    {
+      docId: 'static-dca-2',
+      type: 'resources',
+      title: 'SABPP Leadership Standard 2017',
+      description: null,
+      featureImageUrl: '/resources/Digital Competency Assessment/qT9Dt16OXH-Screenshot 2022-09-15 at 09.37.24.png',
+      url: '/resources/Digital Competency Assessment/Iy6MBhIKaL-SABPP_Leadership Standards 2017.pdf'
+    },
+    {
+      docId: 'static-dca-3',
+      type: 'resources',
+      title: 'PWC Global Trends Challenges By African Realities',
+      description: null,
+      featureImageUrl: '/resources/Digital Competency Assessment/iABJFG7B2h-Screenshot 2022-09-15 at 09.37.13.png',
+      url: '/resources/Digital Competency Assessment/iABJFG7B2h-PWC_Global Trends Challenges By African Realities.pdf'
+    },
+    {
+      docId: 'static-dca-4',
+      type: 'resources',
+      title: 'PWC: Ten Insights into 4IR',
+      description: null,
+      featureImageUrl: '/resources/Digital Competency Assessment/LAsVvtHIux-Screenshot 2022-11-16 at 11.00.13.png',
+      url: '/resources/Digital Competency Assessment/LAsVvtHIux-PWC_Ten Insights Into 4IR.pdf'
+    },
+    {
+      docId: 'static-dca-5',
+      type: 'resources',
+      title: 'WEF Future Skills Article',
+      description: null,
+      featureImageUrl: '/resources/Digital Competency Assessment/p3B1fNRNa9-Screenshot 2022-09-15 at 09.58.14.png',
+      url: 'https://www.weforum.org/agenda/2020/10/top-10-work-skills-of-tomorrow-how-long-it-takes-to-learn-them/'
+    },
+    {
+      docId: 'static-dca-6',
+      type: 'resources',
+      title: 'PWC Workforce Of The Future 2030',
+      description: null,
+      featureImageUrl: '/resources/Digital Competency Assessment/e7fjhgYO51-Screenshot 2022-09-15 at 09.37.34.png',
+      url: '/resources/Digital Competency Assessment/e7fjhgYO51-PWC_Workforce Of The Future 2030_2018.pdf'
+    },
+    {
+      docId: 'static-dca-7',
+      type: 'resources',
+      title: 'SATCAP Digital Reference Material',
+      description: null,
+      featureImageUrl: '/resources/Digital Competency Assessment/s85PxtIFlE-Screenshot 2022-09-20 at 15.53.55.png',
+      url: '/resources/Digital Competency Assessment/s85PxtIFlE-SATCAP REFERENCE TO SUPPORTING MATERIAL V3.pdf'
+    }
+  ],
+  'SMME Engagement Tool': [
+    {
+      docId: 'static-set-1',
+      type: 'resources',
+      title: 'Pre-Application Cheat Sheet',
+      description: null,
+      featureImageUrl: '/resources/SMME Engagement Tool/Banners5.png',
+      url: '/resources/SMME Engagement Tool/Pre-Application Cheat Sheet.pdf'
+    },
+    {
+      docId: 'static-set-2',
+      type: 'resources',
+      title: 'FAQ\'s Post-Application',
+      description: null,
+      featureImageUrl: '/resources/SMME Engagement Tool/Banners.png',
+      url: '/resources/SMME Engagement Tool/FAQ\'s Post-Application.pdf'
+    },
+    {
+      docId: 'static-set-3',
+      type: 'resources',
+      title: 'Post-Application Cheat Sheet',
+      description: null,
+      featureImageUrl: '/resources/SMME Engagement Tool/Bz376PxTgi-Banners3.png',
+      url: '/resources/SMME Engagement Tool/Bz376PxTgi-Post-Application Cheat Sheet.pdf'
+    },
+    {
+      docId: 'static-set-4',
+      type: 'resources',
+      title: 'Procurement Glossary of Terms',
+      description: null,
+      featureImageUrl: '/resources/SMME Engagement Tool/ProcBanner.png',
+      url: '/resources/SMME Engagement Tool/Procurement Terms.pdf'
+    },
+    {
+      docId: 'static-set-5',
+      type: 'resources',
+      title: 'Helpful Links',
+      description: null,
+      featureImageUrl: '/resources/SMME Engagement Tool/9jegtJShRr-Banners2.png',
+      url: '/resources/SMME Engagement Tool/9jegtJShRr-Helpful Links.pdf'
+    },
+    {
+      docId: 'static-set-6',
+      type: 'resources',
+      title: 'FAQ\'s Pre-Application',
+      description: null,
+      featureImageUrl: '/resources/SMME Engagement Tool/zUgYHGVmd2-Banners6.png',
+      url: '/resources/SMME Engagement Tool/zUgYHGVmd2-FAQ\'s Pre-Application.pdf'
+    },
+    {
+      docId: 'static-set-7',
+      type: 'resources',
+      title: 'Video Tutorials',
+      description: null,
+      featureImageUrl: '/resources/SMME Engagement Tool/e2NZv3HyMl-Screenshot 2022-09-06 at 11.47.29.png',
+      url: '/resources/SMME Engagement Tool/e2NZv3HyMl-Video Tutorials.pdf'
+    },
+    {
+      docId: 'static-set-8',
+      type: 'resources',
+      title: 'FAQ\'s Post-Response',
+      description: null,
+      featureImageUrl: '/resources/SMME Engagement Tool/Screenshot 2022-09-06 at 11.46.21.png',
+      url: '/resources/SMME Engagement Tool/p4Tne9qPCI-FAQ\'s Post-Response.pdf'
+    }
+  ],
+  'Training Needs Assessment Tool': [
+    {
+      docId: 'static-tnat-1',
+      type: 'resources',
+      title: 'Infographic',
+      description: 'This is how all the SATCAP tools work together.',
+      featureImageUrl: '/resources/Training Needs Assessment Tool/whatissatcap.png',
+      url: '/resources/Training Needs Assessment Tool/MDKWYrBxaM-SATCAP_Infographic_V7-2.pdf'
+    },
+    {
+      docId: 'static-tnat-2',
+      type: 'resources',
+      title: 'Training Needs Assessment Tool',
+      description: null,
+      featureImageUrl: '/resources/SMME Engagement Tool/Banners5.png',
+      url: '/resources/Training Needs Assessment Tool/88VQUCLpq2-Training Needs Assessment Tool.pdf'
+    },
+    {
+      docId: 'static-tnat-3',
+      type: 'resources',
+      title: 'Alternative Economies',
+      description: null,
+      featureImageUrl: '/resources/Training Needs Assessment Tool/0ibYqimp5t-Screenshot 2022-11-24 at 12.14.57.png',
+      url: '/resources/Training Needs Assessment Tool/eADPa1egOS-Alternative economy sheet v3 (002).pdf'
+    }
+  ]
+}
+
 const setCard = function (item) {
   const template = document.getElementById('templateContent')
   const content = template.content.cloneNode(true)
@@ -136,15 +307,37 @@ const getRecentContent = async function (type, mineId, locationId, packageId) {
 }
 
 const getSingleContent = async function (collection, docId, type) {
-  console.log(collection)
-  const docRef = doc(db, collection, docId)
-  const docSnap = await getDoc(docRef)
-  
-  if (!docSnap.exists()) {
-    return
-  } return {
-    type,
-    ...docSnap.data()
+  if (docId.includes('static-')) {
+    const docIdAsArray = docId.split('-')
+    let key
+    switch (docIdAsArray[1]) {
+      case 'cns':
+        key = 'Community Needs Survey'
+        break
+      case 'dca':
+        key = 'Digital Competency Assessment'
+        break
+      case 'set':
+        key = 'SMME Engagement Tool'
+        break
+      case 'tnat':
+        key = 'Training Needs Assessment Tool'
+        break
+      default:
+        return
+    }
+
+    return resources[key].find((res) => res.docId === docId)
+  } else {
+    const docRef = doc(db, collection, docId)
+    const docSnap = await getDoc(docRef)
+    
+    if (!docSnap.exists()) {
+      return
+    } return {
+      type,
+      ...docSnap.data()
+    }
   }
 }
 
@@ -201,10 +394,31 @@ const viewItem = function (item) {
 const getAllContent = async function (type, mineId, locationId, packageId) {
   if (!type || !mineId) return []
 
+  let data = []
+  let key
+  if (type === 'resources') {
+    switch (packageId) {
+      case 'ye0erjENgXMIgAMbsufs':
+        key = 'Training Needs Assessment Tool'
+        break;
+      case 'w8jONMPpUov16uTFJT4G':
+        key = 'Digital Competency Assessment'
+        break;
+      case 'zM4Z6N9H82ks1xiNLKen':
+        key = 'Community Needs Survey'
+        break;
+      case 'ckCa1z7bexNKBI8Ufk0z':
+        key = 'SMME Engagement Tool'
+        break;
+      default:
+        break;
+    }
+    data = resources[key]
+  }
+
   const snapshot = await getDocs(query(collection(db, `mines/${mineId}/${type}`), orderBy('createdAt', 'desc'), where('packageDocId', '==', packageId), where('visibility', 'array-contains', locationId)))
   if (!snapshot.size) return []
 
-  const data = []
   snapshot.forEach((doc) => {
     data.push({
       type,
