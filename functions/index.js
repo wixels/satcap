@@ -131,3 +131,133 @@ exports.submitSurvey = functions.https.onRequest(async (req, res) => {
     }
   }
 })
+
+exports.addMine = functions.https.onRequest(async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*')
+  if (req.method === 'OPTIONS') {
+    res.set('Access-Control-Allow-Methods', 'GET')
+    res.set('Access-Control-Allow-Headers', 'Content-Type')
+    res.set('Access-Control-Max-Age', '3600')
+    res.status(204).send('')
+    res.end()
+  } else {
+    await admin.firestore().collection('mines').add({
+      name: req.query.name || 'Enter your mine name here',
+      description: 'Enter your mine description here',
+      address: 'Enter your mine location here',
+      packages: ['ye0erjENgXMIgAMbsufs', 'zM4Z6N9H82ks1xiNLKen', 'ckCa1z7bexNKBI8Ufk0z', 'w8jONMPpUov16uTFJT4G'],
+      createdAt: dayjs().format('YYYY-MM-DD HH:mm:ss')
+    })
+
+    res.send('Mine successfully added to your project')
+    res.end()
+  }
+})
+
+exports.importPackages = functions.https.onRequest(async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*')
+  if (req.method === 'OPTIONS') {
+    res.set('Access-Control-Allow-Methods', 'GET')
+    res.set('Access-Control-Allow-Headers', 'Content-Type')
+    res.set('Access-Control-Max-Age', '3600')
+    res.status(204).send('')
+    res.end()
+  } else {
+    // Training Needs Assessment Survey Tool
+    const wpTwoOne = {
+      docId: 'ye0erjENgXMIgAMbsufs',
+      name: 'Training Needs Assessment Survey Tool',
+      scopes: ['home','survey','information'],
+      survey: {
+        title: 'Training Needs Assessment Survey Tool',
+        key: 'wp-two-one',
+        shortDescription: 'Welcome to the Training Needs Assessment Survey Tool',
+        description: 'Thank you for taking the time to complete this assessment.&NewLine;&NewLine; The Training Needs Assessment Tool focuses on understanding the current and future training/skills needs of the community and SMMEs in mining communities.&NewLine;&NewLine; The assessment should take approximately 30 minutes to complete.&NewLine;&NewLine; Enjoy!',
+        customAnswers: [
+          {
+            key: 'area',
+            label: 'Area options',
+            description: 'Type in the specific area/s (geographical location) that will reflect on the tool for the responder to select'
+          }
+        ]
+      }
+    }
+
+    // Digital Leadership Competency Assessment Tool
+    const wpTwoTwo = {
+      docId: 'w8jONMPpUov16uTFJT4G',
+      name: 'Digital Leadership Competency Assessment Tool',
+      scopes: ['home','survey','information'],
+      survey: {
+        title: 'Digital Leadership Competency Assessment Tool',
+        key: 'wp-two-two',
+        shortDescription: 'Welcome to the Digital Leadership Competency Assessment Tool',
+        description: 'Thank you for taking the time to complete this assessment.&NewLine;&NewLine; The focus of the digital leadership competency gap assessment illuminates how digitisation will have an impact on current versus future mining activities across the workforce. In doing so, the assessment acts as a mechanism to understand the current digital capabilities of the workforce vs. the future digital capabilities.&NewLine;&NewLine; The assessment should take approximately 30 minutes to complete.&NewLine;&NewLine; Enjoy!',
+      }
+    }
+
+    // SMME Engagement Tool
+    const wpThreeOne = {
+      docId: 'ckCa1z7bexNKBI8Ufk0z',
+      name: 'SMME Engagement Tool',
+      scopes: ['home','survey','information','queries'],
+      survey: {
+        title: 'SMME Engagement Tool',
+        key: 'wp-three-one',
+        shortDescription: 'Welcome to the SMME Engagement Tool',
+        surveys: [
+          {
+            color: '#2a3989',
+            description: 'Use this checklist to make sure you are ready to apply for a procurement opportunity',
+            faqUrl: `https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2FFAQ's%20Pre-Application.pdf?alt=media&token=d7b14be7-eb98-4727-a3b4-d8d1f5ffd34c`,
+            key: 'wp-three-one-pre',
+            title: 'Pre-Application Checklist',
+          },
+          {
+            color: '#fcb31c',
+            description: 'Use this checklist to help you find out what to do while you wait for a response to your application',
+            faqUrl: `https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2FFAQ's%20Post-Application.pdf?alt=media&token=35658549-9bd9-47f6-90fd-df542850f95a`,
+            key: 'wp-three-one-post',
+            title: 'Post-Application Checklist',
+          },
+          {
+            color: '#33825c',
+            description: 'Let us know how your procurement experience went and what can be done to improve',
+            faqUrl: `https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2FFAQ's%20Post-Response.pdf?alt=media&token=ca13b985-2401-4695-aae6-d1ee600e1d75`,
+            key: 'wp-three-one-post-response',
+            title: 'Post-Response Checklist',
+          }
+        ]
+      },
+      extraInformation: '<p>This tool is made up of 4 sections namely:</p>             <ul>               <li>A Checklist section to help you at different stages of the procurement process. Within the checklist section, there are also a set of FAQs to answer general questions from SMMEs.</li>               <li>A Notice Board section where mines will post information to SMMEs.</li>               <li>A Resource Library that contains useful business development information.</li>               <li>A Query Submission section where you can submit questions to the mine related to procurement.</li>             </ul>             <p>The tool can be navigated by clicking on the section that you wish to access.</p>             <p>This tool is not a vendor portal where you submit applications but will help assist you in becoming compliant and accessing resources and opportunities.</p>'
+    }
+
+    // Community Needs Assessment Survey Tool
+    const wpThreeTwo = {
+      docId: 'zM4Z6N9H82ks1xiNLKen',
+      name: 'Community Needs Assessment Survey Tool',
+      scopes: ['home','survey','information'],
+      survey: {
+        title: 'Community Needs Assessment Survey Tool',
+        key: 'wp-three-two',
+        shortDescription: 'Welcome to the Community Needs Assessment Survey Tool',
+        description: 'Thank you for taking the time to complete this assessment.&NewLine;&NewLine; The Community social-needs assessment tool - focuses on obtaining local mining communities "real" needs, for support towards shared value creation.&NewLine;&NewLine; The assessment should take approximately 30 minutes to complete.&NewLine;&NewLine; Thank you!',
+        customAnswers: [
+          {
+            key: 'area',
+            label: 'Area options',
+            description: 'Type in the specific area/s (geographical location) that will reflect on the tool for the responder to select'
+          }
+        ]
+      }
+    }
+
+    await admin.firestore().collection('packages').doc('ye0erjENgXMIgAMbsufs').set(wpTwoOne);
+    await admin.firestore().collection('packages').doc('w8jONMPpUov16uTFJT4G').set(wpTwoTwo);
+    await admin.firestore().collection('packages').doc('ckCa1z7bexNKBI8Ufk0z').set(wpThreeOne);
+    await admin.firestore().collection('packages').doc('zM4Z6N9H82ks1xiNLKen').set(wpThreeTwo);
+
+    res.send('Default packages successfully imported to your project')
+    res.end()
+  }
+})

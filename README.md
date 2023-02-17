@@ -98,9 +98,28 @@ firebase deploy --only hosting:user
 
 ## Initial data import
 
+### Add Mine
+To create your mine without adding it manually on [Firebase console](https://console.firebase.google.com/)
+
+To acheive this, you can run the `addMine` cloud function deployed in the [previous step](#functions).
+
+Please change the following:
+- {LOCATION} = The location in which the project was deployed e.g. us-central1
+- PROJECT_ID} = The ID of the Firebase Project e.g. satcap-research
+- {NAME} = The name of the mine you're wanting to create
+```
+https://{LOCATION}-{PROJECT_ID}.cloudfunctions.net/addMine?name={NAME}
+```
+
 ### Add Surveys
 In order for the mine to create survey links, the [packages collection](#packages) needs to have the predefined data in it. 
-To acheive this, you can run the cloud function deployed in the [previous step](#functions):
+
+To acheive this, you can run the `importPackages` cloud function deployed in the [previous step](#functions).
+
+Please change the following:
+- {LOCATION} = The location in which the project was deployed e.g. us-central1
+- {PROJECT_ID} = The ID of the Firebase Project e.g. satcap-research
+
 ```
 https://{LOCATION}-{PROJECT_ID}.cloudfunctions.net/importPackages
 ```
@@ -121,7 +140,7 @@ Please see [Data Architecture](#data-architecture) for more information before p
 7. Click on Build -> Firestore Database
 8. Click on "mines" collection
 9. Click on the mine you're wanting to add the person to
-10. Click on the Sub-collection "users"
+10. Click on the Sub-collection "users" (If not there, create it by clicking "Start collection" within the mine document and skip step 11)
 11. Click "Add document"
 11. Click "Auto-Id" and add the [following fields](#users) 
 
