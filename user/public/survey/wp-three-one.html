@@ -710,7 +710,7 @@
         <div class="question">
           <p>Question 2</p>
           <fieldset class="radioGroup">
-            <legend>When applying to the mines, were your supporting documents easy to upload?</legend>
+            <legend>Were the instructions on the vendor/procurement portal easy to follow?</legend>
             <label>
               <input type="radio" value="Yes" name="questionTwo"/>
               <span>Yes</span>
@@ -724,7 +724,7 @@
         <div class="question">
           <p>Question 3</p>
           <fieldset class="radioGroup">
-            <legend>Was the application process user friendly?</legend>
+            <legend>When applying to the mines, were your supporting documents easy to upload?</legend>
             <label>
               <input type="radio" value="Yes" name="questionThree"/>
               <span>Yes</span>
@@ -737,71 +737,85 @@
         </div>
         <div class="question">
           <p>Question 4</p>
+          <fieldset class="radioGroup">
+            <legend>Was the application process user friendly?</legend>
+            <label>
+              <input type="radio" value="Yes" name="questionFour"/>
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" value="No" name="questionFour"/>
+              <span>No</span>
+            </label>
+          </fieldset>
+        </div>
+        <div class="question">
+          <p>Question 5</p>
           <span>What is your preferred method to receive the outcome of your application?</span>
           <div class="multiple">
             <label class="selector">
-              <input type="radio" value="Cellphone call" name="questionFour" />
+              <input type="radio" value="Cellphone call" name="questionFive" />
               <span>Cellphone call</span>
             </label>
             <label class="selector">
-              <input type="radio" value="SMS" name="questionFour" />
+              <input type="radio" value="SMS" name="questionFive" />
               <span>SMS</span>
             </label>
             <label class="selector">
-              <input type="radio" value="Email" name="questionFour" />
+              <input type="radio" value="Email" name="questionFive" />
               <span>Email</span>
             </label>
             <label class="selector">
-              <input type="radio" value="Business telephone call" name="questionFour" />
+              <input type="radio" value="Business telephone call" name="questionFive" />
               <span>Business telephone call</span>
             </label>
             <label class="selector">
-              <input type="radio" value="Through the vendor portal" name="questionFour" />
+              <input type="radio" value="Through the vendor portal" name="questionFive" />
               <span>Through the vendor portal</span>
             </label>
             <label class="selector">
-              <input type="radio" value="A letter received in the mail" name="questionFour" />
+              <input type="radio" value="A letter received in the mail" name="questionFive" />
               <span>A letter received in the mail</span>
             </label>
           </div>
         </div>
         <div class="question">
-          <p>Question 5</p>
+          <p>Question 6</p>
           <fieldset class="radioGroup">
             <legend>Do you know some of the common reasons that applications are rejected?</legend>
             <label>
-              <input type="radio" value="Yes" name="questionFive" data-on-change="conditionalPath" data-conditional-path="five-no"/>
+              <input type="radio" value="Yes" name="questionSix" data-on-change="conditionalPath" data-conditional-path="six-no"/>
               <span>Yes</span>
             </label>
             <label>
-              <input type="radio" value="No" name="questionFive" data-on-change="conditionalPath" data-conditional-path="five-no"/>
+              <input type="radio" value="No" name="questionSix" data-on-change="conditionalPath" data-conditional-path="six-no"/>
               <span>No</span>
             </label>
           </fieldset>
-          <template data-choice="five-no">
+          <template data-choice="six-no">
             <p>Please click on this link to access resources that can help you:</p>
             <a href="https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2FFAQ's%20Post-Response.pdf?alt=media&token=ca13b985-2401-4695-aae6-d1ee600e1d75" target="_blank">FAQ's Post-Response</a>
           </template>
         </div>
         <div class="question">
-          <p>Question 6</p>
+          <p>Question 7</p>
           <fieldset class="radioGroup">
             <legend>Were you able to amend your application during the application process?</legend>
             <label>
-              <input type="radio" value="Yes" name="questionSix"/>
+              <input type="radio" value="Yes" name="questionSeven"/>
               <span>Yes</span>
             </label>
             <label>
-              <input type="radio" value="No" name="questionSix"/>
+              <input type="radio" value="No" name="questionSeven"/>
               <span>No</span>
             </label>
           </fieldset>
         </div>
         <div class="question">
-          <p>Question 7</p>
+          <p>Question 8</p>
           <label>
             <span>How can the mines make the administrative processes easier?</span>
-            <input type="text" name="questionSeven"/>
+            <textarea name="questionEight"></textarea>
           </label>
         </div>
         <button type="submit">Submit</button>
