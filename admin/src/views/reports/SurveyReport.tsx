@@ -1293,8 +1293,6 @@ const viz = {
           'questionTwentySeven-One',
           'questionTwentySeven-Two',
           'questionTwentyEight',
-          'questionTwentyNine',
-          'questionThirty',
         ],
       },
       survey: 'Operator',
