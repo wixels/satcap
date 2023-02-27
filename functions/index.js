@@ -241,7 +241,7 @@ exports.importPackages = functions.https.onRequest(async (req, res) => {
         title: 'Community Needs Assessment Survey Tool',
         key: 'wp-three-two',
         shortDescription: 'Welcome to the Community Needs Assessment Survey Tool',
-        description: 'Thank you for taking the time to complete this assessment.&NewLine;&NewLine; The Community social-needs assessment tool - focuses on obtaining local mining communities "real" needs, for support towards shared value creation.&NewLine;&NewLine; The assessment should take approximately 30 minutes to complete.&NewLine;&NewLine; Thank you!',
+        description: 'Thank you for taking the time to complete this assessment.&NewLine;&NewLine; The Community Needs Assessment Survey Tool - focuses on obtaining local mining communities "real" needs, for support towards shared value creation.&NewLine;&NewLine; The assessment should take approximately 30 minutes to complete.&NewLine;&NewLine; Thank you!',
         customAnswers: [
           {
             key: 'area',
