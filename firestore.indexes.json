@@ -1,4 +1,114 @@
 {
-  "indexes": [],
-  "fieldOverrides": []
+  "indexes": [
+    {
+      "collectionGroup": "notices",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "visibility", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "packageDocId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "queries",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "userRef", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "resources",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "visibility", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "packageDocId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "links",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        { "fieldPath": "deletedAt", "order": "ASCENDING" },
+        { "fieldPath": "linkId", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "links",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "deletedAt", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "responses",
+      "fieldPath": "survey",
+      "indexes": [
+        {
+          "queryScope": "COLLECTION",
+          "arrayConfig": "CONTAINS" 
+        },
+        {
+          "queryScope": "COLLECTION",
+          "order": "ASCENDING" 
+        },
+        {
+          "queryScope": "COLLECTION",
+          "order": "DESCENDING" 
+        },
+        {
+          "queryScope": "COLLECTION_GROUP",
+          "order": "ASCENDING" 
+        }
+      ]
+    },
+    {
+      "collectionGroup": "links",
+      "fieldPath": "linkId",
+      "indexes": [
+        {
+          "queryScope": "COLLECTION",
+          "arrayConfig": "CONTAINS" 
+        },
+        {
+          "queryScope": "COLLECTION",
+          "order": "ASCENDING" 
+        },
+        {
+          "queryScope": "COLLECTION",
+          "order": "DESCENDING" 
+        },
+        {
+          "queryScope": "COLLECTION_GROUP",
+          "order": "ASCENDING" 
+        }
+      ]
+    },
+    {
+      "collectionGroup": "users",
+      "fieldPath": "authUid",
+      "indexes": [
+        {
+          "queryScope": "COLLECTION",
+          "arrayConfig": "CONTAINS" 
+        },
+        {
+          "queryScope": "COLLECTION",
+          "order": "ASCENDING" 
+        },
+        {
+          "queryScope": "COLLECTION",
+          "order": "DESCENDING" 
+        },
+        {
+          "queryScope": "COLLECTION_GROUP",
+          "order": "ASCENDING" 
+        }
+      ]
+    }
+  ]
 }
