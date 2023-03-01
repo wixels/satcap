@@ -3,6 +3,7 @@ import {
   Box,
   Card,
   Group,
+  ScrollArea,
   SimpleGrid,
   Text,
   Title,
@@ -636,6 +637,39 @@ const viz = {
               datasets,
             }}
           />
+        );
+      },
+    },
+    {
+      key: 'Suggestion Box',
+      survey: 'wp-three-one-post',
+      qKeys: ['questionFive'],
+      mutatorFn: (
+        responses: any[],
+        qKeys: string[],
+        key: string,
+        survey?: string
+      ) => {
+        const filteredBySurvey = responses?.filter((x) => x?.survey === survey);
+        console.log('filteredBySurvey::: ', filteredBySurvey);
+        const set = new Set();
+        filteredBySurvey.forEach((res) => {
+          const item = res[qKeys[0]];
+          if (Array.isArray(item)) {
+            item.forEach((item) => item && set.add(item));
+          } else if (item) {
+            set.add(item);
+          }
+        });
+        const options = Array.from(set);
+        return (
+          <ScrollArea style={{ height: 250 }}>
+            <ul>
+              {options?.map((opt: any) => (
+                <li key={opt}>{opt}</li>
+              ))}
+            </ul>
+          </ScrollArea>
         );
       },
     },
