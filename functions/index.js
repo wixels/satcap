@@ -142,9 +142,9 @@ exports.addMine = functions.https.onRequest(async (req, res) => {
     res.end()
   } else {
     await admin.firestore().collection('mines').add({
-      name: req.query.name || 'Enter your mine name here',
-      description: 'Enter your mine description here',
-      address: 'Enter your mine location here',
+      name: req.query.name || 'Enter your mine name here using Firebase console',
+      description: 'Enter your mine description here using Firebase console',
+      address: 'Enter your mine location here using Firebase console',
       packages: ['ye0erjENgXMIgAMbsufs', 'zM4Z6N9H82ks1xiNLKen', 'ckCa1z7bexNKBI8Ufk0z', 'w8jONMPpUov16uTFJT4G'],
       createdAt: dayjs().format('YYYY-MM-DD HH:mm:ss')
     })
