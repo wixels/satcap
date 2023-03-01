@@ -106,7 +106,10 @@ export const Login = (): JSX.Element => {
           radius={0}
           p={30}
         >
-          <Image
+          <Center mb={'xl'}>
+            <Title>Sign In Page</Title>
+          </Center>
+          {/* <Image
             style={{
               marginLeft: 'auto',
               marginRight: 'auto',
@@ -116,7 +119,7 @@ export const Login = (): JSX.Element => {
             radius="md"
             src={'https://satcap-research.web.app/_style/images/logo.png'}
             alt="Random unsplash image"
-          />
+          /> */}
           <TextInput
             radius={'md'}
             size="md"
