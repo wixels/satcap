@@ -98,10 +98,12 @@ firebase deploy --only hosting:user
 
 ## Initial data import
 
-### Add Mine
-To create your mine without adding it manually on [Firebase console](https://console.firebase.google.com/)
+To start using the application, you can easily add mines and import packages using cloud functions before accessing the application on the web. 
 
-To acheive this, you can run the `addMine` cloud function deployed in the [previous step](#functions).
+The current version of the application does not support the creation of mines or packages within the application itself.
+
+### Add Mine
+To create your mine without adding it manually on [Firebase console](https://console.firebase.google.com/) you can run the `addMine` cloud function deployed in the [previous step](#functions).
 
 Please change the following:
 - {LOCATION} = The location in which the project was deployed e.g. us-central1
@@ -111,7 +113,9 @@ Please change the following:
 https://{LOCATION}-{PROJECT_ID}.cloudfunctions.net/addMine?name={NAME}
 ```
 
-### Add Surveys
+Please see the [data architecture](#mines) to understand what can be edited/added to the mine information
+
+### Add Surveys/Packages
 In order for the mine to create survey links, the [packages collection](#packages) needs to have the predefined data in it. 
 
 To acheive this, you can run the `importPackages` cloud function deployed in the [previous step](#functions).
@@ -161,8 +165,6 @@ You will need to enable the following extensions within Firebase:
 
 ## Data Architecture
 
-The current version of this application does not support the creation of **mines** or **packages** within the application itself, so these will have to be manually added before accessing the application.
-
 ### Packages
 Collection Id: **packages**
 
@@ -182,7 +184,7 @@ Collection Id: **packages**
 | survey.surveys                     | array[map]    | (Optional) list of surveys if package provides more than one       |
 | survey.surveys[0].color            | string        | HEX value of theme colour for survey                               |
 | survey.surveys[0].description      | string        | Description of survey                                              |
-| survey.surveys[0].faqUrl           | string        | Link to FAQ's for survey                                           |
+| survey.surveys[0].faqUrl           | string        | URL link to FAQ's for survey                                           |
 | survey.surveys[0].key              | string        | Unique key of survey                                               |
 | survey.surveys[0].title            | string        | Title of survey                                                    |
 | scopes                             | array[string] | List of all menu items this package has access to on the user side |
@@ -205,8 +207,8 @@ Collection Id: **mines**
 | address         | string        | Area of mine                                                        |
 | name            | string        | Name of mine                                                        |
 | description     | string        | Description of mine                                                 |
-| featureImageUrl | string        | Link to header image                                                |
-| imageUrl        | string        | Link to logo of mine                                                |
+| featureImageUrl | string        | URL link to header image                                                |
+| imageUrl        | string        | URL link to logo of mine                                                |
 | packages        | array[string] | Document ID's of all [packages](#packages) this admin has access to |
 
 ### Users
