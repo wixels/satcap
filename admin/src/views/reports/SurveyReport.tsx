@@ -639,6 +639,21 @@ const viz = {
         );
       },
     },
+    {
+      key: 'Suggestion Box',
+      survey: 'wp-three-one-post',
+      qKeys: [],
+      mutatorFn: (
+        responses: any[],
+        qKeys: string[],
+        key: string,
+        survey?: string
+      ) => {
+        const filteredBySurvey = responses?.filter((x) => x?.survey === survey);
+        console.log('filteredBySurvey::: ', filteredBySurvey);
+        return <div>Hello World</div>;
+      },
+    },
   ],
   'wp-three-two': [
     {
