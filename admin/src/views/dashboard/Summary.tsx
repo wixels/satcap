@@ -653,9 +653,9 @@ const tableData = {
                       style={{
                         backgroundColor:
                           status >= levels.above
-                            ? 'green'
-                            : status <= levels.below
                             ? 'red'
+                            : status <= levels.below
+                            ? 'green'
                             : 'yellow',
                       }}
                     >
@@ -686,9 +686,9 @@ const tableData = {
                       style={{
                         backgroundColor:
                           status >= levels.above
-                            ? 'green'
-                            : status <= levels.below
                             ? 'red'
+                            : status <= levels.below
+                            ? 'green'
                             : 'yellow',
                       }}
                     >
@@ -814,9 +814,9 @@ const tableData = {
                       style={{
                         backgroundColor:
                           status >= levels.above
-                            ? 'green'
-                            : status <= levels.below
                             ? 'red'
+                            : status <= levels.below
+                            ? 'green'
                             : 'yellow',
                       }}
                     >
@@ -847,9 +847,9 @@ const tableData = {
                       style={{
                         backgroundColor:
                           status >= levels.above
-                            ? 'green'
-                            : status <= levels.below
                             ? 'red'
+                            : status <= levels.below
+                            ? 'green'
                             : 'yellow',
                       }}
                     >
@@ -1008,6 +1008,105 @@ const tableData = {
                             ? 'green'
                             : status <= levels.below
                             ? 'red'
+                            : 'yellow',
+                      }}
+                    >
+                      {status}%
+                    </td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </Table>
+        );
+      },
+    },
+    {
+      title:
+        'Perceived asset bases in the community for community members and SMMEs',
+      description:
+        'Red – 66% or more responders selected the following social need/answered yes. Yellow – Between 33% and 66% responders selected the following social need/answered yes. Green – Less than 33% selected the following need/answered yes',
+      levels: {
+        above: 66,
+        below: 33,
+      },
+      qKeys: {
+        smme: ['SMMEQuestionThirtyFour'],
+      },
+      mutatorFn: (
+        responses: any[],
+        qKeys: { community: string[]; smme: string[] },
+        levels: { above: number; below: number }
+      ) => {
+        const smme = responses.filter(
+          (x) => x?.['questionSeven']?.toLowerCase() === 'yes'
+        );
+
+        console.log('smme::: ', smme);
+        type row = {
+          items: string;
+          status: number;
+        };
+
+        const smmeRows: row[] = [];
+        qKeys?.smme?.map((item) => {
+          const set = new Set();
+          smme.forEach((res) => {
+            const items: string[] | string = res[item];
+            if (Array.isArray(items)) {
+              items.forEach((item) => item && set.add(item));
+            } else if (item) {
+              set.add(items);
+            }
+          });
+          Array.from(set)
+            .filter((x) => x)
+            .forEach((opt: any) => {
+              smmeRows.push({
+                items: opt,
+                status: Math.round(
+                  (smme.filter((x) => x?.[item]?.includes(opt)).length /
+                    smme.length) *
+                    100
+                ),
+              });
+            });
+        });
+
+        return (
+          <Table>
+            <thead>
+              <tr>
+                <th>Social Needs</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td
+                  colSpan={2}
+                  style={{
+                    width: '100%',
+                    backgroundColor: 'rgba(234, 239, 255, 1)',
+                    fontWeight: 'bolder',
+                  }}
+                  align="center"
+                >
+                  SMMEs
+                </td>
+              </tr>
+              {smmeRows.map(
+                // @ts-ignore
+                ({ status, items }: { status: number; items: number }) => (
+                  <tr key={items}>
+                    <td>{items}</td>
+                    <td
+                      style={{
+                        backgroundColor:
+                          status >= levels.above
+                            ? 'red'
+                            : status <= levels.below
+                            ? 'green'
                             : 'yellow',
                       }}
                     >
