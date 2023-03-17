@@ -866,7 +866,7 @@ const tableData = {
     {
       title: 'Active/current asset bases in the community',
       description:
-        'Red – 66% or more responders selected the following social need/answered yes. Yellow – Between 33% and 66% responders selected the following social need/answered yes. Green – Less than 33% selected the following need/answered yes',
+        'Green – 66% or more responders selected the following current assets. Yellow – Between 33% and 65% responders selected the following current assets. Red – Less than 33% selected the following current assets',
       levels: {
         above: 66,
         below: 33,
