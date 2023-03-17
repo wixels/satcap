@@ -209,27 +209,27 @@ exports.importPackages = functions.https.onRequest(async (req, res) => {
           {
             color: '#2a3989',
             description: 'Use this checklist to make sure you are ready to apply for a procurement opportunity',
-            faqUrl: `https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2FFAQ's%20Pre-Application.pdf?alt=media&token=d7b14be7-eb98-4727-a3b4-d8d1f5ffd34c`,
+            faqUrl: `/resources/SMME Engagement Tool/zUgYHGVmd2-FAQ's Pre-Application.pdf`,
             key: 'wp-three-one-pre',
             title: 'Pre-Application Checklist',
           },
           {
             color: '#fcb31c',
             description: 'Use this checklist to help you find out what to do while you wait for a response to your application',
-            faqUrl: `https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2FFAQ's%20Post-Application.pdf?alt=media&token=35658549-9bd9-47f6-90fd-df542850f95a`,
+            faqUrl: `/resources/SMME Engagement Tool/FAQ's Post-Application.pdf`,
             key: 'wp-three-one-post',
             title: 'Post-Application Checklist',
           },
           {
             color: '#33825c',
             description: 'Let us know how your procurement experience went and what can be done to improve',
-            faqUrl: `https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2FFAQ's%20Post-Response.pdf?alt=media&token=ca13b985-2401-4695-aae6-d1ee600e1d75`,
+            faqUrl: `/resources/SMME Engagement Tool/p4Tne9qPCI-FAQ's Post-Response.pdf`,
             key: 'wp-three-one-post-response',
             title: 'Post-Response Checklist',
           }
         ]
       },
-      extraInformation: '<p>This tool is made up of 4 sections namely:</p>             <ul>               <li>A Checklist section to help you at different stages of the procurement process. Within the checklist section, there are also a set of FAQs to answer general questions from SMMEs.</li>               <li>A Notice Board section where mines will post information to SMMEs.</li>               <li>A Resource Library that contains useful business development information.</li>               <li>A Query Submission section where you can submit questions to the mine related to procurement.</li>             </ul>             <p>The tool can be navigated by clicking on the section that you wish to access.</p>             <p>This tool is not a vendor portal where you submit applications but will help assist you in becoming compliant and accessing resources and opportunities.</p>'
+      extraInformation: '<p>This tool is made up of 4 sections namely:</p>             <ul>               <li>A Checklist section to help you at different stages of the procurement process. Within the checklist section, there are also a set of FAQs to answer general questions from SMMEs.</li>               <li>A Notice Board section where mines will post information to SMMEs.</li>               <li>A Resource Library that contains useful business development information.</li>               <li>A Query Submission section where you can submit questions to the mine related to procurement.</li>             </ul>             <p>The tool can be navigated by clicking on the section that you wish to access.</p>             <p>This tool is not a vendor portal where you submit applications but will help assist you in becoming compliant and accessing resources and opportunities.</p><p>Please note, external links contained in the supporting documents will not be maintained and actively updated and are there to serve as direction for the SMME</p>'
     }
 
     // Community Needs Assessment Survey Tool
