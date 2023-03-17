@@ -314,6 +314,12 @@ const setOnChange = function (containerElement) {
       setProgressTracker()
     })
   })
+  const textareas = containerElement.querySelectorAll('textarea')
+  textareas.forEach((textarea) => {
+    textarea.addEventListener('input', (e) => {
+      setProgressTracker()
+    })
+  })
   const selects = containerElement.querySelectorAll('select')
   selects.forEach((select) => {
     select.addEventListener('input', (e) => {
@@ -342,6 +348,7 @@ const setProgressTracker = function () {
           if (!isComplete) {
             switch (el.type) {
               case 'text':
+              case 'textarea':
               case 'select-one':
               case 'date':
                 if (validShortAnswer.includes(answers.get(key).toLowerCase()) || answers.get(key).length > 3) {
