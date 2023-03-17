@@ -22,6 +22,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import { auth } from '../../firebase';
+import authbg from '../../assets/authbg.png';
 
 interface FormValues {
   email: string;
@@ -35,8 +36,7 @@ const useStyles = createStyles((theme) => ({
     minHeight: 900,
     height: '100vh',
     backgroundSize: 'cover',
-    backgroundImage:
-      'url(https://firebasestorage.googleapis.com/v0/b/satcap-research.appspot.com/o/public%2Fauth-bg.png?alt=media&token=d5488eea-b5eb-443d-b188-a650c719db0e)',
+    backgroundImage: `url(${authbg})`,
   },
 
   form: {
