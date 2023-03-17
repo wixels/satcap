@@ -1046,12 +1046,11 @@ const viz = {
     },
     {
       key: 'Assets that exist within community',
-      qKeys: ['SMMEQuestionNineteen'],
+      qKeys: ['communityQuestionNineteen'],
       mutatorFn: (responses: any[], qKeys: string[], key: string) => {
         const filtered = responses.filter(
           (x) => x['questionSeven'] === 'No' && x[qKeys[0]]
         );
-
         const set = new Set();
         filtered.forEach((res) => {
           const item = res[qKeys[0]];
@@ -1071,7 +1070,12 @@ const viz = {
         labels.forEach((label) => {
           let count = 0;
           filtered.forEach((res) => {
-            res[qKeys[0]] === label && count++;
+            if (res && Array.isArray(res[qKeys[0]])) {
+              // @ts-ignore
+              res[qKeys[0]].includes(label) && count++;
+            } else {
+              res[qKeys[0]] === label && count++;
+            }
           });
           datasets[0].data.push(count);
         });
