@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import {
   collection,
   DocumentData,
-  getCountFromServer,
   getDocs,
   orderBy,
   query,
@@ -13,13 +12,23 @@ import { ILink } from '../../types';
 
 export async function fetchLinkResponses(id: string) {
   const responses: DocumentData[] = [];
-  const resSnap = await getCountFromServer(
+  const resSnap = await getDocs(
     collection(
       db,
       `mines/${window.localStorage.getItem('mineId')}/links/${id}/responses`
     )
   );
-  return resSnap.data().count;
+  resSnap.forEach((doc) => {
+    const items = doc.data();
+    delete items?.consent;
+    delete items?.linkDocId;
+    delete items?.linkId;
+    delete items?.mineDocId;
+    delete items?.survey;
+
+    responses.push(items);
+  });
+  return responses;
 }
 
 export async function fetchLinks(force: boolean) {
