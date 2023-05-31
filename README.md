@@ -63,6 +63,7 @@ Error: HTTP Error: 400, Invalid name: `admin-satcap-research` is reserved by ano
 
 ### Functions setup
 [Functions docs](https://firebase.google.com/docs/functions)
+**Blaze (Pay As You Go) billing option is required to use cloud functions**
 
 1. `cd functions/`
 2. `npm i`
