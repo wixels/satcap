@@ -36,6 +36,11 @@ firebase use ALIAS
 5. Click "Create Database"
 6. Follow the prompts
 
+### Storage setup
+1. Login to [Firebase console](https://console.firebase.google.com/)
+2. Open your project
+3. Click on Build -> Storage
+6. Follow the prompts
 
 ### Authentication setup
 1. Login to [Firebase console](https://console.firebase.google.com/)
@@ -63,7 +68,8 @@ Error: HTTP Error: 400, Invalid name: `admin-satcap-research` is reserved by ano
 
 ### Functions setup
 [Functions docs](https://firebase.google.com/docs/functions)
-**Blaze (Pay As You Go) billing option is required to use cloud functions**
+
+**PLEASE NOTE: Blaze (Pay As You Go) billing option is required to use cloud functions**
 
 1. `cd functions/`
 2. `npm i`
