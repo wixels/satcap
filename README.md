@@ -20,7 +20,7 @@
 3. `firebase use --add`
 4. When prompted for which project you want to add, select the project you created in the prequisite step
 5. Write your alias (can be anything like e.g. satcap-prod)
-6. You are now using your own Firebase project and no longer the **default** (satcap-research)
+6. You are now using your own Firebase project
 
 To switch projects run the following, changing **ALIAS** to a defined alias
 ```
@@ -53,6 +53,7 @@ firebase use ALIAS
 
 ### Hosting setup
 [Hosting docs](https://firebase.google.com/docs/hosting)
+
 **ADMIN_SITE_ID** and **USER_SITE_ID** has to be replaced with a value of your choosing.
 
 This would however need to be unique across the entire Firebase platform so if you use a value that already exists, you will get an error similar to the below:
@@ -65,6 +66,24 @@ Error: HTTP Error: 400, Invalid name: `admin-satcap-research` is reserved by ano
 3. `firebase target:apply hosting admin ADMIN_SITE_ID`
 4. `firebase target:apply hosting user USER_SITE_ID`
 
+#### **Firebase Application Configuration**
+
+You will need to update the firebase configurations for each app (user & admin) respectively.
+##### **Admin**
+1. `cd admin/src/`
+2. Open firebase.ts in your favourite editor
+3. Replace the `config` object with your app's [Firebase project configuration](https://firebase.google.com/docs/web/learn-more#config-object)
+
+##### **User**
+1. `cd user/public/_scripts`
+2. Open init.js in your favourite editor
+3. Replace the `firebaseConfig` object with your app's [Firebase project configuration](https://firebase.google.com/docs/web/learn-more#config-object)
+
+#### **Hosting URL Configuration**
+##### **Admin**
+1. `cd admin/`
+2. Open .env in your favourite editor
+3. Set VITE_USER_URL={https://USER_SITE_ID.web.app}
 
 ### Functions setup
 [Functions docs](https://firebase.google.com/docs/functions)
@@ -73,6 +92,9 @@ Error: HTTP Error: 400, Invalid name: `admin-satcap-research` is reserved by ano
 
 1. `cd functions/`
 2. `npm i`
+3. Open .env in your favourite editor
+4. Set ADMIN_URL={https://ADMIN_SITE_ID.web.app}
+5. Set USER_URL={https://USER_SITE_ID.web.app}
 
 ## Deploy
 
@@ -85,12 +107,6 @@ firebase deploy --only firestore:rules
 firebase deploy --only storage
 ```
 
-### Functions
-```
-firebase deploy --only functions
-```
-You can [read here](https://firebase.google.com/docs/functions/manage-functions#deploy_functions) for more details about Firebase Functions and deployments
-
 ### Admin
 1. `cd admin/`
 2. `npm i && npm run build`
@@ -101,6 +117,18 @@ You can [read here](https://firebase.google.com/docs/functions/manage-functions#
 ### User (survey links)
 ```
 firebase deploy --only hosting:user
+```
+
+### Functions
+You can [read here](https://firebase.google.com/docs/functions/manage-functions#deploy_functions) for more details about Firebase Functions and deployments
+
+Before deploying all functions, we need to have an existing mine in the Firestore Database so that the relevant trigger functions on the `mines` collection will deploy successfully.
+```
+firebase deploy --only functions:addMine
+```
+Please see [Initial data import/Add Mine](#add-mine) for how to execute this function **before** running the below:
+```
+firebase deploy --only functions
 ```
 
 ## Initial data import
