@@ -83,7 +83,7 @@ You will need to update the firebase configurations for each app (user & admin) 
 ##### **Admin**
 1. `cd admin/`
 2. Open .env in your favourite editor
-3. Set VITE_USER_URL={https://USER_SITE_ID.web.app}
+3. Set VITE_USER_URL=https://USER_SITE_ID.web.app
 
 ### Functions setup
 [Functions docs](https://firebase.google.com/docs/functions)
@@ -93,8 +93,8 @@ You will need to update the firebase configurations for each app (user & admin) 
 1. `cd functions/`
 2. `npm i`
 3. Open .env in your favourite editor
-4. Set ADMIN_URL={https://ADMIN_SITE_ID.web.app}
-5. Set USER_URL={https://USER_SITE_ID.web.app}
+4. Set ADMIN_URL=https://ADMIN_SITE_ID.web.app
+5. Set USER_URL=https://USER_SITE_ID.web.app
 
 ## Deploy
 
