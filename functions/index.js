@@ -10,6 +10,9 @@ if (admin.apps.length === 0) {
 exports.createAuthentication = functions.firestore
   .document('mines/{mineId}/users/{userId}')
   .onCreate(async (snap, context) => {
+    const adminUrl = process.env.ADMIN_URL
+    const userUrl = process.env.USER_URL
+
     const user = snap.data()
     const password = generator.generate()
 
@@ -32,20 +35,20 @@ exports.createAuthentication = functions.firestore
       to: user.email,
       message: {
         subject: 'SATCAP Admin | New Account Created',
-        text: `Hi ${user.name}. Welcome to SATCAP Admin. Please sign in (https://admin-satcap-research.web.app) using the following password: ${password}`,
+        text: `Hi ${user.name}. Welcome to SATCAP Admin. Please sign in (${adminUrl}) using the following password: ${password}`,
         html: `
           <div style="padding: 20px; background-color: rgb(247, 247, 247);border-radius:10px;max-width:640px;margin:0 auto;">
-            <img src="https://satcap-research.web.app/_style/images/emailheader.jpg" style="width:100%;object-fit:cover;max-height:150px;border-radius:10px;"/>
+            <img src="${userUrl}/_style/images/emailheader.jpg" style="width:100%;object-fit:cover;max-height:150px;border-radius:10px;"/>
             <h2 style="font-size: 2em;">Welcome ${user.name}</h2>
             <br>
             <p style="font-size: 1.2em;">You've just been added to the SATCAP Admin Platform; Happy to have you onboard!</p>
             <p style="font-size: 1.2em;">Your Password is:  <strong style="font-size: 1.3em;">${password}</strong></p>
             <br>
             <p style="font-size: 1.2em;">Click below to get started:</p>
-            <a style="font-size: 1.2em;" href="https://admin-satcap-research.web.app">SATCAP Admin</a><br>
+            <a style="font-size: 1.2em;" href="${adminUrl}">SATCAP Admin</a><br>
             <br/><br/><br/>
             <div style="text-align:center;width:100%;margin:0 auto;">
-              <img src="https://satcap-research.web.app/_style/images/logo.png" style="width:30px;" alt="SATCAP Logo" />
+              <img src="${userUrl}/_style/images/logo.png" style="width:30px;" alt="SATCAP Logo" />
               <strong style="text-align:center;font-size: 1em;">SATCAP</strong>
             </div>
           </div>

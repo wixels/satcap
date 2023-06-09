@@ -227,7 +227,7 @@ const setQuery = function (item) {
     const id = e.currentTarget.dataset.queryDocId
     const link = JSON.parse(window.localStorage.getItem('link'))
     e.currentTarget.textContent = 'Deleting...'
-    const res = await requestHandler('https://satcap-research.web.app/api/query/delete', 'DELETE', { mineDocId: link.mineDocId , queryDocId: id })
+    const res = await requestHandler(window.location.origin+'/api/query/delete', 'DELETE', { mineDocId: link.mineDocId , queryDocId: id })
     if (res.ok) {
       document.getElementById(id).remove()
     }

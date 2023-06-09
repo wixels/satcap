@@ -136,7 +136,7 @@ const submitSurvey = async function (e) {
     form.querySelector('button[type="submit"]').textContent = 'Submitting your responses...'
     let body = parseData(form)
               
-    const res = await requestHandler(form.action, form.method, body)
+    const res = await requestHandler(window.location.origin+form.action, form.method, body)
     form.querySelector('button[type="submit"]').textContent = 'Submit'
     if (res.ok) {
       const link = JSON.parse(window.localStorage.getItem('link'))

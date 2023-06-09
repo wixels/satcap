@@ -117,7 +117,7 @@ export const Login = (): JSX.Element => {
             }}
             width={180}
             radius="md"
-            src={'https://satcap-research.web.app/_style/images/logo.png'}
+            src={'/logo.png'}
             alt="Random unsplash image"
           /> */}
           <TextInput

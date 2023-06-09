@@ -215,7 +215,7 @@ function App(): JSX.Element {
                       width={40}
                       radius="md"
                       src={
-                        'https://satcap-research.web.app/_style/images/logo.png'
+                        '/logo.png'
                       }
                       alt="Random unsplash image"
                     />

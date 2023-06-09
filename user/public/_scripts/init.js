@@ -3,15 +3,8 @@ import { getAnalytics, logEvent } from 'https://www.gstatic.com/firebasejs/9.9.3
 import { getFirestore, getDocs, query, collectionGroup, where } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js'
 import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js'
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAh2eCT0djKwvkvVbT_jMK7OuZcNX05jHQ",
-  authDomain: "satcap-research.firebaseapp.com",
-  projectId: "satcap-research",
-  storageBucket: "satcap-research.appspot.com",
-  messagingSenderId: "16504149634",
-  appId: "1:16504149634:web:74802b5a7a9a6cf5d6469b",
-  measurementId: "G-N3W0HEY5R1"
-}
+// TODO: Replace the following with your app's Firebase project configuration (https://firebase.google.com/docs/web/learn-more#config-object)
+const firebaseConfig = {}
 
 const app = initializeApp(firebaseConfig)
 const analytics = getAnalytics(app)

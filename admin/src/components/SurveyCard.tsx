@@ -45,7 +45,7 @@ export const SurveyCard = ({
   const [opened, { close, open }] = useDisclosure(false);
   const [resLoading, setResLoading] = useState(false);
 
-  const CORE_URL = 'https://satcap-research.web.app/?linkId=';
+  const CORE_URL = import.meta.env.VITE_USER_URL+'/?linkId=';
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 

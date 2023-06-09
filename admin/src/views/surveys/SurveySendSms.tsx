@@ -50,7 +50,7 @@ export const SurveySendSms = (): JSX.Element => {
             .replaceAll(')', '')
             .replaceAll('-', '')
         ),
-        body: `Good day, The following link will provide you with the necessary Survey/Checklist access: https://satcap-research.web.app/?linkId=${link}`,
+        body: `Good day, The following link will provide you with the necessary Survey/Checklist access: ${import.meta.env.VITE_USER_URL}/?linkId=${link}`,
       });
       setLoading(false);
       showNotification({

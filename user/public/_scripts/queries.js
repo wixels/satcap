@@ -23,7 +23,7 @@ const submit = async function (e) {
       }
     }
   
-    const res = await requestHandler(form.action, form.method, body)
+    const res = await requestHandler(window.location.origin+form.action, form.method, body)
     form.querySelector('button[type="submit"]').textContent = 'Submit query'
     if (res.ok) {
       form.reset()
