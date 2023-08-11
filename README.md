@@ -56,6 +56,9 @@ firebase use ALIAS
 
 **ADMIN_SITE_ID** and **USER_SITE_ID** has to be replaced with a value of your choosing.
 
+riis-satcap-admin
+riis-satcap-user
+
 This would however need to be unique across the entire Firebase platform so if you use a value that already exists, you will get an error similar to the below:
 ```
 Error: HTTP Error: 400, Invalid name: `admin-satcap-research` is reserved by another project; try something like `admin-satcap-research-51aa9` instead

@@ -1,0 +1,22 @@
+{
+  "projects": {
+    "satcap-prod": "riis-satcap-28b32",
+    "riis-satcap-prod": "satcap-riis-b1fd5"
+  },
+  "targets": {
+    "riis-satcap-28b32": {
+      "hosting": {}
+    },
+    "satcap-riis-b1fd5": {
+      "hosting": {
+        "admin": [
+          "riis-satcap-admin"
+        ],
+        "user": [
+          "riis-satcap-user"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
