@@ -1,7 +1,8 @@
 {
   "projects": {
     "satcap-prod": "riis-satcap-28b32",
-    "riis-satcap-prod": "satcap-riis-b1fd5"
+    "riis-satcap-prod": "satcap-riis-b1fd5",
+    "satcap": "satcap-research"
   },
   "targets": {
     "riis-satcap-28b32": {

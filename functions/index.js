@@ -264,3 +264,56 @@ exports.importPackages = functions.https.onRequest(async (req, res) => {
     res.end()
   }
 })
+
+exports.getDataFromFirestore = functions.https.onRequest(async (request, response) => {
+  try {
+    const firestore = admin.firestore();
+    const responses = [];
+    // Replace 'your_collection_name' with the actual Firestore collection you want to access
+    const snapshot = await firestore.collectionGroup('responses').get();
+    snapshot.forEach((doc) => {
+      responses.push(doc.data());
+    });
+ 
+    response.json(responses);
+  } catch (error) {
+    response.status(500).json({ error: 'Something went wrong!' });
+  }
+});
+
+
+exports.getLocationsFromFirestore = functions.https.onRequest(async (request, response) => {
+  try {
+
+    const firestore = admin.firestore();
+
+    const links = [];
+    const linksSnapshot = await firestore.collectionGroup('links').get();
+    linksSnapshot.forEach((doc) => {
+      links.push(doc.data());
+    }); 
+    
+    const locations = [];
+    const snapshot = await firestore.collectionGroup('locations').get();
+    snapshot.forEach((doc) => {
+      locations.push({
+        ...doc.data(),
+        locationId: doc.id,
+      });
+    });
+
+
+   const returnData = links.map(link => {
+    return {
+      linkId: link?.linkId,
+      createdAt: link?.createdAt,
+      locationDocId: link?.locationDocId,
+      locationName: locations?.find(x => x.locationId === link.locationDocId).name ?? ''
+    }
+   }) 
+
+    response.json(returnData);
+  } catch (error) {
+    response.status(500).json({ error: 'Something went wrong!' });
+  }
+});
