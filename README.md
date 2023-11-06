@@ -108,6 +108,8 @@ Because of the admin website requiring a build before deployment, it is **not** 
 firebase deploy --only firestore:indexes
 firebase deploy --only firestore:rules
 firebase deploy --only storage
+firebase deploy –only getLocationsFromFirestore
+firebase deploy –only getDataFromFirestore
 ```
 
 ### Admin
