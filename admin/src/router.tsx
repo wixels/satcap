@@ -16,6 +16,8 @@ import { Discussions } from './views/discussions/Discussions';
 import { Home } from './views/home/Home';
 import { CreatePerson } from './views/people/CreatePerson';
 import { People } from './views/people/People';
+import { Tools } from './views/tool-editor/Tools';
+import { ToolEditor } from './views/tool-editor/ToolEditor';
 import { SurveyReports } from './views/reports/SurveyReports';
 import { CreateWrapper } from './views/resources/CreateWrapper';
 import { Information } from './views/resources/Information';
@@ -202,6 +204,30 @@ export const routerFactory = (queryClient: any) => {
               fetchPerson(personId)
             )),
           element: <EditPerson />,
+        },
+      ],
+    },
+    {
+      path: '/tool-editor',
+      loader: () =>
+        queryClient.getQueryData(['mine']) ??
+        queryClient.fetchQuery(['mine'], fetchMineWithPacks),
+      children: [
+        {
+          path: '/',
+          element: <Tools />,
+        },
+        {
+          path: ':surveyKey',
+          loader: () =>
+            queryClient.getQueryData(['locations']) ??
+            queryClient.fetchQuery(['locations'], fetchLocations),
+          children: [
+            {
+              path: '/',
+              element: <ToolEditor />,
+            }
+          ],
         },
       ],
     },

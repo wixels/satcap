@@ -35,6 +35,43 @@ export interface ILocation {
   name: string;
 }
 
+export interface IQuestion {
+  id: string;
+  answerId?: string;
+  surveyKey: string;
+  title: string;
+  subtitle?: string;
+  type: string;
+  order: int;
+  isLocked: boolean;
+  maxAnswerCount?: int;
+  answers: IAnswer[];
+  createdAt?: string;
+  lastUpdatedAt?: string;
+}
+
+export interface IAnswer {
+  id: string;
+  title: string;
+  order: int;
+  specifyAnswer: boolean;
+  subQuestionsRelated: boolean;
+  questions?: IQuestion[];
+  conditionalView?: IConditionalView;
+  createdAt?: string;
+  lastUpdatedAt?: string;
+}
+
+export interface IConditionalView {
+  text: string;
+  link: IConditionalViewLink;
+}
+
+export interface IConditionalViewLink {
+  text: string;
+  url: string;
+}
+
 export interface ISurvey {
   description?: string;
   key: string;
