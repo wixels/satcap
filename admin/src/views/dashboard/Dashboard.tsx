@@ -4,14 +4,6 @@ import { useEffect } from 'react';
 import { useGetMine } from '../../hooks/network/useMine';
 
 export const Dashboard = () => {
-  // PAGE SETUP
-  const PAGE_TITLE = 'Dashboard';
-  const [_, setTitle] = useLocalStorage({
-    key: 'title',
-  });
-  useEffect(() => {
-    setTitle(PAGE_TITLE);
-  }, []);
 
   // DATA
   const { data: mine, isLoading } = useGetMine();

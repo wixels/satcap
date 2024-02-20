@@ -30,13 +30,6 @@ export const Surveys = (): JSX.Element => {
   const linkId = useNanoId();
   const { data: links } = useGetLinks();
 
-  const PAGE_TITLE = 'Surveys';
-  const [_, setTitle] = useLocalStorage({
-    key: 'title',
-  });
-  useEffect(() => {
-    setTitle(PAGE_TITLE);
-  }, []);
   return (
     <>
       <Button

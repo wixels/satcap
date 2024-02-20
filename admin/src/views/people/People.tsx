@@ -18,13 +18,7 @@ export const People = (): JSX.Element => {
   }, [currentAccount?.isAdmin, fetching]);
 
   const { data } = useGetPeople();
-  const PAGE_TITLE = 'Manage People';
-  const [_, setTitle] = useLocalStorage({
-    key: 'title',
-  });
-  useEffect(() => {
-    setTitle(PAGE_TITLE);
-  }, []);
+
   return (
     <>
       <Button

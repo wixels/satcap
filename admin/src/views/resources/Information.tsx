@@ -28,15 +28,7 @@ export const Information = (): JSX.Element => {
   const { filter } = useSearch<LocationGenerics>();
   const navigate = useNavigate<LocationGenerics>();
 
-  const PAGE_TITLE = 'Resources & Notices';
-  const [_, setTitle] = useLocalStorage({
-    key: 'title',
-  });
   const [chips, setChips] = useState(filter);
-
-  useEffect(() => {
-    setTitle(PAGE_TITLE);
-  }, []);
 
   const items = useCallback(() => {
     if (filter?.includes('all') || !filter?.length || !filter)

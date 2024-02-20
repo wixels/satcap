@@ -28,12 +28,13 @@ import {
   IconLogout,
   IconMessages,
   IconMoonStars,
+  IconSettings,
   IconSpeakerphone,
   IconSun,
   IconUsers,
 } from '@tabler/icons';
 import { Outlet } from '@tanstack/react-location';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { UserButton } from './components/UserButton';
 import useAuthState from './hooks/useAuthState';
 import { getAuth, signOut } from 'firebase/auth';
@@ -56,7 +57,7 @@ function App(): JSX.Element {
       : 'light',
     getInitialValueInEffect: true,
   });
-  const [title] = useLocalStorage({
+  const [title, setTitle] = useLocalStorage({
     key: 'title',
     defaultValue: '',
   });
@@ -133,24 +134,36 @@ function App(): JSX.Element {
                   />
                   <Box mt={'1rem'}>
                     <NavbarLink
+                      onClick={() => { setTitle('Home') }}
                       path="/"
                       icon={<IconHome2 size={22} stroke={1.5} />}
                       label="Home"
                     />
                     <NavbarLink
+                      onClick={() => { setTitle('Dashboard') }}
                       path="/dashboard"
                       icon={<IconLayoutDashboard size={22} stroke={1.5} />}
                       label="Dashboard"
                     />
                     {currentAccount?.isAdmin && (
-                      <NavbarLink
-                        path="/people"
-                        label="People"
-                        icon={<IconUsers size={22} stroke={1.5} />}
-                      />
+                      <div>
+                        <NavbarLink
+                          onClick={() => { setTitle('Manage People') }}
+                          path="/people"
+                          label="People"
+                          icon={<IconUsers size={22} stroke={1.5} />}
+                        />
+                        <NavbarLink
+                          onClick={() => { setTitle('Tool Editor') }}
+                          path="/tool-editor"
+                          label="Tool Editor"
+                          icon={<IconSettings size={22} stroke={1.5} />}
+                        />
+                      </div>
                     )}
                     {mine?.scopes?.includes('survey') && (
                       <NavbarLink
+                        onClick={() => { setTitle('Survey Reports') }}
                         path="/reports"
                         label="Survey Reports"
                         icon={<IconChartPie size={22} stroke={1.5} />}
@@ -158,6 +171,7 @@ function App(): JSX.Element {
                     )}
                     {mine?.scopes?.includes('information') && (
                       <NavbarLink
+                        onClick={() => { setTitle('Resources & Notices') }}
                         path="/information"
                         label="Information"
                         icon={<IconSpeakerphone size={22} stroke={1.5} />}
@@ -166,6 +180,7 @@ function App(): JSX.Element {
 
                     {mine?.scopes?.includes('survey') && (
                       <NavbarLink
+                        onClick={() => { setTitle('Surveys') }}
                         path="/surveys"
                         label="Surveys"
                         icon={<IconLayoutGrid size={22} stroke={1.5} />}
@@ -174,6 +189,7 @@ function App(): JSX.Element {
 
                     {mine?.scopes?.includes('queries') && (
                       <NavbarLink
+                        onClick={() => { setTitle('Query Submissions') }}
                         path="/discussions"
                         label="Query Submissions"
                         icon={<IconMessages size={22} stroke={1.5} />}

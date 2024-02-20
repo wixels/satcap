@@ -55,13 +55,6 @@ const Discussions = () => {
       ];
     }
   }, [discussions, isLoading, isError]);
-  const PAGE_TITLE = 'Query Submissions';
-  const [_, setTitle] = useLocalStorage({
-    key: 'title',
-  });
-  useEffect(() => {
-    setTitle(PAGE_TITLE);
-  }, []);
 
   const toSentenceCase = (string: string) => {
     const result = string.replace(/([A-Z])/g, ' $1');

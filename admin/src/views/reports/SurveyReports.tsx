@@ -93,13 +93,7 @@ export const SurveyReports = (): JSX.Element => {
     );
     download();
   };
-  const PAGE_TITLE = 'Survey Reports';
-  const [_, setTitle] = useLocalStorage({
-    key: 'title',
-  });
-  useEffect(() => {
-    setTitle(PAGE_TITLE);
-  }, []);
+  
   return (
     <Accordion multiple={true}>
       {linksByLocation?.map((location) => (
