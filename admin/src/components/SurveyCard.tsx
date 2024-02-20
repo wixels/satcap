@@ -95,8 +95,8 @@ export const SurveyCard = ({
       </Modal>
       <Card shadow="sm" p="lg" radius="md" withBorder>
         <Card.Section withBorder inheritPadding py="xs">
-          <Group position="apart">
-            <Text weight={500}>{name}</Text>
+          <Group noWrap={true} position="apart">
+            <Text truncate={true} weight={500}>{name}</Text>
             <Menu withinPortal position="bottom-end" shadow="sm">
               <Menu.Target>
                 <ActionIcon>
