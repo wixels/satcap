@@ -14,7 +14,13 @@ import {
   SimpleGrid,
 } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
-import { IconCheck, IconChevronsLeft, IconTrash, IconX } from '@tabler/icons';
+import {
+  IconCheck,
+  IconChevronsLeft,
+  IconCirclePlus,
+  IconTrash,
+  IconX,
+} from '@tabler/icons';
 import { Link, useMatch, useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
@@ -25,6 +31,7 @@ import { useGetUser, userGetMine } from '../../context/AuthenticationContext';
 import db from '../../firebase';
 import { useGetQuestions } from '../../hooks/network/useQuestions';
 import { QuestionCard } from '../../components/QuestionCard';
+import { ToolEditorTable } from '../../components/ToolEditorTable';
 
 export const ToolEditor = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
@@ -66,7 +73,18 @@ export const ToolEditor = (): JSX.Element => {
           </Group>
         </UnstyledButton>
       </Link>
-      <SimpleGrid
+      <Button
+        to={'./create-question'}
+        component={Link}
+        variant="light"
+        leftIcon={<IconCirclePlus />}
+        mb={'md'}
+      >
+        Add new question
+      </Button>
+      {!isLoading && questions ? <ToolEditorTable data={questions} /> : null}
+
+      {/* <SimpleGrid
         cols={3}
         spacing="lg"
         breakpoints={[
@@ -84,7 +102,7 @@ export const ToolEditor = (): JSX.Element => {
             key={question.id}
           />
         ))}
-      </SimpleGrid>
+      </SimpleGrid> */}
     </>
   );
 };

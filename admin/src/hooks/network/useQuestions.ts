@@ -5,10 +5,9 @@ import { IQuestion } from '../../types';
 
 export async function fetchQuestions(surveyKey: string) {
   const questions: IQuestion[] = [];
-
-  console.log(surveyKey)
-  const questionsSnap = await getDocs(query(collection(db, 'questions'), where('surveyKey', '==', surveyKey)));
-  console.log(questionsSnap.docs)
+  const questionsSnap = await getDocs(
+    query(collection(db, 'questions'), where('surveyKey', '==', surveyKey))
+  );
   questionsSnap.forEach((doc) => {
     questions.push({
       ...(doc.data() as IQuestion),
@@ -19,7 +18,11 @@ export async function fetchQuestions(surveyKey: string) {
 }
 
 export const useGetQuestions = (surveyKey: string) => {
-  return useQuery<IQuestion[], any>(['questions', surveyKey], () => fetchQuestions(surveyKey), {
-    staleTime: 1000 * 60 * 10,
-  });
+  return useQuery<IQuestion[], any>(
+    ['questions', surveyKey],
+    () => fetchQuestions(surveyKey),
+    {
+      staleTime: 1000 * 60 * 10,
+    }
+  );
 };

@@ -33,6 +33,7 @@ import { Dashboard } from './views/dashboard/Dashboard';
 import { Summary } from './views/dashboard/Summary';
 import { useGetResponses } from './hooks/network/useResponses';
 import { Center, Loader, Stack } from '@mantine/core';
+import { CreateQuestion } from './views/tool-editor/CreateQuestion';
 
 export type LocationGenerics = MakeGenerics<{
   Params: {
@@ -226,7 +227,11 @@ export const routerFactory = (queryClient: any) => {
             {
               path: '/',
               element: <ToolEditor />,
-            }
+            },
+            {
+              path: '/create-question',
+              element: <CreateQuestion />,
+            },
           ],
         },
       ],

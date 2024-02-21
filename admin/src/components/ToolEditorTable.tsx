@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useMemo } from 'react';
 import {
   ActionIcon,
   Anchor,
@@ -22,108 +21,80 @@ import {
   IconEdit,
   IconTrash,
 } from '@tabler/icons';
-import { Link, useNavigate } from '@tanstack/react-location';
-import { useQueryClient } from '@tanstack/react-query';
-import React, { useMemo, useState } from 'react';
-import { useTable, usePagination, useRowSelect } from 'react-table';
-import { deleteDoc, doc } from 'firebase/firestore';
-import db from '../firebase';
+import { usePagination, useRowSelect, useTable } from 'react-table';
+import { Link } from '@tanstack/react-location';
 
-const useStyles = createStyles((theme) => ({
-  td: {
-    marginBottom: theme.spacing.lg,
-    '&:first-of-type': {
-      borderTopLeftRadius: theme.radius.lg,
-      borderBottomLeftRadius: theme.radius.lg,
-    },
-    '&:last-of-type': {
-      borderTopRightRadius: theme.radius.lg,
-      borderBottomRightRadius: theme.radius.lg,
-    },
-  },
-}));
+type Props = {
+  data: any;
+};
 
-export const PeopleTable = ({ data }) => {
-  const [loading, setLoading] = useState(false);
+export const ToolEditorTable: React.FC<Props> = ({ data }) => {
+  const useStyles = createStyles((theme) => ({
+    td: {
+      marginBottom: theme.spacing.lg,
+      '&:first-of-type': {
+        borderTopLeftRadius: theme.radius.lg,
+        borderBottomLeftRadius: theme.radius.lg,
+      },
+      '&:last-of-type': {
+        borderTopRightRadius: theme.radius.lg,
+        borderBottomRightRadius: theme.radius.lg,
+      },
+    },
+  }));
   const columns = useMemo(
     () => [
       {
-        Header: 'Name',
-        accessor: 'name',
+        Header: 'Order',
+        accessor: 'order',
       },
       {
-        Header: 'Email',
-        accessor: 'email',
+        Header: 'ID',
+        accessor: 'id',
       },
       {
-        Header: 'Mobile',
-        accessor: 'mobile',
+        Header: 'Answer ID',
+        accessor: 'answerId',
       },
       {
-        Header: 'Job Title',
-        accessor: 'jobTitle',
+        Header: 'Survey Key',
+        accessor: 'surveyKey',
       },
       {
-        Header: 'Locations',
-        accessor: 'locationAdmin',
-        Cell: ({ row }) => {
-          const locations = row?.values?.locationAdmin;
-          if (!locations) return null;
-          return `Manages ${locations.length} Operation${
-            locations.length === 1 ? '' : 's'
-          }`;
-        },
+        Header: 'Title',
+        accessor: 'title',
+      },
+      {
+        Header: 'Subtitle',
+        accessor: 'subtitle',
+      },
+      {
+        Header: 'Type',
+        accessor: 'type',
+      },
+      {
+        Header: 'Locked',
+        accessor: 'isLocked',
+      },
+      {
+        Header: 'Max Answer Count',
+        accessor: 'maxAnswerCount',
+      },
+      {
+        Header: 'Answers',
+        accessor: 'answers',
+      },
+      {
+        Header: 'Created At',
+        accessor: 'createdAt',
+      },
+      {
+        Header: 'Updated At',
+        accessor: 'lastUpdatedAt',
       },
     ],
     []
   );
-
-  const IndeterminateCheckbox = React.forwardRef(
-    ({ indeterminate, ...rest }, ref) => {
-      const defaultRef = React.useRef();
-      const resolvedRef = ref != null || defaultRef;
-
-      React.useEffect(() => {
-        resolvedRef.current.indeterminate = indeterminate;
-      }, [resolvedRef, indeterminate]);
-
-      return (
-        <>
-          <input type="checkbox" ref={resolvedRef} {...rest} />
-        </>
-      );
-    }
-  );
-  IndeterminateCheckbox.displayName = 'IndeterminateCheckbox';
-
-  const { classes } = useStyles();
-
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const handleDelete = async (cell) => {
-    setLoading(true);
-    try {
-      //
-      const itemToDelete = cell.data?.[cell?.cell?.row?.index];
-      await deleteDoc(
-        doc(
-          db,
-          `mines/${window.localStorage.getItem('mineId')}/users`,
-          itemToDelete?.docId
-        )
-      );
-      queryClient.invalidateQueries(['people']);
-      setLoading(false);
-    } catch (error) {
-      showNotification({
-        icon: <IconX size={18} />,
-        color: 'red',
-        message: error?.message || 'Unable to delete notice',
-        disallowClose: true,
-      });
-      setLoading(false);
-    }
-  };
 
   const {
     getTableProps,
@@ -156,7 +127,7 @@ export const PeopleTable = ({ data }) => {
             <Group>
               <ActionIcon
                 component={Link}
-                to={`./${cell.data?.[cell?.cell?.row?.index]?.docId}/edit`}
+                to={`/`}
                 color="blue"
                 variant="light"
               >
@@ -189,7 +160,7 @@ export const PeopleTable = ({ data }) => {
                   <Button
                     fullWidth
                     color={'red'}
-                    onClick={() => handleDelete(cell)}
+                    // onClick={() => handleDelete(cell)}
                   >
                     Delete
                   </Button>
@@ -201,8 +172,10 @@ export const PeopleTable = ({ data }) => {
       ]);
     }
   );
+  const { classes } = useStyles();
   return (
     <>
+      <pre>{JSON.stringify(data, null, 3)}</pre>
       <Table
         style={{ marginBottom: '60px' }}
         {...getTableProps()}
