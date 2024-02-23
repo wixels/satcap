@@ -1,0 +1,91 @@
+import {
+  Checkbox,
+  Grid,
+  NumberInput,
+  Select,
+  Text,
+  TextInput,
+} from '@mantine/core';
+
+type Props = {
+  path: string;
+  form: any;
+  children: React.ReactNode;
+};
+export const BaseQuestionFields: React.FC<Props> = ({
+  path,
+  form,
+  children,
+}) => {
+  return (
+    <Grid p={0}>
+      <Grid.Col span={6}>
+        <TextInput
+          placeholder="Question Title..."
+          radius={'md'}
+          size="md"
+          label={
+            <Text size="sm" color="dimmed">
+              Question Title
+            </Text>
+          }
+          {...form.getInputProps(`${path}.title`)}
+        />
+      </Grid.Col>
+      <Grid.Col span={6}>
+        <TextInput
+          placeholder="Subtitle..."
+          radius={'md'}
+          size="md"
+          label={
+            <Text size="sm" color="dimmed">
+              Subtitle
+            </Text>
+          }
+          {...form.getInputProps(`${path}.subtitle`)}
+        />
+      </Grid.Col>
+      <Grid.Col span={12}>
+        <Select
+          data={['single-select', 'multi-select', 'dropdown']}
+          radius={'md'}
+          size="md"
+          label={
+            <Text size="sm" color="dimmed">
+              Type
+            </Text>
+          }
+          {...form.getInputProps(`${path}.type`)}
+        />
+      </Grid.Col>
+      <Grid.Col span={6}>
+        <Text size="sm" color="dimmed">
+          Lock Question
+        </Text>
+        <Checkbox
+          radius={'md'}
+          size="md"
+          label={
+            <Text size="sm" color="dimmed">
+              Lock This Question From Editing
+            </Text>
+          }
+          {...form.getInputProps(`${path}.isLocked`)}
+        />
+      </Grid.Col>
+      <Grid.Col span={6}>
+        <NumberInput
+          radius={'md'}
+          size="md"
+          label={
+            <Text size="sm" color="dimmed">
+              Max Answer Count
+            </Text>
+          }
+          {...form.getInputProps(`${path}.maxAnswerCount`)}
+        />
+      </Grid.Col>
+      {children}
+    </Grid>
+  );
+};

@@ -1,9 +1,11 @@
+// @ts-nocheck
 import { useMemo } from 'react';
 import {
   ActionIcon,
   Anchor,
   Button,
   Card,
+  Checkbox,
   createStyles,
   Group,
   Popover,
@@ -45,36 +47,30 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
   const columns = useMemo(
     () => [
       {
-        Header: 'Order',
-        accessor: 'order',
-      },
-      {
-        Header: 'ID',
-        accessor: 'id',
-      },
-      {
-        Header: 'Answer ID',
-        accessor: 'answerId',
-      },
-      {
-        Header: 'Survey Key',
-        accessor: 'surveyKey',
-      },
-      {
         Header: 'Title',
         accessor: 'title',
       },
       {
-        Header: 'Subtitle',
-        accessor: 'subtitle',
-      },
-      {
         Header: 'Type',
         accessor: 'type',
+        Cell: ({ row }) => {
+          return (
+            <span style={{ textTransform: 'capitalize' }}>
+              {row?.values?.type.replace('-', ' ')}
+            </span>
+          );
+        },
       },
       {
         Header: 'Locked',
         accessor: 'isLocked',
+        Cell: ({ row }) => {
+          return row?.values?.isLocked ? (
+            <Checkbox defaultChecked disabled />
+          ) : (
+            <Checkbox disabled />
+          );
+        },
       },
       {
         Header: 'Max Answer Count',
@@ -83,14 +79,11 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
       {
         Header: 'Answers',
         accessor: 'answers',
-      },
-      {
-        Header: 'Created At',
-        accessor: 'createdAt',
-      },
-      {
-        Header: 'Updated At',
-        accessor: 'lastUpdatedAt',
+        Cell: ({ row }) => {
+          const answers = row?.values?.answers;
+          if (!answers) return 0;
+          return `${answers.length} Answer${answers.length === 1 ? '' : 's'}`;
+        },
       },
     ],
     []
@@ -123,51 +116,54 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
         ...columns,
         {
           id: 'delete',
-          Cell: (cell) => (
-            <Group>
-              <ActionIcon
-                component={Link}
-                to={`/`}
-                color="blue"
-                variant="light"
-              >
-                <IconEdit size={16} />
-              </ActionIcon>
-              <Popover
-                width={300}
-                trapFocus
-                position="bottom"
-                withArrow
-                shadow="md"
-              >
-                <Popover.Target>
-                  <ActionIcon color="red" variant="light">
-                    <IconTrash size={16} />
-                  </ActionIcon>
-                </Popover.Target>
-                <Popover.Dropdown
-                  sx={(theme) => ({
-                    background:
-                      theme.colorScheme === 'dark'
-                        ? theme.colors.dark[7]
-                        : theme.white,
-                  })}
+          Cell: (cell) => {
+            if (cell.row.original?.isLocked) return null;
+            return (
+              <Group>
+                <ActionIcon
+                  component={Link}
+                  to={`/`}
+                  color="blue"
+                  variant="light"
                 >
-                  <Title order={5}>Are you sure you want to delete?</Title>
-                  <Text color="dimmed" mb={'xl'}>
-                    This action cannot be undone
-                  </Text>
-                  <Button
-                    fullWidth
-                    color={'red'}
-                    // onClick={() => handleDelete(cell)}
+                  <IconEdit size={16} />
+                </ActionIcon>
+                <Popover
+                  width={300}
+                  trapFocus
+                  position="bottom"
+                  withArrow
+                  shadow="md"
+                >
+                  <Popover.Target>
+                    <ActionIcon color="red" variant="light">
+                      <IconTrash size={16} />
+                    </ActionIcon>
+                  </Popover.Target>
+                  <Popover.Dropdown
+                    sx={(theme) => ({
+                      background:
+                        theme.colorScheme === 'dark'
+                          ? theme.colors.dark[7]
+                          : theme.white,
+                    })}
                   >
-                    Delete
-                  </Button>
-                </Popover.Dropdown>
-              </Popover>
-            </Group>
-          ),
+                    <Title order={5}>Are you sure you want to delete?</Title>
+                    <Text color="dimmed" mb={'xl'}>
+                      This action cannot be undone
+                    </Text>
+                    <Button
+                      fullWidth
+                      color={'red'}
+                      // onClick={() => handleDelete(cell)}
+                    >
+                      Delete
+                    </Button>
+                  </Popover.Dropdown>
+                </Popover>
+              </Group>
+            );
+          },
         },
       ]);
     }
@@ -175,7 +171,7 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
   const { classes } = useStyles();
   return (
     <>
-      <pre>{JSON.stringify(data, null, 3)}</pre>
+      {/* <pre>{JSON.stringify(data, null, 3)}</pre> */}
       <Table
         style={{ marginBottom: '60px' }}
         {...getTableProps()}
@@ -203,7 +199,7 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
           })}
         </tbody>
       </Table>
-      {data?.length > 10 && (
+      {/* {data?.length > 10 && (
         <Card
           sx={(theme) => ({
             position: 'absolute',
@@ -271,7 +267,7 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
             ]}
           />
         </Card>
-      )}
+      )} */}
     </>
   );
 };
