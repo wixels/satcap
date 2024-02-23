@@ -1,31 +1,18 @@
-// @ts-nocheck
-import { useMemo } from 'react';
 import {
   ActionIcon,
-  Anchor,
   Button,
-  Card,
   Checkbox,
   createStyles,
   Group,
   Popover,
-  Select,
   Table,
   Text,
-  TextInput,
   Title,
 } from '@mantine/core';
-import {
-  IconChevronLeft,
-  IconChevronRight,
-  IconChevronsLeft,
-  IconChevronsRight,
-  IconDragDrop,
-  IconEdit,
-  IconTrash,
-} from '@tabler/icons';
-import { usePagination, useRowSelect, useTable } from 'react-table';
+import { IconDragDrop, IconEdit, IconTrash } from '@tabler/icons';
 import { Link } from '@tanstack/react-location';
+import { useMemo } from 'react';
+import { usePagination, useRowSelect, useTable } from 'react-table';
 
 type Props = {
   data: any;
@@ -72,10 +59,6 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
             <Checkbox disabled />
           );
         },
-      },
-      {
-        Header: 'Max Answer Count',
-        accessor: 'maxAnswerCount',
       },
       {
         Header: 'Answers',
@@ -193,6 +176,24 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
         verticalSpacing={'md'}
         highlightOnHover
       >
+        {/* <Table.Thead>
+          <Table.Tr>
+            <Table.Th>Element position</Table.Th>
+            <Table.Th>Element name</Table.Th>
+            <Table.Th>Symbol</Table.Th>
+            <Table.Th>Atomic mass</Table.Th>
+          </Table.Tr>
+        </Table.Thead> */}
+        <thead>
+          <tr>
+            <th>Order</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Locked</th>
+            <th>Answers</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
         <tbody {...getTableBodyProps()}>
           {page.map((row, i) => {
             prepareRow(row);
