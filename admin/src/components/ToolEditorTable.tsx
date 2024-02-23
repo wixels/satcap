@@ -20,6 +20,7 @@ import {
   IconChevronRight,
   IconChevronsLeft,
   IconChevronsRight,
+  IconDragDrop,
   IconEdit,
   IconTrash,
 } from '@tabler/icons';
@@ -113,6 +114,16 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
     useRowSelect,
     (hooks) => {
       hooks.visibleColumns.push((columns) => [
+        {
+          id: 'drag',
+          Cell: (cell) => {
+            return (
+              <ActionIcon color="blue" variant="light">
+                <IconDragDrop size={16} />
+              </ActionIcon>
+            );
+          },
+        },
         ...columns,
         {
           id: 'delete',
