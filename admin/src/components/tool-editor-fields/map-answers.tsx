@@ -31,7 +31,6 @@ export const MapAnswers: React.FC<Props> = ({
 
   const value = getObjectByString(form.values, path);
   console.log('value::: ', value);
-  // console.log('path::: ', path);
   useEffect(() => {
     if (value.type !== 'dropdown') {
       setAutoAnswers(false);
@@ -57,6 +56,7 @@ export const MapAnswers: React.FC<Props> = ({
               setAutoAnswers(e.target.checked);
               if (e.target.checked) {
                 form.setFieldValue(`${path}.autoAnswers`, 'area');
+                form.setFieldValue(`${path}.answers`, []);
               }
             }}
             radius={'md'}

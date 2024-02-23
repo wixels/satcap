@@ -81,7 +81,11 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
         Header: 'Answers',
         accessor: 'answers',
         Cell: ({ row }) => {
+          console.log('row?.values::: ', row);
           const answers = row?.values?.answers;
+          if (row?.original?.autoAnswers === 'area') {
+            return 'Area Answers';
+          }
           if (!answers) return 0;
           return `${answers.length} Answer${answers.length === 1 ? '' : 's'}`;
         },
