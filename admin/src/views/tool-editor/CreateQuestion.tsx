@@ -19,6 +19,7 @@ import { BaseQuestionFields } from '../../components/tool-editor-fields/base-que
 import { MapAnswers } from '../../components/tool-editor-fields/map-answers';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import db from '../../firebase';
+import { useQueryClient } from '@tanstack/react-query';
 
 type Props = {};
 export const questionDefaultValues = {
@@ -29,6 +30,7 @@ export const questionDefaultValues = {
   type: 'single-select',
   isLocked: false,
   maxAnswerCount: null,
+  answerId: null,
   answers: [
     {
       id: nanoid(8),
@@ -68,6 +70,7 @@ export const CreateQuestion: React.FC<Props> = () => {
     },
   });
 
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const createQuestion = async (values: any) => {
     // TODO: Do validation and add subView key
@@ -79,6 +82,8 @@ export const CreateQuestion: React.FC<Props> = () => {
         ...values.questions[0],
         surveyKey,
       });
+
+      queryClient.invalidateQueries();
       navigate({ to: '../' });
     } catch (error: any) {
       showNotification({
