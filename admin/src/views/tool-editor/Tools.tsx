@@ -1,31 +1,7 @@
-import {
-  ActionIcon,
-  Badge,
-  Button,
-  Card,
-  CheckIcon,
-  CopyButton,
-  Group,
-  Menu,
-  SimpleGrid,
-  Stack,
-  Text,
-} from '@mantine/core';
-import { useLocalStorage } from '@mantine/hooks';
-import {
-  IconCirclePlus,
-  IconClipboardCheck,
-  IconDots,
-  IconTrash,
-} from '@tabler/icons';
-import { Link } from '@tanstack/react-location';
+import { SimpleGrid } from '@mantine/core';
 import { nanoid } from 'nanoid';
-import { useEffect } from 'react';
-import { SurveyCard } from '../../components/SurveyCard';
-import { useGetMine } from '../../hooks/network/useMine';
-import { useNanoId } from '../../hooks/useNanoId';
-import { ILink, IPackage } from '../../types';
 import { ToolCard } from '../../components/ToolCard';
+import { useGetMine } from '../../hooks/network/useMine';
 
 export const Tools = (): JSX.Element => {
   const { data: mine, isLoading } = useGetMine();
@@ -42,15 +18,30 @@ export const Tools = (): JSX.Element => {
       >
         {mine?.packages?.map((pack, i) => {
           console.log('pack::: ', pack);
-          return (
-            <ToolCard
-              linkId={pack.survey.key}
-              name={pack.name}
-              description={pack.scopes.join(', ')}
-              docId={pack.docId}
-              key={nanoid()}
-            />
-          );
+          if (pack?.survey?.surveys) {
+            return pack?.survey?.surveys.map((survey) => {
+              console.log('I am surveys::: ');
+              return (
+                <ToolCard
+                  linkId={survey.key}
+                  name={survey.title}
+                  description={survey.description}
+                  docId={survey.key}
+                  key={survey.key}
+                />
+              );
+            });
+          } else {
+            return (
+              <ToolCard
+                linkId={pack.survey.key}
+                name={pack.name}
+                description={pack.scopes.join(', ')}
+                docId={pack.docId}
+                key={nanoid()}
+              />
+            );
+          }
         })}
       </SimpleGrid>
     </>
