@@ -17,10 +17,10 @@ export const Tools = (): JSX.Element => {
         ]}
       >
         {mine?.packages?.map((pack, i) => {
-          console.log('pack::: ', pack);
+          // @ts-ignore
           if (pack?.survey?.surveys) {
+            // @ts-ignore
             return pack?.survey?.surveys.map((survey) => {
-              console.log('I am surveys::: ');
               return (
                 <ToolCard
                   linkId={survey.key}
