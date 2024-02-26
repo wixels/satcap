@@ -31,7 +31,7 @@ export const MapQuestions: React.FC<Props> = ({
   };
 
   const value = getObjectByString(form.values, path);
-  // console.log('value::: ', value);
+  console.log('value::: ', value);
   // console.log('path::: ', path);
   return (
     <Grid>
@@ -63,8 +63,7 @@ export const MapQuestions: React.FC<Props> = ({
           ))
         : null}
       <Grid.Col
-        //
-        hidden={value?.questions?.length || value?.link}
+        hidden={value?.link}
         span={6}
       >
         <Button
@@ -85,17 +84,7 @@ export const MapQuestions: React.FC<Props> = ({
               type: 'single-select',
               isLocked: false,
               maxAnswerCount: null,
-              answers: [
-                {
-                  id: nanoid(8),
-                  key: nanoid(8),
-                  title: '',
-                  specifyAnswer: false,
-                  subQuestionsRelated: true,
-                  subView: null,
-                  // questions: [],
-                },
-              ],
+              answers: [],
               createdAt: new Date().toISOString(),
             });
           }}

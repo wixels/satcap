@@ -30,6 +30,8 @@ export const questionDefaultValues = {
   type: 'single-select',
   isLocked: false,
   maxAnswerCount: null,
+  order: 1,
+  reportingKey: null,
   answerId: null,
   answers: [
     {
@@ -48,8 +50,8 @@ export const answerDefaultValues = {
   key: nanoid(8),
   title: '',
   specifyAnswer: false,
-  subQuestionsRelated: true,
-  subView: '',
+  subQuestionsRelated: false,
+  subView: null,
   questions: [],
   link: {
     title: '',
@@ -76,8 +78,6 @@ export const CreateQuestion: React.FC<Props> = () => {
     // TODO: Do validation and add subView key
     setLoading(true);
     try {
-      console.log('values::: ', values);
-
       await setDoc(doc(db, 'questions', values.questions[0].id), {
         ...values.questions[0],
         surveyKey,

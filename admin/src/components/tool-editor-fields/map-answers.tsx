@@ -82,6 +82,7 @@ export const MapAnswers: React.FC<Props> = ({
                   />
 
                   <Grid.Col span={12}>
+
                     <MapQuestions
                       isParentQuestionDropdown={value.type === 'dropdown'}
                       form={form}
@@ -89,6 +90,7 @@ export const MapAnswers: React.FC<Props> = ({
                       questions={answer.questions ?? []}
                       surveyKey={surveyKey}
                     />
+                    
                   </Grid.Col>
                 </React.Fragment>
               ))
@@ -102,8 +104,8 @@ export const MapAnswers: React.FC<Props> = ({
                   key: nanoid(8),
                   title: '',
                   specifyAnswer: false,
-                  subQuestionsRelated: true,
-                  subView: '',
+                  subQuestionsRelated: false,
+                  subView: null,
                   // questions: [],
                 })
               }

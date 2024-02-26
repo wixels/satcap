@@ -1,4 +1,4 @@
-import { collection, query, where, getDocs } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js'
+import { collection, query, where, orderBy, getDocs } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js'
 import { logEvent } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js'
 import { requestHandler } from './helpers.js'
 import { analytics, db, initMenu } from './init.js?v=1'
@@ -83,7 +83,7 @@ const startSurvey = async function (surveyKey, subKey, title) {
   }
 }
 
-const giveConsent = function (e) {
+const giveConsent = async function (e) {
   e.preventDefault()
   const link = JSON.parse(window.localStorage.getItem('link'))
   const checked = document.querySelector('[name="giveConsent"]:checked')
@@ -97,6 +97,7 @@ const giveConsent = function (e) {
       form.querySelector('input[name="mineDocId"]').setAttribute('value', link.mineDocId)
       form.querySelector('input[name="linkDocId"]').setAttribute('value', link.docId)
       form.querySelector('input[name="linkId"]').setAttribute('value', link.linkId)
+      await setQuestions(link.package.survey.key, form)
       setOnChange(form)
       setProgressTracker()
       setEmbeddables()
@@ -157,6 +158,132 @@ const submitSurvey = async function (e) {
   } catch (error) {
     form.querySelector('button[type="submit"]').textContent = 'Submit'
     console.error(error)
+  }
+}
+
+const setQuestions = async function (surveyKey, form) {
+  const questionsSnap = await getDocs(query(collection(db, 'questions'), where('surveyKey', '==', surveyKey), where('answerId', '==', null), orderBy('order')))
+  if (questionsSnap.size) {
+    form.querySelector('#preQuestion').classList.add('hidden')
+    for (let i = 0; i < questionsSnap.docs.length; i++) {
+      const question = questionsSnap.docs[i].data()
+      const questionTemplate = document.getElementById(`question-type-${question.type}`)
+      const questionContent = questionTemplate.content.cloneNode(true)
+
+      questionContent.querySelector('.question-number').textContent = `Question ${i + 1}`
+      questionContent.querySelector('.question-title').textContent = question.title
+      questionContent.querySelector('.question-subtitle').textContent = question.subtitle
+
+      if (question.type === 'dropdown') {
+        const select = questionContent.querySelector('select')
+        select.name = `question-${question.id}`
+        if (question.autoAnswers && !question.answers?.length) {
+          select.dataset.answers = question.autoAnswers
+        } else if (question.answers.length) {
+          for (const answer of question.answers) {
+            const option = document.createElement('option')
+            option.textContent = answer.title
+            option.value = answer.title
+            select.appendChild(option)
+          }
+        }
+      } else {
+        for (const answer of question.answers) {
+          const answerTemplate = questionContent.querySelector('#answer')
+          const answerContent = answerTemplate.content.cloneNode(true)
+          const input = answerContent.querySelector('input')
+          answerContent.querySelector('span').textContent = answer.title
+          input.name = `question-${question.id}`
+          input.value = answer.title
+          input.dataset.answerId = answer.id
+          questionContent.querySelector('.answers').appendChild(answerContent)
+  
+          if (answer.subView?.length) {
+            let subViewContent
+  
+            const inputs = questionContent.querySelectorAll('.answers input')
+            for (const input of inputs) {
+              input.dataset.onChange = "conditionalPath"
+              input.dataset.conditionalPath = (input.dataset.conditionalPath) ? input.dataset.conditionalPath + `-${question.id}-${answer.id}` : `${question.id}-${answer.id}}`
+            }
+  
+            if (answer.subView === 'link' && answer.link?.title) {
+              const linkTemplate = document.getElementById('answer-subView-link')
+              subViewContent = linkTemplate.content.cloneNode(true)
+  
+              subViewContent.querySelector('p').textContent = answer.link.title
+              subViewContent.querySelector('a').textContent = answer.link.name
+              subViewContent.querySelector('a').setAttribute('href', answer.link.url)
+            } else if (answer.subView === 'questions' &&  answer.questions?.length) {
+              subViewContent = document.createElement('div')
+              subViewContent.classList.add('subQuestion')
+  
+              for (let a = 0; a < answer.questions.length; a++) {
+                const questionA = answer.questions[a].data()
+                const questionATemplate = document.getElementById(`question-type-${questionA.type}`)
+                const questionAContent = questionATemplate.content.cloneNode(true)
+          
+                questionAContent.querySelector('.question-number').textContent = `Question ${a + 1}`
+                questionAContent.querySelector('.question-title').textContent = questionA.title
+                questionAContent.querySelector('.question-subtitle').textContent = questionA.subtitle
+          
+                for (const answerA of questionA.answers) {
+                  if (questionA.type === 'dropdown') {
+                    const select = questionAContent.querySelector('select')
+                    select.name = `question-${questionA.id}`
+                    const option = document.createElement('option')
+                    option.textContent = answerA.title
+                    option.value = answerA.title
+                    select.appendChild(option)
+                  } else {
+                    const answerTemplate = questionAContent.querySelector('#answer')
+                    const answerContent = answerTemplate.content.cloneNode(true)
+                    const input = answerContent.querySelector('input')
+                    input.name = `question-${questionA.id}`
+                    input.value = answerA.title
+                    input.dataset.answerId = answerA.id
+                    questionAContent.querySelector('.answers').appendChild(answerContent)
+          
+                    if (answerA.subView?.length) {
+                      let subViewContent
+          
+                      const inputs = questionAContent.querySelectorAll('.answers input')
+                      for (const input of inputs) {
+                        input.dataset.onChange = "conditionalPath"
+                        input.dataset.conditionalPath = (input.dataset.conditionalPath) ? input.dataset.conditionalPath + `-${questionA.id}-${answerA.id}` : `${questionA.id}-${answerA.id}}`
+                      }
+          
+                      if (answerA.subView === 'link' && answerA.link?.title) {
+                        const linkTemplate = document.getElementById('answer-subView-link')
+                        subViewContent = linkTemplate.content.cloneNode(true)
+          
+                        subViewContent.querySelector('p').textContent = answerA.link.title
+                        subViewContent.querySelector('a').textContent = answerA.link.name
+                        subViewContent.querySelector('a').setAttribute('href', answerA.link.url)
+                      }
+          
+                      const temp = document.createElement('template')
+                      temp.dataset.choice = `${questionA.id}-${answerA.id}`
+                      temp.appendChild(subViewContent)
+                      questionContent.appendChild(temp)
+                    }
+                  }        
+                }
+                subViewContent.appendChild(questionAContent)
+              }
+            }
+  
+            const temp = document.createElement('template')
+            temp.dataset.choice = `${question.id}-${answer.id}`
+            temp.appendChild(subViewContent)
+            questionContent.appendChild(temp)
+          }        
+        }
+      }
+      form.querySelector('.questions').appendChild(questionContent)
+    }
+  } else {
+    form.querySelector('#preQuestion p').textContent = 'No questions found for survey'
   }
 }
 
@@ -340,6 +467,7 @@ const setProgressTracker = function () {
   let keysChecked = []
 
   for (const key of answers.keys()) {
+    console.log(key)
     if (!keysChecked.includes(key)) {
       let isComplete = false
       if (key.toLowerCase().includes('question')) {

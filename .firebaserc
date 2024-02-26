@@ -17,6 +17,13 @@
           "riis-satcap-user"
         ]
       }
+    },
+    "satcap-research": {
+      "hosting": {
+        "user": [
+          "satcap-research"
+        ]
+      }
     }
   },
   "etags": {}
