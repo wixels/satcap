@@ -45,7 +45,20 @@ export const BaseQuestionFields: React.FC<Props> = ({
           {...form.getInputProps(`${path}.subtitle`)}
         />
       </Grid.Col>
-      <Grid.Col span={12}>
+      <Grid.Col span={6}>
+        <TextInput
+          placeholder="Image url"
+          radius={'md'}
+          size="md"
+          label={
+            <Text size="sm" color="dimmed">
+              Image Url
+            </Text>
+          }
+          {...form.getInputProps(`${path}.imageUrl`)}
+        />
+      </Grid.Col>
+      <Grid.Col span={6}>
         <Select
           data={['single-select', 'multi-select', 'dropdown']}
           radius={'md'}

@@ -75,6 +75,19 @@ export const BaseAnswerFields: React.FC<Props> = ({
           </ActionIcon>
         </Flex>
       </Grid.Col>
+      <Grid.Col span={12}>
+        <TextInput
+          placeholder="(e.g. give more meaning to the answer)"
+          radius={'md'}
+          size="md"
+          label={
+            <Text size="sm" color="dimmed">
+              Answer Description
+            </Text>
+          }
+          {...form.getInputProps(`${path}.description`)}
+        />
+      </Grid.Col>
       <Grid.Col span={6}>
         <Text size="sm" color="dimmed">
           Add "Please Specify"
