@@ -55,7 +55,7 @@ export interface IAnswer {
   title: string;
   order: int;
   specifyAnswer: boolean;
-  subQuestionsRelated: boolean;
+  subViewRelated: boolean;
   questions?: IQuestion[];
   conditionalView?: IConditionalView;
   createdAt?: string;

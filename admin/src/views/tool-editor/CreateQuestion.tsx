@@ -47,7 +47,7 @@ export const questionDefaultValues = {
       title: '',
       description: '',
       specifyAnswer: false,
-      subQuestionsRelated: false,
+      subViewRelated: false,
       subView: null,
     },
   ],
@@ -59,7 +59,7 @@ export const answerDefaultValues = {
   title: '',
   description: '',
   specifyAnswer: false,
-  subQuestionsRelated: false,
+  subViewRelated: false,
   subView: null,
   questions: [],
   link: {
@@ -85,11 +85,8 @@ export const CreateQuestion: React.FC<Props> = () => {
   const navigate = useNavigate();
 
   const createQuestion = async (values: any) => {
-    // TODO: Do validation and add subView key
     setLoading(true);
     try {
-      console.log('values::: ', values);
-
       let questionsArr: any[] = [];
       function extractQuestions(obj: any, pass: number = 1) {
         if (obj.answers && obj.answers.length > 0) {
@@ -104,10 +101,14 @@ export const CreateQuestion: React.FC<Props> = () => {
         }
       }
       extractQuestions(values.questions[0]);
-      questionsArr.push(values.questions[0]);
+      questionsArr.push({ ...values.questions[0], surveyKey });
       const batch = writeBatch(db);
       questionsArr.forEach((q: any) => {
         batch.set(doc(db, 'questions', q.id), q);
+      });
+      console.log('values::: ', {
+        values,
+        questionsArr,
       });
       await batch.commit();
 
@@ -178,7 +179,15 @@ export const CreateQuestion: React.FC<Props> = () => {
       </Link>
       <form onSubmit={form.onSubmit(createQuestion)}>
         {questions}
-        <Button type="submit" mt={'xl'} fullWidth>
+        <Button
+          //
+          radius={'md'}
+          size="md"
+          loading={loading}
+          type="submit"
+          mt={'xl'}
+          fullWidth
+        >
           Create Question
         </Button>
       </form>

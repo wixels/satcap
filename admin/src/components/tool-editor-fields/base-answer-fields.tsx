@@ -115,7 +115,7 @@ export const BaseAnswerFields: React.FC<Props> = ({
               Questions are part of answer ( i.e 1.1 )
             </Text>
           }
-          {...form.getInputProps(`${path}.subQuestionsRelated`)}
+          {...form.getInputProps(`${path}.subViewRelated`)}
         />
       </Grid.Col>
       {value.link && (

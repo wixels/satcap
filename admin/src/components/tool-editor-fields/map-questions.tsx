@@ -31,8 +31,6 @@ export const MapQuestions: React.FC<Props> = ({
   };
 
   const value = getObjectByString(form.values, path);
-  console.log('value::: ', value);
-  // console.log('path::: ', path);
 
   return (
     <Grid>
