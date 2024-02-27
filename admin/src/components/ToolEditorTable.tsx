@@ -1,15 +1,25 @@
 import {
   ActionIcon,
   Button,
+  Card,
   Checkbox,
   createStyles,
   Group,
   Popover,
+  Select,
   Table,
   Text,
   Title,
 } from '@mantine/core';
-import { IconDragDrop, IconEdit, IconTrash } from '@tabler/icons';
+import {
+  IconChevronLeft,
+  IconChevronRight,
+  IconChevronsLeft,
+  IconChevronsRight,
+  IconDragDrop,
+  IconEdit,
+  IconTrash,
+} from '@tabler/icons';
 import { Link } from '@tanstack/react-location';
 import { useMemo } from 'react';
 import { usePagination, useRowSelect, useTable } from 'react-table';
@@ -169,21 +179,12 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
   const { classes } = useStyles();
   return (
     <>
-      {/* <pre>{JSON.stringify(data, null, 3)}</pre> */}
       <Table
         style={{ marginBottom: '60px' }}
         {...getTableProps()}
         verticalSpacing={'md'}
         highlightOnHover
       >
-        {/* <Table.Thead>
-          <Table.Tr>
-            <Table.Th>Element position</Table.Th>
-            <Table.Th>Element name</Table.Th>
-            <Table.Th>Symbol</Table.Th>
-            <Table.Th>Atomic mass</Table.Th>
-          </Table.Tr>
-        </Table.Thead> */}
         <thead>
           <tr>
             <th>Order</th>
@@ -195,10 +196,12 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
           </tr>
         </thead>
         <tbody {...getTableBodyProps()}>
+          {/* @ts-ignore */}
           {page.map((row, i) => {
             prepareRow(row);
             return (
               <tr key={row.id} {...row.getRowProps()}>
+                {/* @ts-ignore */}
                 {row.cells.map((cell) => {
                   return (
                     <td
@@ -215,7 +218,7 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
           })}
         </tbody>
       </Table>
-      {/* {data?.length > 10 && (
+      {data?.length > 10 && (
         <Card
           sx={(theme) => ({
             position: 'absolute',
@@ -283,7 +286,7 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
             ]}
           />
         </Card>
-      )} */}
+      )}
     </>
   );
 };
