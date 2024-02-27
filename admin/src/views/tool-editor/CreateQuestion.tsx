@@ -1,7 +1,6 @@
 import {
   Avatar,
   Button,
-  Code,
   Divider,
   Grid,
   Group,
@@ -13,19 +12,13 @@ import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { IconChevronLeft, IconX } from '@tabler/icons';
 import { Link, useMatch, useNavigate } from '@tanstack/react-location';
+import { useQueryClient } from '@tanstack/react-query';
+import { doc, writeBatch } from 'firebase/firestore';
 import { nanoid } from 'nanoid';
 import React, { useState } from 'react';
 import { BaseQuestionFields } from '../../components/tool-editor-fields/base-question-fields';
 import { MapAnswers } from '../../components/tool-editor-fields/map-answers';
-import {
-  addDoc,
-  collection,
-  doc,
-  setDoc,
-  writeBatch,
-} from 'firebase/firestore';
 import db from '../../firebase';
-import { useQueryClient } from '@tanstack/react-query';
 
 type Props = {};
 export const questionDefaultValues = {
@@ -110,10 +103,10 @@ export const CreateQuestion: React.FC<Props> = () => {
         values,
         questionsArr,
       });
-      await batch.commit();
+      // await batch.commit();
 
-      queryClient.invalidateQueries();
-      navigate({ to: '../' });
+      // queryClient.invalidateQueries();
+      // navigate({ to: '../' });
     } catch (error: any) {
       showNotification({
         icon: <IconX size={18} />,

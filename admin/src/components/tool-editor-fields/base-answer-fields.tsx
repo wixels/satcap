@@ -130,7 +130,7 @@ export const BaseAnswerFields: React.FC<Props> = ({
                   Link Title
                 </Text>
               }
-              {...form.getInputProps(`${path}?.link?.title`)}
+              {...form.getInputProps(`${path}.link.title`)}
             />
           </Grid.Col>
           <Grid.Col span={6}>
@@ -143,7 +143,7 @@ export const BaseAnswerFields: React.FC<Props> = ({
                   Link Name
                 </Text>
               }
-              {...form.getInputProps(`${path}?.link?.name`)}
+              {...form.getInputProps(`${path}.link.name`)}
             />
           </Grid.Col>
           <Grid.Col span={12}>
@@ -156,7 +156,7 @@ export const BaseAnswerFields: React.FC<Props> = ({
                   Link URL
                 </Text>
               }
-              {...form.getInputProps(`${path}?.link?.url`)}
+              {...form.getInputProps(`${path}.link.url`)}
             />
           </Grid.Col>
         </>
