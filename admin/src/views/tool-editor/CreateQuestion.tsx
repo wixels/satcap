@@ -17,7 +17,13 @@ import { nanoid } from 'nanoid';
 import React, { useState } from 'react';
 import { BaseQuestionFields } from '../../components/tool-editor-fields/base-question-fields';
 import { MapAnswers } from '../../components/tool-editor-fields/map-answers';
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  setDoc,
+  writeBatch,
+} from 'firebase/firestore';
 import db from '../../firebase';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -77,14 +83,33 @@ export const CreateQuestion: React.FC<Props> = () => {
 
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+
   const createQuestion = async (values: any) => {
     // TODO: Do validation and add subView key
     setLoading(true);
     try {
-      await setDoc(doc(db, 'questions', values.questions[0].id), {
-        ...values.questions[0],
-        surveyKey,
+      console.log('values::: ', values);
+
+      let questionsArr: any[] = [];
+      function extractQuestions(obj: any, pass: number = 1) {
+        if (obj.answers && obj.answers.length > 0) {
+          obj.answers.forEach((a: any) => {
+            if (a.questions && a.questions.length > 0) {
+              questionsArr = [...questionsArr, ...a.questions];
+              a.questions.forEach((q: any) => {
+                extractQuestions(q, pass + 1);
+              });
+            }
+          });
+        }
+      }
+      extractQuestions(values.questions[0]);
+      questionsArr.push(values.questions[0]);
+      const batch = writeBatch(db);
+      questionsArr.forEach((q: any) => {
+        batch.set(doc(db, 'questions', q.id), q);
       });
+      await batch.commit();
 
       queryClient.invalidateQueries();
       navigate({ to: '../' });

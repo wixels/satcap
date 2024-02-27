@@ -33,6 +33,7 @@ export const MapQuestions: React.FC<Props> = ({
   const value = getObjectByString(form.values, path);
   console.log('value::: ', value);
   // console.log('path::: ', path);
+
   return (
     <Grid>
       {questions && questions?.length > 0
@@ -62,10 +63,7 @@ export const MapQuestions: React.FC<Props> = ({
             </React.Fragment>
           ))
         : null}
-      <Grid.Col
-        hidden={value?.link}
-        span={6}
-      >
+      <Grid.Col span={6}>
         <Button
           fullWidth
           leftIcon={<IconPlus size={14} />}
@@ -73,7 +71,10 @@ export const MapQuestions: React.FC<Props> = ({
           onClick={() => {
             const id = nanoid(8);
             form.setFieldValue(`${path}.subView`, 'questions');
-            form.setFieldValue(`${path}.questions`, []);
+            form.setFieldValue(
+              `${path}.questions`,
+              value.questions ? [...value.questions] : []
+            );
             form.insertListItem(`${path}.questions`, {
               key: nanoid(8),
               id,

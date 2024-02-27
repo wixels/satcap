@@ -30,7 +30,6 @@ export const MapAnswers: React.FC<Props> = ({
   };
 
   const value = getObjectByString(form.values, path);
-  console.log('value::: ', value);
   useEffect(() => {
     if (value.type !== 'dropdown') {
       setAutoAnswers(false);
@@ -41,8 +40,8 @@ export const MapAnswers: React.FC<Props> = ({
   return (
     <Grid
       style={{
-        marginLeft: '1rem',
-        paddingLeft: '1rem',
+        marginLeft: '2rem',
+        paddingLeft: '2rem',
         borderLeft: '1px solid #CED4D9',
       }}
     >
