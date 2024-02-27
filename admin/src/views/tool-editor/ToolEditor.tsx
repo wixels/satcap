@@ -84,7 +84,7 @@ export const ToolEditor = (): JSX.Element => {
       </Button>
       {!isLoading && questions ? <ToolEditorTable data={questions} /> : null}
 
-      {/* <SimpleGrid
+      <SimpleGrid
         cols={3}
         spacing="lg"
         breakpoints={[
@@ -102,7 +102,7 @@ export const ToolEditor = (): JSX.Element => {
             key={question.id}
           />
         ))}
-      </SimpleGrid> */}
+      </SimpleGrid>
     </>
   );
 };
