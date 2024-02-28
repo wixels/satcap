@@ -127,12 +127,12 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
           id: 'delete',
           Cell: (cell) => {
             // @ts-ignore
-            if (cell.row.original?.isLocked) return null;
+            // if (cell.row.original?.isLocked) return null;
             return (
               <Group>
                 <ActionIcon
                   component={Link}
-                  to={`/`}
+                  to={`./${cell.row.original?.id}/edit`}
                   color="blue"
                   variant="light"
                 >

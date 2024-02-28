@@ -37,14 +37,15 @@ export interface ILocation {
 
 export interface IQuestion {
   id: string;
+  key: string;
   answerId?: string;
   surveyKey: string;
   title: string;
   subtitle?: string;
   type: string;
-  order: int;
+  order: number;
   isLocked: boolean;
-  maxAnswerCount?: int;
+  maxAnswerCount?: number;
   answers: IAnswer[];
   createdAt?: string;
   lastUpdatedAt?: string;
@@ -53,7 +54,7 @@ export interface IQuestion {
 export interface IAnswer {
   id: string;
   title: string;
-  order: int;
+  order: number;
   specifyAnswer: boolean;
   subViewRelated: boolean;
   questions?: IQuestion[];

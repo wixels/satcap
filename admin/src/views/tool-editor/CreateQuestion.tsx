@@ -21,46 +21,6 @@ import { MapAnswers } from '../../components/tool-editor-fields/map-answers';
 import db from '../../firebase';
 
 type Props = {};
-export const questionDefaultValues = {
-  key: nanoid(8),
-  id: nanoid(8),
-  title: '',
-  subtitle: '',
-  imageUrl: null,
-  type: 'single-select',
-  isLocked: false,
-  maxAnswerCount: null,
-  order: 1,
-  reportingKey: null,
-  answerId: null,
-  answers: [
-    {
-      id: nanoid(8),
-      key: nanoid(8),
-      title: '',
-      description: '',
-      specifyAnswer: false,
-      subViewRelated: false,
-      subView: null,
-    },
-  ],
-  createdAt: new Date().toISOString(),
-};
-export const answerDefaultValues = {
-  id: nanoid(8),
-  key: nanoid(8),
-  title: '',
-  description: '',
-  specifyAnswer: false,
-  subViewRelated: false,
-  subView: null,
-  questions: [],
-  link: {
-    title: '',
-    name: '',
-    url: '',
-  },
-};
 
 export const CreateQuestion: React.FC<Props> = () => {
   const [loading, setLoading] = useState(false);
@@ -68,6 +28,46 @@ export const CreateQuestion: React.FC<Props> = () => {
     params: { surveyKey },
   } = useMatch();
 
+  const questionDefaultValues = {
+    key: nanoid(8),
+    id: nanoid(8),
+    title: '',
+    subtitle: '',
+    imageUrl: null,
+    type: 'single-select',
+    isLocked: false,
+    maxAnswerCount: null,
+    order: 1,
+    reportingKey: null,
+    answerId: null,
+    answers: [
+      {
+        id: nanoid(8),
+        key: nanoid(8),
+        title: '',
+        description: '',
+        specifyAnswer: false,
+        subViewRelated: false,
+        subView: null,
+      },
+    ],
+    createdAt: new Date().toISOString(),
+  };
+  const answerDefaultValues = {
+    id: nanoid(8),
+    key: nanoid(8),
+    title: '',
+    description: '',
+    specifyAnswer: false,
+    subViewRelated: false,
+    subView: null,
+    questions: [],
+    link: {
+      title: '',
+      name: '',
+      url: '',
+    },
+  };
   const form = useForm({
     initialValues: {
       questions: [questionDefaultValues],
@@ -103,10 +103,10 @@ export const CreateQuestion: React.FC<Props> = () => {
         values,
         questionsArr,
       });
-      // await batch.commit();
+      await batch.commit();
 
-      // queryClient.invalidateQueries();
-      // navigate({ to: '../' });
+      queryClient.invalidateQueries();
+      navigate({ to: '../' });
     } catch (error: any) {
       showNotification({
         icon: <IconX size={18} />,

@@ -1,6 +1,5 @@
 import {
   ActionIcon,
-  Button,
   Checkbox,
   Flex,
   Grid,
@@ -33,13 +32,7 @@ export const BaseAnswerFields: React.FC<Props> = ({
   };
 
   const value = getObjectByString(form.values, path);
-  // console.log(
-  //   'path::: ',
-  //   path
-  //     .split('.')
-  //     .slice(0, path.split('.').length - 1)
-  //     .join('.')
-  // );
+
   return (
     <>
       <Grid.Col span={12}>

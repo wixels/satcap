@@ -34,6 +34,8 @@ import { Summary } from './views/dashboard/Summary';
 import { useGetResponses } from './hooks/network/useResponses';
 import { Center, Loader, Stack } from '@mantine/core';
 import { CreateQuestion } from './views/tool-editor/CreateQuestion';
+import { EditQuestion } from './views/tool-editor/EditQuestion';
+import { fetchQuestion } from './hooks/network/useQuestions';
 
 export type LocationGenerics = MakeGenerics<{
   Params: {
@@ -44,6 +46,7 @@ export type LocationGenerics = MakeGenerics<{
     personId: string;
     discussionId: string;
     docId: string;
+    questionId: string;
   };
 }>;
 
@@ -231,6 +234,23 @@ export const routerFactory = (queryClient: any) => {
             {
               path: '/create-question',
               element: <CreateQuestion />,
+            },
+            {
+              path: '/:questionId/edit',
+              element: <EditQuestion />,
+              loader: ({ params: { questionId } }) =>
+                queryClient.getQueryData(['question', questionId]) ??
+                queryClient.fetchQuery(['question', questionId], () =>
+                  fetchQuestion(questionId)
+                ),
+              pendingElement: async () => (
+                <Center>
+                  <Stack align={'center'}>
+                    <p>Fetching question... Hold on tight!</p>
+                    <Loader />
+                  </Stack>
+                </Center>
+              ),
             },
           ],
         },

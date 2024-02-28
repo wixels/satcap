@@ -1,37 +1,11 @@
-import {
-  ActionIcon,
-  Avatar,
-  Button,
-  Center,
-  Grid,
-  Group,
-  Select,
-  Stack,
-  Text,
-  Textarea,
-  TextInput,
-  UnstyledButton,
-  SimpleGrid,
-} from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
-import {
-  IconCheck,
-  IconChevronsLeft,
-  IconCirclePlus,
-  IconTrash,
-  IconX,
-} from '@tabler/icons';
+import { Avatar, Button, Group, Text, UnstyledButton } from '@mantine/core';
+import { IconChevronsLeft, IconCirclePlus } from '@tabler/icons';
 import { Link, useMatch, useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
-import dayjs from 'dayjs';
-import { addDoc, collection } from 'firebase/firestore';
-import { nanoid } from 'nanoid';
-import { useMemo, useState } from 'react';
-import { useGetUser, userGetMine } from '../../context/AuthenticationContext';
-import db from '../../firebase';
-import { useGetQuestions } from '../../hooks/network/useQuestions';
-import { QuestionCard } from '../../components/QuestionCard';
+import { useState } from 'react';
 import { ToolEditorTable } from '../../components/ToolEditorTable';
+import { useGetUser, userGetMine } from '../../context/AuthenticationContext';
+import { useGetQuestions } from '../../hooks/network/useQuestions';
 
 export const ToolEditor = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
