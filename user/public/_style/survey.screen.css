@@ -146,7 +146,12 @@ textarea {
 .subQuestion {
   margin-top: 1rem;
 }
-fieldset.radioGroup { 
+.answers {
+  width: 100%;
+}
+
+fieldset.radioGroup .answers,
+fieldset.radioGroup {
   display: flex;
 }
 fieldset.radioGroup input {

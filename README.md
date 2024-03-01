@@ -168,6 +168,15 @@ Please change the following:
 https://{LOCATION}-{PROJECT_ID}.cloudfunctions.net/importPackages
 ```
 
+### Default Survey Questions
+To use the default questions provided per package, you will need to run the `importQuestions` cloud function.
+
+You can view and add questions to each package by going to the "Tool Editor" tab within the admin application.
+
+```
+https://{LOCATION}-{PROJECT_ID}.cloudfunctions.net/importQuestions
+```
+
 ### Create Admin User
 Initially, you will have to manually add a person to the "backend" to get started.
 

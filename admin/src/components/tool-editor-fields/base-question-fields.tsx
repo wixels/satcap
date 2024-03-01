@@ -60,7 +60,7 @@ export const BaseQuestionFields: React.FC<Props> = ({
       </Grid.Col>
       <Grid.Col span={6}>
         <Select
-          data={['single-select', 'multi-select', 'dropdown']}
+          data={['single-select', 'multi-select', 'dropdown', 'number-rating']}
           radius={'md'}
           size="md"
           label={

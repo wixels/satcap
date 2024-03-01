@@ -15,11 +15,7 @@ import { showNotification } from '@mantine/notifications';
 export async function fetchQuestions(surveyKey: string) {
   const questions: IQuestion[] = [];
   const questionsSnap = await getDocs(
-    query(
-      collection(db, 'questions'),
-      where('surveyKey', '==', surveyKey),
-      orderBy('order')
-    )
+    query(collection(db, 'questions'), where('surveyKey', '==', surveyKey), where('answerId', '==', null), orderBy('order'))
   );
   questionsSnap.forEach((doc) => {
     questions.push({

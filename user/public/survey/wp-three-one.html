@@ -61,444 +61,8 @@
         <input type="hidden" name="linkDocId" />
         <input type="hidden" name="linkId" />
         <div id="preQuestion"><p>Loading questions...</p></div>
-        <div id="todelete">
-          <div class="question">
-            <p>Question 1</p>
-            <fieldset class="radioGroup">
-              <legend>Does your company have a registered name?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionOne" data-on-change="conditionalPath" data-conditional-path="one-no"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionOne" data-on-change="conditionalPath" data-conditional-path="one-no"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-            <template data-choice="one-no">
-              <p>Please click on this link to access resources that can help you:</p>
-              <a href="/resources/SMME Engagement Tool/Pre-Application Cheat Sheet.pdf" target="_blank">Pre-application cheat sheet</a>
-            </template>
-          </div>
-          <div class="question">
-            <p>Question 2</p>
-            <fieldset class="radioGroup">
-              <legend>Do you have a company trading name?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionTwo" data-on-change="conditionalPath" data-conditional-path="two-no"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionTwo" data-on-change="conditionalPath" data-conditional-path="two-no"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-            <template data-choice="two-no">
-              <p>Please click on this link to access resources that can help you:</p>
-              <a href="/resources/SMME Engagement Tool/Pre-Application Cheat Sheet.pdf" target="_blank">Pre-application cheat sheet</a>
-            </template>
-          </div>
-          <div class="question">
-            <p>Question 3</p>
-            <fieldset class="radioGroup">
-              <legend>Do you have a primary contact person for the company?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionThree" data-on-change="conditionalPath" data-conditional-path="three-no"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionThree" data-on-change="conditionalPath" data-conditional-path="three-no"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-            <template data-choice="three-no">
-              <p>Please click on this link to access resources that can help you:</p>
-              <a href="/resources/SMME Engagement Tool/Pre-Application Cheat Sheet.pdf" target="_blank">Pre-application cheat sheet</a>
-            </template>
-          </div>
-          <div class="question">
-            <p>Question 4</p>
-            <fieldset class="radioGroup">
-              <legend>Do you have a primary contact email address for the company?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionFour" data-on-change="conditionalPath" data-conditional-path="four-no"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionFour" data-on-change="conditionalPath" data-conditional-path="four-no"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-            <template data-choice="four-no">
-              <p>Please click on this link to access resources that can help you:</p>
-              <a href="/resources/SMME Engagement Tool/Pre-Application Cheat Sheet.pdf" target="_blank">Pre-application cheat sheet</a>
-            </template>
-          </div>
-          <div class="question">
-            <p>Question 5</p>
-            <label>
-              <span>Can you explain what your product or service offering is?</span>
-              <select name="questionFive" data-on-change="free-text">
-                <option value="">Select an option</option>
-                <option value="Automotive">Automotive</option>
-                <option value="Agriculture, regenerative agriculture, agro-processing and re-forestry">Agriculture, regenerative agriculture, agro-processing and re-forestry</option>
-                <option value="Construction and building">Construction and building</option>
-                <option value="Creative and Design Industry">Creative and Design Industry</option>
-                <option value="Engineering">Engineering</option>
-                <option value="Healthcare">Healthcare</option>
-                <option value="Mining and minerals">Mining and minerals</option>
-                <option value="Mine rehabilitation">Mine rehabilitation</option>
-                <option value="Mine waste beneficiation">Mine waste beneficiation</option>
-                <option value="e-Waste">e-Waste</option>
-                <option value="Renewable energy">Renewable energy</option>
-                <option value="Small/light manufacturing">Small/light manufacturing</option>
-                <option value="Services and retail trade">Services and retail trade</option>
-                <option value="Textiles">Textiles</option>
-                <option value="Tourism and hospitality (accomodation and catering)">Tourism and hospitality (accomodation and catering)</option>
-                <option value="Oil and gas">Oil and gas</option>
-                <option value="Recycling or Upcycling">Recycling or Upcycling</option>
-                <option value="Waste management">Waste management</option>
-                <option value="Catering">Catering</option>
-                <option value="Retail">Retail</option>
-                <option value="Education and Training">Education and Training</option>
-                <option value="Other" data-free-text="true">Other</option>
-              </select>
-            </label>
-          </div>
-          <div class="question">
-            <p>Question 6</p>
-            <fieldset class="radioGroup">
-              <legend>Is your company registered with the Companies and Intellectual Properties Commission (CIPC)?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionSix" data-on-change="conditionalPath" data-conditional-path="six-no"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionSix" data-on-change="conditionalPath" data-conditional-path="six-no"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-            <template data-choice="six-no">
-              <p>Please click on this link to access resources that can help you:</p>
-              <a href="/resources/SMME Engagement Tool/Pre-Application Cheat Sheet.pdf" target="_blank">Pre-application cheat sheet</a>
-            </template>
-          </div>
-          <div class="question">
-            <p>Question 7</p>
-            <fieldset class="radioGroup">
-              <legend>Do you have a company registration number?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionSeven" data-on-change="conditionalPath" data-conditional-path="seven-no"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionSeven" data-on-change="conditionalPath" data-conditional-path="seven-no"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-            <template data-choice="seven-no">
-              <p>Please click on this link to access resources that can help you:</p>
-              <a href="/resources/SMME Engagement Tool/Pre-Application Cheat Sheet.pdf" target="_blank">Pre-application cheat sheet</a>
-            </template>
-          </div>
-          <div class="question">
-            <p>Question 8</p>
-            <fieldset class="radioGroup">
-              <legend>Is your company registered on the Central Supplier Database (CSD)?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionEight" data-on-change="conditionalPath" data-conditional-path="eight-no"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionEight" data-on-change="conditionalPath" data-conditional-path="eight-no"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-            <template data-choice="eight-no">
-              <p>Please click on this link to access resources that can help you:</p>
-              <a href="/resources/SMME Engagement Tool/Pre-Application Cheat Sheet.pdf" target="_blank">Pre-application cheat sheet</a>
-            </template>
-          </div>
-          <div class="question">
-            <p>Question 9</p>
-            <fieldset class="radioGroup">
-              <legend>Is your company registered with the Workmans Compensation Fund?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionNine" data-on-change="conditionalPath" data-conditional-path="nine-no"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionNine" data-on-change="conditionalPath" data-conditional-path="nine-no"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-            <template data-choice="nine-no">
-              <p>Please click on this link to access resources that can help you:</p>
-              <a href="/resources/SMME Engagement Tool/Pre-Application Cheat Sheet.pdf" target="_blank">Pre-application cheat sheet</a>
-            </template>
-          </div>
-          <div class="question">
-            <p>Question 10</p>
-            <label>
-              <span>What type of company do you operate?</span>
-              <select name="questionTen">
-                <option value="">Select an option</option>
-                <option value="Sole Proprietor">Sole Proprietor</option>
-                <option value="Partnership">Partnership</option>
-                <option value="Public Company">Public Company</option>
-                <option value="Private Company (Pty) Ltd">Private Company (Pty) Ltd</option>
-                <option value="Other (Not-for-Profit, Franchise, etc.)">Other (Not-for-Profit, Franchise, etc.)</option>
-                <option value="Unsure">Unsure</option>
-              </select>
-            </label>
-          </div>
-          <div class="question">
-            <p>Question 11</p>
-            <label>
-              <span>Are you an exempt micro enterprise (turnover less than R10M) or qualifying small enterprise (turnover between R10M-50M) or generic enterprise (turnover above R50M)?</span>
-              <select name="questionEleven">
-                <option value="">Select an option</option>
-                <option value="Micro">Annual turnover &lt; R10 million</option>
-                <option value="Small">Annual turnover &gt; or equal to R10 million but &lt; R50 million</option>
-                <option value="Generic">Annual turnover &gt; R50 million</option>
-                <option value="Unknown">I am not sure</option>
-              </select>
-            </label>
-          </div>
-          <div class="question">
-            <p>Question 12</p>
-            <label>
-              <span>What is your BBBEE level?</span>
-              <select name="questionTwelve">
-                <option value="">Select an option</option>
-                <option value="Level One">Level One &gt; 100 points</option>
-                <option value="Level Two">Level Two &gt; 95 but &lt; 100 points</option>
-                <option value="Level Three">Level Three &gt; 90 but &lt; 95 points</option>
-                <option value="Level Four">Level Four &gt; 80 but &lt; 90 points</option>
-                <option value="Unknown">Unsure</option>
-              </select>
-            </label>
-          </div>
-          <div class="question">
-            <p>Question 13</p>
-            <fieldset class="radioGroup">
-              <legend>Do you have a company tax number?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionThirteen" data-on-change="conditionalPath" data-conditional-path="thirteen-no"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionThirteen" data-on-change="conditionalPath" data-conditional-path="thirteen-no"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-            <template data-choice="thirteen-no">
-              <p>Please click on this link to access resources that can help you:</p>
-              <a href="/resources/SMME Engagement Tool/Pre-Application Cheat Sheet.pdf" target="_blank">Pre-application cheat sheet</a>
-            </template>
-          </div>
-          <div class="question">
-            <p>Question 14</p>
-            <fieldset class="radioGroup">
-              <legend>Do you have a VAT registration number?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionFourteen" data-on-change="conditionalPath" data-conditional-path="fourteen-no"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionFourteen" data-on-change="conditionalPath" data-conditional-path="fourteen-no"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-            <template data-choice="fourteen-no">
-              <p>Please click on this link to access resources that can help you:</p>
-              <a href="/resources/SMME Engagement Tool/Pre-Application Cheat Sheet.pdf" target="_blank">Pre-application cheat sheet</a>
-            </template>
-          </div>
-          <div class="question">
-            <p>Question 15</p>
-            <fieldset class="radioGroup">
-              <legend>Do you have a bank account for your business?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionFifteen" data-on-change="conditionalPath" data-conditional-path="fifteen-no"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionFifteen" data-on-change="conditionalPath" data-conditional-path="fifteen-no"/>
-                <span>No</span>
-              </label>
-            </fieldset>2
-            <template data-choice="fifteen-no">
-              <p>Please click on this link to access resources that can help you:</p>
-              <a href="/resources/SMME Engagement Tool/Pre-Application Cheat Sheet.pdf" target="_blank">Pre-application cheat sheet</a>
-            </template>
-          </div>
-          <div class="question">
-            <p>Question 16</p>
-            <label>
-              <span>Do you prepare internal management accounts or financial statements?</span>
-              <select name="questionSixteen">
-                <option value="">Select an option</option>
-                <option value="Yes, we prepare financial statements and management accounts">Yes, we prepare financial statements and management accounts</option>
-                <option value="No, we do not prepare financial statements or management accounts">No, we do not prepare financial statements or management accounts</option>
-                <option value="No we do not prepare financial statements">No, we do not prepare financial statements</option>
-                <option value="No we do not prepare management accounts">No, we do not prepare management accounts</option>
-              </select>
-            </label>
-          </div>
-          <div class="question">
-            <p>Question 17</p>
-            <label>
-              <span>When is your financial year end? The term "financial year-end" refers to the completion of any one-year or 12-month accounting period</span>
-              <input type="date" name="questionSeventeen" />
-            </label>
-          </div>
-          <div class="question">
-            <p>Question 18</p>
-            <fieldset class="radioGroup">
-              <legend>The average time to complete the application process is 6-8 hours - if your governance is in place. Have you set aside enough time to complete this process?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionEighteen" />
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionEighteen" />
-                <span>No</span>
-              </label>
-            </fieldset>
-          </div>
-          <div class="question">
-            <p>Question 19</p>
-            <fieldset class="radioGroup">
-              <legend>Do you know how long an application takes to complete when you have all the required documents on hand?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionNineteen" data-on-change="conditionalPath" data-conditional-path="nineteen-no"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionNineteen" data-on-change="conditionalPath" data-conditional-path="nineteen-no"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-            <template data-choice="nineteen-no">
-              <p>Please click on this link to access resources that can help you:</p>
-              <a href="/resources/SMME Engagement Tool/Pre-Application Cheat Sheet.pdf" target="_blank">Pre-application cheat sheet</a>
-            </template>
-          </div>
-          <div class="question">
-            <p>Question 20</p>
-            <fieldset class="radioGroup">
-              <legend>Are you aware of the closing date for the procurement opportunity that you are applying for?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionTwenty" data-on-change="conditionalPath" data-conditional-path="twenty-no"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionTwenty" data-on-change="conditionalPath" data-conditional-path="twenty-no"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-            <template data-choice="twenty-no">
-              <p>Please click on this link to access resources that can help you:</p>
-              <a href="/resources/SMME Engagement Tool/Pre-Application Cheat Sheet.pdf" target="_blank">Pre-application cheat sheet</a>
-            </template>
-          </div>
-          <div class="question">
-            <p>Question 21</p>
-            <fieldset class="radioGroup">
-              <legend>Do you understand the tender requirements?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionTwentyOne" data-on-change="conditionalPath" data-conditional-path="twentyone-no"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionTwentyOne" data-on-change="conditionalPath" data-conditional-path="twentyone-no"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-            <template data-choice="twentyone-no">
-              <p>Please click on this link to access resources that can help you:</p>
-              <a href="/resources/SMME Engagement Tool/Pre-Application Cheat Sheet.pdf" target="_blank">Pre-application cheat sheet</a>
-            </template>
-          </div>
-          <div class="question">
-            <p>Question 22</p>
-            <fieldset class="radioGroup">
-              <legend>Do you know how to interpret a Request for Proposal (RFP)?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionTwentyTwo" data-on-change="conditionalPath" data-conditional-path="twentytwo-no"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionTwentyTwo" data-on-change="conditionalPath" data-conditional-path="twentytwo-no"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-            <template data-choice="twentytwo-no">
-              <p>Please click on this link to access resources that can help you:</p>
-              <a href="/resources/SMME Engagement Tool/Pre-Application Cheat Sheet.pdf" target="_blank">Pre-application cheat sheet</a>
-            </template>
-          </div>
-          <div class="question">
-            <p>Question 23</p>
-            <fieldset class="radioGroup">
-              <legend>Are you aware of health and safety requirements you need to comply with as an employer?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionTwentyThree" data-on-change="conditionalPath" data-conditional-path="twentythree-no"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionTwentyThree" data-on-change="conditionalPath" data-conditional-path="twentythree-no"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-            <template data-choice="twentythree-no">
-              <a href="https://www.labour.gov.za/DocumentCenter/Publications/Occupational%20Health%20and%20Safety/What%20every%20worker%20should%20know%20about%20health%20and%20safety%20at%20work.pdf" target="_blank">Health and Safety Requirements for an employer</a>
-            </template>
-          </div>
-          <div class="question">
-            <p>Question 24</p>
-            <fieldset class="radioGroup">
-              <legend>Have you conducted business/obtained a work contract with the mines before?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionTwentyFour"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionTwentyFour"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-          </div>
-          <div class="question">
-            <p>Question 25</p>
-            <fieldset class="radioGroup">
-              <legend>Are you able to produce proof of your BBBEE Certification?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionTwentyFive"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionTwentyFive"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-          </div>
-          <div class="question">
-            <p>Question 26</p>
-            <fieldset class="radioGroup">
-              <legend>Do you meet the functionality criteria for the opportunity you are interested in?</legend>
-              <label>
-                <input type="radio" value="Yes" name="questionTwentySix"/>
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" value="No" name="questionTwentySix"/>
-                <span>No</span>
-              </label>
-            </fieldset>
-          </div>
-        </div>
+        <div class="questions hidden"></div>
+        <div class="unrelatedSubViews"></div>
         <button type="submit">Submit</button>
       </form>
     </template>
@@ -535,133 +99,9 @@
         <input type="hidden" name="mineDocId" />
         <input type="hidden" name="linkDocId" />
         <input type="hidden" name="linkId" />
-        <div class="question">
-          <p>Question 1</p>
-          <fieldset class="radioGroup">
-            <legend>Have you submitted the required supporting documentation for your tender submission?</legend>
-            <label>
-              <input type="radio" value="Yes" name="questionOne" data-on-change="conditionalPath" data-conditional-path="one-no"/>
-              <span>Yes</span>
-            </label>
-            <label>
-              <input type="radio" value="No" name="questionOne" data-on-change="conditionalPath" data-conditional-path="one-no"/>
-              <span>No</span>
-            </label>
-          </fieldset>
-          <template data-choice="one-no">
-            <p>Please click on this link to access resources that can help you:</p>
-            <a href="/resources/SMME Engagement Tool/Bz376PxTgi-Post-Application Cheat Sheet.pdf" target="_blank">Post-application cheat sheet</a>
-          </template>
-        </div>
-        <div class="question">
-          <p>Question 2</p>
-          <fieldset class="radioGroup">
-            <legend>Are you aware of the pre-application readiness checklist that assists by guiding you through the application process?</legend>
-            <label>
-              <input type="radio" value="Yes" name="questionTwo" data-on-change="conditionalPath" data-conditional-path="two-no"/>
-              <span>Yes</span>
-            </label>
-            <label>
-              <input type="radio" value="No" name="questionTwo" data-on-change="conditionalPath" data-conditional-path="two-no"/>
-              <span>No</span>
-            </label>
-          </fieldset>
-          <template data-choice="two-no">
-            <p>Please note: You can complete the pre-application checklist on this tool by visiting the home page</p>
-          </template>
-        </div>
-        <div class="question">
-          <p>Question 3</p>
-          <fieldset class="radioGroup">
-            <legend>
-              Have you taken our pre-application readiness checklist?
-              <span class="sub">This checklist assists in guiding you through the application process.</span>
-            </legend>
-            <label>
-              <input type="radio" value="Yes" name="questionThree" data-on-change="conditionalPath" data-conditional-path="three-no" />
-              <span>Yes</span>
-            </label>
-            <label>
-              <input type="radio" value="No" name="questionThree" data-on-change="conditionalPath" data-conditional-path="three-no"/>
-              <span>No</span>
-            </label>
-          </fieldset>
-          <template data-choice="three-no">
-            <p>Please note: You can complete the pre-application checklist on this tool by visiting the home page</p>
-          </template>
-        </div>
-        <div class="question">
-          <p>Question 4</p>
-          <fieldset class="radioGroup">
-            <legend>Have you checked that you have supplied the mining company with the correct contact information?</legend>
-            <label>
-              <input type="radio" value="Yes" name="questionFour" data-on-change="conditionalPath" data-conditional-path="four-no"/>
-              <span>Yes</span>
-            </label>
-            <label>
-              <input type="radio" value="No" name="questionFour" data-on-change="conditionalPath" data-conditional-path="four-no"/>
-              <span>No</span>
-            </label>
-          </fieldset>
-          <template data-choice="four-no">
-            <p>Please click on this link to access resources that can help you:</p>
-            <a href="/resources/SMME Engagement Tool/Bz376PxTgi-Post-Application Cheat Sheet.pdf" target="_blank">Post-application cheat sheet</a>
-          </template>
-        </div>
-        <div class="question">
-          <p>Question 5</p>
-          <fieldset class="radioGroup">
-            <legend>Did you verify that your application was successfully submitted?</legend>
-            <label>
-              <input type="radio" value="Yes" name="questionFive" data-on-change="conditionalPath" data-conditional-path="five-no"/>
-              <span>Yes</span>
-            </label>
-            <label>
-              <input type="radio" value="No" name="questionFive" data-on-change="conditionalPath" data-conditional-path="five-no"/>
-              <span>No</span>
-            </label>
-          </fieldset>
-          <template data-choice="five-no">
-            <p>Please click on this link to access resources that can help you:</p>
-            <a href="/resources/SMME Engagement Tool/Bz376PxTgi-Post-Application Cheat Sheet.pdf" target="_blank">Post-application cheat sheet</a>
-          </template>
-        </div>
-        <div class="question">
-          <p>Question 6</p>
-          <fieldset class="radioGroup">
-            <legend>Do you know where to check the status of your application?</legend>
-            <label>
-              <input type="radio" value="Yes" name="questionSix" data-on-change="conditionalPath" data-conditional-path="six-no"/>
-              <span>Yes</span>
-            </label>
-            <label>
-              <input type="radio" value="No" name="questionSix" data-on-change="conditionalPath" data-conditional-path="six-no"/>
-              <span>No</span>
-            </label>
-          </fieldset>
-          <template data-choice="six-no">
-            <p>Please click on this link to access resources that can help you:</p>
-            <a href="/resources/SMME Engagement Tool/Bz376PxTgi-Post-Application Cheat Sheet.pdf" target="_blank">Post-application cheat sheet</a>
-          </template>
-        </div>
-        <div class="question">
-          <p>Question 7</p>
-          <fieldset class="radioGroup">
-            <legend>Are you actively monitoring the status of your application where possible?</legend>
-            <label>
-              <input type="radio" value="Yes" name="questionSeven" data-on-change="conditionalPath" data-conditional-path="seven-no"/>
-              <span>Yes</span>
-            </label>
-            <label>
-              <input type="radio" value="No" name="questionSeven" data-on-change="conditionalPath" data-conditional-path="seven-no"/>
-              <span>No</span>
-            </label>
-          </fieldset>
-          <template data-choice="seven-no">
-            <p>Please click on this link to access resources that can help you:</p>
-            <a href="/resources/SMME Engagement Tool/Bz376PxTgi-Post-Application Cheat Sheet.pdf" target="_blank">Post-application cheat sheet</a>
-          </template>
-        </div>
+        <div id="preQuestion"><p>Loading questions...</p></div>
+        <div class="questions hidden"></div>
+        <div class="unrelatedSubViews"></div>
         <button type="submit">Submit</button>
       </form>
     </template>
@@ -696,131 +136,9 @@
         <input type="hidden" name="mineDocId" />
         <input type="hidden" name="linkDocId" />
         <input type="hidden" name="linkId" />
-        <div class="question">
-          <p>Question 1</p>
-          <fieldset class="radioGroup">
-            <legend>Did you know how to navigate the vendor portal in order to submit your application?</legend>
-            <label>
-              <input type="radio" value="Yes" name="questionOne"/>
-              <span>Yes</span>
-            </label>
-            <label>
-              <input type="radio" value="No" name="questionOne"/>
-              <span>No</span>
-            </label>
-          </fieldset>
-        </div>
-        <div class="question">
-          <p>Question 2</p>
-          <fieldset class="radioGroup">
-            <legend>Were the instructions on the vendor/procurement portal easy to follow?</legend>
-            <label>
-              <input type="radio" value="Yes" name="questionTwo"/>
-              <span>Yes</span>
-            </label>
-            <label>
-              <input type="radio" value="No" name="questionTwo"/>
-              <span>No</span>
-            </label>
-          </fieldset>
-        </div>
-        <div class="question">
-          <p>Question 3</p>
-          <fieldset class="radioGroup">
-            <legend>When applying to the mines, were your supporting documents easy to upload?</legend>
-            <label>
-              <input type="radio" value="Yes" name="questionThree"/>
-              <span>Yes</span>
-            </label>
-            <label>
-              <input type="radio" value="No" name="questionThree"/>
-              <span>No</span>
-            </label>
-          </fieldset>
-        </div>
-        <div class="question">
-          <p>Question 4</p>
-          <fieldset class="radioGroup">
-            <legend>Was the application process user friendly?</legend>
-            <label>
-              <input type="radio" value="Yes" name="questionFour"/>
-              <span>Yes</span>
-            </label>
-            <label>
-              <input type="radio" value="No" name="questionFour"/>
-              <span>No</span>
-            </label>
-          </fieldset>
-        </div>
-        <div class="question">
-          <p>Question 5</p>
-          <span>What is your preferred method to receive the outcome of your application?</span>
-          <div class="multiple">
-            <label class="selector">
-              <input type="radio" value="Cellphone call" name="questionFive" />
-              <span>Cellphone call</span>
-            </label>
-            <label class="selector">
-              <input type="radio" value="SMS" name="questionFive" />
-              <span>SMS</span>
-            </label>
-            <label class="selector">
-              <input type="radio" value="Email" name="questionFive" />
-              <span>Email</span>
-            </label>
-            <label class="selector">
-              <input type="radio" value="Business telephone call" name="questionFive" />
-              <span>Business telephone call</span>
-            </label>
-            <label class="selector">
-              <input type="radio" value="Through the vendor portal" name="questionFive" />
-              <span>Through the vendor portal</span>
-            </label>
-            <label class="selector">
-              <input type="radio" value="A letter received in the mail" name="questionFive" />
-              <span>A letter received in the mail</span>
-            </label>
-          </div>
-        </div>
-        <div class="question">
-          <p>Question 6</p>
-          <fieldset class="radioGroup">
-            <legend>Do you know some of the common reasons that applications are rejected?</legend>
-            <label>
-              <input type="radio" value="Yes" name="questionSix" data-on-change="conditionalPath" data-conditional-path="six-no"/>
-              <span>Yes</span>
-            </label>
-            <label>
-              <input type="radio" value="No" name="questionSix" data-on-change="conditionalPath" data-conditional-path="six-no"/>
-              <span>No</span>
-            </label>
-          </fieldset>
-          <template data-choice="six-no">
-            <p>Please click on this link to access resources that can help you:</p>
-            <a href="/resources/SMME Engagement Tool/p4Tne9qPCI-FAQ's Post-Response.pdf" target="_blank">FAQ's Post-Response</a>
-          </template>
-        </div>
-        <div class="question">
-          <p>Question 7</p>
-          <fieldset class="radioGroup">
-            <legend>Were you able to amend your application during the application process?</legend>
-            <label>
-              <input type="radio" value="Yes" name="questionSeven"/>
-              <span>Yes</span>
-            </label>
-            <label>
-              <input type="radio" value="No" name="questionSeven"/>
-              <span>No</span>
-            </label>
-          </fieldset>
-        </div>
-        <div class="question">
-          <p>Question 8</p>
-          <label>
-            <span>How can the mines make the administrative processes easier?</span>
-            <textarea name="questionEight"></textarea>
-          </label>
-        </div>
+        <div id="preQuestion"><p>Loading questions...</p></div>
+        <div class="questions hidden"></div>
+        <div class="unrelatedSubViews"></div>
         <button type="submit">Submit</button>
       </form>
     </template>
@@ -840,6 +158,7 @@
           <legend>
             <span class="question-title"></span>
             <span class="sub question-subtitle"></span>
+            <img style="margin:10px auto;border-radius:10px;" src="" />
           </legend>
           <div class="answers"></div>
         </fieldset>
@@ -856,6 +175,7 @@
         <p class="question-number"></p>
         <span class="question-title"></span>
         <span class="sub question-subtitle"></span>
+        <img style="margin:10px auto;border-radius:10px;" src="" />
         <div class="answers multiple"></div>
       </div>
       <template id="answer">
@@ -865,12 +185,51 @@
         </label>
       </template>
     </template>
+    <template id="question-type-number-rating">
+      <div class="question">
+        <p class="question-number"></p>
+        <span class="question-title"></span>
+        <span class="sub question-subtitle"></span>
+        <img style="margin:10px auto;border-radius:10px;" src="" />
+        <div class="answers numberRating lrg">
+          <input type="radio" id="" class="hidden" name="" value="1" />
+          <input type="radio" id="" class="hidden" name="" value="2" />
+          <input type="radio" id="" class="hidden" name="" value="3" />
+          <input type="radio" id="" class="hidden" name="" value="4" />
+          <input type="radio" id="" class="hidden" name="" value="5" />
+          <label for="1"></label>
+          <label for="2"></label>
+          <label for="3"></label>
+          <label for="4"></label>
+          <label for="5"></label>
+        </div>
+      </div>
+    </template>
+    <template id="question-type-date">
+      <div class="question">
+        <p class="question-number"></p>
+        <span class="question-title"></span>
+        <span class="sub question-subtitle"></span>
+        <img style="margin:10px auto;border-radius:10px;" src="" />
+        <input type="date" name="" />
+      </div>
+    </template>
+    <template id="question-type-open-text">
+      <div class="question">
+        <p class="question-number"></p>
+        <span class="question-title"></span>
+        <span class="sub question-subtitle"></span>
+        <img style="margin:10px auto;border-radius:10px;" src="" />
+        <textarea name=""></textarea>
+      </div>
+    </template>
     <template id="question-type-dropdown">
       <div class="question">
         <p class="question-number"></p>
         <label>
           <span class="question-title"></span>
           <span class="sub question-subtitle"></span>
+          <img style="margin:10px auto;border-radius:10px;" src="" />
           <select name="">
             <option value="">Select an option</option>
           </select>

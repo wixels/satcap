@@ -28,7 +28,7 @@ interface Props {
   title: string;
   subtitle?: string;
   answers?: any[];
-  order: int;
+  order: number;
 }
 
 export const QuestionCard = ({

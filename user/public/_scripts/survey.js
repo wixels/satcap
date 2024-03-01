@@ -161,127 +161,155 @@ const submitSurvey = async function (e) {
   }
 }
 
+const setQuestionContent = async function (questions, form, container, surveyKey, parentOrder) {
+  for (let i = 0; i < questions.length; i++) {
+    const question = questions[i].data()
+    const questionTemplate = document.getElementById(`question-type-${question.type}`)
+    const questionContent = questionTemplate.content.cloneNode(true)
+
+    questionContent.querySelector('.question').dataset.questionId = question.id
+    questionContent.querySelector('.question').dataset.reportingKey = question.reportingKey
+    questionContent.querySelector('.question-number').textContent = `Question ${(parentOrder) ? `${parentOrder}.` : ''}${i + 1}`
+    questionContent.querySelector('.question-title').textContent = question.title
+    questionContent.querySelector('.question-subtitle').textContent = question.subtitle
+    const img = questionContent.querySelector('img')
+    if (question.imageUrl) {
+      img.setAttribute('src', question.imageUrl)
+    } else {
+      img.remove()
+    }
+
+    if (question.type === 'dropdown') {
+      const select = questionContent.querySelector('select')
+      select.name = `question-${question.id}`
+      if (question.autoAnswers && !question.answers?.length) {
+        select.dataset.answers = question.autoAnswers
+      } else if (question.answers.length) {
+        for (const answer of question.answers) {
+          const option = document.createElement('option')
+          option.textContent = (answer.description?.length) ? answer.description : answer.title
+          option.value = answer.title
+          if (answer.specifyAnswer) {
+            select.dataset.onChange = 'free-text'
+            option.dataset.freeText = 'true'
+          }
+          select.appendChild(option)
+        }
+      }
+    } else if (question.type === 'number-rating') {
+      const inputs = questionContent.querySelectorAll('input')
+      for (let i = 0; i < inputs.length; i++) {
+        let num = i + 1
+        const label = questionContent.querySelector(`label[for="${num}"]`)
+        inputs[i].setAttribute('id', `${question.id}-${num}`)
+        inputs[i].setAttribute('name', question.id)
+        label.setAttribute('for', `${question.id}-${num}`)
+        label.textContent = question.answers[i].title
+      }
+    } else if (question.type === 'date') {
+      const input = questionContent.querySelector('input')
+      input.setAttribute('name', question.id)
+    } else if (question.type === 'open-text') {
+      const input = questionContent.querySelector('textarea')
+      input.setAttribute('name', question.id)
+    } else {
+      for (const answer of question.answers) {
+        const answerTemplate = questionContent.querySelector('#answer')
+        const answerContent = answerTemplate.content.cloneNode(true)
+        const input = answerContent.querySelector('input')
+        answerContent.querySelector('span').textContent = (answer.description?.length) ? answer.description : answer.title
+        input.name = `question-${question.id}`
+        input.value = answer.title
+        input.dataset.answerId = answer.id
+        questionContent.querySelector('.answers').appendChild(answerContent)      
+      }
+
+      const subQuestions = question.answers.filter((answer) => answer.subView === 'questions')
+      const subLinks = question.answers.filter((answer) => answer.subView === 'link' && answer.link?.title?.length)
+
+      if (subQuestions.length) {
+        for (const answer of subQuestions) {
+          const inputs = questionContent.querySelectorAll('.answers input')
+          for (const input of inputs) {
+            input.dataset.onChange = "conditionalPath"
+            input.dataset.conditionalPath = (input.dataset.conditionalPath) ? input.dataset.conditionalPath + `-${question.id}-${answer.id}` : `${question.id}-${answer.id}`
+          }
+
+          let parentIndex = (parentOrder) ? parentOrder + '.' : ''
+          if (answer.subViewRelated) parentIndex = parentIndex + (i + 1)
+          const subQuestionContent = await setSubQuestions(form, surveyKey, answer.id, (parentIndex.length) ? parentIndex : null)
+
+          const temp = document.createElement('template')
+          temp.dataset.choice = `${question.id}-${answer.id}`
+          temp.appendChild(subQuestionContent)
+
+          if (answer.subViewRelated) {
+            questionContent.appendChild(temp)
+          } else {
+            form.querySelector('.unrelatedSubViews').appendChild(temp)
+          } 
+        }
+      }
+
+      if (subLinks.length) {
+        for (const answer of subLinks) {
+          const inputs = questionContent.querySelectorAll('.answers input')
+          for (const input of inputs) {
+            input.dataset.onChange = "conditionalPath"
+            input.dataset.conditionalPath = (input.dataset.conditionalPath) ? input.dataset.conditionalPath + `-${question.id}-${answer.id}` : `${question.id}-${answer.id}`
+          }
+          const linkTemplate = document.getElementById('answer-subView-link')
+          const linkContent = linkTemplate.content.cloneNode(true)
+
+          linkContent.querySelector('p').textContent = answer.link.title
+
+          if (!answer.link.url) {
+            linkContent.querySelector('a').remove()
+          } else {
+            linkContent.querySelector('a').textContent = answer.link.name
+            linkContent.querySelector('a').setAttribute('href', answer.link.url)
+          }
+          
+          const temp = document.createElement('template')
+          temp.dataset.choice = `${question.id}-${answer.id}`
+          temp.appendChild(linkContent)
+          questionContent.appendChild(temp)
+        }
+      }
+
+      if (question.maxAnswerCount) {
+        const inputs = questionContent.querySelectorAll('.answers input')
+        for (const input of inputs) {
+          input.dataset.onChange = "maxCount"
+          input.dataset.maxCount = question.maxAnswerCount
+        }
+      }
+    }
+    container.appendChild(questionContent)
+  }
+}
+
+const setSubQuestions = async function (form, surveyKey, answerId, parentOrder) {
+  const subQuestionContent = document.createElement('div')
+  subQuestionContent.classList.add('subQuestion')
+
+  const questionsSnap = await getDocs(query(collection(db, 'questions'), where('surveyKey', '==', surveyKey), where('answerId', '==', answerId), orderBy('order')))
+
+  if (!questionsSnap.size) return subQuestionContent
+
+  await setQuestionContent(questionsSnap.docs, form, subQuestionContent, surveyKey, parentOrder)
+  
+  return subQuestionContent
+}
+
 const setQuestions = async function (surveyKey, form) {
   const questionsSnap = await getDocs(query(collection(db, 'questions'), where('surveyKey', '==', surveyKey), where('answerId', '==', null), orderBy('order')))
   if (questionsSnap.size) {
+    await setQuestionContent(questionsSnap.docs, form, form.querySelector('.questions'), surveyKey)
+
     form.querySelector('#preQuestion').classList.add('hidden')
-    for (let i = 0; i < questionsSnap.docs.length; i++) {
-      const question = questionsSnap.docs[i].data()
-      const questionTemplate = document.getElementById(`question-type-${question.type}`)
-      const questionContent = questionTemplate.content.cloneNode(true)
-
-      questionContent.querySelector('.question-number').textContent = `Question ${i + 1}`
-      questionContent.querySelector('.question-title').textContent = question.title
-      questionContent.querySelector('.question-subtitle').textContent = question.subtitle
-
-      if (question.type === 'dropdown') {
-        const select = questionContent.querySelector('select')
-        select.name = `question-${question.id}`
-        if (question.autoAnswers && !question.answers?.length) {
-          select.dataset.answers = question.autoAnswers
-        } else if (question.answers.length) {
-          for (const answer of question.answers) {
-            const option = document.createElement('option')
-            option.textContent = answer.title
-            option.value = answer.title
-            select.appendChild(option)
-          }
-        }
-      } else {
-        for (const answer of question.answers) {
-          const answerTemplate = questionContent.querySelector('#answer')
-          const answerContent = answerTemplate.content.cloneNode(true)
-          const input = answerContent.querySelector('input')
-          answerContent.querySelector('span').textContent = answer.title
-          input.name = `question-${question.id}`
-          input.value = answer.title
-          input.dataset.answerId = answer.id
-          questionContent.querySelector('.answers').appendChild(answerContent)
-  
-          if (answer.subView?.length) {
-            let subViewContent
-  
-            const inputs = questionContent.querySelectorAll('.answers input')
-            for (const input of inputs) {
-              input.dataset.onChange = "conditionalPath"
-              input.dataset.conditionalPath = (input.dataset.conditionalPath) ? input.dataset.conditionalPath + `-${question.id}-${answer.id}` : `${question.id}-${answer.id}}`
-            }
-  
-            if (answer.subView === 'link' && answer.link?.title) {
-              const linkTemplate = document.getElementById('answer-subView-link')
-              subViewContent = linkTemplate.content.cloneNode(true)
-  
-              subViewContent.querySelector('p').textContent = answer.link.title
-              subViewContent.querySelector('a').textContent = answer.link.name
-              subViewContent.querySelector('a').setAttribute('href', answer.link.url)
-            } else if (answer.subView === 'questions' &&  answer.questions?.length) {
-              subViewContent = document.createElement('div')
-              subViewContent.classList.add('subQuestion')
-  
-              for (let a = 0; a < answer.questions.length; a++) {
-                const questionA = answer.questions[a].data()
-                const questionATemplate = document.getElementById(`question-type-${questionA.type}`)
-                const questionAContent = questionATemplate.content.cloneNode(true)
-          
-                questionAContent.querySelector('.question-number').textContent = `Question ${a + 1}`
-                questionAContent.querySelector('.question-title').textContent = questionA.title
-                questionAContent.querySelector('.question-subtitle').textContent = questionA.subtitle
-          
-                for (const answerA of questionA.answers) {
-                  if (questionA.type === 'dropdown') {
-                    const select = questionAContent.querySelector('select')
-                    select.name = `question-${questionA.id}`
-                    const option = document.createElement('option')
-                    option.textContent = answerA.title
-                    option.value = answerA.title
-                    select.appendChild(option)
-                  } else {
-                    const answerTemplate = questionAContent.querySelector('#answer')
-                    const answerContent = answerTemplate.content.cloneNode(true)
-                    const input = answerContent.querySelector('input')
-                    input.name = `question-${questionA.id}`
-                    input.value = answerA.title
-                    input.dataset.answerId = answerA.id
-                    questionAContent.querySelector('.answers').appendChild(answerContent)
-          
-                    if (answerA.subView?.length) {
-                      let subViewContent
-          
-                      const inputs = questionAContent.querySelectorAll('.answers input')
-                      for (const input of inputs) {
-                        input.dataset.onChange = "conditionalPath"
-                        input.dataset.conditionalPath = (input.dataset.conditionalPath) ? input.dataset.conditionalPath + `-${questionA.id}-${answerA.id}` : `${questionA.id}-${answerA.id}}`
-                      }
-          
-                      if (answerA.subView === 'link' && answerA.link?.title) {
-                        const linkTemplate = document.getElementById('answer-subView-link')
-                        subViewContent = linkTemplate.content.cloneNode(true)
-          
-                        subViewContent.querySelector('p').textContent = answerA.link.title
-                        subViewContent.querySelector('a').textContent = answerA.link.name
-                        subViewContent.querySelector('a').setAttribute('href', answerA.link.url)
-                      }
-          
-                      const temp = document.createElement('template')
-                      temp.dataset.choice = `${questionA.id}-${answerA.id}`
-                      temp.appendChild(subViewContent)
-                      questionContent.appendChild(temp)
-                    }
-                  }        
-                }
-                subViewContent.appendChild(questionAContent)
-              }
-            }
-  
-            const temp = document.createElement('template')
-            temp.dataset.choice = `${question.id}-${answer.id}`
-            temp.appendChild(subViewContent)
-            questionContent.appendChild(temp)
-          }        
-        }
-      }
-      form.querySelector('.questions').appendChild(questionContent)
-    }
+    form.querySelector('.questions').classList.remove('hidden')
+    
   } else {
     form.querySelector('#preQuestion p').textContent = 'No questions found for survey'
   }
@@ -346,6 +374,8 @@ const setOnChange = function (containerElement) {
     const container = el.parentNode.parentNode.parentNode
     const item = el.dataset[e.currentTarget.dataset.onChange]
     if (item) {
+      console.log('ITEM: ', item)
+      console.log('el.dataset.answerId: ', el.dataset.answerId)
       if (e.currentTarget.dataset.onChange === 'maxCount') {
         const checked = document.querySelectorAll(`input[name="${e.currentTarget.name}"]:checked`)
         if (checked.length > Number(item)) {
@@ -356,7 +386,7 @@ const setOnChange = function (containerElement) {
         if (elAllowedToShow.value === el.value) {
           const template = document.getElementById('selectFreeText')
           const content = template.content.cloneNode(true)
-          content.querySelector('input[type="text"]').setAttribute('name', `${el.name}Description`)
+          content.querySelector('input[type="text"]').setAttribute('name', `${el.name}-Description`)
           elAllowedToShow.parentNode.parentNode.parentNode.appendChild(content)
         } else {
           const label = container.querySelector('label.free-text')
@@ -364,15 +394,16 @@ const setOnChange = function (containerElement) {
         }
       } else {
         const itemAsArray = item.split('-')
-        if (el.value.toLowerCase() === itemAsArray[1].toLowerCase()) {
-          const template = document.querySelector(`[data-choice="${itemAsArray[0]}-${el.value.toLowerCase()}"]`)
-          const questionContainer = template.parentNode
+        if (el.dataset.answerId === itemAsArray[1]) {
+          const template = document.querySelector(`[data-choice="${item}"]`)
+          const questionContainer = document.querySelector('.questions')
           const content = template.content.cloneNode(true)
           for (let i = 0; i < content.children.length; i++) {
-            content.children[i].classList.add(itemAsArray[0]+'-'+itemAsArray[1].toLowerCase())
+            content.children[i].classList.add(itemAsArray[0])
+            content.children[i].classList.add(item)
           }
           if (itemAsArray.length > 2) {
-            const existing = questionContainer.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[3]?.toLowerCase()}`)
+            const existing = questionContainer.querySelectorAll(`.${itemAsArray[0]}`)
             if (existing.length) {
               existing.forEach((node) => {
                 node.remove()
@@ -380,33 +411,34 @@ const setOnChange = function (containerElement) {
             }
           }
           
-          questionContainer.insertBefore(content, questionContainer.querySelector('button[type="submit"]'))
-          setOnChange(questionContainer.querySelector(`.${itemAsArray[0]}-${itemAsArray[1].toLowerCase()}`))
-        } else if (itemAsArray.length > 2 && el.value.toLowerCase() === itemAsArray[3]?.toLowerCase()) {
-          const template = document.querySelector(`[data-choice="${itemAsArray[0]}-${el.value.toLowerCase()}"]`)
+          questionContainer.appendChild(content)
+          // questionContainer.insertBefore(content, questionContainer.querySelector('button[type="submit"]'))
+          setOnChange(questionContainer.querySelector(`.${item}`))
+        } else if (itemAsArray.length > 2 && el.value === itemAsArray[3]) {
+          const template = document.querySelector(`[data-choice="${itemAsArray[0]}-${el.value}"]`)
           const questionContainer = template.parentNode
           const content = template.content.cloneNode(true)
           for (let i = 0; i < content.children.length; i++) {
-            content.children[i].classList.add(itemAsArray[0]+'-'+itemAsArray[3].toLowerCase())
+            content.children[i].classList.add(itemAsArray[0]+'-'+itemAsArray[3])
           }
 
-          const existing = questionContainer.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[1]?.toLowerCase()}`)
+          const existing = questionContainer.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[1]}`)
           if (existing.length) {
             existing.forEach((node) => {
               node.remove()
             })
           }
           questionContainer.insertBefore(content, questionContainer.querySelector('button[type="submit"]'))
-          setOnChange(questionContainer.querySelector(`.${itemAsArray[0]}-${itemAsArray[3].toLowerCase()}`))
+          setOnChange(questionContainer.querySelector(`.${itemAsArray[0]}-${itemAsArray[3]}`))
         } else {
-          const existing = document.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[1].toLowerCase()}`)
+          const existing = document.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[1]}`)
           if (existing.length) {
             existing.forEach((node) => {
               node.remove()
             })
           }
           if (itemAsArray.length > 2) {
-            const existingTwo = document.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[3].toLowerCase()}`)
+            const existingTwo = document.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[3]}`)
             if (existingTwo.length) {
               existingTwo.forEach((node) => {
                 node.remove()
@@ -420,7 +452,7 @@ const setOnChange = function (containerElement) {
       if (elAllowedToShow.value === el.value) {
         const template = document.getElementById('selectFreeText')
         const content = template.content.cloneNode(true)
-        content.querySelector('input[type="text"]').setAttribute('name', `${el.name}Description`)
+        content.querySelector('input[type="text"]').setAttribute('name', `${el.name}-Description`)
         elAllowedToShow.parentNode.parentNode.parentNode.appendChild(content)
       } else {
         const label = container.querySelector('label.free-text')
@@ -470,7 +502,7 @@ const setProgressTracker = function () {
     console.log(key)
     if (!keysChecked.includes(key)) {
       let isComplete = false
-      if (key.toLowerCase().includes('question')) {
+      if (key.includes('question')) {
         const els = document.getElementsByName(key)
         for (const el of els) {
           if (!isComplete) {
@@ -479,7 +511,7 @@ const setProgressTracker = function () {
               case 'textarea':
               case 'select-one':
               case 'date':
-                if (validShortAnswer.includes(answers.get(key).toLowerCase()) || answers.get(key).length > 3) {
+                if (validShortAnswer.includes(answers.get(key)) || answers.get(key).length > 3) {
                   isComplete = true
                 }
                 break

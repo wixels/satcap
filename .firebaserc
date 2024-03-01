@@ -22,6 +22,9 @@
       "hosting": {
         "user": [
           "satcap-research"
+        ],
+        "admin": [
+          "admin-satcap-research"
         ]
       }
     }
