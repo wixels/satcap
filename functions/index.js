@@ -8799,14 +8799,3607 @@ exports.importQuestions = functions.https.onRequest(async (req, res) => {
     ]
 
     const wpTwoTwo = [
-      
+      {
+        "title": "Which age bracket do you fall into?",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionOne",
+        "answerId": "",
+        "type": "dropdown",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "20-29",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "30-39",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "40-49",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "50-59",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "60-69",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "70-70",
+            "description": "70 or older",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Which option generally describes your current job function?",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionTwo",
+        "answerId": "",
+        "type": "multi-select",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Operator",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Supervisor",
+            "description": "",
+            "subView": "questions",
+            "subViewRelated": false,
+            "specifyAnswer": false,
+            "questions": [
+              {
+                "title": "How confident are you in the creation of Word Documents?",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionTwentyNine",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Hesitant",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Unconfident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How confident are you in the creation of Digital Presentations?",
+                "subtitle": "E.g. PowerPoint Presentation",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirty",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Hesitant",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Unconfident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How confident are you when working with databases and spreadsheets?",
+                "subtitle": "E.g. Access and Excel",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirtyOne",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Hesitant",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Unconfident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How confident are you in setting up a Wi-Fi Network?",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirtyTwo",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Hesitant",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Unconfident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How confident are you in using a Search Engine?",
+                "subtitle": "E.g. Google",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirtyThree",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Hesitant",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Unconfident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How confident are you in using digital communication",
+                "subtitle": "E.g. via email correspondence",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirtyFour",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Hesitant",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Unconfident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How proactively do you find and collect information from the internet to apply to your job role?",
+                "subtitle": "(without instruction from superviors)",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirtyFive",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Never",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Rarely",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Occasionally",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Frequently",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very Frequently",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "Rate your interest in finding and applying new technologies and software to your job",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirtySix",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Very Low",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Low",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "High",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very High",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How do you respond to change within your organisation?",
+                "subtitle": "Select the hypothetical response that most closely aligns with your response",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirtySeven",
+                "answerId": "",
+                "type": "multi-select",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "2 - I'm not sure what to do",
+                    "description": `"I'm not sure what to do"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "1 - It's fine the way it is",
+                    "description": `"It's fine the way it is"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "2 - No one is considering how this will impact me",
+                    "description": `"No one is considering how this will impact me"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "1 - Haven't we tried this before and it didn't work",
+                    "description": `"Haven't we tried this before and it didn't work"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "4 - I'm fine with it - but other people are not",
+                    "description": `"I'm fine with it - but other people are not"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "0 - We don't have time for this",
+                    "description": `"We don't have time for this"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "0 - This won't be permanent",
+                    "description": `"This won't be permanent"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "5 - I'm willing to adapt",
+                    "description": `"I'm willing to adapt"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "0 - No comment",
+                    "description": `"No comment"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "0 - None of the above",
+                    "description": `"None of the above"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Manager",
+            "description": "",
+            "subView": "questions",
+            "subViewRelated": false,
+            "specifyAnswer": false,
+            "questions": [
+              {
+                "title": "How confident are you in the creation of Word Documents?",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionTwentyNine",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Hesitant",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Unconfident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How confident are you in the creation of Digital Presentations?",
+                "subtitle": "E.g. PowerPoint Presentation",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirty",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Hesitant",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Unconfident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How confident are you when working with databases and spreadsheets?",
+                "subtitle": "E.g. Access and Excel",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirtyOne",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Hesitant",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Unconfident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How confident are you in setting up a Wi-Fi Network?",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirtyTwo",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Hesitant",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Unconfident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How confident are you in using a Search Engine?",
+                "subtitle": "E.g. Google",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirtyThree",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Hesitant",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Unconfident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How confident are you in using digital communication",
+                "subtitle": "E.g. via email correspondence",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirtyFour",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Hesitant",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Unconfident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very Confident",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How proactively do you find and collect information from the internet to apply to your job role?",
+                "subtitle": "(without instruction from superviors)",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirtyFive",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Never",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Rarely",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Occasionally",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Frequently",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very Frequently",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "Rate your interest in finding and applying new technologies and software to your job",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirtySix",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Very Low",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Low",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "High",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very High",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How do you respond to change within your organisation?",
+                "subtitle": "Select the hypothetical response that most closely aligns with your response",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirtySeven",
+                "answerId": "",
+                "type": "multi-select",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "2 - I'm not sure what to do",
+                    "description": `"I'm not sure what to do"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "1 - It's fine the way it is",
+                    "description": `"It's fine the way it is"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "2 - No one is considering how this will impact me",
+                    "description": `"No one is considering how this will impact me"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "1 - Haven't we tried this before and it didn't work",
+                    "description": `"Haven't we tried this before and it didn't work"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "4 - I'm fine with it - but other people are not",
+                    "description": `"I'm fine with it - but other people are not"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "0 - We don't have time for this",
+                    "description": `"We don't have time for this"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "0 - This won't be permanent",
+                    "description": `"This won't be permanent"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "5 - I'm willing to adapt",
+                    "description": `"I'm willing to adapt"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "0 - No comment",
+                    "description": `"No comment"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "0 - None of the above",
+                    "description": `"None of the above"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "Rate your level of understanding of the impact of digital transformation within your organisation",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirtyEight",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Very Low",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Low",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "High",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very High",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "I am capable of sound judgement through analysis of digital and non-digital information",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionThirtyNine",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Strongly Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Strongly Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How often do you solve problems using the digital assets at your disposal?",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionForty",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Never",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Bi-monthly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Monthly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Weekly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Daily",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "I use digital information to monitor new developments in my industry",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFortyOne",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Strongly Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Strongly Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "I am aware of the security risks involved with the use of digital assets",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFortyTwo",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Strongly Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Strongly Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How often do you use digital assets° for innovation within your job role?",
+                "subtitle": "°E.g. Microsoft Teams, Zoom, Microsoft Office Suit, Spreadsheet Software",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFortyThree",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Never",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Bi-monthly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Monthly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Weekly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Daily",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How often do you set targets for your team with monitoring and evaluating metrics using digital assets?",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFortyFour",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Never",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Bi-monthly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Monthly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Weekly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Daily",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "I understand my organisation's business model",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFortyFive",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Strongly Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Strongly Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "I am aware of the strategic direction, objectives, and Key Performance Indictors (KPIs) of the organisation",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFortySix",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Strongly Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Strongly Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How often do you collaborate using a digital asset?",
+                "subtitle": "E.g. Microsoft Teams, Zoom, Microsoft Office Suit, Spreadsheet Software",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFortySeven",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Never",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Bi-monthly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Monthly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Weekly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Daily",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How often do you identify talent in the workforce and encourage personal development?",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFortyEight",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Never",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Bi-monthly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Monthly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Weekly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Daily",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "Rate your ability to act-on/implement/execute on the strategic intent of the organisation",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFortyNine",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Very Low",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Low",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "High",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very High",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "Rate your ability to influence others through digital channels",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFifty",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Very Low",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Low",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "High",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Very High",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "I am a mentor/coach to others for the adoption and use of digital assets",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFiftyOne",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Strongly Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Strongly Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "I have an understanding of some of the measures that need to put in place to ensure that digital transformation is encouraged in my company",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFiftyTwo",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Strongly Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Strongly Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How often do you use digital tools to reach consensus, find alignment, or promote decision making?",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFiftyThree",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Never",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Bi-monthly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Monthly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Weekly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Daily",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "How often do you encourage the use of digital assets within your organisation?",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFiftyFour",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Never",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Bi-monthly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Monthly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Weekly",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Daily",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "I am curious about alternative digital assets that can improve my ability to lead",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFiftyFive",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Strongly Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Strongly Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "I consider myself as someone who has the desire to constantly be right",
+                "subtitle": "",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFiftySix",
+                "answerId": "",
+                "type": "number-rating",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "Strongly Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Disagree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Neutral",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "Strongly Agree",
+                    "description": "",
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              },
+              {
+                "title": "What do you think about pivotting from legacy technology that cannot meet the current needs of your organisation?",
+                "subtitle": "Select the hypothetical response that most closely aligns with your response",
+                "surveyKey": "wp-two-two",
+                "reportingKey": "questionFiftySeven",
+                "answerId": "",
+                "type": "multi-select",
+                "maxAnswerCount": null,
+                "isLocked": true,
+                "answers": [
+                  {
+                    "title": "2 - I'm not sure what to do",
+                    "description": `"I'm not sure what to do"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "1 - It's fine the way it is",
+                    "description": `"It's fine the way it is"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "2 - No one is considering how this will impact me",
+                    "description": `"No one is considering how this will impact me"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "1 - Haven't we tried this before and it didn't work",
+                    "description": `"Haven't we tried this before and it didn't work"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "4 - I'm fine with it - but other people are not",
+                    "description": `"I'm fine with it - but other people are not"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "0 - We don't have time for this",
+                    "description": `"We don't have time for this"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "0 - This won't be permanent",
+                    "description": `"This won't be permanent"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "5 - I'm willing to adapt",
+                    "description": `"I'm willing to adapt"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "0 - No comment",
+                    "description": `"No comment"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  },
+                  {
+                    "title": "0 - None of the above",
+                    "description": `"None of the above"`,
+                    "subView": null,
+                    "subViewRelated": false,
+                    "specifyAnswer": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "How long have you been employed within that role?",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionThree",
+        "answerId": "",
+        "type": "multi-select",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Less than 1 year",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "1 - 3 years",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "3 - 5 years",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "5 - 8 years",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "8 - 10 years",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "More than 10 years",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Please select which type of mine you believe you work in",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionFour",
+        "answerId": "",
+        "type": "multi-select",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Traditional (not very modern)",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Hybrid (mixture of modern technology)",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Modern (highly integrated with modern technology)",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "What is your highest level of education?",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionFive",
+        "answerId": "",
+        "type": "dropdown",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Primary School",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "High School",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Technical College",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Vocational Training",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Online Short Courses",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "University",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "None of the above",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Rate your level of comfort using a cellphone",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionSix-One",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Very Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Neutral",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Very High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Rate your level of comfort using a desktop computer or laptop",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionSix-Two",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Very Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Neutral",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Very High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Rate your level of comfort using a touchscreen device (e.g. tablet)",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionSix-Three",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Very Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Neutral",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Very High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Rate your ability to type on a cellphone",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionSeven-One",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Very Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Neutral",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Very High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Rate your ability to type on a desktop computer/laptop",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionSeven-Two",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Very Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Neutral",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Very High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Rate your ability to type on a touchscreen device (e.g. tablet)",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionSeven-Three",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Very Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Neutral",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Very High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "How often do you use a cellphone for learning purposes?",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionEight-One",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Never",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Bi-monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Weekly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Daily",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "How often do you use a desktop computer or laptop for learning purposes?",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionEight-Two",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Never",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Bi-monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Weekly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Daily",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "How often do you use a tablet for learning purposes?",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionEight-Three",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Never",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Bi-monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Weekly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Daily",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Which of the following is a digital literacy skill?",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionNine",
+        "answerId": "",
+        "type": "multi-select",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "1-correct",
+            "description": "Being able to find sources of electronic information",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "2-incorrect",
+            "description": "Being able to take electronic photographs",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "3-incorrect",
+            "description": "Being able to find paper-based information",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "What is the fraudulent attempt to acquire sensitive information such as passwords and credit card details in an electronic communication?",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionTen",
+        "answerId": "",
+        "type": "multi-select",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "1-correct",
+            "description": "Streaming",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "2-incorrect",
+            "description": "Crowdsourcing",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "3-incorrect",
+            "description": "Phishing",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Which emotion do you feel when you think about changing how you perform your job?",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionEleven",
+        "answerId": "",
+        "type": "multi-select",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "0 - Anger",
+            "description": "Anger",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "3 - Anticipation",
+            "description": "Anticipation",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "5 - Joy",
+            "description": "Joy",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "4 - Trust",
+            "description": "Trust",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "0 - Fear",
+            "description": "Fear",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "2 - Surprise",
+            "description": "Surprise",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "1 - Sadness",
+            "description": "Sadness",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "0 - Disgust",
+            "description": "Disgust",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "0 - No comment",
+            "description": "Prefer not to say",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "0 - None of the above",
+            "description": "None of the above",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "How often do you use Microsoft°?",
+        "subtitle": "°Word, Excel, PowerPoint etc.",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionTwelve",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Never",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Bi-monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Weekly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Daily",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "How often do you use email?",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionThirteen",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Never",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Bi-monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Weekly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Daily",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "How often do you access the Internet?",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionFourteen",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Never",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Bi-monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Weekly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Daily",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "How often do you use Spreadsheet Software°?",
+        "subtitle": "°For data organisation",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionFifteen",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Never",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Bi-monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Weekly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Daily",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "How often do you use learning software?",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionSixteen",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Never",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Bi-monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Weekly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Daily",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "How often do you use video conferencing software?",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionSeventeen",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Never",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Bi-monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Monthly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Weekly",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Daily",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "How many hours a day do you spend using a digital device°?",
+        "subtitle": "°Smartphone, desktop computer, laptop, tablet etc.",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionEighteen",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Never",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "0 - 1 hour",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "1 - 5 hours",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "5 - 10 hours",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "10+ hours",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "How many hours a day do you check or link your schedule to an online calendar?",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionNineteen",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Never",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "0 - 1 hour",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "1 - 5 hours",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "5 - 10 hours",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "10+ hours",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "How many hours a day do you spend learning how to use the digital device/s that you personally own or have possession of?",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionTwenty",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Never",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "0 - 1 hour",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "1 - 5 hours",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "5 - 10 hours",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "10+ hours",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Rate your willingness to use digital assets to perform activities",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionTwentyOne",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Very Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Neutral",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Very High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Rate your ability to use web and mobile applications",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionTwentyTwo",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Very Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Neutral",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Very High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Rate your ability to use online platforms° to communicate with others",
+        "subtitle": "°Facebook, WhatsApp, Instagram, Telegram, WeChat, TikTok etc.",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionTwentyThree",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Very Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Neutral",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Very High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Rate your ability to use the internet to obtain information",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionTwentyFour",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Very Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Neutral",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Very High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Rate your ability to use specialised computing software° for your job activities",
+        "subtitle": "°Microsoft Teams, Adobe Acrobat Reader, Microsoft Office Suite etc.",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionTwentyFive",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Very Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Neutral",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Very High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Rate your ability to understand, interpret, analyse data obtained through digital assets°",
+        "subtitle": "°Microsoft Teams, Zoom, Microsoft Office Suite, Spreadsheet Software etc.",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionTwentySix",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Very Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Low",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Neutral",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Very High",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "I am trusted by others whilst performing my job function",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionTwentySeven",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Strongly Disagree",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Disagree",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Neutral",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Agree",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Strongly Agree",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "Others rely on me to get the job done right",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionTwentySeven-One",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Strongly Disagree",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Disagree",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Neutral",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Agree",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Strongly Agree",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "I often provide support when others struggle performing a task",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionTwentySeven-Two",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Strongly Disagree",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Disagree",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Neutral",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Agree",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Strongly Agree",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      },
+      {
+        "title": "I have the will to take responsibility for my actions",
+        "subtitle": "",
+        "surveyKey": "wp-two-two",
+        "reportingKey": "questionTwentyEight",
+        "answerId": "",
+        "type": "number-rating",
+        "maxAnswerCount": null,
+        "isLocked": true,
+        "answers": [
+          {
+            "title": "Strongly Disagree",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Disagree",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Neutral",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Agree",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          },
+          {
+            "title": "Strongly Agree",
+            "description": "",
+            "subView": null,
+            "subViewRelated": false,
+            "specifyAnswer": false
+          }
+        ]
+      }
     ]
 
-    // await addQuestions(wpThreeOnePre)
-    // await addQuestions(wpThreeOnePost)
-    // await addQuestions(wpThreeOnePostResponse)
-    // await addQuestions(wpThreeTwo)
-    // await addQuestions(wpTwoOne)
+    await addQuestions(wpThreeOnePre)
+    await addQuestions(wpThreeOnePost)
+    await addQuestions(wpThreeOnePostResponse)
+    await addQuestions(wpThreeTwo)
+    await addQuestions(wpTwoOne)
     await addQuestions(wpTwoTwo)
 
     await batch.commit()
@@ -8929,10 +12522,29 @@ exports.getDataFromFirestore = functions.https.onRequest(async (request, respons
   try {
     const firestore = admin.firestore();
     const responses = [];
+    const questions = {};
     // Replace 'your_collection_name' with the actual Firestore collection you want to access
+
     const snapshot = await firestore.collectionGroup('responses').get();
-    snapshot.forEach((doc) => {
-      responses.push(doc.data());
+    snapshot.forEach(async (doc) => {
+      const data = doc.data()
+      for (const key in data) {
+        if (key.indexOf('question-') > -1) {
+          if (!questions[data.surveyKey]) {
+            questions[data.surveyKey] = {}
+            const quesSnap = await firestore.collection('questions').where('surveyKey', '==', data.surveyKey).get();
+            quesSnap.forEach((doc) => {
+              questions[data.surveyKey]['question-'+doc.id] = doc.data().reportingKey
+            })
+          }
+          if (questions[data.surveyKey][key]) {
+            data[questions[data.surveyKey][key]] = data[key]
+            delete data[key]
+          }
+        }
+      }
+
+      responses.push(data);
     });
  
     response.json(responses);
