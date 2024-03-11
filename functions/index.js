@@ -12553,7 +12553,6 @@ exports.getDataFromFirestore = functions.https.onRequest(async (request, respons
   }
 });
 
-
 exports.getLocationsFromFirestore = functions.https.onRequest(async (request, response) => {
   try {
 
