@@ -2,7 +2,7 @@ import { Avatar, Button, Group, Text, UnstyledButton } from '@mantine/core';
 import { IconChevronsLeft, IconCirclePlus } from '@tabler/icons';
 import { Link, useMatch, useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ToolEditorTable } from '../../components/ToolEditorTable';
 import { useGetUser, userGetMine } from '../../context/AuthenticationContext';
 import { useGetQuestions } from '../../hooks/network/useQuestions';
@@ -16,7 +16,19 @@ export const ToolEditor = (): JSX.Element => {
     params: { surveyKey },
   } = useMatch();
   const { data: questions, isLoading } = useGetQuestions(surveyKey);
-  const { user, fetching: loadingUser } = useGetUser();
+
+  console.log('mine::: ', mine);
+  const orderLocked = useMemo(() => {
+    const packageByKey = mine?.packages?.find(
+      (pack) => pack.survey.key === surveyKey
+    );
+    if (packageByKey && packageByKey.survey?.orderLocked) {
+      return true;
+    }
+    return false;
+  }, [mine]);
+
+  console.log('isLocked::: ', orderLocked);
 
   return (
     <>
@@ -56,28 +68,9 @@ export const ToolEditor = (): JSX.Element => {
       >
         Add new question
       </Button>
-      {/* <pre>{JSON.stringify(questions, null, 2)}</pre> */}
-      {!isLoading && questions ? <ToolEditorTable data={questions} /> : null}
-
-      {/* <SimpleGrid
-        cols={3}
-        spacing="lg"
-        breakpoints={[
-          { maxWidth: 'md', cols: 1, spacing: 'sm' },
-          { maxWidth: 'lg', cols: 2, spacing: 'lg' },
-        ]}
-      >
-        {questions?.map((question, i) => (
-          <QuestionCard
-            title={question.title}
-            subtitle={question.subtitle}
-            id={question.id}
-            order={i + 1}
-            answers={question.answers}
-            key={question.id}
-          />
-        ))}
-      </SimpleGrid> */}
+      {!isLoading && questions ? (
+        <ToolEditorTable orderLocked={orderLocked} data={questions} />
+      ) : null}
     </>
   );
 };

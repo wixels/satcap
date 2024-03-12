@@ -1,14 +1,31 @@
-import { Checkbox, createStyles, Table } from '@mantine/core';
+// @ts-nocheck
+import {
+  ActionIcon,
+  Button,
+  Checkbox,
+  Group,
+  Popover,
+  Table,
+  Text,
+  Title,
+} from '@mantine/core';
+import { cleanNotifications, showNotification } from '@mantine/notifications';
+import { IconEdit, IconTrash } from '@tabler/icons';
+import { Link } from '@tanstack/react-location';
+import { doc, writeBatch } from 'firebase/firestore';
+import update from 'immutability-helper';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { useTable } from 'react-table';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import update from 'immutability-helper';
+import { useTable } from 'react-table';
+import db from '../firebase';
+import useDebouncedCallback from '../hooks/useDebouncedCallback';
 
 // needed for row & cell level scope DnD setup
 
 type Props = {
   data: any;
+  orderLocked: boolean;
 };
 const Row = ({ row, index, moveRow }) => {
   const dropRef = useRef(null);
@@ -70,7 +87,9 @@ const Row = ({ row, index, moveRow }) => {
 
   return (
     <tr ref={dropRef} style={{ opacity }}>
-      <td ref={dragRef}>move</td>
+      <td ref={dragRef}>
+        <ActionIcon>=</ActionIcon>
+      </td>
       {row.cells.map((cell) => {
         return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
       })}
@@ -78,7 +97,7 @@ const Row = ({ row, index, moveRow }) => {
   );
 };
 
-export const ToolEditorTable: React.FC<Props> = ({ data }) => {
+export const ToolEditorTable: React.FC<Props> = ({ data, orderLocked }) => {
   const [records, setRecords] = useState(data);
 
   const getRowId = useCallback((row) => {
@@ -87,12 +106,6 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
 
   const columns = useMemo(
     () => [
-      // {
-      //   Header: 'order',
-      //   Cell: ({ row }) => {
-      //     return <RowDragHandleCell rowId={row.id} />;
-      //   },
-      // },
       {
         Header: 'Title',
         accessor: 'title',
@@ -134,31 +147,106 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
       {
         Header: 'Actions',
         accessor: 'id',
-        Cell: ({ row }) => {
-          return <div>x</div>;
+        Cell: (cell) => {
+          // @ts-ignore
+          if (cell.row.original?.isLocked) return null;
+          return (
+            <Group>
+              <ActionIcon
+                component={Link}
+                to={`./${cell.row.original?.id}/edit`}
+                color="blue"
+                variant="light"
+              >
+                <IconEdit size={16} />
+              </ActionIcon>
+              <Popover
+                width={300}
+                trapFocus
+                position="bottom"
+                withArrow
+                shadow="md"
+              >
+                <Popover.Target>
+                  <ActionIcon color="red" variant="light">
+                    <IconTrash size={16} />
+                  </ActionIcon>
+                </Popover.Target>
+                <Popover.Dropdown
+                  sx={(theme) => ({
+                    background:
+                      theme.colorScheme === 'dark'
+                        ? theme.colors.dark[7]
+                        : theme.white,
+                  })}
+                >
+                  <Title order={5}>Are you sure you want to delete?</Title>
+                  <Text color="dimmed" mb={'xl'}>
+                    This action cannot be undone
+                  </Text>
+                  <Button
+                    fullWidth
+                    color={'red'}
+                    // onClick={() => handleDelete(cell)}
+                  >
+                    Delete
+                  </Button>
+                </Popover.Dropdown>
+              </Popover>
+            </Group>
+          );
         },
       },
     ],
     []
   );
+  const debouncedOrder = useDebouncedCallback(async (questions: any[]) => {
+    const batch = writeBatch(db);
+
+    showNotification({
+      loading: true,
+      title: 'Saving your data',
+      message: 'Please wait before closing the page.',
+      autoClose: false,
+      disallowClose: true,
+    });
+    // Update the population of 'SF'
+    questions.forEach((q, i) => {
+      const qRef = doc(db, 'questions', q.id);
+      batch.update(qRef, { order: i });
+      return;
+    });
+
+    // Commit the batch
+    await batch.commit();
+    cleanNotifications();
+    showNotification({
+      color: 'teal',
+      title: 'Data was saved',
+      message:
+        'Notification will close in 2 seconds, you can close this notification now',
+      autoClose: 2000,
+    });
+  }, 3000);
 
   const moveRow = (dragIndex, hoverIndex) => {
     const dragRecord = records[dragIndex];
-    setRecords(
-      update(records, {
-        $splice: [
-          [dragIndex, 1],
-          [hoverIndex, 0, dragRecord],
-        ],
-      })
-    );
+    const updatedRecords = update(records, {
+      $splice: [
+        [dragIndex, 1],
+        [hoverIndex, 0, dragRecord],
+      ],
+    });
+
+    debouncedOrder(updatedRecords);
+    setRecords(updatedRecords);
   };
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({
-      columns,
-      data: records,
-    });
+  const { getTableProps, getTableBodyProps, rows, prepareRow } = useTable({
+    columns,
+    data: records,
+    getRowId,
+  });
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -170,7 +258,7 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
       >
         <thead>
           <tr>
-            <th>Order</th>
+            {!orderLocked && <th>Order</th>}
             <th>Title</th>
             <th>Type</th>
             <th>Locked</th>
@@ -179,17 +267,30 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
           </tr>
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map(
-            (row, index) =>
-              prepareRow(row) || (
-                <Row
-                  index={index}
-                  row={row}
-                  moveRow={moveRow}
-                  {...row.getRowProps()}
-                />
-              )
-          )}
+          {orderLocked
+            ? rows.map((row, i) => {
+                prepareRow(row);
+                return (
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map((cell) => {
+                      return (
+                        <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                      );
+                    })}
+                  </tr>
+                );
+              })
+            : rows.map(
+                (row, index) =>
+                  prepareRow(row) || (
+                    <Row
+                      index={index}
+                      row={row}
+                      moveRow={moveRow}
+                      {...row.getRowProps()}
+                    />
+                  )
+              )}
         </tbody>
       </Table>
     </DndProvider>
