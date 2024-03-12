@@ -26,7 +26,10 @@ export const CreateQuestion: React.FC<Props> = () => {
   const [loading, setLoading] = useState(false);
   const {
     params: { surveyKey },
+    search: { total },
   } = useMatch();
+
+  console.log('total::: ', total);
 
   const questionDefaultValues = {
     key: nanoid(8),
@@ -37,7 +40,7 @@ export const CreateQuestion: React.FC<Props> = () => {
     type: 'single-select',
     isLocked: false,
     maxAnswerCount: null,
-    order: 1,
+    order: total ? Number(total) + 1 : 0,
     reportingKey: null,
     answerId: null,
     answers: [
@@ -53,21 +56,7 @@ export const CreateQuestion: React.FC<Props> = () => {
     ],
     createdAt: new Date().toISOString(),
   };
-  const answerDefaultValues = {
-    id: nanoid(8),
-    key: nanoid(8),
-    title: '',
-    description: '',
-    specifyAnswer: false,
-    subViewRelated: false,
-    subView: null,
-    questions: [],
-    link: {
-      title: '',
-      name: '',
-      url: '',
-    },
-  };
+
   const form = useForm({
     initialValues: {
       questions: [questionDefaultValues],
@@ -105,7 +94,8 @@ export const CreateQuestion: React.FC<Props> = () => {
       });
       await batch.commit();
 
-      queryClient.invalidateQueries();
+      await queryClient.invalidateQueries();
+      await queryClient.invalidateQueries(['questions', surveyKey]);
       navigate({ to: '../' });
     } catch (error: any) {
       showNotification({

@@ -2,7 +2,7 @@ import { Avatar, Button, Group, Text, UnstyledButton } from '@mantine/core';
 import { IconChevronsLeft, IconCirclePlus } from '@tabler/icons';
 import { Link, useMatch, useNavigate } from '@tanstack/react-location';
 import { useQueryClient } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ToolEditorTable } from '../../components/ToolEditorTable';
 import { useGetUser, userGetMine } from '../../context/AuthenticationContext';
 import { useGetQuestions } from '../../hooks/network/useQuestions';
@@ -16,6 +16,9 @@ export const ToolEditor = (): JSX.Element => {
     params: { surveyKey },
   } = useMatch();
   const { data: questions, isLoading } = useGetQuestions(surveyKey);
+  useEffect(() => {
+    queryClient.invalidateQueries(['questions', surveyKey]);
+  }, []);
 
   console.log('mine::: ', mine);
   const orderLocked = useMemo(() => {
@@ -27,8 +30,6 @@ export const ToolEditor = (): JSX.Element => {
     }
     return false;
   }, [mine]);
-
-  console.log('isLocked::: ', orderLocked);
 
   return (
     <>
@@ -61,6 +62,9 @@ export const ToolEditor = (): JSX.Element => {
       </Link>
       <Button
         to={'./create-question'}
+        search={{
+          total: questions?.length ?? 0,
+        }}
         component={Link}
         variant="light"
         leftIcon={<IconCirclePlus />}

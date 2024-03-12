@@ -15,7 +15,12 @@ import { showNotification } from '@mantine/notifications';
 export async function fetchQuestions(surveyKey: string) {
   const questions: IQuestion[] = [];
   const questionsSnap = await getDocs(
-    query(collection(db, 'questions'), where('surveyKey', '==', surveyKey), where('answerId', '==', null), orderBy('order'))
+    query(
+      collection(db, 'questions'),
+      where('surveyKey', '==', surveyKey),
+      where('answerId', '==', null),
+      orderBy('order')
+    )
   );
   questionsSnap.forEach((doc) => {
     questions.push({
@@ -43,7 +48,7 @@ export const useGetQuestions = (surveyKey: string) => {
     ['questions', surveyKey],
     () => fetchQuestions(surveyKey),
     {
-      staleTime: 1000 * 60 * 10,
+      cacheTime: 0,
     }
   );
 };
@@ -52,7 +57,7 @@ export const useGetQuestion = (questionId: string) => {
     ['question', questionId],
     () => fetchQuestion(questionId),
     {
-      staleTime: 1000 * 60 * 10,
+      cacheTime: 0,
     }
   );
 };

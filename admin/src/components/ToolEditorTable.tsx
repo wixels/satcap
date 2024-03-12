@@ -10,9 +10,9 @@ import {
   Title,
 } from '@mantine/core';
 import { cleanNotifications, showNotification } from '@mantine/notifications';
-import { IconEdit, IconTrash } from '@tabler/icons';
-import { Link } from '@tanstack/react-location';
-import { doc, writeBatch } from 'firebase/firestore';
+import { IconEdit, IconTrash, IconX } from '@tabler/icons';
+import { Link, useRouter } from '@tanstack/react-location';
+import { deleteDoc, doc, writeBatch } from 'firebase/firestore';
 import update from 'immutability-helper';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
@@ -20,6 +20,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { useTable } from 'react-table';
 import db from '../firebase';
 import useDebouncedCallback from '../hooks/useDebouncedCallback';
+import { useQueryClient } from '@tanstack/react-query';
 
 // needed for row & cell level scope DnD setup
 
@@ -100,9 +101,28 @@ const Row = ({ row, index, moveRow }) => {
 export const ToolEditorTable: React.FC<Props> = ({ data, orderLocked }) => {
   const [records, setRecords] = useState(data);
 
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
   const getRowId = useCallback((row) => {
     return row.id;
   }, []);
+
+  const handleDelete = async (docId) => {
+    try {
+      //
+      await deleteDoc(doc(db, 'questions', docId));
+      queryClient.invalidateQueries();
+      window.location.reload();
+    } catch (error) {
+      showNotification({
+        icon: <IconX size={18} />,
+        color: 'red',
+        message: 'Unable to delete question',
+        disallowClose: true,
+      });
+    }
+  };
 
   const columns = useMemo(
     () => [
@@ -187,7 +207,7 @@ export const ToolEditorTable: React.FC<Props> = ({ data, orderLocked }) => {
                   <Button
                     fullWidth
                     color={'red'}
-                    // onClick={() => handleDelete(cell)}
+                    onClick={() => handleDelete(cell.cell.row.original.id)}
                   >
                     Delete
                   </Button>
