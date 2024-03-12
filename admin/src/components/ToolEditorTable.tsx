@@ -1,50 +1,98 @@
-// @ts-nocheck
-import {
-  ActionIcon,
-  Button,
-  Card,
-  Checkbox,
-  createStyles,
-  Group,
-  Popover,
-  Select,
-  Table,
-  Text,
-  Title,
-} from '@mantine/core';
-import {
-  IconChevronLeft,
-  IconChevronRight,
-  IconChevronsLeft,
-  IconChevronsRight,
-  IconDragDrop,
-  IconEdit,
-  IconTrash,
-} from '@tabler/icons';
-import { Link } from '@tanstack/react-location';
-import { useMemo } from 'react';
-import { usePagination, useRowSelect, useTable } from 'react-table';
+import { Checkbox, createStyles, Table } from '@mantine/core';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import { useTable } from 'react-table';
+import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+import update from 'immutability-helper';
+
+// needed for row & cell level scope DnD setup
 
 type Props = {
   data: any;
 };
+const Row = ({ row, index, moveRow }) => {
+  const dropRef = useRef(null);
+  const dragRef = useRef(null);
+
+  const [, drop] = useDrop({
+    accept: 'row',
+    hover(item, monitor) {
+      if (!dropRef.current) {
+        return;
+      }
+      const dragIndex = item.index;
+      const hoverIndex = index;
+      // Don't replace items with themselves
+      if (dragIndex === hoverIndex) {
+        return;
+      }
+      // Determine rectangle on screen
+      const hoverBoundingRect = dropRef.current.getBoundingClientRect();
+      // Get vertical middle
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      // Determine mouse position
+      const clientOffset = monitor.getClientOffset();
+      // Get pixels to the top
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      // Only perform the move when the mouse has crossed half of the items height
+      // When dragging downwards, only move when the cursor is below 50%
+      // When dragging upwards, only move when the cursor is above 50%
+      // Dragging downwards
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        return;
+      }
+      // Dragging upwards
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        return;
+      }
+      // Time to actually perform the action
+      moveRow(dragIndex, hoverIndex);
+      // Note: we're mutating the monitor item here!
+      // Generally it's better to avoid mutations,
+      // but it's good here for the sake of performance
+      // to avoid expensive index searches.
+      item.index = hoverIndex;
+    },
+  });
+
+  const [{ isDragging }, drag, preview] = useDrag({
+    item: { type: 'row', index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
+  const opacity = isDragging ? 0 : 1;
+
+  preview(drop(dropRef));
+  drag(dragRef);
+
+  return (
+    <tr ref={dropRef} style={{ opacity }}>
+      <td ref={dragRef}>move</td>
+      {row.cells.map((cell) => {
+        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+      })}
+    </tr>
+  );
+};
 
 export const ToolEditorTable: React.FC<Props> = ({ data }) => {
-  const useStyles = createStyles((theme) => ({
-    td: {
-      marginBottom: theme.spacing.lg,
-      '&:first-of-type': {
-        borderTopLeftRadius: theme.radius.lg,
-        borderBottomLeftRadius: theme.radius.lg,
-      },
-      '&:last-of-type': {
-        borderTopRightRadius: theme.radius.lg,
-        borderBottomRightRadius: theme.radius.lg,
-      },
-    },
-  }));
+  const [records, setRecords] = useState(data);
+
+  const getRowId = useCallback((row) => {
+    return row.id;
+  }, []);
+
   const columns = useMemo(
     () => [
+      // {
+      //   Header: 'order',
+      //   Cell: ({ row }) => {
+      //     return <RowDragHandleCell rowId={row.id} />;
+      //   },
+      // },
       {
         Header: 'Title',
         accessor: 'title',
@@ -75,7 +123,6 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
         Header: 'Answers',
         accessor: 'answers',
         Cell: ({ row }) => {
-          console.log('row?.values::: ', row);
           const answers = row?.values?.answers;
           if (row?.original?.autoAnswers === 'area') {
             return 'Area Answers';
@@ -84,103 +131,37 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
           return `${answers.length} Answer${answers.length === 1 ? '' : 's'}`;
         },
       },
+      {
+        Header: 'Actions',
+        accessor: 'id',
+        Cell: ({ row }) => {
+          return <div>x</div>;
+        },
+      },
     ],
     []
   );
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    prepareRow,
-    page,
-    canPreviousPage,
-    canNextPage,
-    pageOptions,
-    pageCount,
-    gotoPage,
-    nextPage,
-    previousPage,
-    setPageSize,
-    // eslint-disable-next-line no-unused-vars
-    state: { pageIndex, pageSize, selectedRowIds },
-  } = useTable(
-    {
+  const moveRow = (dragIndex, hoverIndex) => {
+    const dragRecord = records[dragIndex];
+    setRecords(
+      update(records, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, dragRecord],
+        ],
+      })
+    );
+  };
+
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({
       columns,
-      data,
-    },
-    usePagination,
-    useRowSelect,
-    (hooks) => {
-      hooks.visibleColumns.push((columns) => [
-        {
-          id: 'drag',
-          Cell: (cell) => {
-            return (
-              <ActionIcon color="blue" variant="light">
-                <IconDragDrop size={16} />
-              </ActionIcon>
-            );
-          },
-        },
-        ...columns,
-        {
-          id: 'delete',
-          Cell: (cell) => {
-            // @ts-ignore
-            if (cell.row.original?.isLocked) return null;
-            return (
-              <Group>
-                <ActionIcon
-                  component={Link}
-                  to={`./${cell.row.original?.id}/edit`}
-                  color="blue"
-                  variant="light"
-                >
-                  <IconEdit size={16} />
-                </ActionIcon>
-                <Popover
-                  width={300}
-                  trapFocus
-                  position="bottom"
-                  withArrow
-                  shadow="md"
-                >
-                  <Popover.Target>
-                    <ActionIcon color="red" variant="light">
-                      <IconTrash size={16} />
-                    </ActionIcon>
-                  </Popover.Target>
-                  <Popover.Dropdown
-                    sx={(theme) => ({
-                      background:
-                        theme.colorScheme === 'dark'
-                          ? theme.colors.dark[7]
-                          : theme.white,
-                    })}
-                  >
-                    <Title order={5}>Are you sure you want to delete?</Title>
-                    <Text color="dimmed" mb={'xl'}>
-                      This action cannot be undone
-                    </Text>
-                    <Button
-                      fullWidth
-                      color={'red'}
-                      // onClick={() => handleDelete(cell)}
-                    >
-                      Delete
-                    </Button>
-                  </Popover.Dropdown>
-                </Popover>
-              </Group>
-            );
-          },
-        },
-      ]);
-    }
-  );
-  const { classes } = useStyles();
+      data: records,
+    });
+
   return (
-    <>
+    <DndProvider backend={HTML5Backend}>
       <Table
         style={{ marginBottom: '60px' }}
         {...getTableProps()}
@@ -198,97 +179,19 @@ export const ToolEditorTable: React.FC<Props> = ({ data }) => {
           </tr>
         </thead>
         <tbody {...getTableBodyProps()}>
-          {/* @ts-ignore */}
-          {page.map((row, i) => {
-            prepareRow(row);
-            return (
-              <tr key={row.id} {...row.getRowProps()}>
-                {/* @ts-ignore */}
-                {row.cells.map((cell) => {
-                  return (
-                    <td
-                      key={cell.id}
-                      className={classes.td}
-                      {...cell.getCellProps()}
-                    >
-                      {cell.render('Cell')}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
+          {rows.map(
+            (row, index) =>
+              prepareRow(row) || (
+                <Row
+                  index={index}
+                  row={row}
+                  moveRow={moveRow}
+                  {...row.getRowProps()}
+                />
+              )
+          )}
         </tbody>
       </Table>
-      {data?.length > 10 && (
-        <Card
-          sx={(theme) => ({
-            position: 'absolute',
-            zIndex: 100,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            boxShadow: theme.shadows.xl,
-            display: 'flex',
-            justifyContent: 'space-between',
-            overflow: 'initial',
-          })}
-        >
-          <Group>
-            <Button.Group>
-              <Button
-                variant="default"
-                onClick={() => gotoPage(0)}
-                disabled={!canPreviousPage}
-              >
-                <IconChevronsLeft size={14} />
-              </Button>
-              <Button
-                variant="default"
-                onClick={() => previousPage()}
-                disabled={!canPreviousPage}
-              >
-                <IconChevronLeft size={14} />
-              </Button>
-              <Button
-                variant="default"
-                onClick={() => nextPage()}
-                disabled={!canNextPage}
-              >
-                <IconChevronRight size={14} />
-              </Button>
-              <Button
-                variant="default"
-                onClick={() => gotoPage(pageCount - 1)}
-                disabled={!canNextPage}
-              >
-                <IconChevronsRight size={14} />
-              </Button>
-            </Button.Group>
-            <span>
-              Page
-              <strong>
-                {pageIndex + 1} of {pageOptions.length}
-              </strong>
-            </span>
-          </Group>
-
-          <Select
-            value={pageSize.toString()}
-            onChange={(e) => {
-              setPageSize(Number(e));
-            }}
-            dropdownPosition="top"
-            data={[
-              { value: '10', label: '10' },
-              { value: '20', label: '20' },
-              { value: '30', label: '30' },
-              { value: '40', label: '40' },
-              { value: '50', label: '50' },
-            ]}
-          />
-        </Card>
-      )}
-    </>
+    </DndProvider>
   );
 };

@@ -173,7 +173,6 @@ export const CreateQuestion: React.FC<Props> = () => {
       <form onSubmit={form.onSubmit(createQuestion)}>
         {questions}
         <Button
-          //
           radius={'md'}
           size="md"
           loading={loading}

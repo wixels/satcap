@@ -56,6 +56,7 @@ export const ToolEditor = (): JSX.Element => {
       >
         Add new question
       </Button>
+      {/* <pre>{JSON.stringify(questions, null, 2)}</pre> */}
       {!isLoading && questions ? <ToolEditorTable data={questions} /> : null}
 
       {/* <SimpleGrid
