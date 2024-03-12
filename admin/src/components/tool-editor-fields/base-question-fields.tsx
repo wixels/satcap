@@ -98,31 +98,6 @@ export const BaseQuestionFields: React.FC<Props> = ({
           {...form.getInputProps(`${path}.maxAnswerCount`)}
         />
       </Grid.Col>
-      <Grid.Col span={6}>
-        <NumberInput
-          radius={'md'}
-          size="md"
-          label={
-            <Text size="sm" color="dimmed">
-              Order
-            </Text>
-          }
-          {...form.getInputProps(`${path}.order`)}
-        />
-      </Grid.Col>
-      <Grid.Col span={6}>
-        <TextInput
-          placeholder="Power BI Key"
-          radius={'md'}
-          size="md"
-          label={
-            <Text size="sm" color="dimmed">
-              Reporting Key
-            </Text>
-          }
-          {...form.getInputProps(`${path}.reportingKey`)}
-        />
-      </Grid.Col>
       {children}
     </Grid>
   );
