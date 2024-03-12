@@ -77,6 +77,7 @@ export interface ISurvey {
   description?: string;
   key: string;
   title: string;
+  orderLocked: boolean;
 }
 
 export interface ISurveys {
