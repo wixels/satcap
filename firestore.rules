@@ -16,6 +16,9 @@ service cloud.firestore {
      match /{path=**}/notices/{noticeId} {
     	allow read: if true;
     }
+    match /{path=**}/questions/{questionId} {
+    	allow list, read: if true;
+    }
    	match /{document=**} {
       allow read, list, write, delete, update: if request.auth.uid != null;
     }
