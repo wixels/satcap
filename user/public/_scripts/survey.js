@@ -46,6 +46,12 @@ const initialise = async function (suveryKey, localSubmissions) {
           exitLink.setAttribute('href', `./exit?linkId=${link.linkId}`)
         }
         const consent = document.querySelector('.consent')
+        const questionsKey = document.createElement('input')
+        questionsKey.setAttribute('type', 'hidden')
+        questionsKey.setAttribute('name', 'questionsKey')
+        questionsKey.setAttribute('value', suveryKey)
+
+        consent.appendChild(questionsKey)
         consent.querySelector('form').addEventListener('submit', giveConsent)
         document.getElementById('surveyDescription').innerHTML = link.package.survey.description
         consent.classList.remove('hidden')
@@ -65,6 +71,12 @@ const startSurvey = async function (surveyKey, subKey, title) {
   const content = template.content.cloneNode(true)
 
   const consent = content.querySelector('.consent')
+  const questionsKey = document.createElement('input')
+  questionsKey.setAttribute('type', 'hidden')
+  questionsKey.setAttribute('name', 'questionsKey')
+  questionsKey.setAttribute('value', subKey)
+
+  consent.appendChild(questionsKey)
   consent.querySelector('form').addEventListener('submit', giveConsent)
   content.querySelector('#surveyDescription').innerHTML = link.package.survey.description
   consent.classList.remove('hidden')
@@ -97,7 +109,8 @@ const giveConsent = async function (e) {
       form.querySelector('input[name="mineDocId"]').setAttribute('value', link.mineDocId)
       form.querySelector('input[name="linkDocId"]').setAttribute('value', link.docId)
       form.querySelector('input[name="linkId"]').setAttribute('value', link.linkId)
-      await setQuestions(link.package.survey.key, form)
+
+      await setQuestions(consent.querySelector('input[name="questionsKey"]')?.value || link.package.survey.key, form)
       setOnChange(form)
       setProgressTracker()
       setEmbeddables()
