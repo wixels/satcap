@@ -159,7 +159,7 @@ exports.addMine = functions.https.onRequest(async (req, res) => {
 
 exports.importQuestions = functions.https.onRequest(async (req, res) => {
   
-  const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 9)
+  const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 8)
 
   res.set('Access-Control-Allow-Origin', '*')
   if (req.method === 'OPTIONS') {
@@ -176,11 +176,11 @@ exports.importQuestions = functions.https.onRequest(async (req, res) => {
 
     const addQuestions = async function (questions, answerId = null) {
       for (let i = 0; i < questions.length; i++) {
-        const questionId = nanoid()
+        const questionId = 'q' + nanoid()
 
         if (Array.isArray(questions[i].answers)) {
           for (const answer of questions[i].answers) {
-            answer.id = nanoid()
+            answer.id = 'a' + nanoid()
           }
         }
 

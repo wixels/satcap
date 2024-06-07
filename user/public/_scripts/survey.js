@@ -174,7 +174,7 @@ const submitSurvey = async function (e) {
   }
 }
 
-const setQuestionContent = async function (questions, form, container, surveyKey, parentOrder) {
+const setQuestionContent = async function (questions, form, container, surveyKey, parentOrder, startFrom = 0) {
   for (let i = 0; i < questions.length; i++) {
     const question = questions[i].data()
     const questionTemplate = document.getElementById(`question-type-${question.type}`)
@@ -182,7 +182,7 @@ const setQuestionContent = async function (questions, form, container, surveyKey
 
     questionContent.querySelector('.question').dataset.questionId = question.id
     questionContent.querySelector('.question').dataset.reportingKey = question.reportingKey
-    questionContent.querySelector('.question-number').textContent = `Question ${(parentOrder) ? `${parentOrder}.` : ''}${i + 1}`
+    questionContent.querySelector('.question-number').textContent = `Question ${(parentOrder) ? `${parentOrder}.` : ''}${startFrom + i + 1}`
     questionContent.querySelector('.question-title').textContent = question.title
     questionContent.querySelector('.question-subtitle').textContent = question.subtitle
     const img = questionContent.querySelector('img')
@@ -248,19 +248,24 @@ const setQuestionContent = async function (questions, form, container, surveyKey
             input.dataset.conditionalPath = (input.dataset.conditionalPath) ? input.dataset.conditionalPath + `-${question.id}-${answer.id}` : `${question.id}-${answer.id}`
           }
 
+          let startingFrom = 0
           let parentIndex = (parentOrder) ? parentOrder + '.' : ''
-          if (answer.subViewRelated) parentIndex = parentIndex + (i + 1)
-          const subQuestionContent = await setSubQuestions(form, surveyKey, answer.id, (parentIndex.length) ? parentIndex : null)
+          if (answer.subViewRelated) {
+            parentIndex = (parentOrder) ? parentOrder + '.' : '' + Number(startFrom + i + 1)
+          } else startingFrom = i + 1
+          const subQuestionContent = await setSubQuestions(form, surveyKey, answer.id, (parentIndex.length) ? parentIndex : null, startingFrom)
 
           const temp = document.createElement('template')
           temp.dataset.choice = `${question.id}-${answer.id}`
-          temp.appendChild(subQuestionContent)
+          temp.dataset.subViewRelated = answer.subViewRelated
+          temp.content.appendChild(subQuestionContent)
 
-          if (answer.subViewRelated) {
-            questionContent.appendChild(temp)
-          } else {
-            form.querySelector('.unrelatedSubViews').appendChild(temp)
-          } 
+          // if (answer.subViewRelated) {
+          //   questionContent.appendChild(temp)
+          // } else {
+          //   form.querySelector('.unrelatedSubViews').appendChild(temp)
+          // } 
+          form.querySelector('.unrelatedSubViews').appendChild(temp)
         }
       }
 
@@ -285,7 +290,7 @@ const setQuestionContent = async function (questions, form, container, surveyKey
           
           const temp = document.createElement('template')
           temp.dataset.choice = `${question.id}-${answer.id}`
-          temp.appendChild(linkContent)
+          temp.content.appendChild(linkContent)
           questionContent.appendChild(temp)
         }
       }
@@ -302,7 +307,7 @@ const setQuestionContent = async function (questions, form, container, surveyKey
   }
 }
 
-const setSubQuestions = async function (form, surveyKey, answerId, parentOrder) {
+const setSubQuestions = async function (form, surveyKey, answerId, parentOrder, startFrom) {
   const subQuestionContent = document.createElement('div')
   subQuestionContent.classList.add('subQuestion')
 
@@ -310,7 +315,7 @@ const setSubQuestions = async function (form, surveyKey, answerId, parentOrder) 
 
   if (!questionsSnap.size) return subQuestionContent
 
-  await setQuestionContent(questionsSnap.docs, form, subQuestionContent, surveyKey, parentOrder)
+  await setQuestionContent(questionsSnap.docs, form, subQuestionContent, surveyKey, parentOrder, startFrom)
   
   return subQuestionContent
 }
@@ -408,55 +413,58 @@ const setOnChange = function (containerElement) {
       } else {
         const itemAsArray = item.split('-')
         if (el.dataset.answerId === itemAsArray[1]) {
-          const template = document.querySelector(`[data-choice="${item}"]`)
+          const template = document.querySelector(`[data-choice="${itemAsArray[0]}-${itemAsArray[1]}"]`)
           const questionContainer = document.querySelector('.questions')
           const content = template.content.cloneNode(true)
-          for (let i = 0; i < content.children.length; i++) {
-            content.children[i].classList.add(itemAsArray[0])
-            content.children[i].classList.add(item)
-          }
-          if (itemAsArray.length > 2) {
-            const existing = questionContainer.querySelectorAll(`.${itemAsArray[0]}`)
-            if (existing.length) {
-              existing.forEach((node) => {
-                node.remove()
-              })
-            }
+          const subQuestions = content.querySelector('.subQuestion')
+          subQuestions.id = itemAsArray[0]
+
+          const existing = document.querySelector(`#${itemAsArray[0]}`)
+          if (existing) {
+            existing.remove()
           }
           
-          questionContainer.appendChild(content)
+          if (template.dataset.subViewRelated == "true") {
+            const currentQues = document.querySelector(`.question[data-question-id="${itemAsArray[0]}"]`)
+            if (currentQues.parentElement.classList.contains('subQuestion')) {
+              currentQues.parentNode.insertBefore(content, currentQues.nextSibling)
+            } else {
+              questionContainer.insertBefore(content, currentQues.nextSibling)
+            }
+          } else {
+            questionContainer.appendChild(content)
+          }
+          
           // questionContainer.insertBefore(content, questionContainer.querySelector('button[type="submit"]'))
-          setOnChange(questionContainer.querySelector(`.${item}`))
-        } else if (itemAsArray.length > 2 && el.value === itemAsArray[3]) {
-          const template = document.querySelector(`[data-choice="${itemAsArray[0]}-${el.value}"]`)
-          const questionContainer = template.parentNode
+          setOnChange(questionContainer.querySelector('#'+itemAsArray[0]))
+        } else if (itemAsArray.length > 2 && el.dataset.answerId === itemAsArray[3]) {
+          const template = document.querySelector(`[data-choice="${itemAsArray[0]}-${itemAsArray[3]}"]`)
+          const questionContainer = document.querySelector('.questions')
           const content = template.content.cloneNode(true)
-          for (let i = 0; i < content.children.length; i++) {
-            content.children[i].classList.add(itemAsArray[0]+'-'+itemAsArray[3])
+          const subQuestions = content.querySelector('.subQuestion')
+          subQuestions.id = itemAsArray[0]
+
+          const existing = document.querySelector(`#${itemAsArray[0]}`)
+          if (existing) {
+            existing.remove()
           }
 
-          const existing = questionContainer.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[1]}`)
-          if (existing.length) {
-            existing.forEach((node) => {
-              node.remove()
-            })
-          }
-          questionContainer.insertBefore(content, questionContainer.querySelector('button[type="submit"]'))
-          setOnChange(questionContainer.querySelector(`.${itemAsArray[0]}-${itemAsArray[3]}`))
-        } else {
-          const existing = document.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[1]}`)
-          if (existing.length) {
-            existing.forEach((node) => {
-              node.remove()
-            })
-          }
-          if (itemAsArray.length > 2) {
-            const existingTwo = document.querySelectorAll(`.${itemAsArray[0]}-${itemAsArray[3]}`)
-            if (existingTwo.length) {
-              existingTwo.forEach((node) => {
-                node.remove()
-              })
+          if (template.dataset.subViewRelated == "true") {
+            const currentQues = document.querySelector(`.question[data-question-id="${itemAsArray[0]}"]`)
+            if (currentQues.parentElement.classList.contains('subQuestion')) {
+              currentQues.parentNode.insertBefore(content, currentQues.nextSibling)
+            } else {
+              questionContainer.insertBefore(content, currentQues.nextSibling)
             }
+          } else {
+            questionContainer.appendChild(content)
+          }
+          // questionContainer.insertBefore(content, questionContainer.querySelector('button[type="submit"]'))
+          setOnChange(questionContainer.querySelector('#'+itemAsArray[0]))
+        } else {
+          const existing = document.querySelector(`#${itemAsArray[0]}`)
+          if (existing) {
+            existing.remove()
           }
         }  
       }
@@ -503,7 +511,7 @@ const setOnChange = function (containerElement) {
 }
 
 const setProgressTracker = function () {
-  const questions = document.querySelectorAll('.question')
+  const questions = document.querySelectorAll('.questions .question')
   const form = document.forms.survey
   const answers = new window.FormData(form)
   const total = questions.length
