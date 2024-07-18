@@ -215,16 +215,16 @@ const setQuestionContent = async function (questions, form, container, surveyKey
         let num = i + 1
         const label = questionContent.querySelector(`label[for="${num}"]`)
         inputs[i].setAttribute('id', `${question.id}-${num}`)
-        inputs[i].setAttribute('name', question.id)
+        inputs[i].setAttribute('name', `question-${question.id}`)
         label.setAttribute('for', `${question.id}-${num}`)
         label.textContent = question.answers[i].title
       }
     } else if (question.type === 'date') {
       const input = questionContent.querySelector('input')
-      input.setAttribute('name', question.id)
+      input.setAttribute('name', `question-${question.id}`)
     } else if (question.type === 'open-text') {
       const input = questionContent.querySelector('textarea')
-      input.setAttribute('name', question.id)
+      input.setAttribute('name', `question-${question.id}`)
     } else {
       for (const answer of question.answers) {
         const answerTemplate = questionContent.querySelector('#answer')
