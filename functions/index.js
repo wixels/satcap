@@ -8118,7 +8118,7 @@ exports.importQuestions = functions.https.onRequest(async (req, res) => {
                 "type": "multi-select",
                 "maxAnswerCount": null,
                 "isLocked": true,
-                "answer": [
+                "answers": [
                   {
                     "title": "Digital literacy",
                     "description": "",
