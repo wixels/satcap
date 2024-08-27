@@ -101,7 +101,7 @@ export interface ILink {
   survey: ISurveys;
   docId: string;
   description?: string;
-  responses?: any[];
+  responses?: { [key: string]: string | string[] }[];
   createdAt?: string;
   deletedAt?: string;
 }
