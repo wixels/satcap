@@ -25,11 +25,9 @@ export function jsonToCsv(jsonData: any, downloadName: string) {
   return { csvString, download };
 }
 export async function downloadImage(imageUrl: any, fileName: string) {
-  const response = await fetch(imageUrl);
-  const blob = await response.blob();
-  const url = window.URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url;
+  a.href = imageUrl;
+  a.target = '_blank';
   a.download = fileName;
   document.body.appendChild(a);
   a.click();
