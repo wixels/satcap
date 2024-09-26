@@ -153,81 +153,75 @@ export const SurveyReports = (): JSX.Element => {
                 { maxWidth: 'lg', cols: 2, spacing: 'lg' },
               ]}
             >
-              {location.links
-                ?.filter((x) => x?.linkId === '93TRQVNN8k')
-                ?.map((link) => (
-                  <Card
-                    key={link.docId}
-                    shadow="sm"
-                    p="lg"
-                    radius="lg"
-                    withBorder
-                  >
-                    <Card.Section withBorder inheritPadding py="xs">
-                      <Group position="apart">
-                        <Box
-                          component={Link}
-                          to={`./${link.docId}`}
-                          sx={{ width: '85%', display: 'flex', gap: '1rem' }}
-                        >
-                          <Avatar color={'green'} radius={'xl'}>
-                            <IconTable />
-                          </Avatar>
-                          <div style={{ flex: 1 }}>
-                            <Text lineClamp={1} size="sm" weight={500}>
-                              {/* @ts-ignore */}
-                              {link.package.name}
-                            </Text>
-
-                            <Text lineClamp={1} color="dimmed" size="xs">
-                              {dayjs(link.createdAt).format('DD/MM/YYYY')}
-                            </Text>
-                          </div>
-                        </Box>
-
-                        <Menu withinPortal position="bottom-end" shadow="sm">
-                          <Menu.Target>
-                            <ActionIcon>
-                              <IconDots size={16} />
-                            </ActionIcon>
-                          </Menu.Target>
-
-                          <Menu.Dropdown>
-                            <Menu.Item
-                              onClick={() => downloadResponses(link)}
-                              icon={<IconFileZip size={14} />}
-                            >
-                              Download
-                            </Menu.Item>
-                          </Menu.Dropdown>
-                        </Menu>
-                      </Group>
-                    </Card.Section>
-                    <Card.Section
-                      p="xl"
-                      component={Link}
-                      to={`./${link.docId}`}
-                    >
-                      <Text color="dimmed" size="xs">
-                        {link?.responses?.length} Response
-                        {link?.responses?.length === 1 ? '' : 's'}
-                      </Text>
-                      <Divider my={'sm'} />
-                      <Text color="dimmed" size="xs">
-                        {link?.description}
-                      </Text>
-                      {import.meta.env.DEV && (
-                        <>
-                          <Divider my={'sm'} />
-                          <Text color="dimmed" size="xs">
+              {location.links?.map((link) => (
+                <Card
+                  key={link.docId}
+                  shadow="sm"
+                  p="lg"
+                  radius="lg"
+                  withBorder
+                >
+                  <Card.Section withBorder inheritPadding py="xs">
+                    <Group position="apart">
+                      <Box
+                        component={Link}
+                        to={`./${link.docId}`}
+                        sx={{ width: '85%', display: 'flex', gap: '1rem' }}
+                      >
+                        <Avatar color={'green'} radius={'xl'}>
+                          <IconTable />
+                        </Avatar>
+                        <div style={{ flex: 1 }}>
+                          <Text lineClamp={1} size="sm" weight={500}>
                             {/* @ts-ignore */}
-                            {link?.package?.survey?.key}
+                            {link.package.name}
                           </Text>
-                        </>
-                      )}
-                    </Card.Section>
-                  </Card>
-                ))}
+
+                          <Text lineClamp={1} color="dimmed" size="xs">
+                            {dayjs(link.createdAt).format('DD/MM/YYYY')}
+                          </Text>
+                        </div>
+                      </Box>
+
+                      <Menu withinPortal position="bottom-end" shadow="sm">
+                        <Menu.Target>
+                          <ActionIcon>
+                            <IconDots size={16} />
+                          </ActionIcon>
+                        </Menu.Target>
+
+                        <Menu.Dropdown>
+                          <Menu.Item
+                            onClick={() => downloadResponses(link)}
+                            icon={<IconFileZip size={14} />}
+                          >
+                            Download
+                          </Menu.Item>
+                        </Menu.Dropdown>
+                      </Menu>
+                    </Group>
+                  </Card.Section>
+                  <Card.Section p="xl" component={Link} to={`./${link.docId}`}>
+                    <Text color="dimmed" size="xs">
+                      {link?.responses?.length} Response
+                      {link?.responses?.length === 1 ? '' : 's'}
+                    </Text>
+                    <Divider my={'sm'} />
+                    <Text color="dimmed" size="xs">
+                      {link?.description}
+                    </Text>
+                    {import.meta.env.DEV && (
+                      <>
+                        <Divider my={'sm'} />
+                        <Text color="dimmed" size="xs">
+                          {/* @ts-ignore */}
+                          {link?.package?.survey?.key}
+                        </Text>
+                      </>
+                    )}
+                  </Card.Section>
+                </Card>
+              ))}
             </SimpleGrid>
           </Accordion.Panel>
         </Accordion.Item>
