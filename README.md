@@ -195,6 +195,12 @@ Please see [Data Architecture](#data-architecture) for more information before p
 11. Click "Add document"
 11. Click "Auto-Id" and add the [following fields](#users) 
 
+## Security recommendations
+
+It is advised to protect yourself as best you can by following the [Firebase's security checklist](https://firebase.google.com/support/guides/security-checklist). 
+
+We have basic secure rules set up for storage and firestore but you can improve on this by limiting the type of collections allowed if you so desire. You can update the `firestore.rules` and `storage.rules` accordingly.
+
 ## Email / SMS
 
 You will need to enable the following extensions within Firebase:
