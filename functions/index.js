@@ -12530,15 +12530,15 @@ exports.getDataFromFirestore = functions.https.onRequest(async (request, respons
       const data = doc.data()
       for (const key in data) {
         if (key.indexOf('question-') > -1) {
-          if (!questions[data.surveyKey]) {
-            questions[data.surveyKey] = {}
-            const quesSnap = await firestore.collection('questions').where('surveyKey', '==', data.surveyKey).get();
-            quesSnap.forEach((doc) => {
-              questions[data.surveyKey]['question-'+doc.id] = doc.data().reportingKey
+          if (!questions[data.survey]) {
+            questions[data.survey] = {}
+            const quesSnap = await firestore.collection('questions').where('surveyKey', '==', data.survey).get();
+            quesSnap.forEach((questionDoc) => {
+              questions[data.survey]['question-'+questionDoc.id] = questionDoc.data().reportingKey
             })
           }
-          if (questions[data.surveyKey][key]) {
-            data[questions[data.surveyKey][key]] = data[key]
+          if (questions[data.survey][key]) {
+            data[questions[data.survey][key]] = data[key]
             delete data[key]
           }
         }
