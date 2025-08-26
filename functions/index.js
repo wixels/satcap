@@ -1,4 +1,4 @@
-const functions = require('firebase-functions')
+const functions = require('firebase-functions/v1')
 const admin = require('firebase-admin')
 const dayjs = require('dayjs')
 const { customAlphabet } = require('nanoid')
@@ -12526,26 +12526,39 @@ exports.getDataFromFirestore = functions.https.onRequest(async (request, respons
     // Replace 'your_collection_name' with the actual Firestore collection you want to access
 
     const snapshot = await firestore.collectionGroup('responses').get();
-    snapshot.forEach(async (doc) => {
-      const data = doc.data()
-      for (const key in data) {
-        if (key.indexOf('question-') > -1) {
-          if (!questions[data.survey]) {
-            questions[data.survey] = {}
-            const quesSnap = await firestore.collection('questions').where('surveyKey', '==', data.survey).get();
-            quesSnap.forEach((questionDoc) => {
-              questions[data.survey]['question-'+questionDoc.id] = questionDoc.data().reportingKey
-            })
-          }
-          if (questions[data.survey][key]) {
-            data[questions[data.survey][key]] = data[key]
-            delete data[key]
+
+    for (const doc of snapshot.docs) {
+      const data = doc.data();
+
+      if (!questions[data.survey]) {
+        questions[data.survey] = {};
+
+        const quesSnap = await firestore
+          .collection('questions')
+          .where('surveyKey', '==', data.survey)
+          .get();
+
+        quesSnap.forEach((questionDoc) => {
+          const qid = `question-${questionDoc.id}`;
+          const reportingKey = questionDoc.data().reportingKey;
+          questions[data.survey][qid] = reportingKey;
+        });
+      }
+
+      // rename keys
+      for (const key of Object.keys(data)) {
+        if (key.startsWith('question-')) {
+          const replacement = questions[data.survey][key];
+          if (replacement) {
+            data[replacement] = data[key];
+            delete data[key];
           }
         }
       }
 
       responses.push(data);
-    });
+    }
+
  
     response.json(responses);
   } catch (error) {
