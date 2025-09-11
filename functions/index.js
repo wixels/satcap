@@ -12523,7 +12523,6 @@ exports.getDataFromFirestore = functions.https.onRequest(async (request, respons
     const firestore = admin.firestore();
     const responses = [];
     const questions = {};
-    // Replace 'your_collection_name' with the actual Firestore collection you want to access
 
     const snapshot = await firestore.collectionGroup('responses').get();
 
@@ -12547,6 +12546,9 @@ exports.getDataFromFirestore = functions.https.onRequest(async (request, respons
 
       // rename keys
       for (const key of Object.keys(data)) {
+        if (Array.isArray(data[key])) {
+          data[key] = data[key].join()
+        }
         if (key.startsWith('question-')) {
           const replacement = questions[data.survey][key];
           if (replacement) {
